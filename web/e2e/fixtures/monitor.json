@@ -1,0 +1,234 @@
+{
+ "firms": [
+  {
+   "id": "f-dom",
+   "name": "Domblick Steuerkanzlei",
+   "city": "Köln"
+  },
+  {
+   "id": "f-isar",
+   "name": "Isartal Steuerberater PartG",
+   "city": "München"
+  },
+  {
+   "id": "f-pleisse",
+   "name": "Pleiße Treuhand Steuerberatung",
+   "city": "Leipzig"
+  },
+  {
+   "id": "f-spree",
+   "name": "Kanzlei Spreebogen Steuerberatung",
+   "city": "Berlin"
+  }
+ ],
+ "actions": [
+  {
+   "firm_id": "f-dom",
+   "action": "objection_required",
+   "notices": 2,
+   "open": 2
+  },
+  {
+   "firm_id": "f-dom",
+   "action": "task",
+   "notices": 15,
+   "open": 15
+  },
+  {
+   "firm_id": "f-pleisse",
+   "action": "objection_review",
+   "notices": 5,
+   "open": 5
+  },
+  {
+   "firm_id": "f-spree",
+   "action": "inform_client",
+   "notices": 14,
+   "open": 14
+  },
+  {
+   "firm_id": "f-spree",
+   "action": "task",
+   "notices": 20,
+   "open": 20
+  },
+  {
+   "firm_id": "f-dom",
+   "action": "objection_review",
+   "notices": 6,
+   "open": 6
+  },
+  {
+   "firm_id": "f-isar",
+   "action": "task",
+   "notices": 18,
+   "open": 18
+  },
+  {
+   "firm_id": "f-isar",
+   "action": "close",
+   "notices": 16,
+   "open": 16
+  },
+  {
+   "firm_id": "f-dom",
+   "action": "inform_client",
+   "notices": 9,
+   "open": 9
+  },
+  {
+   "firm_id": "f-pleisse",
+   "action": "inform_client",
+   "notices": 3,
+   "open": 3
+  },
+  {
+   "firm_id": "f-dom",
+   "action": "duplicate",
+   "notices": 2,
+   "open": 2
+  },
+  {
+   "firm_id": "f-isar",
+   "action": "objection_required",
+   "notices": 4,
+   "open": 4
+  },
+  {
+   "firm_id": "f-isar",
+   "action": "duplicate",
+   "notices": 1,
+   "open": 1
+  },
+  {
+   "firm_id": "f-dom",
+   "action": "review",
+   "notices": 3,
+   "open": 3
+  },
+  {
+   "firm_id": "f-isar",
+   "action": "objection_review",
+   "notices": 5,
+   "open": 5
+  },
+  {
+   "firm_id": "f-pleisse",
+   "action": "task",
+   "notices": 15,
+   "open": 15
+  },
+  {
+   "firm_id": "f-dom",
+   "action": "close",
+   "notices": 21,
+   "open": 21
+  },
+  {
+   "firm_id": "f-isar",
+   "action": "review",
+   "notices": 1,
+   "open": 1
+  },
+  {
+   "firm_id": "f-spree",
+   "action": "duplicate",
+   "notices": 3,
+   "open": 3
+  },
+  {
+   "firm_id": "f-spree",
+   "action": "close",
+   "notices": 18,
+   "open": 18
+  },
+  {
+   "firm_id": "f-pleisse",
+   "action": "close",
+   "notices": 26,
+   "open": 26
+  },
+  {
+   "firm_id": "f-spree",
+   "action": "objection_required",
+   "notices": 3,
+   "open": 3
+  },
+  {
+   "firm_id": "f-isar",
+   "action": "inform_client",
+   "notices": 10,
+   "open": 10
+  },
+  {
+   "firm_id": "f-spree",
+   "action": "objection_review",
+   "notices": 4,
+   "open": 4
+  }
+ ],
+ "deadlines": [
+  {
+   "firm_id": "f-pleisse",
+   "proposed": 23,
+   "confirmed": 0,
+   "done": 0
+  },
+  {
+   "firm_id": "f-isar",
+   "proposed": 38,
+   "confirmed": 0,
+   "done": 0
+  },
+  {
+   "firm_id": "f-dom",
+   "proposed": 35,
+   "confirmed": 0,
+   "done": 0
+  },
+  {
+   "firm_id": "f-spree",
+   "proposed": 40,
+   "confirmed": 0,
+   "done": 0
+  }
+ ],
+ "corrections": [],
+ "quality": {
+  "test": {
+   "action_accuracy": 0.9696,
+   "review_rate": 0.0304,
+   "auto_close_rate": 0.9643,
+   "kind_accuracy": 0.9864,
+   "deadline_exact": 0.9955,
+   "late_deadlines": 0,
+   "closed_but_needed_action": 0,
+   "missed_required_objection": 0,
+   "verified_wrong_values": 0,
+   "wrong_client": 0,
+   "error_recall": 1.0,
+   "error_precision": 1.0,
+   "retrieval_recall_at_3": 1.0,
+   "town_review_first_notice": 0.0833,
+   "town_review_later_notices": 0.0
+  },
+  "heldout": {
+   "action_accuracy": 0.9831,
+   "review_rate": 0.0084,
+   "auto_close_rate": 0.9872,
+   "kind_accuracy": 0.9956,
+   "deadline_exact": 0.9867,
+   "late_deadlines": 0,
+   "closed_but_needed_action": 0,
+   "missed_required_objection": 0,
+   "verified_wrong_values": 0,
+   "wrong_client": 0,
+   "error_recall": 1.0,
+   "error_precision": 1.0,
+   "retrieval_recall_at_3": 0.9643,
+   "town_review_first_notice": 0.0833,
+   "town_review_later_notices": 0.0625
+  }
+ },
+ "as_of": "2026-11-03T17:08:59+00:00"
+}

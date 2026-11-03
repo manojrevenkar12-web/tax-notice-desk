@@ -25,12 +25,21 @@ def decide(report: dict[str, Any]) -> dict[str, Any]:
 
 
 def render(d: dict[str, Any], report: dict[str, Any]) -> str:
-    lines = [f"# Release decision on `{d['split']}` ({report['notices']} notices)", "",
-             f"**{'Ships' if d['ship'] else 'Does not ship'}.**" + (f" Failed: {', '.join(d['failed'])}." if d["failed"] else ""),
-             "", "| Gate | Value | Limit | Result |", "|---|---|---|---|"]
+    lines = [
+        f"# Release decision on `{d['split']}` ({report['notices']} notices)",
+        "",
+        f"**{'Ships' if d['ship'] else 'Does not ship'}.**"
+        + (f" Failed: {', '.join(d['failed'])}." if d["failed"] else ""),
+        "",
+        "| Gate | Value | Limit | Result |",
+        "|---|---|---|---|",
+    ]
     for r in d["checks"]:
         lim = f"≥ {r['limit']['min']}" if "min" in r["limit"] else f"≤ {r['limit']['max']}"
         lines.append(f"| {r['metric']} | {r['value']} | {lim} | {r['status']} |")
-    lines += ["", f"Model calls {report.get('model_calls', 0)}, cost ${report.get('model_cost_usd', 0)}; "
-              f"{report['seconds']} s for {report['notices']} notices."]
+    lines += [
+        "",
+        f"Model calls {report.get('model_calls', 0)}, cost ${report.get('model_cost_usd', 0)}; "
+        f"{report['seconds']} s for {report['notices']} notices.",
+    ]
     return "\n".join(lines) + "\n"

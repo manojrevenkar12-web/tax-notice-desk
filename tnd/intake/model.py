@@ -13,10 +13,10 @@ from .parse import Parsed, _spec, verify
 
 def schema(kind: str) -> dict[str, Any]:
     fields = config.load("extraction")["fields"][kind]
-    props: dict[str, Any] = {k: {"type": ["integer", "null"], "description": "cents; hebesatz as percent x 100"}
-                             for k in fields}
-    return {"type": "object", "properties": {"fields": {"type": "object", "properties": props}},
-            "required": ["fields"]}
+    props: dict[str, Any] = {
+        k: {"type": ["integer", "null"], "description": "cents; hebesatz as percent x 100"} for k in fields
+    }
+    return {"type": "object", "properties": {"fields": {"type": "object", "properties": props}}, "required": ["fields"]}
 
 
 def read_with_model(p: Parsed, text: str) -> tuple[Parsed | None, dict[str, Any]]:
@@ -27,7 +27,7 @@ def read_with_model(p: Parsed, text: str) -> tuple[Parsed | None, dict[str, Any]
     system = (config.ROOT / cfg["prompt"]).read_text()
     user = f"Kind of notice: {p.kind}\nFields and the usual labels: {labels}\n\nOCR text:\n{text[:6000]}"
     try:
-        raw, key, replayed = claude_cli.ask(cfg["model"], system, user, schema(p.kind), [], cfg["budget_usd"])
+        raw, key, replayed = claude_cli.ask(cfg["model"], system, user, schema(p.kind or ""), [], cfg["budget_usd"])
     except claude_cli.CacheMiss:
         return None, {"calls": 0, "cache_miss": True}
     use = claude_cli.usage(raw)
@@ -37,8 +37,11 @@ def read_with_model(p: Parsed, text: str) -> tuple[Parsed | None, dict[str, Any]
         if isinstance(v, int) and k in labels:
             q.fields[k] = v
             q.method[k] = "model"
-    q.missing = [k for k, sp in config.load("extraction")["fields"][p.kind].items()
-                 if k not in q.fields and not _spec(sp).get("optional")]
+    q.missing = [
+        k
+        for k, sp in config.load("extraction")["fields"][p.kind].items()
+        if k not in q.fields and not _spec(sp).get("optional")
+    ]
     q.source = "ocr"
     verify(q)
     meta = {"calls": 1, "cost_usd": use["cost_usd"], "replayed": replayed, "key": key, "accepted": q.verified}

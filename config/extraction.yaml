@@ -1,6 +1,6 @@
 # How the desk reads notices. Labels are matched case-insensitively and tolerate OCR noise
 # (similarity >= fuzzy_min); the first amount after a label, on its line or the next, is its value.
-version: 2
+version: 3
 fuzzy_min: 0.84
 ocr: { dpi: 200, lang: deu, psm: 4 }
 

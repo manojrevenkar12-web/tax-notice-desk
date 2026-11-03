@@ -23,11 +23,13 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="tnd", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("build")
-    sub.add_parser("warm")
+    w = sub.add_parser("warm")
+    w.add_argument("--prune", action="store_true", help="delete cached OCR of files that no longer exist")
     e = sub.add_parser("eval")
     e.add_argument("split")
     e.add_argument("--no-model", action="store_true")
     e.add_argument("--limit", type=int)
+    e.add_argument("--name", default="", help="write reports/evals/<split>-<name>.json, leave results alone")
     r = sub.add_parser("release")
     r.add_argument("--no-model", action="store_true")
     h = sub.add_parser("heldout")
@@ -50,11 +52,11 @@ def main(argv: list[str] | None = None) -> int:
     elif a.cmd == "warm":
         from .intake.warm import warm
 
-        print(warm())
+        print(warm(clean=a.prune))
     elif a.cmd == "eval":
         from .evals.run import evaluate
 
-        rep = evaluate(a.split, not a.no_model, limit=a.limit)
+        rep = evaluate(a.split, not a.no_model, limit=a.limit, name=a.name)
         print(json.dumps(rep["metrics"], indent=1))
     elif a.cmd == "release":
         from .evals.gate import decide, render
@@ -72,8 +74,10 @@ def main(argv: list[str] | None = None) -> int:
         first = config.REPORTS / "heldout" / a.set / "first_run.json"
         before = json.loads(first.read_text())["passed"] if first.exists() else None
         rep = run(a.set, not a.no_model)
-        print(f"{a.set} ({rep['status']}): {rep['passed']}/{rep['cases']} cases pass; late deadlines "
-              f"{rep['late_deadlines']}; recorded as {rep['recorded_as']}")
+        print(
+            f"{a.set} ({rep['status']}): {rep['passed']}/{rep['cases']} cases pass; late deadlines "
+            f"{rep['late_deadlines']}; recorded as {rep['recorded_as']}"
+        )
         for f in rep["failures"]:
             print(" ", f["id"], f.get("error") or {k: v for k, v in f["checks"].items() if not v}, f.get("got"))
         if a.no_worse and before is not None and rep["passed"] < before:

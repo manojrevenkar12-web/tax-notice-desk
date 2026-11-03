@@ -51,9 +51,15 @@ def _group(cases: list[dict]) -> Group:
         firms[fid] = {"id": fid, "name": "Kanzlei", "city": "", "land": c["firm"]["land"]}
         cl = c["client"]
         cid = f"c-{digits(cl['steuernummer'])}"
-        clients[cid] = {"id": cid, "firm": fid, "kind": cl.get("kind", "person"), "name": cl["name"],
-                        "steuernummer": cl["steuernummer"], "land": cl.get("land", c["firm"]["land"]),
-                        "municipality": cl.get("municipality")}
+        clients[cid] = {
+            "id": cid,
+            "firm": fid,
+            "kind": cl.get("kind", "person"),
+            "name": cl["name"],
+            "steuernummer": cl["steuernummer"],
+            "land": cl.get("land", c["firm"]["land"]),
+            "municipality": cl.get("municipality"),
+        }
         if c.get("filed"):
             f = c["filed"]
             filed[(cid, f["kind"], int(f["year"]))] = f["fields"]
@@ -74,24 +80,36 @@ def run_case(g: Group, case: dict, folder: Path, use_model: bool) -> dict[str, A
             meta[k] = str(d[k])
     out = process(g, nid, folder, meta, use_model)
     exp = case["expect"]
-    got_errors = sorted({f["type"] for f in out["findings"]} & {"wrong_hebesatz", "stale_messbetrag", "arithmetic",
-                                                                  "interest"})
+    got_errors = sorted(
+        {f["type"] for f in out["findings"]} & {"wrong_hebesatz", "stale_messbetrag", "arithmetic", "interest"}
+    )
     checks = {
         "kind": out["kind"] == exp.get("kind", out["kind"]),
         "action": out["action"] == exp["action"],
         "deadline": (out["deadline"] or {}).get("due") == (str(exp["deadline"]) if exp.get("deadline") else None)
-        if "deadline" in exp else True,
+        if "deadline" in exp
+        else True,
         "errors": got_errors == sorted(exp.get("errors") or []),
         "fields": all(out["parsed"]["fields"].get(k) == v for k, v in (exp.get("fields") or {}).items()),
     }
     late = bool(exp.get("deadline") and out["deadline"] and out["deadline"]["due"] > str(exp["deadline"]))
-    return {"id": nid, "pass": all(checks.values()), "checks": checks, "late_deadline": late,
-            "closed_but_needed_action": out["action"] == "close" and exp["action"] != "close",
-            "expected": {k: (str(v) if isinstance(v, dt.date) else v) for k, v in exp.items()},
-            "got": {"kind": out["kind"], "action": out["action"], "deadline": (out["deadline"] or {}).get("due"),
-                    "errors": got_errors, "reasons": out["reasons"],
-                    "fields": {k: out["parsed"]["fields"].get(k) for k in (exp.get("fields") or {})}},
-            "why": case.get("why", "")}
+    return {
+        "id": nid,
+        "pass": all(checks.values()),
+        "checks": checks,
+        "late_deadline": late,
+        "closed_but_needed_action": out["action"] == "close" and exp["action"] != "close",
+        "expected": {k: (str(v) if isinstance(v, dt.date) else v) for k, v in exp.items()},
+        "got": {
+            "kind": out["kind"],
+            "action": out["action"],
+            "deadline": (out["deadline"] or {}).get("due"),
+            "errors": got_errors,
+            "reasons": out["reasons"],
+            "fields": {k: out["parsed"]["fields"].get(k) for k in (exp.get("fields") or {})},
+        },
+        "why": case.get("why", ""),
+    }
 
 
 def run(name: str, use_model: bool = True) -> dict[str, Any]:
@@ -111,12 +129,17 @@ def run(name: str, use_model: bool = True) -> dict[str, Any]:
                 except Exception as e:  # a case the desk cannot even process is a failure, recorded as such
                     results.append({"id": c["id"], "pass": False, "error": f"{type(e).__name__}: {e}"})
     report = {
-        "set": name, "status": status, "ran_at": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),
-        "cases": len(results), "passed": sum(r["pass"] for r in results),
+        "set": name,
+        "status": status,
+        "ran_at": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),
+        "cases": len(results),
+        "passed": sum(r["pass"] for r in results),
         "late_deadlines": sum(r.get("late_deadline", False) for r in results),
         "closed_but_needed_action": sum(r.get("closed_but_needed_action", False) for r in results),
-        "by_check": {k: sum(r.get("checks", {}).get(k, False) for r in results)
-                     for k in ("kind", "action", "deadline", "errors", "fields")},
+        "by_check": {
+            k: sum(r.get("checks", {}).get(k, False) for r in results)
+            for k in ("kind", "action", "deadline", "errors", "fields")
+        },
         "failures": [r for r in results if not r["pass"]],
     }
     out = config.REPORTS / "heldout" / name

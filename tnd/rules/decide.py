@@ -31,8 +31,16 @@ class Decision:
     blocked_close: list[str] = field(default_factory=list)
 
 
-def decide(kind: str | None, verified: bool, matched: bool, duplicate_of: str | None, findings: list[Finding],
-           tax_effect: int, estimate: bool, has_filed: bool) -> Decision:
+def decide(
+    kind: str | None,
+    verified: bool,
+    matched: bool,
+    duplicate_of: str | None,
+    findings: list[Finding],
+    tax_effect: int,
+    estimate: bool,
+    has_filed: bool,
+) -> Decision:
     cfg = config.load("rules")["decide"]
     if duplicate_of:
         return Decision("duplicate", [f"same notice as {duplicate_of}"])
@@ -56,6 +64,9 @@ def decide(kind: str | None, verified: bool, matched: bool, duplicate_of: str | 
         return Decision("close", ["matches the filed return; arithmetic and interest checked"])
     against = [f for f in devs if f.against and f.primary]
     if against and (kind == "gewst_mess" or tax_effect >= cfg["objection_materiality_cents"]):
-        return Decision("objection_review", [f"{len(against)} change(s) against the client; tax effect "
-                                             f"{tax_effect / 100:.2f} €"], ["deviation"])
+        return Decision(
+            "objection_review",
+            [f"{len(against)} change(s) against the client; remaining tax up by {tax_effect / 100:,.2f} €"],
+            ["deviation"],
+        )
     return Decision("inform_client", ["deviations in the client's favour or below the threshold"], ["deviation"])

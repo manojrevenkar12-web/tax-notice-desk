@@ -55,9 +55,14 @@ class Deadline:
     later_possible: dt.date | None = None  # a later date the client could argue, never used for the register
 
     def as_dict(self) -> dict:
-        return {"bekanntgabe": self.bekanntgabe.isoformat(), "due": self.due.isoformat(), "basis": self.basis,
-                "rules": self.rules, "notes": self.notes,
-                "later_possible": self.later_possible.isoformat() if self.later_possible else None}
+        return {
+            "bekanntgabe": self.bekanntgabe.isoformat(),
+            "due": self.due.isoformat(),
+            "basis": self.basis,
+            "rules": self.rules,
+            "notes": self.notes,
+            "later_possible": self.later_possible.isoformat() if self.later_possible else None,
+        }
 
 
 def _version(versions: list[dict], day: dt.date) -> dict:
@@ -68,9 +73,14 @@ def _version(versions: list[dict], day: dt.date) -> dict:
     return current
 
 
-def bekanntgabe(channel: str, posted: dt.date, lands: tuple[str, ...], provided: dt.date | None = None,
-                notified: dt.date | None = None, postmark: dt.date | None = None) -> tuple[dt.date, list[str], list[str],
-                                                                                         dt.date | None]:
+def bekanntgabe(
+    channel: str,
+    posted: dt.date,
+    lands: tuple[str, ...],
+    provided: dt.date | None = None,
+    notified: dt.date | None = None,
+    postmark: dt.date | None = None,
+) -> tuple[dt.date, list[str], list[str], dt.date | None]:
     cfg = config.load("rules")["bekanntgabe"]
     rules: list[str] = []
     notes: list[str] = []
@@ -86,8 +96,10 @@ def bekanntgabe(channel: str, posted: dt.date, lands: tuple[str, ...], provided:
         rules.append(v["source"])
         if not cfg["weekend_shift"]["portal"] and free_day(day, lands):
             later = roll_forward(day, lands)
-            notes.append("presumed day falls on a weekend or holiday; whether it moves is not settled for § 122a AO, "
-                         "the register keeps the earlier date")
+            notes.append(
+                "presumed day falls on a weekend or holiday; whether it moves is not settled for § 122a AO, "
+                "the register keeps the earlier date"
+            )
         return day, rules, notes, later
     v = _version(cfg["post"], posted)
     day = posted + dt.timedelta(days=v["days"])
@@ -98,14 +110,23 @@ def bekanntgabe(channel: str, posted: dt.date, lands: tuple[str, ...], provided:
     if postmark and postmark > posted:
         later_day = postmark + dt.timedelta(days=v["days"])
         later = roll_forward(later_day, lands)
-        notes.append(f"envelope postmarked {postmark:%d.%m.%Y}: the presumption may be rebutted (BFH IX B 95/25); "
-                     "the register keeps the date from the notice")
+        notes.append(
+            f"envelope postmarked {postmark:%d.%m.%Y}: the presumption may be rebutted (BFH IX B 95/25); "
+            "the register keeps the date from the notice"
+        )
     return day, rules, notes, later
 
 
-def objection_deadline(channel: str, posted: dt.date, lands: tuple[str, ...], instructions: bool,
-                       remedy: str | None, provided: dt.date | None = None, notified: dt.date | None = None,
-                       postmark: dt.date | None = None) -> Deadline:
+def objection_deadline(
+    channel: str,
+    posted: dt.date,
+    lands: tuple[str, ...],
+    instructions: bool,
+    remedy: str | None,
+    provided: dt.date | None = None,
+    notified: dt.date | None = None,
+    postmark: dt.date | None = None,
+) -> Deadline:
     rcfg = config.load("rules")["remedy"]
     bk, rules, notes, later = bekanntgabe(channel, posted, lands, provided, notified, postmark)
     if not instructions:
@@ -127,3 +148,19 @@ def objection_deadline(channel: str, posted: dt.date, lands: tuple[str, ...], in
 def authority_deadline(due: dt.date, posted: dt.date) -> Deadline:
     """A date the office set in a letter: kept as written (an extension under § 108 Abs. 3 is not relied on)."""
     return Deadline(posted, due, "authority", ["date set by the authority"], [])
+
+
+def from_receipt(received: dt.date, lands: tuple[str, ...], remedy: str | None) -> Deadline:
+    """The notice date could not be read: count the month from the day the notice arrived, the earliest day the
+    period can plausibly start. A person reads the date and corrects the register."""
+    due = roll_forward(add_months(received, 1), lands)
+    return Deadline(
+        received,
+        due,
+        "remedy",
+        [
+            "notice date not read: counted from the day it arrived",
+            "VwGO § 70 Abs. 1" if remedy == "Widerspruch" else "AO § 355 Abs. 1",
+        ],
+        ["read the notice date and correct the deadline"],
+    )

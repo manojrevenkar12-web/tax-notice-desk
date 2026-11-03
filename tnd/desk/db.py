@@ -17,8 +17,22 @@ from psycopg.types.json import Jsonb
 from .. import config
 
 MIGRATIONS = Path(__file__).parent / "migrations"
-TABLES = ["firms", "people", "clients", "filed_returns", "onfile", "history", "documents", "notices", "deadlines",
-          "drafts", "corrections", "layout_memory", "audit_log", "outbox"]
+TABLES = [
+    "firms",
+    "people",
+    "clients",
+    "filed_returns",
+    "onfile",
+    "history",
+    "documents",
+    "notices",
+    "deadlines",
+    "drafts",
+    "corrections",
+    "layout_memory",
+    "audit_log",
+    "outbox",
+]
 
 
 def owner_url() -> str:
@@ -75,14 +89,19 @@ def roles(c: psycopg.Connection[Any]) -> None:
             c.execute(f"create role {role} {opts}")
         else:
             c.execute(f"alter role {role} {opts}")
-    c.execute(f"grant usage on schema public to tnd_app, tnd_reporting")
+    c.execute("grant usage on schema public to tnd_app, tnd_reporting")
     c.execute(f"grant select, insert, update on {', '.join(TABLES)} to tnd_app")
     c.execute("revoke delete, truncate on all tables in schema public from tnd_app")
     c.execute("grant usage, select on all sequences in schema public to tnd_app")
     c.execute("grant select on clients, notices, deadlines, corrections to tnd_reporting")
     c.execute("grant select, update on documents to tnd_reporting")
-    for fn in ("firm_metrics()", "deadline_metrics()", "correction_metrics()", "route_taxno(text)",
-               "route_document(text, text)"):
+    for fn in (
+        "firm_metrics()",
+        "deadline_metrics()",
+        "correction_metrics()",
+        "route_taxno(text)",
+        "route_document(text, text)",
+    ):
         c.execute(f"alter function {fn} owner to tnd_reporting")
         c.execute(f"grant execute on function {fn} to tnd_app")
 
@@ -92,8 +111,9 @@ def session(firm: str | None, scope: str = "firm", url: str | None = None) -> It
     """A transaction bound to one firm (or to the mailroom or group operations scope)."""
     with psycopg.connect(url or app_url(), row_factory=dict_row) as c:  # type: ignore[arg-type]
         with c.transaction():
-            c.execute("select set_config('app.firm_id', %s, true), set_config('app.scope', %s, true)",
-                      (firm or "", scope))
+            c.execute(
+                "select set_config('app.firm_id', %s, true), set_config('app.scope', %s, true)", (firm or "", scope)
+            )
             yield c
 
 

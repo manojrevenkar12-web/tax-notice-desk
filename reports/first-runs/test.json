@@ -1,0 +1,106 @@
+{
+ "counts": {
+  "notices": 230,
+  "action_right": 223,
+  "kind_total": 221,
+  "kind_right": 218,
+  "deadline_total": 220,
+  "deadline_exact": 219,
+  "truth_close": 84,
+  "auto_closed": 81,
+  "review": 7,
+  "early_deadlines": 1,
+  "verified_wrong_values": 1,
+  "deadline_missing": 1
+ },
+ "metrics": {
+  "action_accuracy": 0.9696,
+  "review_rate": 0.0304,
+  "auto_close_rate": 0.9643,
+  "kind_accuracy": 0.9864,
+  "deadline_exact": 0.9955,
+  "late_deadlines": 0,
+  "closed_but_needed_action": 0,
+  "missed_required_objection": 0,
+  "verified_wrong_values": 1,
+  "wrong_client": 0,
+  "error_recall": 1.0,
+  "error_precision": 0.8889,
+  "retrieval_recall_at_3": 1.0,
+  "town_review_first_notice": 0.0833,
+  "town_review_later_notices": 0.0
+ },
+ "by_channel": {
+  "client_upload": {
+   "notices": 6,
+   "action_accuracy": 1.0,
+   "review_rate": 0.0
+  },
+  "municipal_digital": {
+   "notices": 3,
+   "action_accuracy": 1.0,
+   "review_rate": 0.0
+  },
+  "municipal_post": {
+   "notices": 30,
+   "action_accuracy": 0.9667,
+   "review_rate": 0.0333
+  },
+  "portal": {
+   "notices": 92,
+   "action_accuracy": 1.0,
+   "review_rate": 0.0
+  },
+  "post": {
+   "notices": 99,
+   "action_accuracy": 0.9394,
+   "review_rate": 0.0606
+  }
+ },
+ "confusion": {
+  "close -> close": 81,
+  "close -> review": 3,
+  "duplicate -> duplicate": 6,
+  "inform_client -> inform_client": 36,
+  "inform_client -> review": 1,
+  "misrouted -> misrouted": 3,
+  "objection_required -> objection_required": 9,
+  "objection_review -> objection_review": 20,
+  "objection_review -> review": 2,
+  "task -> review": 1,
+  "task -> task": 68
+ },
+ "examples": {
+  "wrong_action": [
+   "n00310",
+   "n00371",
+   "n00457",
+   "n00385",
+   "n00387",
+   "n00409",
+   "n00315"
+  ],
+  "early_deadlines": [
+   "n00371"
+  ],
+  "verified_wrong_values": [
+   "n00457"
+  ],
+  "false_error": [
+   "n00457"
+  ],
+  "deadline_missing": [
+   "n00281"
+  ]
+ },
+ "ran_at": "2026-11-03T16:51:03+00:00",
+ "split": "test",
+ "notices": 230,
+ "seconds": 423.7,
+ "model_calls": 44,
+ "model_cost_usd": 0.0352,
+ "versions": {
+  "rules": 3,
+  "extraction": 2
+ }
+}

@@ -37,24 +37,53 @@ FA_LABELS: dict[str, list[tuple[str, str]]] = {
         ("zve", "zu versteuerndes Einkommen"),
     ],
     "kst": [("einkommen", "zu versteuerndes Einkommen")],
-    "ust": [("umsatz_19", "steuerpflichtige Umsätze zu 19 %"), ("umsatz_7", "steuerpflichtige Umsätze zu 7 %"),
-            ("ust", "Umsatzsteuer"), ("vorsteuer", "abziehbare Vorsteuerbeträge"),
-            ("zahllast", "verbleibende Umsatzsteuer")],
-    "gewst_mess": [("gewinn", "Gewinn aus Gewerbebetrieb"), ("hinzurechnungen", "Hinzurechnungen"),
-                   ("kuerzungen", "Kürzungen"), ("gewerbeertrag", "Gewerbeertrag (abgerundet)"),
-                   ("freibetrag", "Freibetrag"), ("messbetrag", "Steuermessbetrag")],
+    "ust": [
+        ("umsatz_19", "steuerpflichtige Umsätze zu 19 %"),
+        ("umsatz_7", "steuerpflichtige Umsätze zu 7 %"),
+        ("ust", "Umsatzsteuer"),
+        ("vorsteuer", "abziehbare Vorsteuerbeträge"),
+        ("zahllast", "verbleibende Umsatzsteuer"),
+    ],
+    "gewst_mess": [
+        ("gewinn", "Gewinn aus Gewerbebetrieb"),
+        ("hinzurechnungen", "Hinzurechnungen"),
+        ("kuerzungen", "Kürzungen"),
+        ("gewerbeertrag", "Gewerbeertrag (abgerundet)"),
+        ("freibetrag", "Freibetrag"),
+        ("messbetrag", "Steuermessbetrag"),
+    ],
 }
 
 MUNI_LABELS = {
-    "messbetrag": ["Steuermessbetrag", "Gewerbesteuermessbetrag", "Messbetrag lt. Messbescheid",
-                   "Festgesetzter Messbetrag", "Messbetrag (Finanzamt)"],
+    "messbetrag": [
+        "Steuermessbetrag",
+        "Gewerbesteuermessbetrag",
+        "Messbetrag lt. Messbescheid",
+        "Festgesetzter Messbetrag",
+        "Messbetrag (Finanzamt)",
+    ],
     "hebesatz": ["Hebesatz", "Hebesatz v.H.", "Hebesatz in %", "Hebesatz der Gemeinde", "Hebesatz (%)"],
-    "gewst": ["Gewerbesteuer", "festgesetzte Gewerbesteuer", "Gewerbesteuer (Jahressteuer)", "Steuerbetrag",
-              "Gewerbesteuer festgesetzt"],
-    "vz_gewst": ["Vorauszahlungen", "abzgl. geleistete Vorauszahlungen", "bisher festgesetzte Vorauszahlungen",
-                 "Vorauszahlungssoll", "Anrechnung Vorauszahlungen"],
-    "rest_gewst": ["Abschlusszahlung", "Restbetrag", "Nachzahlung / Erstattung", "noch zu zahlen (+) / Erstattung (-)",
-                   "Differenz"],
+    "gewst": [
+        "Gewerbesteuer",
+        "festgesetzte Gewerbesteuer",
+        "Gewerbesteuer (Jahressteuer)",
+        "Steuerbetrag",
+        "Gewerbesteuer festgesetzt",
+    ],
+    "vz_gewst": [
+        "Vorauszahlungen",
+        "abzgl. geleistete Vorauszahlungen",
+        "bisher festgesetzte Vorauszahlungen",
+        "Vorauszahlungssoll",
+        "Anrechnung Vorauszahlungen",
+    ],
+    "rest_gewst": [
+        "Abschlusszahlung",
+        "Restbetrag",
+        "Nachzahlung / Erstattung",
+        "noch zu zahlen (+) / Erstattung (-)",
+        "Differenz",
+    ],
 }
 NUMBER_STYLES = ["de", "eur", "de_plain", "trailing_minus"]
 FONTS = [("Helvetica", "Helvetica-Bold"), ("Times-Roman", "Times-Bold"), ("Courier", "Courier-Bold")]
@@ -146,13 +175,17 @@ def _remedy(p: Page, doc: dict) -> None:
     p.gap(0.6)
     p.text("Rechtsbehelfsbelehrung", bold=True)
     if doc.get("remedy") == "Widerspruch":
-        p.wrap(f"Gegen diesen Bescheid kann innerhalb eines Monats nach Bekanntgabe Widerspruch erhoben werden. "
-               f"Der Widerspruch ist schriftlich oder zur Niederschrift bei {doc['authority']['name']} einzulegen.")
+        p.wrap(
+            f"Gegen diesen Bescheid kann innerhalb eines Monats nach Bekanntgabe Widerspruch erhoben werden. "
+            f"Der Widerspruch ist schriftlich oder zur Niederschrift bei {doc['authority']['name']} einzulegen."
+        )
     else:
-        p.wrap(f"Gegen diesen Bescheid ist der Einspruch gegeben. Der Einspruch ist bei {doc['authority']['name']} "
-               "schriftlich einzureichen, diesem elektronisch zu übermitteln oder dort zur Niederschrift zu erklären. "
-               "Die Frist für die Einlegung des Einspruchs beträgt einen Monat. Sie beginnt mit Ablauf des Tages, an "
-               "dem Ihnen dieser Bescheid bekannt gegeben worden ist.")
+        p.wrap(
+            f"Gegen diesen Bescheid ist der Einspruch gegeben. Der Einspruch ist bei {doc['authority']['name']} "
+            "schriftlich einzureichen, diesem elektronisch zu übermitteln oder dort zur Niederschrift zu erklären. "
+            "Die Frist für die Einlegung des Einspruchs beträgt einen Monat. Sie beginnt mit Ablauf des Tages, an "
+            "dem Ihnen dieser Bescheid bekannt gegeben worden ist."
+        )
 
 
 def _explain(p: Page, doc: dict) -> None:
@@ -176,22 +209,30 @@ def finanzamt_pdf(doc: dict) -> bytes:
     if k in ("request", "reminder", "audit"):
         L = doc["letter"]
         if k == "request":
-            p.wrap(f"Sehr geehrte Damen und Herren, zur Bearbeitung der Steuererklärung für {doc['tax_year']} "
-                   f"bitte ich Sie, {L['topic']} bis zum {de_date(L['due'])} einzureichen.")
+            p.wrap(
+                f"Sehr geehrte Damen und Herren, zur Bearbeitung der Steuererklärung für {doc['tax_year']} "
+                f"bitte ich Sie, {L['topic']} bis zum {de_date(L['due'])} einzureichen."
+            )
         elif k == "reminder":
-            p.wrap(f"Sehr geehrte Damen und Herren, die Steuererklärung für {doc['tax_year']} liegt noch nicht vor. "
-                   f"Bitte reichen Sie die Erklärung spätestens bis zum {de_date(L['due'])} ein. Andernfalls müssen die "
-                   "Besteuerungsgrundlagen geschätzt werden (§ 162 AO) und ein Verspätungszuschlag kann festgesetzt "
-                   "werden (§ 152 AO).")
+            p.wrap(
+                f"Sehr geehrte Damen und Herren, die Steuererklärung für {doc['tax_year']} liegt noch nicht vor. "
+                f"Bitte reichen Sie die Erklärung spätestens bis zum {de_date(L['due'])} ein. Andernfalls müssen die "
+                "Besteuerungsgrundlagen geschätzt werden (§ 162 AO) und ein Verspätungszuschlag kann festgesetzt "
+                "werden (§ 152 AO)."
+            )
         else:
-            p.wrap(f"Gemäß § 196 AO in Verbindung mit § 193 AO wird eine {L['topic']} angeordnet. "
-                   f"Die Prüfung beginnt am {de_date(L['due'])} in Ihren Geschäftsräumen. Bitte halten Sie die "
-                   "Unterlagen bereit (§ 200 AO).")
+            p.wrap(
+                f"Gemäß § 196 AO in Verbindung mit § 193 AO wird eine {L['topic']} angeordnet. "
+                f"Die Prüfung beginnt am {de_date(L['due'])} in Ihren Geschäftsräumen. Bitte halten Sie die "
+                "Unterlagen bereit (§ 200 AO)."
+            )
         _remedy(p, doc)
         return p.pdf()
     if k == "vz_est":
-        p.wrap(f"Die Vorauszahlungen zur Einkommensteuer werden ab dem Kalenderjahr {doc['vz_year']} wie folgt "
-               "festgesetzt (§ 37 EStG):")
+        p.wrap(
+            f"Die Vorauszahlungen zur Einkommensteuer werden ab dem Kalenderjahr {doc['vz_year']} wie folgt "
+            "festgesetzt (§ 37 EStG):"
+        )
         p.pair("Vorauszahlung je Quartal", fmt(f["vz_quartal"]))
         p.wrap("Fälligkeit: 10.03., 10.06., 10.09. und 10.12.")
         _remedy(p, doc)
@@ -205,8 +246,11 @@ def finanzamt_pdf(doc: dict) -> bytes:
         p.pair("Einkommensteuer", fmt(f["est"]))
         p.pair("Solidaritätszuschlag", fmt(f["soli"]))
         p.pair("Kirchensteuer", fmt(f["kist"]))
-        for tax, a, b, c in (("Einkommensteuer", "est", "lst_est", "vz_est"), ("Solidaritätszuschlag", "soli", "lst_soli", None),
-                             ("Kirchensteuer", "kist", "lst_kist", None)):
+        for tax, a, b, c in (
+            ("Einkommensteuer", "est", "lst_est", "vz_est"),
+            ("Solidaritätszuschlag", "soli", "lst_soli", None),
+            ("Kirchensteuer", "kist", "lst_kist", None),
+        ):
             p.text(f"Abrechnung {tax}", bold=True)
             p.pair("festgesetzt", fmt(f[a]))
             p.pair("abzüglich Steuerabzugsbeträge", fmt(f[b]))
@@ -231,8 +275,10 @@ def finanzamt_pdf(doc: dict) -> bytes:
         p.pair("verbleibende Beträge", fmt(f["rest_ust"]))
         _interest(p, f, "Umsatzsteuer", "zinsen_ust", doc["tax_year"], None)
     elif k == "gewst_mess":
-        p.wrap(f"Hebeberechtigte Gemeinde: {doc['municipality']}. Der Steuermessbetrag wird der Gemeinde mitgeteilt; "
-               "sie setzt die Gewerbesteuer fest.")
+        p.wrap(
+            f"Hebeberechtigte Gemeinde: {doc['municipality']}. Der Steuermessbetrag wird der Gemeinde mitgeteilt; "
+            "sie setzt die Gewerbesteuer fest."
+        )
     _flags(p, doc)
     _explain(p, doc)
     _remedy(p, doc)
@@ -248,12 +294,19 @@ def municipal_pdf(doc: dict) -> bytes:
     num = st["numbers"]
     L = st["labels"]
     p.wrap(f"Grundlage: Gewerbesteuermessbescheid des Finanzamts vom {de_date(doc['messbescheid_date'])}.")
-    rows = [("messbetrag", fmt(f["messbetrag"], num)), ("hebesatz", hs), ("gewst", fmt(f["gewst"], num)),
-            ("vz_gewst", fmt(f["vz_gewst"], num)), ("rest_gewst", fmt(f["rest_gewst"], num))]
+    rows = [
+        ("messbetrag", fmt(f["messbetrag"], num)),
+        ("hebesatz", hs),
+        ("gewst", fmt(f["gewst"], num)),
+        ("vz_gewst", fmt(f["vz_gewst"], num)),
+        ("rest_gewst", fmt(f["rest_gewst"], num)),
+    ]
     if st["structure"] == "prose":
-        p.wrap(f"Der {L['messbetrag']} beträgt {rows[0][1]}. Bei einem Hebesatz von {hs} ergibt sich eine Gewerbesteuer "
-               f"von {rows[2][1]}. Hierauf werden Vorauszahlungen in Höhe von {rows[3][1]} angerechnet, so dass sich "
-               f"ein Betrag von {rows[4][1]} ergibt (positiv: Nachzahlung, negativ: Erstattung).")
+        p.wrap(
+            f"Der {L['messbetrag']} beträgt {rows[0][1]}. Bei einem Hebesatz von {hs} ergibt sich eine Gewerbesteuer "
+            f"von {rows[2][1]}. Hierauf werden Vorauszahlungen in Höhe von {rows[3][1]} angerechnet, so dass sich "
+            f"ein Betrag von {rows[4][1]} ergibt (positiv: Nachzahlung, negativ: Erstattung)."
+        )
     elif st["structure"] == "table":
         p.text("   ".join(L[k] for k, _ in rows[:3]), bold=True)
         p.text("   ".join(v for _, v in rows[:3]))
@@ -271,11 +324,13 @@ def municipal_pdf(doc: dict) -> bytes:
 
 def data_xml(doc: dict) -> str:
     """The structured data that comes with an electronic notice (an illustrative schema, not ELSTER's)."""
-    parts = [f'<Bescheid art="{doc["kind"]}" jahr="{doc["tax_year"]}">',
-             f"<Behoerde>{escape(doc['authority']['name'])}</Behoerde>",
-             f"<Steuernummer>{doc['addressee']['steuernummer']}</Steuernummer>",
-             f"<Datum>{doc['date']}</Datum>",
-             f"<Vorbehalt>{'ja' if doc.get('vorbehalt') else 'nein'}</Vorbehalt>"]
+    parts = [
+        f'<Bescheid art="{doc["kind"]}" jahr="{doc["tax_year"]}">',
+        f"<Behoerde>{escape(doc['authority']['name'])}</Behoerde>",
+        f"<Steuernummer>{doc['addressee']['steuernummer']}</Steuernummer>",
+        f"<Datum>{doc['date']}</Datum>",
+        f"<Vorbehalt>{'ja' if doc.get('vorbehalt') else 'nein'}</Vorbehalt>",
+    ]
     for k, v in doc["fields"].items():
         parts.append(f'<Wert name="{k}">{v}</Wert>')
     if doc.get("letter"):
@@ -301,14 +356,16 @@ def scan(pdf: bytes, quality: str, seed: str) -> bytes:
         src = Path(d) / "in.pdf"
         src.write_bytes(pdf)
         dpi = {"good": 200, "fair": 150, "poor": 120}[quality]
-        subprocess.run(["pdftoppm", "-r", str(dpi), "-gray", "-png", "-singlefile", str(src), str(Path(d) / "p")],
-                       check=True)
+        subprocess.run(
+            ["pdftoppm", "-r", str(dpi), "-gray", "-png", "-singlefile", str(src), str(Path(d) / "p")], check=True
+        )
         img = Image.open(Path(d) / "p.png").convert("L")
     angle = r.uniform(-1.2, 1.2) * {"good": 0.4, "fair": 1, "poor": 1.6}[quality]
-    img = img.rotate(angle, expand=False, fillcolor=255, resample=Image.BICUBIC)
+    img = img.rotate(angle, expand=False, fillcolor=255, resample=Image.Resampling.BICUBIC)
     if quality != "good":
         img = img.filter(ImageFilter.GaussianBlur(radius=0.5 if quality == "fair" else 0.85))
     px = img.load()
+    assert px is not None
     w, h = img.size
     for _ in range(int(w * h * {"good": 0.0005, "fair": 0.002, "poor": 0.004}[quality])):
         x, y = r.randrange(w), r.randrange(h)

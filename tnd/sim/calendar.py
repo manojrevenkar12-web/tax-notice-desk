@@ -38,8 +38,9 @@ def plus_months(day: dt.date, months: int) -> dt.date:
     return dt.date(y, m, min(day.day, last))
 
 
-def received(channel: str, posted: dt.date, provided: dt.date | None, notified: dt.date | None,
-             lands: tuple[str, ...]) -> dt.date:
+def received(
+    channel: str, posted: dt.date, provided: dt.date | None, notified: dt.date | None, lands: tuple[str, ...]
+) -> dt.date:
     """When the notice counts as received, following the versions in docs/NOTICE_RULES.md."""
     if channel in ("post", "client_upload", "municipal_post"):
         days = 3 if posted < dt.date(2025, 1, 1) else 4

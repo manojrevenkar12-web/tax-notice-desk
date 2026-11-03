@@ -1,0 +1,918 @@
+[
+ {
+  "id": 20,
+  "firm_id": "f-spree",
+  "notice_id": "n00254",
+  "due": "2026-12-24",
+  "bekanntgabe": "2026-12-03",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "reminder",
+  "action": "task",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Anna Lehmann"
+ },
+ {
+  "id": 29,
+  "firm_id": "f-spree",
+  "notice_id": "n00275",
+  "due": "2026-12-24",
+  "bekanntgabe": "2026-12-03",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "reminder",
+  "action": "task",
+  "authority": "Finanzamt Prenzlauer Berg",
+  "client": "Jonas Schwarz"
+ },
+ {
+  "id": 33,
+  "firm_id": "f-spree",
+  "notice_id": "n00297",
+  "due": "2026-12-29",
+  "bekanntgabe": "2026-12-08",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "reminder",
+  "action": "task",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Aylin Wagner"
+ },
+ {
+  "id": 13,
+  "firm_id": "f-spree",
+  "notice_id": "n00247",
+  "due": "2026-12-31",
+  "bekanntgabe": "2026-12-03",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "request",
+  "action": "task",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Piotr Wagner"
+ },
+ {
+  "id": 1,
+  "firm_id": "f-spree",
+  "notice_id": "n00265",
+  "due": "2027-01-04",
+  "bekanntgabe": "2026-12-04",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "kst",
+  "action": "inform_client",
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "client": "Vogel Softwareentwicklung GmbH"
+ },
+ {
+  "id": 10,
+  "firm_id": "f-spree",
+  "notice_id": "n00286",
+  "due": "2027-01-04",
+  "bekanntgabe": "2026-12-04",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122 Abs. 2 Nr. 1 i.d.F. Art. 20 PostModG, BGBl. 2024 I Nr. 236",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "vz_est",
+  "action": "inform_client",
+  "authority": "Finanzamt Prenzlauer Berg",
+  "client": "Clara Werner"
+ },
+ {
+  "id": 2,
+  "firm_id": "f-spree",
+  "notice_id": "n00268",
+  "due": "2027-01-05",
+  "bekanntgabe": "2026-12-05",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [
+   "presumed day falls on a weekend or holiday; whether it moves is not settled for § 122a AO, the register keeps the earlier date"
+  ],
+  "later_possible": "2027-01-07",
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "ust",
+  "action": "objection_review",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Neumann Physiotherapie-Bedarf GmbH"
+ },
+ {
+  "id": 3,
+  "firm_id": "f-spree",
+  "notice_id": "n00279",
+  "due": "2027-01-05",
+  "bekanntgabe": "2026-12-05",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [
+   "presumed day falls on a weekend or holiday; whether it moves is not settled for § 122a AO, the register keeps the earlier date"
+  ],
+  "later_possible": "2027-01-07",
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "vz_est",
+  "action": "inform_client",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Mehmet Werner"
+ },
+ {
+  "id": 4,
+  "firm_id": "f-spree",
+  "notice_id": "n00284",
+  "due": "2027-01-05",
+  "bekanntgabe": "2026-12-05",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [
+   "presumed day falls on a weekend or holiday; whether it moves is not settled for § 122a AO, the register keeps the earlier date"
+  ],
+  "later_possible": "2027-01-07",
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "est",
+  "action": "objection_review",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Tobias Müller"
+ },
+ {
+  "id": 5,
+  "firm_id": "f-spree",
+  "notice_id": "n00298",
+  "due": "2027-01-05",
+  "bekanntgabe": "2026-12-05",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [
+   "presumed day falls on a weekend or holiday; whether it moves is not settled for § 122a AO, the register keeps the earlier date"
+  ],
+  "later_possible": "2027-01-07",
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "gewst",
+  "action": "objection_required",
+  "authority": "Berlin",
+  "client": "Aylin Wagner"
+ },
+ {
+  "id": 58,
+  "firm_id": "f-spree",
+  "notice_id": "n00293",
+  "due": "2027-01-05",
+  "bekanntgabe": "2026-12-15",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "reminder",
+  "action": "task",
+  "authority": "Finanzamt Prenzlauer Berg",
+  "client": "Fischer Kfz-Service GmbH"
+ },
+ {
+  "id": 84,
+  "firm_id": "f-spree",
+  "notice_id": "n00258",
+  "due": "2027-01-07",
+  "bekanntgabe": "2026-12-17",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "reminder",
+  "action": "task",
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "client": "Schwarz Gebäudereinigung GmbH"
+ },
+ {
+  "id": 28,
+  "firm_id": "f-spree",
+  "notice_id": "n00252",
+  "due": "2027-01-08",
+  "bekanntgabe": "2026-12-08",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122 Abs. 2 Nr. 1 i.d.F. Art. 20 PostModG, BGBl. 2024 I Nr. 236",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "gewst",
+  "action": "objection_required",
+  "authority": "Berlin",
+  "client": "Anna Lehmann"
+ },
+ {
+  "id": 44,
+  "firm_id": "f-spree",
+  "notice_id": "n00246",
+  "due": "2027-01-08",
+  "bekanntgabe": "2026-12-11",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "request",
+  "action": "task",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Piotr Wagner"
+ },
+ {
+  "id": 85,
+  "firm_id": "f-spree",
+  "notice_id": "n00260",
+  "due": "2027-01-08",
+  "bekanntgabe": "2026-12-18",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "reminder",
+  "action": "task",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Koch Logistik GmbH"
+ },
+ {
+  "id": 89,
+  "firm_id": "f-spree",
+  "notice_id": "n00282",
+  "due": "2027-01-08",
+  "bekanntgabe": "2026-12-18",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "reminder",
+  "action": "task",
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "client": "Aylin Vogel"
+ },
+ {
+  "id": 45,
+  "firm_id": "f-spree",
+  "notice_id": "n00278",
+  "due": "2027-01-11",
+  "bekanntgabe": "2026-12-11",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122 Abs. 2 Nr. 1 i.d.F. Art. 20 PostModG, BGBl. 2024 I Nr. 236",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "vz_est",
+  "action": "inform_client",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Mehmet Werner"
+ },
+ {
+  "id": 105,
+  "firm_id": "f-spree",
+  "notice_id": "n00291",
+  "due": "2027-01-12",
+  "bekanntgabe": "2026-12-22",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "reminder",
+  "action": "task",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Hoffmann Gastronomie GmbH"
+ },
+ {
+  "id": 38,
+  "firm_id": "f-spree",
+  "notice_id": "n00299",
+  "due": "2027-01-13",
+  "bekanntgabe": "2026-12-13",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [
+   "presumed day falls on a weekend or holiday; whether it moves is not settled for § 122a AO, the register keeps the earlier date"
+  ],
+  "later_possible": "2027-01-14",
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "vz_est",
+  "action": "inform_client",
+  "authority": "Finanzamt Prenzlauer Berg",
+  "client": "Aylin Krause"
+ },
+ {
+  "id": 63,
+  "firm_id": "f-spree",
+  "notice_id": "n00285",
+  "due": "2027-01-13",
+  "bekanntgabe": "2026-12-16",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "request",
+  "action": "task",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Tobias Müller"
+ },
+ {
+  "id": 40,
+  "firm_id": "f-spree",
+  "notice_id": "n00263",
+  "due": "2027-01-14",
+  "bekanntgabe": "2026-12-14",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122 Abs. 2 Nr. 1 i.d.F. Art. 20 PostModG, BGBl. 2024 I Nr. 236",
+   "AO § 108 Abs. 3; BFH III B 85/13",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "est",
+  "action": "objection_required",
+  "authority": "Finanzamt Prenzlauer Berg",
+  "client": "Elias Werner"
+ },
+ {
+  "id": 46,
+  "firm_id": "f-spree",
+  "notice_id": "n00296",
+  "due": "2027-01-14",
+  "bekanntgabe": "2026-12-14",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122 Abs. 2 Nr. 1 i.d.F. Art. 20 PostModG, BGBl. 2024 I Nr. 236",
+   "AO § 108 Abs. 3; BFH III B 85/13",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [
+   "envelope postmarked 14.12.2026: the presumption may be rebutted (BFH IX B 95/25); the register keeps the date from the notice"
+  ],
+  "later_possible": "2027-01-18",
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "vz_est",
+  "action": "inform_client",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Aylin Wagner"
+ },
+ {
+  "id": 50,
+  "firm_id": "f-spree",
+  "notice_id": "n00300",
+  "due": "2027-01-15",
+  "bekanntgabe": "2026-12-15",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122 Abs. 2 Nr. 1 i.d.F. Art. 20 PostModG, BGBl. 2024 I Nr. 236",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "vz_est",
+  "action": "inform_client",
+  "authority": "Finanzamt Prenzlauer Berg",
+  "client": "Aylin Krause"
+ },
+ {
+  "id": 88,
+  "firm_id": "f-spree",
+  "notice_id": "n00277",
+  "due": "2027-01-15",
+  "bekanntgabe": "2026-12-18",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "request",
+  "action": "task",
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "client": "Felix Krause"
+ },
+ {
+  "id": 86,
+  "firm_id": "f-spree",
+  "notice_id": "n00262",
+  "due": "2027-01-18",
+  "bekanntgabe": "2026-12-21",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "request",
+  "action": "task",
+  "authority": "Finanzamt Prenzlauer Berg",
+  "client": "Elias Werner"
+ },
+ {
+  "id": 125,
+  "firm_id": "f-spree",
+  "notice_id": "n00251",
+  "due": "2027-01-18",
+  "bekanntgabe": "2026-12-28",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "reminder",
+  "action": "task",
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "client": "Müller Medientechnik GmbH"
+ },
+ {
+  "id": 62,
+  "firm_id": "f-spree",
+  "notice_id": "n00242",
+  "due": "2027-01-20",
+  "bekanntgabe": "2026-12-20",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [
+   "presumed day falls on a weekend or holiday; whether it moves is not settled for § 122a AO, the register keeps the earlier date"
+  ],
+  "later_possible": "2027-01-21",
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "audit",
+  "action": "task",
+  "authority": "Finanzamt Prenzlauer Berg",
+  "client": "Olga Schmidt"
+ },
+ {
+  "id": 70,
+  "firm_id": "f-spree",
+  "notice_id": "n00271",
+  "due": "2027-01-20",
+  "bekanntgabe": "2026-12-20",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [
+   "presumed day falls on a weekend or holiday; whether it moves is not settled for § 122a AO, the register keeps the earlier date"
+  ],
+  "later_possible": "2027-01-21",
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "audit",
+  "action": "task",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Neumann Physiotherapie-Bedarf GmbH"
+ },
+ {
+  "id": 109,
+  "firm_id": "f-spree",
+  "notice_id": "n00244",
+  "due": "2027-01-20",
+  "bekanntgabe": "2026-12-23",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "request",
+  "action": "task",
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "client": "Schneider Feinkost GmbH"
+ },
+ {
+  "id": 111,
+  "firm_id": "f-spree",
+  "notice_id": "n00283",
+  "due": "2027-01-20",
+  "bekanntgabe": "2026-12-23",
+  "basis": "authority",
+  "rules": [
+   "date set by the authority"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "request",
+  "action": "task",
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "client": "Aylin Vogel"
+ },
+ {
+  "id": 69,
+  "firm_id": "f-spree",
+  "notice_id": "n00243",
+  "due": "2027-01-21",
+  "bekanntgabe": "2026-12-21",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "est",
+  "action": "inform_client",
+  "authority": "Finanzamt Prenzlauer Berg",
+  "client": "Olga Schmidt"
+ },
+ {
+  "id": 87,
+  "firm_id": "f-spree",
+  "notice_id": "n00276",
+  "due": "2027-01-21",
+  "bekanntgabe": "2026-12-21",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122 Abs. 2 Nr. 1 i.d.F. Art. 20 PostModG, BGBl. 2024 I Nr. 236",
+   "AO § 108 Abs. 3; BFH III B 85/13",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "vz_est",
+  "action": "inform_client",
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "client": "Felix Krause"
+ },
+ {
+  "id": 90,
+  "firm_id": "f-spree",
+  "notice_id": "n00287",
+  "due": "2027-01-22",
+  "bekanntgabe": "2026-12-22",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122 Abs. 2 Nr. 1 i.d.F. Art. 20 PostModG, BGBl. 2024 I Nr. 236",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "vz_est",
+  "action": "inform_client",
+  "authority": "Finanzamt Prenzlauer Berg",
+  "client": "Clara Werner"
+ },
+ {
+  "id": 83,
+  "firm_id": "f-spree",
+  "notice_id": "n00256",
+  "due": "2027-01-25",
+  "bekanntgabe": "2026-12-25",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [
+   "presumed day falls on a weekend or holiday; whether it moves is not settled for § 122a AO, the register keeps the earlier date"
+  ],
+  "later_possible": "2027-01-28",
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "vz_est",
+  "action": "inform_client",
+  "authority": "Finanzamt Prenzlauer Berg",
+  "client": "Ben Seidel"
+ },
+ {
+  "id": 100,
+  "firm_id": "f-spree",
+  "notice_id": "n00290",
+  "due": "2027-01-27",
+  "bekanntgabe": "2026-12-27",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [
+   "presumed day falls on a weekend or holiday; whether it moves is not settled for § 122a AO, the register keeps the earlier date"
+  ],
+  "later_possible": "2027-01-28",
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "ust",
+  "action": "objection_review",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Hoffmann Gastronomie GmbH"
+ },
+ {
+  "id": 104,
+  "firm_id": "f-spree",
+  "notice_id": "n00273",
+  "due": "2027-01-27",
+  "bekanntgabe": "2026-12-27",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [
+   "presumed day falls on a weekend or holiday; whether it moves is not settled for § 122a AO, the register keeps the earlier date"
+  ],
+  "later_possible": "2027-01-28",
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "est",
+  "action": "inform_client",
+  "authority": "Finanzamt Prenzlauer Berg",
+  "client": "Jonas Schwarz"
+ },
+ {
+  "id": 107,
+  "firm_id": "f-spree",
+  "notice_id": "n00253",
+  "due": "2027-01-28",
+  "bekanntgabe": "2026-12-28",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "est",
+  "action": "inform_client",
+  "authority": "Finanzamt Charlottenburg",
+  "client": "Anna Lehmann"
+ },
+ {
+  "id": 110,
+  "firm_id": "f-spree",
+  "notice_id": "n00255",
+  "due": "2027-01-28",
+  "bekanntgabe": "2026-12-28",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122 Abs. 2 Nr. 1 i.d.F. Art. 20 PostModG, BGBl. 2024 I Nr. 236",
+   "AO § 108 Abs. 3; BFH III B 85/13",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "vz_est",
+  "action": "inform_client",
+  "authority": "Finanzamt Prenzlauer Berg",
+  "client": "Ben Seidel"
+ },
+ {
+  "id": 116,
+  "firm_id": "f-spree",
+  "notice_id": "n00241",
+  "due": "2027-02-02",
+  "bekanntgabe": "2027-01-02",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [
+   "presumed day falls on a weekend or holiday; whether it moves is not settled for § 122a AO, the register keeps the earlier date"
+  ],
+  "later_possible": "2027-02-04",
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "audit",
+  "action": "task",
+  "authority": "Finanzamt Prenzlauer Berg",
+  "client": "Olga Schmidt"
+ },
+ {
+  "id": 131,
+  "firm_id": "f-spree",
+  "notice_id": "n00267",
+  "due": "2027-02-04",
+  "bekanntgabe": "2027-01-04",
+  "basis": "remedy",
+  "rules": [
+   "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026",
+   "AO § 355 Abs. 1",
+   "AO § 108 Abs. 1, 3; BGB §§ 187, 188"
+  ],
+  "notes": [],
+  "later_possible": null,
+  "status": "proposed",
+  "proposed_by": "desk",
+  "confirmed_by": null,
+  "confirmed_at": null,
+  "kind": "kst",
+  "action": "objection_review",
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "client": "Vogel Softwareentwicklung GmbH"
+ }
+]

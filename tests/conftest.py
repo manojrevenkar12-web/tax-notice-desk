@@ -40,7 +40,9 @@ def desk(world):
     seed(None, OWNER)
     g = Group.load()
     folder = config.DATA / "dev" / "inbox"
-    metas = sorted((json.loads(p.read_text()) for p in folder.glob("*.json")), key=lambda m: (m["received_at"], m["id"]))
+    metas = sorted(
+        (json.loads(p.read_text()) for p in folder.glob("*.json")), key=lambda m: (m["received_at"], m["id"])
+    )
     picked: dict[str, list[dict]] = {}
     for m in metas:
         if m["channel"] != "portal":

@@ -1,0 +1,10 @@
+{
+ "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmLXNwcmVlLXAwIiwiZmlybSI6ImYtc3ByZWUiLCJyb2xlIjoiY2xlcmsiLCJpc3MiOiJ0YXgtbm90aWNlLWRlc2siLCJpYXQiOjE3OTM3MjU3MzksImV4cCI6MTc5Mzc1NDUzOX0.7YYLPQZTbxHs_IDVzIyDZeeslAwimWDRbK229qseqIs",
+ "person": {
+  "id": "f-spree-p0",
+  "name": "Katrin Albers",
+  "role": "clerk",
+  "firm": "f-spree",
+  "firm_name": "Kanzlei Spreebogen Steuerberatung"
+ }
+}

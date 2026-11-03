@@ -15,16 +15,96 @@ from .. import config
 from . import calendar as cal
 from . import tax
 
-FIRST = ["Anna", "Jonas", "Leonie", "Felix", "Marie", "Paul", "Sophie", "Lukas", "Emma", "Elias", "Hannah", "Ben",
-         "Mia", "Noah", "Lea", "Finn", "Lina", "Tim", "Clara", "Moritz", "Ida", "Jakob", "Greta", "David", "Aylin",
-         "Mehmet", "Olga", "Piotr", "Sara", "Tobias"]
-LAST = ["Müller", "Schmidt", "Schneider", "Fischer", "Weber", "Meyer", "Wagner", "Becker", "Hoffmann", "Schulz",
-        "Koch", "Richter", "Klein", "Wolf", "Neumann", "Schwarz", "Zimmermann", "Krüger", "Hartmann", "Lange",
-        "Werner", "Krause", "Lehmann", "Köhler", "Yilmaz", "Nowak", "Kaya", "Brandt", "Vogel", "Seidel"]
-TRADES = ["Elektrotechnik", "Gebäudereinigung", "Softwareentwicklung", "Gastronomie", "Holzbau", "Logistik",
-          "Messebau", "Physiotherapie-Bedarf", "Werbetechnik", "Kfz-Service", "Feinkost", "Medientechnik"]
-STREETS = ["Hauptstraße", "Lindenallee", "Bahnhofstraße", "Am Markt", "Gartenweg", "Schillerstraße", "Ringstraße",
-           "Kirchgasse", "Mühlenweg", "Parkstraße"]
+FIRST = [
+    "Anna",
+    "Jonas",
+    "Leonie",
+    "Felix",
+    "Marie",
+    "Paul",
+    "Sophie",
+    "Lukas",
+    "Emma",
+    "Elias",
+    "Hannah",
+    "Ben",
+    "Mia",
+    "Noah",
+    "Lea",
+    "Finn",
+    "Lina",
+    "Tim",
+    "Clara",
+    "Moritz",
+    "Ida",
+    "Jakob",
+    "Greta",
+    "David",
+    "Aylin",
+    "Mehmet",
+    "Olga",
+    "Piotr",
+    "Sara",
+    "Tobias",
+]
+LAST = [
+    "Müller",
+    "Schmidt",
+    "Schneider",
+    "Fischer",
+    "Weber",
+    "Meyer",
+    "Wagner",
+    "Becker",
+    "Hoffmann",
+    "Schulz",
+    "Koch",
+    "Richter",
+    "Klein",
+    "Wolf",
+    "Neumann",
+    "Schwarz",
+    "Zimmermann",
+    "Krüger",
+    "Hartmann",
+    "Lange",
+    "Werner",
+    "Krause",
+    "Lehmann",
+    "Köhler",
+    "Yilmaz",
+    "Nowak",
+    "Kaya",
+    "Brandt",
+    "Vogel",
+    "Seidel",
+]
+TRADES = [
+    "Elektrotechnik",
+    "Gebäudereinigung",
+    "Softwareentwicklung",
+    "Gastronomie",
+    "Holzbau",
+    "Logistik",
+    "Messebau",
+    "Physiotherapie-Bedarf",
+    "Werbetechnik",
+    "Kfz-Service",
+    "Feinkost",
+    "Medientechnik",
+]
+STREETS = [
+    "Hauptstraße",
+    "Lindenallee",
+    "Bahnhofstraße",
+    "Am Markt",
+    "Gartenweg",
+    "Schillerstraße",
+    "Ringstraße",
+    "Kirchgasse",
+    "Mühlenweg",
+    "Parkstraße",
+]
 TAXNO = {"BE": (2, 3, 5), "BY": (3, 3, 5), "NW": (3, 4, 4), "SN": (3, 3, 5), "BB": (3, 3, 5)}
 FA_PREFIX = {"BE": "27", "BY": "143", "NW": "214", "SN": "231", "BB": "048"}
 CITY_OF_LAND = {"BE": "Berlin", "BY": "München", "NW": "Köln", "SN": "Leipzig", "BB": "Potsdam"}
@@ -130,7 +210,12 @@ class World:
             soli_k = round(kst * 0.055)
             vz = kst * rng.choice([0, 50, 80, 100]) // 100 // 100 * 100
             c.filed.setdefault("kst", {})[year] = {
-                "einkommen": einkommen, "kst": kst, "soli": soli_k, "vz_kst": vz, "rest_kst": kst - vz}
+                "einkommen": einkommen,
+                "kst": kst,
+                "soli": soli_k,
+                "vz_kst": vz,
+                "rest_kst": kst - vz,
+            }
             self._business(c, year, einkommen)
         if c.kind != "person":
             u19 = eur(rng.uniform(60000, 1500000))
@@ -140,11 +225,26 @@ class World:
             zl = ust - vst
             vz = zl - eur(rng.uniform(-3000, 3000)) if zl > 300000 else zl
             c.filed.setdefault("ust", {})[year] = {
-                "umsatz_19": u19, "umsatz_7": u7, "ust": ust, "vorsteuer": vst, "zahllast": zl,
-                "vz_ust": vz, "rest_ust": zl - vz}
+                "umsatz_19": u19,
+                "umsatz_7": u7,
+                "ust": ust,
+                "vorsteuer": vst,
+                "zahllast": zl,
+                "vz_ust": vz,
+                "rest_ust": zl - vz,
+            }
 
-    def _est_fields(self, c: Client, year: int, nsa: int, gew: int, vuv: int, sa: int, agb: int,
-                    credits: tuple[int, int, int, int] | None) -> dict[str, int]:
+    def _est_fields(
+        self,
+        c: Client,
+        year: int,
+        nsa: int,
+        gew: int,
+        vuv: int,
+        sa: int,
+        agb: int,
+        credits: tuple[int, int, int, int] | None,
+    ) -> dict[str, int]:
         summe = nsa + gew + vuv
         zve = max(0, summe - sa - agb) // 100 * 100
         est = tax.income_tax(zve, year)
@@ -159,10 +259,25 @@ class World:
             lst_k = round(ki * share)
             credits = (lst, vz, lst_s, lst_k)
         lst, vz, lst_s, lst_k = credits
-        return {"einkuenfte_nsa": nsa, "einkuenfte_gewerbe": gew, "einkuenfte_vuv": vuv, "summe_einkuenfte": summe,
-                "sonderausgaben": sa, "agb": agb, "zve": zve, "est": est, "soli": so, "kist": ki,
-                "lst_est": lst, "vz_est": vz, "rest_est": est - lst - vz,
-                "lst_soli": lst_s, "rest_soli": so - lst_s, "lst_kist": lst_k, "rest_kist": ki - lst_k}
+        return {
+            "einkuenfte_nsa": nsa,
+            "einkuenfte_gewerbe": gew,
+            "einkuenfte_vuv": vuv,
+            "summe_einkuenfte": summe,
+            "sonderausgaben": sa,
+            "agb": agb,
+            "zve": zve,
+            "est": est,
+            "soli": so,
+            "kist": ki,
+            "lst_est": lst,
+            "vz_est": vz,
+            "rest_est": est - lst - vz,
+            "lst_soli": lst_s,
+            "rest_soli": so - lst_s,
+            "lst_kist": lst_k,
+            "rest_kist": ki - lst_k,
+        }
 
     def _business(self, c: Client, year: int, gewinn: int) -> None:
         rng = self.rng
@@ -170,8 +285,13 @@ class World:
         kuerz = eur(rng.uniform(0, 12000)) if rng.random() < 0.2 else 0
         ertrag, frei, mb = tax.messbetrag(gewinn, hinz, kuerz, c.kind != "company")
         c.filed.setdefault("gewst_mess", {})[year] = {
-            "gewinn": gewinn, "hinzurechnungen": hinz, "kuerzungen": kuerz, "gewerbeertrag": ertrag,
-            "freibetrag": frei, "messbetrag": mb}
+            "gewinn": gewinn,
+            "hinzurechnungen": hinz,
+            "kuerzungen": kuerz,
+            "gewerbeertrag": ertrag,
+            "freibetrag": frei,
+            "messbetrag": mb,
+        }
 
     # ----------------------------------------------------------------- notices
     def _id(self) -> str:
@@ -217,11 +337,11 @@ class World:
                 c = self._client(firm, 99)
             c.id = "unknown"
             days = self._working_days(start, end - dt.timedelta(days=5), firm["land"])
-            n = self._notice(c, firm, "est", 2024, rng.choice(days))
-            n["truth"]["action"] = "misrouted"
-            n["truth"]["client_id"] = None
-            n["truth"]["firm"] = None
-            notices.append(n)
+            stray = self._notice(c, firm, "est", 2024, rng.choice(days))
+            stray["truth"]["action"] = "misrouted"
+            stray["truth"]["client_id"] = None
+            stray["truth"]["firm"] = None
+            notices.append(stray)
         notices.sort(key=lambda x: (x["meta"]["received_at"], x["id"]))
         return notices
 
@@ -271,7 +391,9 @@ class World:
     def _channel(self, authority: dict, posted: dt.date) -> str:
         rng, ch = self.rng, self.cfg["channels"]
         if authority["kind"] == "gemeinde":
-            return "municipal_digital" if rng.random() < self.munis[authority["id"]]["digital_share"] else "municipal_post"
+            return (
+                "municipal_digital" if rng.random() < self.munis[authority["id"]]["digital_share"] else "municipal_post"
+            )
         share = ch["diva_share_from_2027"] if posted >= dt.date(2027, 1, 1) else ch["diva_share_until_2026"]
         return "portal" if rng.random() < share else "post"
 
@@ -285,8 +407,9 @@ class World:
         if channel in ("portal", "municipal_digital"):
             provided = posted
             notified = posted + dt.timedelta(days=1 if rng.random() < 0.15 else 0)
-            meta.update(provided_at=provided.isoformat(), notified_at=notified.isoformat(),
-                        received_at=notified.isoformat())
+            meta.update(
+                provided_at=provided.isoformat(), notified_at=notified.isoformat(), received_at=notified.isoformat()
+            )
         else:
             arrive = posted + dt.timedelta(days=rng.randint(1, 4))
             arrive = cal.next_working(arrive, (firm["land"],))
@@ -295,22 +418,37 @@ class World:
                 meta["postmark"] = (posted + dt.timedelta(days=rng.randint(3, 5))).isoformat()
             else:
                 meta["postmark"] = posted.isoformat()
-            meta["quality"] = rng.choices(list(self.cfg["channels"]["scan_quality"]),
-                                          list(self.cfg["channels"]["scan_quality"].values()))[0]
+            meta["quality"] = rng.choices(
+                list(self.cfg["channels"]["scan_quality"]), list(self.cfg["channels"]["scan_quality"].values())
+            )[0]
         bekannt = cal.received(channel, posted, provided, notified, lands)
         no_rbb = rng.random() < mail["no_appeal_notice"]
         months = 12 if no_rbb else 1
         doc: dict[str, Any] = {
-            "kind": kind, "authority": auth, "date": posted.isoformat(), "tax_year": year,
+            "kind": kind,
+            "authority": auth,
+            "date": posted.isoformat(),
+            "tax_year": year,
             "addressee": {"name": c.name, "address": c.address, "steuernummer": c.steuernummer},
             "agent": {"name": firm["name"], "city": firm["city"]},
-            "fields": {}, "explanations": [], "vorbehalt": False, "vorlaeufig": [],
-            "appeal_instructions": not no_rbb, "remedy": "Einspruch",
+            "fields": {},
+            "explanations": [],
+            "vorbehalt": False,
+            "vorlaeufig": [],
+            "appeal_instructions": not no_rbb,
+            "remedy": "Einspruch",
         }
         truth: dict[str, Any] = {
-            "client_id": c.id, "firm": c.firm, "kind": kind, "tax_year": year, "bekanntgabe": bekannt.isoformat(),
-            "deadline": cal.deadline(bekannt, months, lands).isoformat(), "deviations": [], "errors": [],
-            "action": "close", "deadline_basis": "remedy",
+            "client_id": c.id,
+            "firm": c.firm,
+            "kind": kind,
+            "tax_year": year,
+            "bekanntgabe": bekannt.isoformat(),
+            "deadline": cal.deadline(bekannt, months, lands).isoformat(),
+            "deviations": [],
+            "errors": [],
+            "action": "close",
+            "deadline_basis": "remedy",
         }
         if kind == "gewst":
             m = self.munis[auth["id"]]
@@ -321,8 +459,13 @@ class World:
             doc["vorbehalt"] = rng.random() < mail["vorbehalt"]
             if rng.random() < mail["vorlaeufig"]:
                 doc["vorlaeufig"] = rng.sample(
-                    ["Abziehbarkeit der Beiträge zu Rentenversicherungen (§ 10 Abs. 1 Nr. 2 EStG)",
-                     "Höhe des Grundfreibetrags", "Verfassungsmäßigkeit des Solidaritätszuschlags"], 1)
+                    [
+                        "Abziehbarkeit der Beiträge zu Rentenversicherungen (§ 10 Abs. 1 Nr. 2 EStG)",
+                        "Höhe des Grundfreibetrags",
+                        "Verfassungsmäßigkeit des Solidaritätszuschlags",
+                    ],
+                    1,
+                )
         truth["no_appeal_instructions"] = no_rbb
         return {"id": self._id(), "meta": meta, "doc": doc, "truth": truth}
 
@@ -335,12 +478,12 @@ class World:
             return assessed
         reasons = self.cfg["reasons"][kind]
         favour = rng.random() < cfg["in_favour_share"]
+
         def usable(r: dict) -> bool:
             f = r["field"]
             return f in filed and (filed[f] != 0 or f in ("hinzurechnungen", "kuerzungen", "sonderausgaben"))
 
-        pool = [r for r in reasons if (not r["against"]) == favour and usable(r)] or \
-            [r for r in reasons if usable(r)]
+        pool = [r for r in reasons if (not r["against"]) == favour and usable(r)] or [r for r in reasons if usable(r)]
         if not pool:
             return assessed
         picks = rng.sample(pool, k=min(len(pool), 2 if rng.random() < 0.2 else 1))
@@ -360,9 +503,16 @@ class World:
             text = self.cfg["reasons"]["unexplained"] if unexplained else r["text"]
             if text not in doc["explanations"]:
                 doc["explanations"].append(text)
-            truth["deviations"].append({"field": fld, "filed": filed[fld], "assessed": assessed[fld],
-                                        "reason": None if unexplained else r["id"], "against": r["against"],
-                                        "cite": r["cite"]})
+            truth["deviations"].append(
+                {
+                    "field": fld,
+                    "filed": filed[fld],
+                    "assessed": assessed[fld],
+                    "reason": None if unexplained else r["id"],
+                    "against": r["against"],
+                    "cite": r["cite"],
+                }
+            )
         return assessed
 
     def _settle(self, truth: dict, filed_rest: int, assessed_rest: int) -> None:
@@ -386,38 +536,56 @@ class World:
         cents = rounded * 15 * months // 10000 // 100 * 100
         if cents < 1000:
             cents = 0
-        truth["interest"] = {"start": start.isoformat(), "months": months, "base": rounded,
-                             "amount": cents if base > 0 else -cents}
+        truth["interest"] = {
+            "start": start.isoformat(),
+            "months": months,
+            "base": rounded,
+            "amount": cents if base > 0 else -cents,
+        }
         if cents and self.rng.random() < self.cfg["interest_errors"]:
             wrong = rounded * 15 * (months + 1) // 10000 // 100 * 100
-            truth["errors"].append({"type": "interest", "correct": truth["interest"]["amount"],
-                                    "stated": wrong if base > 0 else -wrong})
+            truth["errors"].append(
+                {"type": "interest", "correct": truth["interest"]["amount"], "stated": wrong if base > 0 else -wrong}
+            )
             return wrong if base > 0 else -wrong
         return truth["interest"]["amount"]
 
     def _k_est(self, c: Client, firm: dict, year: int, doc: dict, truth: dict, bekannt: dt.date) -> None:
         filed = c.filed["est"][year]
         assessed = self._deviate("est", filed, truth, doc)
-        f = self._est_fields(c, year, assessed["einkuenfte_nsa"], assessed["einkuenfte_gewerbe"],
-                             assessed["einkuenfte_vuv"], assessed["sonderausgaben"], assessed["agb"],
-                             (filed["lst_est"], filed["vz_est"], filed["lst_soli"], filed["lst_kist"]))
+        f = self._est_fields(
+            c,
+            year,
+            assessed["einkuenfte_nsa"],
+            assessed["einkuenfte_gewerbe"],
+            assessed["einkuenfte_vuv"],
+            assessed["sonderausgaben"],
+            assessed["agb"],
+            (filed["lst_est"], filed["vz_est"], filed["lst_soli"], filed["lst_kist"]),
+        )
         f["zinsen_est"] = self._interest("est", year, f["rest_est"], bekannt, truth)
         doc["fields"] = f
         doc["title"] = f"Bescheid für {year} über Einkommensteuer, Solidaritätszuschlag und Kirchensteuer"
-        self._settle(truth, filed["rest_est"] + filed["rest_soli"] + filed["rest_kist"],
-                     f["rest_est"] + f["rest_soli"] + f["rest_kist"])
+        self._settle(
+            truth,
+            filed["rest_est"] + filed["rest_soli"] + filed["rest_kist"],
+            f["rest_est"] + f["rest_soli"] + f["rest_kist"],
+        )
         self._errors_to_action(truth)
 
     def _k_estimate(self, c: Client, firm: dict, year: int, doc: dict, truth: dict, bekannt: dt.date) -> None:
         base = c.filed["est"][year]
         nsa, gew = int(base["einkuenfte_nsa"] * 1.15) // 100 * 100, int(base["einkuenfte_gewerbe"] * 1.3) // 100 * 100
-        f = self._est_fields(c, year, nsa, gew, base["einkuenfte_vuv"], 0, 0, (base["lst_est"], 0, base["lst_soli"],
-                                                                                base["lst_kist"]))
-        f["zinsen_est"] = 0
+        f = self._est_fields(
+            c, year, nsa, gew, base["einkuenfte_vuv"], 0, 0, (base["lst_est"], 0, base["lst_soli"], base["lst_kist"])
+        )
+        f["zinsen_est"] = self._interest("est", year, f["rest_est"], bekannt, truth)
         doc["fields"] = f
         doc["title"] = f"Bescheid für {year} über Einkommensteuer, Solidaritätszuschlag und Kirchensteuer"
-        doc["explanations"].append("Da Sie Ihre Steuererklärung trotz Aufforderung nicht abgegeben haben, wurden die "
-                                   "Besteuerungsgrundlagen gemäß § 162 AO geschätzt.")
+        doc["explanations"].append(
+            "Da Sie Ihre Steuererklärung trotz Aufforderung nicht abgegeben haben, wurden die "
+            "Besteuerungsgrundlagen gemäß § 162 AO geschätzt."
+        )
         doc["estimate"] = True
         doc["kind"] = "est"
         truth["kind"] = "est"
@@ -429,8 +597,13 @@ class World:
         filed = c.filed["kst"][year]
         a = self._deviate("kst", filed, truth, doc)
         kst = a["einkommen"] * 15 // 100
-        f = {"einkommen": a["einkommen"], "kst": kst, "soli": round(kst * 0.055), "vz_kst": filed["vz_kst"],
-             "rest_kst": kst - filed["vz_kst"]}
+        f = {
+            "einkommen": a["einkommen"],
+            "kst": kst,
+            "soli": round(kst * 0.055),
+            "vz_kst": filed["vz_kst"],
+            "rest_kst": kst - filed["vz_kst"],
+        }
         f["zinsen_kst"] = self._interest("kst", year, f["rest_kst"], bekannt, truth)
         doc["fields"] = f
         doc["title"] = f"Bescheid für {year} über Körperschaftsteuer und Solidaritätszuschlag"
@@ -442,8 +615,15 @@ class World:
         a = self._deviate("ust", filed, truth, doc)
         ust = a["umsatz_19"] * 19 // 100 + a["umsatz_7"] * 7 // 100
         zl = ust - a["vorsteuer"]
-        f = {"umsatz_19": a["umsatz_19"], "umsatz_7": a["umsatz_7"], "ust": ust, "vorsteuer": a["vorsteuer"],
-             "zahllast": zl, "vz_ust": filed["vz_ust"], "rest_ust": zl - filed["vz_ust"]}
+        f = {
+            "umsatz_19": a["umsatz_19"],
+            "umsatz_7": a["umsatz_7"],
+            "ust": ust,
+            "vorsteuer": a["vorsteuer"],
+            "zahllast": zl,
+            "vz_ust": filed["vz_ust"],
+            "rest_ust": zl - filed["vz_ust"],
+        }
         f["zinsen_ust"] = self._interest("ust", year, f["rest_ust"], bekannt, truth)
         doc["fields"] = f
         doc["title"] = f"Bescheid für {year} über Umsatzsteuer"
@@ -454,8 +634,14 @@ class World:
         filed = c.filed["gewst_mess"][year]
         a = self._deviate("gewst_mess", filed, truth, doc)
         ertrag, frei, mb = tax.messbetrag(a["gewinn"], a["hinzurechnungen"], a["kuerzungen"], c.kind != "company")
-        doc["fields"] = {"gewinn": a["gewinn"], "hinzurechnungen": a["hinzurechnungen"], "kuerzungen": a["kuerzungen"],
-                         "gewerbeertrag": ertrag, "freibetrag": frei, "messbetrag": mb}
+        doc["fields"] = {
+            "gewinn": a["gewinn"],
+            "hinzurechnungen": a["hinzurechnungen"],
+            "kuerzungen": a["kuerzungen"],
+            "gewerbeertrag": ertrag,
+            "freibetrag": frei,
+            "messbetrag": mb,
+        }
         doc["title"] = f"Bescheid für {year} über den Gewerbesteuermessbetrag"
         doc["municipality"] = self.munis[c.municipality or "berlin"]["name"]
         self._settle(truth, filed["messbetrag"], mb)
@@ -464,15 +650,23 @@ class World:
         rng, me = self.rng, self.cfg["municipal_errors"]
         m = self.munis[c.municipality or "berlin"]
         mess = c.filed["gewst_mess"][year]["messbetrag"]
-        on = {"client_id": c.id, "firm": c.firm, "steuernummer": c.steuernummer, "kind": "gewst_mess", "year": year,
-              "date": f"{year + 1}-{rng.randint(6, 9):02d}-{rng.randint(1, 28):02d}", "messbetrag": mess}
+        on = {
+            "client_id": c.id,
+            "firm": c.firm,
+            "steuernummer": c.steuernummer,
+            "kind": "gewst_mess",
+            "year": year,
+            "date": f"{year + 1}-{rng.randint(6, 9):02d}-{rng.randint(1, 28):02d}",
+            "messbetrag": mess,
+        }
         self.onfile.append(on)
         used, hebesatz = mess, m["hebesatz"]
         if rng.random() < me["stale_messbetrag"]:
             changed = max(0, mess + rng.choice([-1, 1]) * 350 * rng.randint(3, 60))
             if changed != mess:
-                self.onfile.append({**on, "date": f"{year + 1}-10-{rng.randint(1, 28):02d}", "messbetrag": changed,
-                                    "changed": True})
+                self.onfile.append(
+                    {**on, "date": f"{year + 1}-10-{rng.randint(1, 28):02d}", "messbetrag": changed, "changed": True}
+                )
                 truth["errors"].append({"type": "stale_messbetrag", "stated": mess, "correct": changed})
                 truth["messbetrag_on_file"] = changed
         if rng.random() < me["wrong_hebesatz"]:
@@ -484,8 +678,13 @@ class World:
             truth["errors"].append({"type": "arithmetic", "stated": stated, "correct": gewst})
             gewst = stated
         vz = gewst * rng.choice([0, 50, 75, 100]) // 100 // 100 * 100
-        doc["fields"] = {"messbetrag": used, "hebesatz": hebesatz * 100, "gewst": gewst, "vz_gewst": vz,
-                         "rest_gewst": gewst - vz}
+        doc["fields"] = {
+            "messbetrag": used,
+            "hebesatz": hebesatz * 100,
+            "gewst": gewst,
+            "vz_gewst": vz,
+            "rest_gewst": gewst - vz,
+        }
         doc["messbescheid_date"] = on["date"]
         doc["title"] = f"Gewerbesteuerbescheid für das Kalenderjahr {year}"
         truth["hebesatz_register"] = m["hebesatz"]
@@ -512,15 +711,25 @@ class World:
         truth["deadline_basis"] = "authority"
 
     def _k_request(self, c: Client, firm: dict, year: int, doc: dict, truth: dict, bekannt: dt.date) -> None:
-        topic = self.rng.choice(["Nachweise über die geltend gemachten Fahrtkosten",
-                                 "Zuwendungsbestätigungen für die erklärten Spenden",
-                                 "den Mietvertrag und die Nebenkostenabrechnung",
-                                 "eine Aufstellung der Bewirtungsaufwendungen"])
+        topic = self.rng.choice(
+            [
+                "Nachweise über die geltend gemachten Fahrtkosten",
+                "Zuwendungsbestätigungen für die erklärten Spenden",
+                "den Mietvertrag und die Nebenkostenabrechnung",
+                "eine Aufstellung der Bewirtungsaufwendungen",
+            ]
+        )
         self._letter(c, doc, truth, f"Steuererklärung {year}: Anforderung von Unterlagen", topic, 4)
 
     def _k_reminder(self, c: Client, firm: dict, year: int, doc: dict, truth: dict, bekannt: dt.date) -> None:
-        self._letter(c, doc, truth, f"Erinnerung an die Abgabe der Steuererklärung für {year}",
-                     "die Abgabe der Steuererklärung", 3)
+        self._letter(
+            c,
+            doc,
+            truth,
+            f"Erinnerung an die Abgabe der Steuererklärung für {year}",
+            "die Abgabe der Steuererklärung",
+            3,
+        )
 
     def _k_audit(self, c: Client, firm: dict, year: int, doc: dict, truth: dict, bekannt: dt.date) -> None:
         posted = dt.date.fromisoformat(doc["date"])
@@ -546,8 +755,20 @@ class World:
                     k = rng.choice(kinds)
                     r = rng.choice(self.cfg["reasons"][k])
                     objected = r["against"] and rng.random() < 0.7
-                    out.append({"client_id": c.id, "firm": c.firm, "year": year, "kind": k, "reason": r["id"],
-                                "text": r["text"], "objection": objected,
-                                "outcome": rng.choice(["abgeholfen", "teilweise abgeholfen", "zurückgenommen",
-                                                       "zurückgewiesen"]) if objected else None})
+                    out.append(
+                        {
+                            "client_id": c.id,
+                            "firm": c.firm,
+                            "year": year,
+                            "kind": k,
+                            "reason": r["id"],
+                            "text": r["text"],
+                            "objection": objected,
+                            "outcome": rng.choice(
+                                ["abgeholfen", "teilweise abgeholfen", "zurückgenommen", "zurückgewiesen"]
+                            )
+                            if objected
+                            else None,
+                        }
+                    )
         return out

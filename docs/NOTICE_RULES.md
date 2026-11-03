@@ -75,7 +75,8 @@ both ways (post and portal, with the notice date as the posting and availability
   last day (BGB § 188). If the end falls on a Saturday, Sunday or holiday, it moves to the next working day
   (AO § 108 Abs. 3).
 - If the notice has **no instructions on how to object** (no Rechtsbehelfsbelehrung), the period is one year
-  (AO § 356 Abs. 2).
+  (AO § 356 Abs. 2). When the desk read a scan and could not find the instructions, it cannot tell a missing
+  passage from a badly read one, so it keeps one month (earlier) and notes the year.
 - A `request` or `reminder` sets its own date: the deadline is that date, as written (not moved).
 - An `audit` order's deadline is the objection period; the audit start date is recorded separately.
 - **Holidays**: a day counts as a holiday only if it is a statutory holiday both in the Land of the firm and in
@@ -116,7 +117,7 @@ withholding − prepayments). Values the desk cannot confirm this way are not us
 | `objection_review` | an assessment deviates from the filed return against the client, and the remaining amounts to pay (or the Messbetrag, for `gewst_mess`) go up by at least 50 €; for `gewst_mess` any deviation against the client |
 | `inform_client` | a prepayment notice; or deviations only in the client's favour, or against the client by less than 50 € |
 | `close` | an assessment that matches the filed return and passes every check |
-| `review` | the desk could not read or match the notice with certainty |
+| `review` | the desk could not read or match the notice with certainty (including a tax number it could not read: that is not `misrouted`) |
 
 Earlier rows win. `review` is never wrong in itself (it costs a person's time), but `close` on a notice that
 needed action is the worst mistake the desk can make.

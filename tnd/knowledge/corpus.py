@@ -101,13 +101,26 @@ def law_units() -> tuple[Unit, ...]:
                 base_id = f"{ref} {para or ''}".strip()
                 for k, chunk in enumerate(_chunks(ptext)):
                     uid = f"{base_id}@corpus" + (f"#{k + 1}" if k else "")
-                    units.append(Unit(uid, "law", ref, title, chunk, para, None, first_new, stale.get((law, sec), []),
-                                      src))
+                    units.append(
+                        Unit(uid, "law", ref, title, chunk, para, None, first_new, stale.get((law, sec), []), src)
+                    )
                 for i, v in enumerate(versions):
                     start = dt.date.fromisoformat(v["from"])
                     end = dt.date.fromisoformat(versions[i + 1]["from"]) if i + 1 < len(versions) else None
-                    units.append(Unit(f"{base_id}@{v['from']}", "law", ref, title, " ".join(v["text"].split()), para,
-                                      start, end, [], v["by"]))
+                    units.append(
+                        Unit(
+                            f"{base_id}@{v['from']}",
+                            "law",
+                            ref,
+                            title,
+                            " ".join(v["text"].split()),
+                            para,
+                            start,
+                            end,
+                            [],
+                            v["by"],
+                        )
+                    )
     for (law, sec, para), versions in replaced.items():  # paragraphs inserted after the corpus was published
         if (law, sec, para) in used:
             continue
@@ -115,8 +128,20 @@ def law_units() -> tuple[Unit, ...]:
         for i, v in enumerate(versions):
             start = dt.date.fromisoformat(v["from"])
             end = dt.date.fromisoformat(versions[i + 1]["from"]) if i + 1 < len(versions) else None
-            units.append(Unit(f"{law} {sec} {para}@{v['from']}", "law", f"{law} {sec}", titles.get(f"{law} {sec}", ""),
-                              " ".join(v["text"].split()), para, start, end, [], v["by"]))
+            units.append(
+                Unit(
+                    f"{law} {sec} {para}@{v['from']}",
+                    "law",
+                    f"{law} {sec}",
+                    titles.get(f"{law} {sec}", ""),
+                    " ".join(v["text"].split()),
+                    para,
+                    start,
+                    end,
+                    [],
+                    v["by"],
+                )
+            )
     return tuple(units)
 
 
@@ -127,8 +152,16 @@ def playbook_units() -> tuple[Unit, ...]:
         text = f.read_text()
         title = text.splitlines()[0].lstrip("# ").strip()
         refs = re.findall(r"(?:AO|EStG|KStG|UStG|GewStG) § \d+[a-z]?", text)
-        out.append(Unit(f"playbook:{f.stem}", "playbook", refs[0] if refs else "", title,
-                        re.sub(r"\s+", " ", text), source=f"corpus/firm/{f.name}"))
+        out.append(
+            Unit(
+                f"playbook:{f.stem}",
+                "playbook",
+                refs[0] if refs else "",
+                title,
+                re.sub(r"\s+", " ", text),
+                source=f"corpus/firm/{f.name}",
+            )
+        )
     return tuple(out)
 
 
@@ -136,6 +169,14 @@ def history_units(rows: list[dict]) -> list[Unit]:
     out = []
     for r in rows:
         outcome = f"; objection: {r['outcome']}" if r.get("objection") else "; no objection"
-        out.append(Unit(f"history:{r['client_id']}:{r['year']}:{r['kind']}", "history", "", f"{r['kind']} {r['year']}",
-                        f"{r['year']} {r['kind']}: {r['text']}{outcome}", source="client file"))
+        out.append(
+            Unit(
+                f"history:{r['client_id']}:{r['year']}:{r['kind']}",
+                "history",
+                "",
+                f"{r['kind']} {r['year']}",
+                f"{r['year']} {r['kind']}: {r['text']}{outcome}",
+                source="client file",
+            )
+        )
     return out

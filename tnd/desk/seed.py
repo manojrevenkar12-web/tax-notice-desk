@@ -12,8 +12,20 @@ from .db import j, migrate_down, migrate_up, owner_url
 from .store import store_document, store_result
 
 PEOPLE = [("clerk", "Sachbearbeitung"), ("clerk", "Fristenkontrolle"), ("advisor", "Steuerberatung")]
-NAMES = ["Katrin Albers", "Stefan Brenner", "Dr. Miriam Cohn", "Ole Dietz", "Selin Ekinci", "Dr. Frank Gerber",
-         "Ines Hahn", "Jan Ivanov", "Dr. Petra Jansen", "Lars Kühn", "Mona Lorenz", "Dr. Rainer Moll"]
+NAMES = [
+    "Katrin Albers",
+    "Stefan Brenner",
+    "Dr. Miriam Cohn",
+    "Ole Dietz",
+    "Selin Ekinci",
+    "Dr. Frank Gerber",
+    "Ines Hahn",
+    "Jan Ivanov",
+    "Dr. Petra Jansen",
+    "Lars Kühn",
+    "Mona Lorenz",
+    "Dr. Rainer Moll",
+]
 
 
 def people(firms: list[dict]) -> list[dict[str, Any]]:
@@ -40,20 +52,36 @@ def seed(split: str | None = "dev", url: str | None = None, use_model: bool = Fa
         for p in people(firms):
             c.execute("insert into people values (%s,%s,%s,%s)", (p["id"], p["firm_id"], p["name"], p["role"]))
         for cl in json.loads((g / "clients.json").read_text()):
-            c.execute("insert into clients values (%s,%s,%s,%s,%s,%s,%s,%s)",
-                      (cl["id"], cl["firm"], cl["kind"], cl["name"], cl["steuernummer"], cl["address"], cl["land"],
-                       cl["municipality"]))
+            c.execute(
+                "insert into clients values (%s,%s,%s,%s,%s,%s,%s,%s)",
+                (
+                    cl["id"],
+                    cl["firm"],
+                    cl["kind"],
+                    cl["name"],
+                    cl["steuernummer"],
+                    cl["address"],
+                    cl["land"],
+                    cl["municipality"],
+                ),
+            )
         firm_of = {cl["id"]: cl["firm"] for cl in json.loads((g / "clients.json").read_text())}
         for r in json.loads((g / "filed.json").read_text()):
-            c.execute("insert into filed_returns values (%s,%s,%s,%s,%s)",
-                      (firm_of[r["client_id"]], r["client_id"], r["kind"], r["year"], j(r["fields"])))
+            c.execute(
+                "insert into filed_returns values (%s,%s,%s,%s,%s)",
+                (firm_of[r["client_id"]], r["client_id"], r["kind"], r["year"], j(r["fields"])),
+            )
         for r in json.loads((g / "onfile.json").read_text()):
-            c.execute("insert into onfile (firm_id, client_id, kind, year, date, messbetrag) values (%s,%s,%s,%s,%s,%s)",
-                      (r["firm"], r["client_id"], r["kind"], r["year"], r["date"], r["messbetrag"]))
+            c.execute(
+                "insert into onfile (firm_id, client_id, kind, year, date, messbetrag) values (%s,%s,%s,%s,%s,%s)",
+                (r["firm"], r["client_id"], r["kind"], r["year"], r["date"], r["messbetrag"]),
+            )
         for r in json.loads((g / "history.json").read_text()):
-            c.execute("insert into history (firm_id, client_id, year, kind, reason, text, objection, outcome) values "
-                      "(%s,%s,%s,%s,%s,%s,%s,%s)", (r["firm"], r["client_id"], r["year"], r["kind"], r["reason"],
-                                                     r["text"], r["objection"], r["outcome"]))
+            c.execute(
+                "insert into history (firm_id, client_id, year, kind, reason, text, objection, outcome) values "
+                "(%s,%s,%s,%s,%s,%s,%s,%s)",
+                (r["firm"], r["client_id"], r["year"], r["kind"], r["reason"], r["text"], r["objection"], r["outcome"]),
+            )
         c.commit()
     n = 0
     if split:

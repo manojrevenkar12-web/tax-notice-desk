@@ -18,10 +18,20 @@ from .read import Reading
 MONEY = re.compile(r"(?<![\d/])(-?\s?(?:EUR\s)?-?\d{1,3}(?:[.\s]\d{3})*(?:\d)*,\d{2}(?:\s?(?:€|EUR))?-?)")
 DATE = re.compile(r"\b(\d{1,2})\.(\d{1,2})\.(\d{4})\b")
 TAXNO = re.compile(r"\b(\d{2,3})\s?/\s?(\d{3,4})\s?/\s?(\d{4,5})\b")
-TOKENS = re.compile(r"\d{3}(?:,0{1,2})?\s*(?:%|v\.?\s?H\.?)|-?\s?(?:EUR\s)?-?\d{1,3}(?:[.\s]\d{3})*,\d{2}(?:\s?(?:€|EUR))?-?")
-SECTION_HEADS = ("Festsetzung", "Abrechnung Einkommensteuer", "Abrechnung Solidaritätszuschlag",
-                 "Abrechnung Kirchensteuer", "Abrechnung Körperschaftsteuer", "Abrechnung Umsatzsteuer",
-                 "Erläuterungen", "Rechtsbehelfsbelehrung", "Ermittlung der Besteuerungsgrundlagen")
+TOKENS = re.compile(
+    r"\d{3}(?:,0{1,2})?\s*(?:%|v\.?\s?H\.?)|-?\s?(?:EUR\s)?-?\d{1,3}(?:[.\s]\d{3})*,\d{2}(?:\s?(?:€|EUR))?-?"
+)
+SECTION_HEADS = (
+    "Festsetzung",
+    "Abrechnung Einkommensteuer",
+    "Abrechnung Solidaritätszuschlag",
+    "Abrechnung Kirchensteuer",
+    "Abrechnung Körperschaftsteuer",
+    "Abrechnung Umsatzsteuer",
+    "Erläuterungen",
+    "Rechtsbehelfsbelehrung",
+    "Ermittlung der Besteuerungsgrundlagen",
+)
 
 
 @dataclass
@@ -264,9 +274,9 @@ def extract(r: Reading, learned: dict[str, list[str]] | None = None) -> Parsed:
             labels = list((learned or {}).get(key, [])) + list(sp["labels"])
             region = _region(lines, sp.get("section"), fz)
             for lab in labels:
-                v = _value_after(region, lab, sp.get("percent", False), fz)
-                if v is not None:
-                    p.fields[key] = v
+                got = _value_after(region, lab, sp.get("percent", False), fz)
+                if got is not None:
+                    p.fields[key] = got
                     p.method[key] = "learned" if lab in (learned or {}).get(key, []) else "label"
                     break
     p.missing = [k for k, sp in specs.items() if k not in p.fields and not sp.get("optional")]
@@ -291,7 +301,9 @@ def verify(p: Parsed) -> None:
             fails.append("zve")
         if not _close(f["rest_est"], f["est"] - f["lst_est"] - f["vz_est"]):
             fails.append("rest_est")
-        if not _close(f["rest_soli"], f["soli"] - f["lst_soli"]) or not _close(f["rest_kist"], f["kist"] - f["lst_kist"]):
+        if not _close(f["rest_soli"], f["soli"] - f["lst_soli"]) or not _close(
+            f["rest_kist"], f["kist"] - f["lst_kist"]
+        ):
             fails.append("rest_soli_kist")
     elif p.kind == "kst":
         if not _close(f["kst"], f["einkommen"] * 15 // 100, 100) or not _close(f["soli"], round(f["kst"] * 0.055), 2):
@@ -301,7 +313,9 @@ def verify(p: Parsed) -> None:
     elif p.kind == "ust":
         if not _close(f["ust"], f["umsatz_19"] * 19 // 100 + f["umsatz_7"] * 7 // 100, 2):
             fails.append("ust")
-        if not _close(f["zahllast"], f["ust"] - f["vorsteuer"]) or not _close(f["rest_ust"], f["zahllast"] - f["vz_ust"]):
+        if not _close(f["zahllast"], f["ust"] - f["vorsteuer"]) or not _close(
+            f["rest_ust"], f["zahllast"] - f["vz_ust"]
+        ):
             fails.append("rest_ust")
     elif p.kind == "gewst_mess":
         ertrag = max(0, f["gewinn"] + f["hinzurechnungen"] - f["kuerzungen"]) // 10000 * 10000
@@ -312,5 +326,10 @@ def verify(p: Parsed) -> None:
             fails.append("rest_gewst")
         if not 20000 <= f["hebesatz"] <= 90000:
             fails.append("hebesatz_range")
+    zkey = {"est": ("zinsen_est", "rest_est"), "kst": ("zinsen_kst", "rest_kst"), "ust": ("zinsen_ust", "rest_ust")}
+    if p.kind in zkey and not p.missing:
+        z, rest = f.get(zkey[p.kind][0], 0), f.get(zkey[p.kind][1], 0)
+        if z and rest and (z > 0) != (rest > 0):  # interest on a refund is the office's to pay (negative)
+            fails.append("interest sign")
     p.failed_checks = fails
     p.verified = p.source == "data" or not fails

@@ -62,8 +62,12 @@ def test_a_postmark_after_the_notice_date_is_noted_never_used():
 
 
 @settings(max_examples=300, deadline=None)
-@given(st.dates(D(2024, 1, 1), D(2027, 6, 30)), st.sampled_from(["post", "portal"]),
-       st.sampled_from([("BE", "BE"), ("BY", "BY"), ("BE", "BB"), ("NW", "BY"), ("SN", "SN")]), st.booleans())
+@given(
+    st.dates(D(2024, 1, 1), D(2027, 6, 30)),
+    st.sampled_from(["post", "portal"]),
+    st.sampled_from([("BE", "BE"), ("BY", "BY"), ("BE", "BB"), ("NW", "BY"), ("SN", "SN")]),
+    st.booleans(),
+)
 def test_the_desk_and_the_simulators_independent_calendar_agree(posted, channel, lands, instructions):
     notified = posted + dt.timedelta(days=1)
     ours = objection_deadline(channel, posted, lands, instructions, None, posted, notified)
@@ -111,3 +115,21 @@ def test_decisions():
     assert decide("est", True, True, "n1", [], 0, False, True).action == "duplicate"
     assert decide("request", False, True, None, [], 0, False, True).action == "task"
     assert decide("est", True, True, None, [], 0, True, False).action == "objection_required"
+
+
+def test_heldout_harness_runs_a_case_end_to_end(tmp_path, monkeypatch):
+    import shutil
+
+    from tnd import config
+    from tnd.evals import heldout
+
+    root = tmp_path / "root"
+    (root / "heldout" / "smoke").mkdir(parents=True)
+    shutil.copy(config.ROOT / "tests" / "fixtures" / "smoke" / "cases.yaml", root / "heldout" / "smoke" / "cases.yaml")
+    (root / "heldout" / "smoke" / "STATUS").write_text("blind")
+    monkeypatch.setattr(config, "ROOT", root)
+    monkeypatch.setattr(config, "REPORTS", root / "reports")
+    rep = heldout.run("smoke", use_model=False)
+    assert rep["passed"] == 1, rep["failures"]
+    assert rep["recorded_as"] == "first_run.json"
+    assert heldout.run("smoke", use_model=False)["recorded_as"] == "latest_run.json"  # the first run is kept

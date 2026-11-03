@@ -1,0 +1,94 @@
+{
+ "counts": {
+  "notices": 237,
+  "action_right": 233,
+  "kind_total": 226,
+  "kind_right": 225,
+  "deadline_total": 226,
+  "deadline_exact": 223,
+  "truth_close": 78,
+  "auto_closed": 77,
+  "early_deadlines": 3,
+  "review": 2
+ },
+ "metrics": {
+  "action_accuracy": 0.9831,
+  "review_rate": 0.0084,
+  "auto_close_rate": 0.9872,
+  "kind_accuracy": 0.9956,
+  "deadline_exact": 0.9867,
+  "late_deadlines": 0,
+  "closed_but_needed_action": 0,
+  "missed_required_objection": 0,
+  "verified_wrong_values": 0,
+  "wrong_client": 0,
+  "error_recall": 1.0,
+  "error_precision": 1.0,
+  "retrieval_recall_at_3": 0.9643,
+  "town_review_first_notice": 0.0833,
+  "town_review_later_notices": 0.0625
+ },
+ "by_channel": {
+  "client_upload": {
+   "notices": 8,
+   "action_accuracy": 0.875,
+   "review_rate": 0.0
+  },
+  "municipal_digital": {
+   "notices": 3,
+   "action_accuracy": 1.0,
+   "review_rate": 0.0
+  },
+  "municipal_post": {
+   "notices": 25,
+   "action_accuracy": 0.92,
+   "review_rate": 0.08
+  },
+  "portal": {
+   "notices": 187,
+   "action_accuracy": 0.9947,
+   "review_rate": 0.0
+  },
+  "post": {
+   "notices": 14,
+   "action_accuracy": 1.0,
+   "review_rate": 0.0
+  }
+ },
+ "confusion": {
+  "close -> close": 77,
+  "close -> review": 1,
+  "duplicate -> duplicate": 7,
+  "duplicate -> task": 1,
+  "inform_client -> duplicate": 1,
+  "inform_client -> inform_client": 35,
+  "misrouted -> misrouted": 3,
+  "objection_required -> objection_required": 13,
+  "objection_required -> review": 1,
+  "objection_review -> objection_review": 21,
+  "task -> task": 77
+ },
+ "examples": {
+  "early_deadlines": [
+   "n00578",
+   "n00536",
+   "n00660"
+  ],
+  "wrong_action": [
+   "n00557",
+   "n00536",
+   "n00660",
+   "n00480"
+  ]
+ },
+ "ran_at": "2026-11-03T17:06:17+00:00",
+ "split": "heldout",
+ "notices": 237,
+ "seconds": 9.6,
+ "model_calls": 29,
+ "model_cost_usd": 0.0221,
+ "versions": {
+  "rules": 3,
+  "extraction": 3
+ }
+}

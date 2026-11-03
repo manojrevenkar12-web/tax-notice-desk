@@ -28,8 +28,13 @@ def test_firms_see_only_their_own(desk):
 
 def test_runtime_role_cannot_delete_or_change_the_schema(desk):
     with firm_conn("f-spree") as c:
-        for sql in ("delete from notices", "delete from deadlines", "drop table notices", "truncate audit_log",
-                    "update audit_log set action = 'x'"):
+        for sql in (
+            "delete from notices",
+            "delete from deadlines",
+            "drop table notices",
+            "truncate audit_log",
+            "update audit_log set action = 'x'",
+        ):
             with pytest.raises(psycopg.Error):
                 c.execute(sql)
 
@@ -38,13 +43,17 @@ def test_a_deadline_needs_a_second_person_and_cannot_move_once_confirmed(desk):
     any_notice = next(r for rs in desk.values() for r in rs if r["firm"] == "f-spree" or True)
     firm = any_notice["firm"]
     with firm_conn(firm) as c:
-        did = c.execute("insert into deadlines (firm_id, notice_id, due, bekanntgabe, basis, rules, notes, proposed_by) "
-                        "values (%s, %s, '2027-01-04', '2026-12-04', 'remedy', '[]', '[]', %s) returning id",
-                        (firm, any_notice["id"], f"{firm}-p0")).fetchone()[0]
+        did = c.execute(
+            "insert into deadlines (firm_id, notice_id, due, bekanntgabe, basis, rules, notes, proposed_by) "
+            "values (%s, %s, '2027-01-04', '2026-12-04', 'remedy', '[]', '[]', %s) returning id",
+            (firm, any_notice["id"], f"{firm}-p0"),
+        ).fetchone()[0]
         with pytest.raises(psycopg.errors.CheckViolation):
             c.execute("update deadlines set status='confirmed', confirmed_by=%s where id=%s", (f"{firm}-p0", did))
-        c.execute("update deadlines set status='confirmed', confirmed_by=%s, confirmed_at=now() where id=%s",
-                  (f"{firm}-p1", did))
+        c.execute(
+            "update deadlines set status='confirmed', confirmed_by=%s, confirmed_at=now() where id=%s",
+            (f"{firm}-p1", did),
+        )
         with pytest.raises(psycopg.Error, match="cannot be moved"):
             c.execute("update deadlines set due = '2027-01-11' where id = %s", (did,))
 
@@ -59,8 +68,10 @@ def test_only_verified_drafts_are_released_and_released_drafts_are_final(desk):
     with firm_conn(firm) as c:
         did = c.execute("select id from drafts where notice_id=%s", (nid,)).fetchone()[0]
         with pytest.raises(psycopg.errors.CheckViolation):
-            c.execute("update drafts set status='released', released_by=%s, verification='{\"ok\": false}' where id=%s",
-                      (f"{firm}-p2", did))
+            c.execute(
+                "update drafts set status='released', released_by=%s, verification='{\"ok\": false}' where id=%s",
+                (f"{firm}-p2", did),
+            )
 
 
 def _client():
@@ -88,7 +99,9 @@ def test_api_decisions_wait_for_the_deadline_and_respect_roles(desk):
     detail = cl.get(f"/api/notices/{nid}", headers=clerk).json()
     assert detail["explanation"] and detail["drafts"]
     # the advisor cannot file the objection before the deadline is confirmed
-    assert cl.post(f"/api/notices/{nid}/decision", json={"outcome": "objection_filed"}, headers=advisor).status_code == 409
+    assert (
+        cl.post(f"/api/notices/{nid}/decision", json={"outcome": "objection_filed"}, headers=advisor).status_code == 409
+    )
     dl = next(d for d in detail["deadlines"] if d["status"] == "proposed")
     assert cl.post(f"/api/deadlines/{dl['id']}/confirm", headers=clerk2).status_code == 200
     # a clerk may not release an objection; an advisor may, but not with a section the desk cannot back
@@ -98,7 +111,9 @@ def test_api_decisions_wait_for_the_deadline_and_respect_roles(desk):
     r = cl.post(f"/api/drafts/{did}/release", json={"text": bad}, headers=advisor)
     assert r.status_code == 422 and "§ 999" in str(r.json())
     assert cl.post(f"/api/drafts/{did}/release", json={}, headers=advisor).status_code == 200
-    assert cl.post(f"/api/notices/{nid}/decision", json={"outcome": "objection_filed"}, headers=advisor).status_code == 200
+    assert (
+        cl.post(f"/api/notices/{nid}/decision", json={"outcome": "objection_filed"}, headers=advisor).status_code == 200
+    )
 
 
 def test_other_firms_and_group_roles_see_no_client_data(desk):
@@ -114,6 +129,5 @@ def test_other_firms_and_group_roles_see_no_client_data(desk):
 
 
 def test_audit_log_is_append_only(desk):
-    with firm_conn("f-spree") as c:
-        with pytest.raises(psycopg.Error, match="append-only"):
-            c.execute("update audit_log set action='x' where firm_id='f-spree'")
+    with firm_conn("f-spree") as c, pytest.raises(psycopg.Error, match="append-only"):
+        c.execute("update audit_log set action='x' where firm_id='f-spree'")

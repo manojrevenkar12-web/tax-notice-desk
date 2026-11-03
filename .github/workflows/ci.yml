@@ -1,0 +1,55 @@
+name: ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: postgres:16
+        env: { POSTGRES_PASSWORD: postgres, POSTGRES_DB: tnd_test }
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      TND_LLM: "off"   # model answers come from fixtures/llm_cache; a miss means the desk goes without
+      TND_TEST_OWNER_URL: postgresql://postgres:postgres@localhost:5432/tnd_test
+      TND_TEST_APP_URL: postgresql://tnd_app:tnd_app@localhost:5432/tnd_test
+      OMP_THREAD_LIMIT: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y poppler-utils tesseract-ocr tesseract-ocr-deu
+      - uses: astral-sh/setup-uv@v6
+      - run: uv venv --python 3.12 && uv pip install -e ".[dev]"
+      - run: .venv/bin/ruff check tnd tests && .venv/bin/ruff format --check tnd tests
+      - run: .venv/bin/mypy tnd
+      - run: .venv/bin/tnd build
+      - run: .venv/bin/pytest -q
+      - name: OCR replays from the cache (the generated scans are byte-identical)
+        run: |
+          .venv/bin/tnd warm
+          test -z "$(git status --porcelain fixtures/ocr_cache)" || { git status --porcelain fixtures/ocr_cache | head; exit 1; }
+      - name: The release gate reproduces the committed decision
+        run: |
+          .venv/bin/tnd release
+          git diff --exit-code reports/release.json
+      - name: Held-out sets still give their recorded results
+        run: for s in heldout/*/; do [ -f "$s/cases.yaml" ] && .venv/bin/tnd heldout "$(basename "$s")" --no-worse; done
+
+  web:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm, cache-dependency-path: web/pnpm-lock.yaml }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint && pnpm exec tsc -b && pnpm test
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm e2e

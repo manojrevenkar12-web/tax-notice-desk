@@ -12,8 +12,10 @@ from .. import config
 from . import claude_cli
 from .explain import _eur
 
-CITED = re.compile(r"§+\s*\d+[a-z]?(?:\s*Abs\.\s*\d+[a-z]?)?(?:\s*Satz\s*\d+)?(?:\s*Nr\.\s*\d+[a-z]?)?\s*"
-                   r"(?:AO|EStG|KStG|UStG|GewStG|VwGO)")
+CITED = re.compile(
+    r"§+\s*\d+[a-z]?(?:\s*Abs\.\s*\d+[a-z]?)?(?:\s*Satz\s*\d+)?(?:\s*Nr\.\s*\d+[a-z]?)?\s*"
+    r"(?:AO|EStG|KStG|UStG|GewStG|VwGO)"
+)
 AMOUNT = re.compile(r"-?\d{1,3}(?:\.\d{3})*,\d{2}\s?€")
 
 
@@ -40,19 +42,27 @@ def template(notice: dict[str, Any], kind: str = "objection") -> str:
         lines.append(f"Steuernummer {p.get('steuernummer')} – {who}")
         lines.append(f"{remedy} gegen den Bescheid vom {date} für {p.get('tax_year')}")
         lines.append("")
-        lines.append(f"namens und in Vollmacht unserer Mandantschaft legen wir gegen den oben genannten Bescheid "
-                     f"{remedy} ein und begründen ihn wie folgt:")
+        lines.append(
+            f"namens und in Vollmacht unserer Mandantschaft legen wir gegen den oben genannten Bescheid "
+            f"{remedy} ein und begründen ihn wie folgt:"
+        )
         for i, item in enumerate(notice.get("explanation", []), 1):
             f = item["finding"]
             if f["type"] == "deviation" and not f.get("against"):
                 continue
             src = ", ".join(item["sources"][:3])
-            reason = (f"Der Bescheid enthält hierzu keine Begründung; wir bitten um Erläuterung der Abweichung."
-                      if item.get("unexplained") else f"Begründung laut Bescheid: {item['office_says']}")
-            lines.append(f"{i}. {item['what']}. {reason} Maßgeblich: {src}.")
+            if item.get("unexplained"):
+                reason = "Der Bescheid enthält hierzu keine Begründung; wir bitten um Erläuterung der Abweichung."
+            elif f["type"] == "deviation" and item.get("office_says"):
+                reason = f"Begründung laut Bescheid: {item['office_says']}"
+            else:
+                reason = ""
+            lines.append(f"{i}. {item['what']}. {reason} Maßgeblich: {src}.".replace(". .", ".").replace("  ", " "))
         lines.append("")
-        lines.append("Wir beantragen, den Bescheid entsprechend zu ändern, und die Aussetzung der Vollziehung in Höhe "
-                     "des streitigen Betrags (§ 361 AO).")
+        lines.append(
+            "Wir beantragen, den Bescheid entsprechend zu ändern, und die Aussetzung der Vollziehung in Höhe "
+            "des streitigen Betrags (§ 361 AO)."
+        )
     else:
         lines.append(f"Liebe Mandantschaft, der Bescheid vom {date} für {p.get('tax_year')} liegt vor.")
         for item in notice.get("explanation", []):
@@ -70,6 +80,8 @@ def allowed(notice: dict[str, Any]) -> tuple[set[str], set[str]]:
         for k in ("filed", "stated", "expected"):
             if f.get(k) is not None:
                 amounts.add(_eur(f[k]))
+        if (f.get("extra") or {}).get("base") is not None:
+            amounts.add(_eur(f["extra"]["base"]))
         if f.get("filed") is not None and f.get("stated") is not None:
             d = f["stated"] - f["filed"]
             amounts |= {_eur(d), _eur(abs(d)), "+" + _eur(d)}
@@ -82,8 +94,9 @@ def allowed(notice: dict[str, Any]) -> tuple[set[str], set[str]]:
 
 def verify(text: str, notice: dict[str, Any]) -> dict[str, Any]:
     secs, amounts = allowed(notice)
-    cited = {_sec(c) for c in CITED.findall(text)} | {_sec(c) for c in re.findall(
-        r"(?:AO|EStG|KStG|UStG|GewStG)\s*§+\s*\d+[a-z]?", text)}
+    cited = {_sec(c) for c in CITED.findall(text)} | {
+        _sec(c) for c in re.findall(r"(?:AO|EStG|KStG|UStG|GewStG)\s*§+\s*\d+[a-z]?", text)
+    }
     bad_secs = sorted(c for c in cited if c not in secs)
     bad_amounts = sorted({a.replace(" ", "") for a in AMOUNT.findall(text)} - {a.replace(" ", "") for a in amounts})
     p = notice["parsed"]
@@ -91,9 +104,12 @@ def verify(text: str, notice: dict[str, Any]) -> dict[str, Any]:
     if p.get("steuernummer") and p["steuernummer"] not in text:
         problems.append("tax number missing")
     due = (notice.get("deadline") or {}).get("due")
+    backed = {due, p.get("date"), p.get("messbescheid_date")}
+    for item in notice.get("explanation", []):  # dates the desk itself computed (an interest period's start)
+        backed |= {f"{d[6:]}-{d[3:5]}-{d[:2]}" for d in re.findall(r"\d{2}\.\d{2}\.\d{4}", item.get("what", ""))}
     for d in re.findall(r"\d{4}-\d{2}-\d{2}|\d{2}\.\d{2}\.\d{4}", text):
         iso = d if "-" in d else f"{d[6:]}-{d[3:5]}-{d[:2]}"
-        if iso not in {due, p.get("date"), p.get("messbescheid_date")}:
+        if iso not in backed:
             problems.append(f"date {d} not from the notice or the register")
     ok = not bad_secs and not bad_amounts and not problems
     return {"ok": ok, "unknown_sections": bad_secs, "unknown_amounts": bad_amounts, "problems": problems}

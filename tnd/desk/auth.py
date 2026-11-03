@@ -35,8 +35,14 @@ def _secret() -> str:
 def mint(p: Principal) -> str:
     cfg = config.load("desk")["auth"]
     now = dt.datetime.now(dt.UTC)
-    claims = {"sub": p.person, "firm": p.firm, "role": p.role, "iss": cfg["issuer"], "iat": now,
-              "exp": now + dt.timedelta(minutes=cfg["token_minutes"])}
+    claims = {
+        "sub": p.person,
+        "firm": p.firm,
+        "role": p.role,
+        "iss": cfg["issuer"],
+        "iat": now,
+        "exp": now + dt.timedelta(minutes=cfg["token_minutes"]),
+    }
     if p.actor:
         claims["act"] = {"sub": p.actor}
     return jwt.encode(claims, _secret(), algorithm="HS256")

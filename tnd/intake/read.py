@@ -60,8 +60,9 @@ def _ocr(pdf: Path, psm: int) -> str:
     if cache.exists():
         return cache.read_text()
     with tempfile.TemporaryDirectory() as d:
-        subprocess.run(["pdftoppm", "-r", str(cfg["dpi"]), "-gray", "-png", "-singlefile", str(pdf), f"{d}/p"],
-                       check=True)
+        subprocess.run(
+            ["pdftoppm", "-r", str(cfg["dpi"]), "-gray", "-png", "-singlefile", str(pdf), f"{d}/p"], check=True
+        )
         img = Image.open(f"{d}/p.png").filter(ImageFilter.MedianFilter(3))  # scanner speckles break OCR
         text = pytesseract.image_to_string(img, lang=cfg["lang"], config=f"--psm {psm}")
     cache.parent.mkdir(parents=True, exist_ok=True)
@@ -72,7 +73,7 @@ def _ocr(pdf: Path, psm: int) -> str:
 def normalise(text: str) -> str:
     """Undo the usual OCR damage in numbers without touching words."""
     t = text.replace(" ", " ").replace("’", "'").replace("‚", ",")
-    t = re.sub(r"(\d)\s*,\s+(\d{2})\b", r"\1,\2", t)          # '15 544, 37' -> '15 544,37'
+    t = re.sub(r"(\d)\s*,\s+(\d{2})\b", r"\1,\2", t)  # '15 544, 37' -> '15 544,37'
     t = re.sub(r"(\d)\s+,(\d{2})\b", r"\1,\2", t)
     t = re.sub(r"(?<=\d)[Oo](?=[\d,.])", "0", t)
     t = re.sub(r"(?<=[\d.])[lI|](?=[\d,])", "1", t)

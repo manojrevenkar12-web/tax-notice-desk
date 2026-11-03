@@ -14,18 +14,54 @@ from .deadlines import add_months
 
 # Fields a notice and the filed return share, by kind; the others are derived or payment figures.
 BASES = {
-    "est": ["einkuenfte_nsa", "einkuenfte_gewerbe", "einkuenfte_vuv", "sonderausgaben", "agb", "zve", "est", "soli",
-            "kist", "lst_est", "vz_est"],
+    "est": [
+        "einkuenfte_nsa",
+        "einkuenfte_gewerbe",
+        "einkuenfte_vuv",
+        "sonderausgaben",
+        "agb",
+        "zve",
+        "est",
+        "soli",
+        "kist",
+        "lst_est",
+        "vz_est",
+    ],
     "kst": ["einkommen", "kst", "soli", "vz_kst"],
     "ust": ["umsatz_19", "umsatz_7", "vorsteuer", "ust", "zahllast", "vz_ust"],
     "gewst_mess": ["gewinn", "hinzurechnungen", "kuerzungen", "gewerbeertrag", "freibetrag", "messbetrag"],
 }
 # Which way a field moving up hurts the client.
-UP_IS_AGAINST = {"einkuenfte_nsa", "einkuenfte_gewerbe", "einkuenfte_vuv", "zve", "est", "soli", "kist", "einkommen",
-                 "kst", "umsatz_19", "umsatz_7", "ust", "zahllast", "gewinn", "hinzurechnungen", "gewerbeertrag",
-                 "messbetrag"}
-DOWN_IS_AGAINST = {"sonderausgaben", "agb", "vorsteuer", "kuerzungen", "freibetrag", "lst_est", "vz_est", "vz_kst",
-                   "vz_ust"}
+UP_IS_AGAINST = {
+    "einkuenfte_nsa",
+    "einkuenfte_gewerbe",
+    "einkuenfte_vuv",
+    "zve",
+    "est",
+    "soli",
+    "kist",
+    "einkommen",
+    "kst",
+    "umsatz_19",
+    "umsatz_7",
+    "ust",
+    "zahllast",
+    "gewinn",
+    "hinzurechnungen",
+    "gewerbeertrag",
+    "messbetrag",
+}
+DOWN_IS_AGAINST = {
+    "sonderausgaben",
+    "agb",
+    "vorsteuer",
+    "kuerzungen",
+    "freibetrag",
+    "lst_est",
+    "vz_est",
+    "vz_kst",
+    "vz_ust",
+}
 PRIMARY = {  # the figures an office changes; the rest follow from them
     "est": {"einkuenfte_nsa", "einkuenfte_gewerbe", "einkuenfte_vuv", "sonderausgaben", "agb"},
     "kst": {"einkommen"},
@@ -46,6 +82,7 @@ class Finding:
     primary: bool = True
     detail: str = ""
     sources: list[str] = dfield(default_factory=list)
+    extra: dict[str, Any] = dfield(default_factory=dict)
 
     def as_dict(self) -> dict[str, Any]:
         return dict(self.__dict__)
@@ -61,8 +98,18 @@ def compare(kind: str, notice: dict[str, int], filed: dict[str, int]) -> list[Fi
         if abs(a - b) <= tol:
             continue
         against = (a > b) if k in UP_IS_AGAINST else (a < b) if k in DOWN_IS_AGAINST else None
-        out.append(Finding("deviation", k, b, a, None, against, k in PRIMARY.get(kind, set()),
-                           f"{k}: filed {b / 100:.2f}, assessed {a / 100:.2f}"))
+        out.append(
+            Finding(
+                "deviation",
+                k,
+                b,
+                a,
+                None,
+                against,
+                k in PRIMARY.get(kind, set()),
+                f"{k}: filed {b / 100:.2f}, assessed {a / 100:.2f}",
+            )
+        )
     return out
 
 
@@ -89,8 +136,13 @@ def interest(kind: str, tax_year: int, base: int, wirksam: dt.date) -> tuple[int
     cents = euros * 100
     if cents < c["minimum_cents"]:
         cents = 0
-    return (cents if base > 0 else -cents), {"start": start.isoformat(), "months": months, "base": rounded,
-                                             "rate": str(rate), "sources": ["AO § 233a", "AO § 238", "AO § 239"]}
+    return (cents if base > 0 else -cents), {
+        "start": start.isoformat(),
+        "months": months,
+        "base": rounded,
+        "rate": str(rate),
+        "sources": ["AO § 233a", "AO § 238", "AO § 239"],
+    }
 
 
 def check_interest(kind: str, tax_year: int, fields: dict[str, int], wirksam: dt.date) -> Finding | None:
@@ -104,32 +156,78 @@ def check_interest(kind: str, tax_year: int, fields: dict[str, int], wirksam: dt
     stated = fields.get(zkey, 0)
     if abs(stated - expected) <= 100:
         return None
-    return Finding("interest", zkey, None, stated, expected, abs(stated) > abs(expected), True,
-                   f"interest from {calc['start']} for {calc.get('months')} full months on "
-                   f"{calc.get('base', 0) / 100:.2f}: {expected / 100:.2f}, notice says {stated / 100:.2f}",
-                   ["AO § 233a", "AO § 238", "AO § 239"])
+    return Finding(
+        "interest",
+        zkey,
+        None,
+        stated,
+        expected,
+        abs(stated) > abs(expected),
+        True,
+        f"interest from {calc['start']} for {calc.get('months')} full months on "
+        f"{calc.get('base', 0) / 100:.2f}: {expected / 100:.2f}, notice says {stated / 100:.2f}",
+        ["AO § 233a", "AO § 238", "AO § 239"],
+        calc,
+    )
 
 
-def check_gewst(fields: dict[str, int], municipality: str | None, tax_year: int,
-                messbetrag_on_file: int | None) -> list[Finding]:
+def check_gewst(
+    fields: dict[str, int], municipality: str | None, tax_year: int, messbetrag_on_file: int | None
+) -> list[Finding]:
     out: list[Finding] = []
     reg = config.load("municipal")["hebesatz"]
     stated_h = fields.get("hebesatz")
     if municipality and municipality in reg and stated_h is not None:
         expected_h = reg[municipality].get(tax_year)
         if expected_h is not None and stated_h != expected_h * 100:
-            out.append(Finding("wrong_hebesatz", "hebesatz", None, stated_h, expected_h * 100, stated_h > expected_h * 100,
-                               True, f"{municipality} levies {expected_h} % for {tax_year}; the notice applies "
-                               f"{stated_h // 100} %", ["GewStG § 16"]))
-    if messbetrag_on_file is not None and fields.get("messbetrag") is not None and fields["messbetrag"] != messbetrag_on_file:
-        out.append(Finding("stale_messbetrag", "messbetrag", None, fields["messbetrag"], messbetrag_on_file,
-                           fields["messbetrag"] > messbetrag_on_file, True,
-                           f"the latest Messbescheid on file sets {messbetrag_on_file / 100:.2f}; the town used "
-                           f"{fields['messbetrag'] / 100:.2f}", ["AO § 175 Abs. 1 Satz 1 Nr. 1", "AO § 182"]))
+            out.append(
+                Finding(
+                    "wrong_hebesatz",
+                    "hebesatz",
+                    None,
+                    stated_h,
+                    expected_h * 100,
+                    stated_h > expected_h * 100,
+                    True,
+                    f"{municipality} levies {expected_h} % for {tax_year}; the notice applies {stated_h // 100} %",
+                    ["GewStG § 16"],
+                    {"municipality": municipality, "year": tax_year},
+                )
+            )
+    if (
+        messbetrag_on_file is not None
+        and fields.get("messbetrag") is not None
+        and fields["messbetrag"] != messbetrag_on_file
+    ):
+        out.append(
+            Finding(
+                "stale_messbetrag",
+                "messbetrag",
+                None,
+                fields["messbetrag"],
+                messbetrag_on_file,
+                fields["messbetrag"] > messbetrag_on_file,
+                True,
+                f"the latest Messbescheid on file sets {messbetrag_on_file / 100:.2f}; the town used "
+                f"{fields['messbetrag'] / 100:.2f}",
+                ["AO § 175 Abs. 1 Satz 1 Nr. 1", "AO § 182"],
+            )
+        )
     if all(k in fields for k in ("messbetrag", "hebesatz", "gewst")):
         expected = fields["messbetrag"] * fields["hebesatz"] // 10000
         if abs(expected - fields["gewst"]) > 100:
-            out.append(Finding("arithmetic", "gewst", None, fields["gewst"], expected, fields["gewst"] > expected, True,
-                               f"{fields['messbetrag'] / 100:.2f} × {fields['hebesatz'] // 100} % = {expected / 100:.2f}, "
-                               f"the notice says {fields['gewst'] / 100:.2f}", ["GewStG § 16 Abs. 1"]))
+            out.append(
+                Finding(
+                    "arithmetic",
+                    "gewst",
+                    None,
+                    fields["gewst"],
+                    expected,
+                    fields["gewst"] > expected,
+                    True,
+                    f"{fields['messbetrag'] / 100:.2f} × {fields['hebesatz'] // 100} % = {expected / 100:.2f}, "
+                    f"the notice says {fields['gewst'] / 100:.2f}",
+                    ["GewStG § 16 Abs. 1"],
+                )
+            )
     return out

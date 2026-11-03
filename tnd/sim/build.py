@@ -35,20 +35,34 @@ def build(splits: tuple[str, ...] = ("dev", "test", "heldout")) -> dict[str, int
             shutil.rmtree(folder)
         (folder / "inbox").mkdir(parents=True)
         (folder / "truth.json").write_text(
-            json.dumps({n["id"]: {**n["truth"], "doc": n["doc"]} for n in notices}, indent=1, ensure_ascii=False))
+            json.dumps({n["id"]: {**n["truth"], "doc": n["doc"]} for n in notices}, indent=1, ensure_ascii=False)
+        )
         jobs += [(split, n) for n in notices]
         out[split] = len(notices)
     with ProcessPoolExecutor() as ex:
         list(ex.map(_write, jobs, chunksize=8))
     group = config.DATA / "group"
     group.mkdir(parents=True, exist_ok=True)
-    clients = [{"id": c.id, "firm": c.firm, "kind": c.kind, "name": c.name, "steuernummer": c.steuernummer,
-                "address": c.address, "land": c.land, "municipality": (w.munis[c.municipality]["name"]
-                                                                       if c.municipality else None)}
-               for c in w.clients]
-    filed = [{"client_id": c.id, "kind": k, "year": y, "fields": f}
-             for c in w.clients for k, ys in c.filed.items() for y, f in ys.items()
-             if (c.id, k, y) not in w.unfiled]
+    clients = [
+        {
+            "id": c.id,
+            "firm": c.firm,
+            "kind": c.kind,
+            "name": c.name,
+            "steuernummer": c.steuernummer,
+            "address": c.address,
+            "land": c.land,
+            "municipality": (w.munis[c.municipality]["name"] if c.municipality else None),
+        }
+        for c in w.clients
+    ]
+    filed = [
+        {"client_id": c.id, "kind": k, "year": y, "fields": f}
+        for c in w.clients
+        for k, ys in c.filed.items()
+        for y, f in ys.items()
+        if (c.id, k, y) not in w.unfiled
+    ]
     (group / "firms.json").write_text(json.dumps(w.firms, indent=1, ensure_ascii=False))
     (group / "clients.json").write_text(json.dumps(clients, indent=1, ensure_ascii=False))
     (group / "filed.json").write_text(json.dumps(filed, indent=1, ensure_ascii=False))

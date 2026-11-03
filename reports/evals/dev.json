@@ -1,0 +1,102 @@
+{
+ "counts": {
+  "notices": 238,
+  "action_right": 227,
+  "truth_close": 114,
+  "auto_closed": 110,
+  "kind_total": 230,
+  "kind_right": 227,
+  "deadline_total": 230,
+  "deadline_exact": 223,
+  "review": 11,
+  "early_deadlines": 7
+ },
+ "metrics": {
+  "action_accuracy": 0.9538,
+  "review_rate": 0.0462,
+  "auto_close_rate": 0.9649,
+  "kind_accuracy": 0.987,
+  "deadline_exact": 0.9696,
+  "late_deadlines": 0,
+  "closed_but_needed_action": 0,
+  "missed_required_objection": 0,
+  "verified_wrong_values": 0,
+  "wrong_client": 0,
+  "error_recall": 1.0,
+  "error_precision": 1.0,
+  "retrieval_recall_at_3": 0.9667,
+  "town_review_first_notice": 0.0909,
+  "town_review_later_notices": 0.0588
+ },
+ "by_channel": {
+  "client_upload": {
+   "notices": 5,
+   "action_accuracy": 1.0,
+   "review_rate": 0.0
+  },
+  "municipal_digital": {
+   "notices": 8,
+   "action_accuracy": 1.0,
+   "review_rate": 0.0
+  },
+  "municipal_post": {
+   "notices": 37,
+   "action_accuracy": 0.9189,
+   "review_rate": 0.0811
+  },
+  "portal": {
+   "notices": 94,
+   "action_accuracy": 1.0,
+   "review_rate": 0.0
+  },
+  "post": {
+   "notices": 94,
+   "action_accuracy": 0.9149,
+   "review_rate": 0.0851
+  }
+ },
+ "confusion": {
+  "close -> close": 110,
+  "close -> review": 4,
+  "duplicate -> duplicate": 5,
+  "inform_client -> inform_client": 24,
+  "misrouted -> misrouted": 3,
+  "objection_required -> objection_required": 16,
+  "objection_required -> review": 3,
+  "objection_review -> objection_review": 26,
+  "objection_review -> review": 3,
+  "task -> review": 1,
+  "task -> task": 43
+ },
+ "examples": {
+  "wrong_action": [
+   "n00120",
+   "n00190",
+   "n00111",
+   "n00094",
+   "n00143",
+   "n00105",
+   "n00004",
+   "n00126"
+  ],
+  "early_deadlines": [
+   "n00120",
+   "n00215",
+   "n00111",
+   "n00164",
+   "n00105",
+   "n00062",
+   "n00156"
+  ]
+ },
+ "ran_at": "2026-11-03T17:05:52+00:00",
+ "split": "dev",
+ "notices": 238,
+ "seconds": 21.3,
+ "model_calls": 38,
+ "model_cost_usd": 0.04,
+ "versions": {
+  "rules": 3,
+  "extraction": 3
+ }
+}

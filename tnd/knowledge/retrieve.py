@@ -17,16 +17,82 @@ from rank_bm25 import BM25Okapi
 from .. import config
 from .corpus import Unit, law_units, playbook_units
 
-STOP = set("der die das und oder ein eine einer eines einem den dem des zu zur zum im in ist sind wird wurden wurde "
-           "werden nicht nur für von mit bei auf als an aus nach soweit da dass sich auch so oder sowie ab bis".split())
-CITE = re.compile(r"§\s*(\d+[a-z]?)\s*(?:Abs\.?\s*\d+[a-z]?\s*)?(?:Satz\s*\d+\s*)?(?:Nr\.?\s*\d+[a-z]?\s*)?"
-                  r"(AO|EStG|KStG|UStG|GewStG)")
+STOP = set(
+    [
+        "der",
+        "die",
+        "das",
+        "und",
+        "oder",
+        "ein",
+        "eine",
+        "einer",
+        "eines",
+        "einem",
+        "den",
+        "dem",
+        "des",
+        "zu",
+        "zur",
+        "zum",
+        "im",
+        "in",
+        "ist",
+        "sind",
+        "wird",
+        "wurden",
+        "wurde",
+        "werden",
+        "nicht",
+        "nur",
+        "für",
+        "von",
+        "mit",
+        "bei",
+        "auf",
+        "als",
+        "an",
+        "aus",
+        "nach",
+        "soweit",
+        "da",
+        "dass",
+        "sich",
+        "auch",
+        "so",
+        "oder",
+        "sowie",
+        "ab",
+        "bis",
+    ]
+)
+CITE = re.compile(
+    r"§\s*(\d+[a-z]?)\s*(?:Abs\.?\s*\d+[a-z]?\s*)?(?:Satz\s*\d+\s*)?(?:Nr\.?\s*\d+[a-z]?\s*)?"
+    r"(AO|EStG|KStG|UStG|GewStG)"
+)
 
 
 def stem(w: str) -> str:
     w = w.lower().replace("ä", "a").replace("ö", "o").replace("ü", "u").replace("ß", "ss")
-    for suf in ("ungen", "ung", "heiten", "heit", "keiten", "keit", "lichen", "lich", "ischen", "isch", "en", "er",
-                "es", "em", "e", "n", "s"):
+    for suf in (
+        "ungen",
+        "ung",
+        "heiten",
+        "heit",
+        "keiten",
+        "keit",
+        "lichen",
+        "lich",
+        "ischen",
+        "isch",
+        "en",
+        "er",
+        "es",
+        "em",
+        "e",
+        "n",
+        "s",
+    ):
         if len(w) > len(suf) + 3 and w.endswith(suf):
             return w[: -len(suf)]
     return w
@@ -45,9 +111,19 @@ class Hit:
 
     def as_dict(self) -> dict:
         u = self.unit
-        return {"id": u.id, "kind": u.kind, "ref": u.ref, "paragraph": u.paragraph, "title": u.title,
-                "text": u.text[:700], "score": round(self.score, 3), "why": self.why, "stale": self.stale,
-                "source": u.source, "valid_from": u.valid_from.isoformat() if u.valid_from else None}
+        return {
+            "id": u.id,
+            "kind": u.kind,
+            "ref": u.ref,
+            "paragraph": u.paragraph,
+            "title": u.title,
+            "text": u.text[:700],
+            "score": round(self.score, 3),
+            "why": self.why,
+            "stale": self.stale,
+            "source": u.source,
+            "valid_from": u.valid_from.isoformat() if u.valid_from else None,
+        }
 
 
 @functools.cache

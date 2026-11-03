@@ -1,0 +1,100 @@
+[
+ {
+  "id": "f-dom-p0",
+  "name": "Ines Hahn",
+  "role": "clerk",
+  "firm": "f-dom",
+  "firm_name": "Domblick Steuerkanzlei"
+ },
+ {
+  "id": "f-dom-p1",
+  "name": "Jan Ivanov",
+  "role": "clerk",
+  "firm": "f-dom",
+  "firm_name": "Domblick Steuerkanzlei"
+ },
+ {
+  "id": "f-dom-p2",
+  "name": "Dr. Petra Jansen",
+  "role": "advisor",
+  "firm": "f-dom",
+  "firm_name": "Domblick Steuerkanzlei"
+ },
+ {
+  "id": "f-isar-p0",
+  "name": "Ole Dietz",
+  "role": "clerk",
+  "firm": "f-isar",
+  "firm_name": "Isartal Steuerberater PartG"
+ },
+ {
+  "id": "f-isar-p1",
+  "name": "Selin Ekinci",
+  "role": "clerk",
+  "firm": "f-isar",
+  "firm_name": "Isartal Steuerberater PartG"
+ },
+ {
+  "id": "f-isar-p2",
+  "name": "Dr. Frank Gerber",
+  "role": "advisor",
+  "firm": "f-isar",
+  "firm_name": "Isartal Steuerberater PartG"
+ },
+ {
+  "id": "f-pleisse-p0",
+  "name": "Lars Kühn",
+  "role": "clerk",
+  "firm": "f-pleisse",
+  "firm_name": "Pleiße Treuhand Steuerberatung"
+ },
+ {
+  "id": "f-pleisse-p1",
+  "name": "Mona Lorenz",
+  "role": "clerk",
+  "firm": "f-pleisse",
+  "firm_name": "Pleiße Treuhand Steuerberatung"
+ },
+ {
+  "id": "f-pleisse-p2",
+  "name": "Dr. Rainer Moll",
+  "role": "advisor",
+  "firm": "f-pleisse",
+  "firm_name": "Pleiße Treuhand Steuerberatung"
+ },
+ {
+  "id": "f-spree-p0",
+  "name": "Katrin Albers",
+  "role": "clerk",
+  "firm": "f-spree",
+  "firm_name": "Kanzlei Spreebogen Steuerberatung"
+ },
+ {
+  "id": "f-spree-p1",
+  "name": "Stefan Brenner",
+  "role": "clerk",
+  "firm": "f-spree",
+  "firm_name": "Kanzlei Spreebogen Steuerberatung"
+ },
+ {
+  "id": "f-spree-p2",
+  "name": "Dr. Miriam Cohn",
+  "role": "advisor",
+  "firm": "f-spree",
+  "firm_name": "Kanzlei Spreebogen Steuerberatung"
+ },
+ {
+  "id": "g-mailroom",
+  "name": "Poststelle der Gruppe",
+  "role": "mailroom",
+  "firm": null,
+  "firm_name": null
+ },
+ {
+  "id": "g-ops",
+  "name": "Group operations",
+  "role": "group_ops",
+  "firm": null,
+  "firm_name": null
+ }
+]

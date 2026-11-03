@@ -16,8 +16,13 @@ from .. import config
 from ..pipeline import Group, process
 from ..sim.render import muni_style
 
-CRITICAL = ("closed_but_needed_action", "late_deadlines", "verified_wrong_values", "missed_required_objection",
-            "wrong_client")
+CRITICAL = (
+    "closed_but_needed_action",
+    "late_deadlines",
+    "verified_wrong_values",
+    "missed_required_objection",
+    "wrong_client",
+)
 
 
 def _clerk_learns(g: Group, out: dict, truth: dict) -> int:
@@ -38,7 +43,9 @@ def _clerk_learns(g: Group, out: dict, truth: dict) -> int:
     return fixed
 
 
-def evaluate(split: str, use_model: bool = True, write: bool = True, limit: int | None = None) -> dict[str, Any]:
+def evaluate(
+    split: str, use_model: bool = True, write: bool = True, limit: int | None = None, name: str = ""
+) -> dict[str, Any]:
     folder = config.DATA / split / "inbox"
     truth = json.loads((config.DATA / split / "truth.json").read_text())
     metas = [json.loads(p.read_text()) for p in folder.glob("*.json")]
@@ -55,24 +62,32 @@ def evaluate(split: str, use_model: bool = True, write: bool = True, limit: int 
         out["ms"] = round((time.time() - t1) * 1000)
         tr = truth[m["id"]]
         if tr["doc"]["authority"]["kind"] == "gemeinde" and tr["action"] not in ("duplicate", "misrouted"):
-            name = tr["doc"]["authority"]["name"]
-            muni_seen[name] += 1
+            town = tr["doc"]["authority"]["name"]
+            muni_seen[town] += 1
             needed = out["action"] == "review"
-            learning.append({"municipality": name, "occurrence": muni_seen[name], "review": needed})
+            learning.append({"municipality": town, "occurrence": muni_seen[town], "review": needed})
             if needed:
                 out["clerk_fixed"] = _clerk_learns(g, out, tr)
         rows.append((out, tr))
     report = score(rows, learning)
-    report.update(split=split, notices=len(rows), seconds=round(time.time() - t0, 1),
-                  model_calls=sum(o["read"]["model"].get("calls", 0) for o, _ in rows),
-                  model_cost_usd=round(sum(o["read"]["model"].get("cost_usd", 0) for o, _ in rows), 4),
-                  versions={k: config.load(k).get("version") for k in ("rules", "extraction")})
+    report.update(
+        split=split,
+        notices=len(rows),
+        seconds=round(time.time() - t0, 1),
+        model_calls=sum(o["read"]["model"].get("calls", 0) for o, _ in rows),
+        model_cost_usd=round(sum(o["read"]["model"].get("cost_usd", 0) for o, _ in rows), 4),
+        versions={k: config.load(k).get("version") for k in ("rules", "extraction")},
+    )
     if write:
         out_dir = config.REPORTS / "evals"
         out_dir.mkdir(parents=True, exist_ok=True)
-        (out_dir / f"{split}.json").write_text(json.dumps(report, indent=1, ensure_ascii=False, default=str))
+        (out_dir / f"{split}{'-' + name if name else ''}.json").write_text(
+            json.dumps(report, indent=1, ensure_ascii=False, default=str)
+        )
+    if write and not name:
         (config.DATA / split / "results.json").write_text(
-            json.dumps({o["id"]: o for o, _ in rows}, indent=1, ensure_ascii=False, default=str))
+            json.dumps({o["id"]: o for o, _ in rows}, indent=1, ensure_ascii=False, default=str)
+        )
     return report
 
 
@@ -145,8 +160,12 @@ def score(rows: list[tuple[dict, dict]], learning: list[dict]) -> dict[str, Any]
                 ex("deadline_missing", nid)
             # errors on the face of the notice
             want_err = {e["type"] for e in tr["errors"]}
-            got_err = {f["type"] for f in out["findings"]} & {"wrong_hebesatz", "stale_messbetrag", "arithmetic",
-                                                               "interest"}
+            got_err = {f["type"] for f in out["findings"]} & {
+                "wrong_hebesatz",
+                "stale_messbetrag",
+                "arithmetic",
+                "interest",
+            }
             if out["parsed"]["verified"]:
                 err_tp += len(want_err & got_err)
                 err_fn += len(want_err - got_err)
@@ -188,8 +207,14 @@ def score(rows: list[tuple[dict, dict]], learning: list[dict]) -> dict[str, Any]
             "town_review_first_notice": rate(sum(x["review"] for x in first), len(first)),
             "town_review_later_notices": rate(sum(x["review"] for x in later), len(later)),
         },
-        "by_channel": {k: {"notices": v["notices"], "action_accuracy": rate(v["action_right"], v["notices"]),
-                           "review_rate": rate(v["review"], v["notices"])} for k, v in sorted(by_channel.items())},
+        "by_channel": {
+            k: {
+                "notices": v["notices"],
+                "action_accuracy": rate(v["action_right"], v["notices"]),
+                "review_rate": rate(v["review"], v["notices"]),
+            }
+            for k, v in sorted(by_channel.items())
+        },
         "confusion": dict(sorted(confusion.items())),
         "examples": examples,
         "ran_at": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),

@@ -1,0 +1,1242 @@
+[
+ {
+  "id": "n00254",
+  "kind": "reminder",
+  "tax_year": 2025,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-03",
+  "action": "task",
+  "reasons": [
+   "reminder: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c06",
+  "client": "Anna Lehmann",
+  "due": "2026-12-24",
+  "deadline_status": "proposed",
+  "deadline_id": 20,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00275",
+  "kind": "reminder",
+  "tax_year": 2024,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-03",
+  "action": "task",
+  "reasons": [
+   "reminder: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c13",
+  "client": "Jonas Schwarz",
+  "due": "2026-12-24",
+  "deadline_status": "proposed",
+  "deadline_id": 29,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00297",
+  "kind": "reminder",
+  "tax_year": 2025,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-08",
+  "action": "task",
+  "reasons": [
+   "reminder: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c24",
+  "client": "Aylin Wagner",
+  "due": "2026-12-29",
+  "deadline_status": "proposed",
+  "deadline_id": 33,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00247",
+  "kind": "request",
+  "tax_year": 2024,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-03",
+  "action": "task",
+  "reasons": [
+   "request: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c03",
+  "client": "Piotr Wagner",
+  "due": "2026-12-31",
+  "deadline_status": "proposed",
+  "deadline_id": 13,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00265",
+  "kind": "kst",
+  "tax_year": 2024,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-11-30",
+  "action": "inform_client",
+  "reasons": [
+   "deviations in the client's favour or below the threshold"
+  ],
+  "status": "open",
+  "tax_effect": -80566,
+  "client_id": "f-spree-c11",
+  "client": "Vogel Softwareentwicklung GmbH",
+  "due": "2027-01-04",
+  "deadline_status": "proposed",
+  "deadline_id": 1,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00286",
+  "kind": "vz_est",
+  "tax_year": 2027,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-11-30",
+  "action": "inform_client",
+  "reasons": [
+   "new prepayments"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c19",
+  "client": "Clara Werner",
+  "due": "2027-01-04",
+  "deadline_status": "proposed",
+  "deadline_id": 10,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00268",
+  "kind": "ust",
+  "tax_year": 2024,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-01",
+  "action": "objection_review",
+  "reasons": [
+   "1 change(s) against the client; tax effect 1223.03 €"
+  ],
+  "status": "open",
+  "tax_effect": 122303,
+  "client_id": "f-spree-c12",
+  "client": "Neumann Physiotherapie-Bedarf GmbH",
+  "due": "2027-01-05",
+  "deadline_status": "proposed",
+  "deadline_id": 2,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00279",
+  "kind": "vz_est",
+  "tax_year": 2027,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-01",
+  "action": "inform_client",
+  "reasons": [
+   "new prepayments"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c15",
+  "client": "Mehmet Werner",
+  "due": "2027-01-05",
+  "deadline_status": "proposed",
+  "deadline_id": 3,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00284",
+  "kind": "est",
+  "tax_year": 2023,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-01",
+  "action": "objection_review",
+  "reasons": [
+   "1 change(s) against the client; tax effect 1606.88 €"
+  ],
+  "status": "open",
+  "tax_effect": 160688,
+  "client_id": "f-spree-c18",
+  "client": "Tobias Müller",
+  "due": "2027-01-05",
+  "deadline_status": "proposed",
+  "deadline_id": 4,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00293",
+  "kind": "reminder",
+  "tax_year": 2023,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-15",
+  "action": "task",
+  "reasons": [
+   "reminder: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c22",
+  "client": "Fischer Kfz-Service GmbH",
+  "due": "2027-01-05",
+  "deadline_status": "proposed",
+  "deadline_id": 58,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00298",
+  "kind": "gewst",
+  "tax_year": 2025,
+  "authority": "Berlin",
+  "notice_date": "2026-12-01",
+  "action": "objection_required",
+  "reasons": [
+   "the latest Messbescheid on file sets 4812.50; the town used 4914.00"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c24",
+  "client": "Aylin Wagner",
+  "due": "2027-01-05",
+  "deadline_status": "proposed",
+  "deadline_id": 5,
+  "verified": true,
+  "channel": "municipal_digital"
+ },
+ {
+  "id": "n00258",
+  "kind": "reminder",
+  "tax_year": 2024,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-12-17",
+  "action": "task",
+  "reasons": [
+   "reminder: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c08",
+  "client": "Schwarz Gebäudereinigung GmbH",
+  "due": "2027-01-07",
+  "deadline_status": "proposed",
+  "deadline_id": 84,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00246",
+  "kind": "request",
+  "tax_year": 2023,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-11",
+  "action": "task",
+  "reasons": [
+   "request: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c03",
+  "client": "Piotr Wagner",
+  "due": "2027-01-08",
+  "deadline_status": "proposed",
+  "deadline_id": 44,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00252",
+  "kind": "gewst",
+  "tax_year": 2024,
+  "authority": "Berlin",
+  "notice_date": "2026-12-04",
+  "action": "objection_required",
+  "reasons": [
+   "5085.50 × 410 % = 20850.55, the notice says 21041.55"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c06",
+  "client": "Anna Lehmann",
+  "due": "2027-01-08",
+  "deadline_status": "proposed",
+  "deadline_id": 28,
+  "verified": true,
+  "channel": "municipal_post"
+ },
+ {
+  "id": "n00260",
+  "kind": "reminder",
+  "tax_year": 2025,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-18",
+  "action": "task",
+  "reasons": [
+   "reminder: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c09",
+  "client": "Koch Logistik GmbH",
+  "due": "2027-01-08",
+  "deadline_status": "proposed",
+  "deadline_id": 85,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00282",
+  "kind": "reminder",
+  "tax_year": 2025,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-12-18",
+  "action": "task",
+  "reasons": [
+   "reminder: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c17",
+  "client": "Aylin Vogel",
+  "due": "2027-01-08",
+  "deadline_status": "proposed",
+  "deadline_id": 89,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00278",
+  "kind": "vz_est",
+  "tax_year": 2027,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-07",
+  "action": "inform_client",
+  "reasons": [
+   "new prepayments"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c15",
+  "client": "Mehmet Werner",
+  "due": "2027-01-11",
+  "deadline_status": "proposed",
+  "deadline_id": 45,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00291",
+  "kind": "reminder",
+  "tax_year": 2025,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-22",
+  "action": "task",
+  "reasons": [
+   "reminder: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c21",
+  "client": "Hoffmann Gastronomie GmbH",
+  "due": "2027-01-12",
+  "deadline_status": "proposed",
+  "deadline_id": 105,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00285",
+  "kind": "request",
+  "tax_year": 2025,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-16",
+  "action": "task",
+  "reasons": [
+   "request: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c18",
+  "client": "Tobias Müller",
+  "due": "2027-01-13",
+  "deadline_status": "proposed",
+  "deadline_id": 63,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00299",
+  "kind": "vz_est",
+  "tax_year": 2027,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-09",
+  "action": "inform_client",
+  "reasons": [
+   "new prepayments"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c25",
+  "client": "Aylin Krause",
+  "due": "2027-01-13",
+  "deadline_status": "proposed",
+  "deadline_id": 38,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00263",
+  "kind": "est",
+  "tax_year": 2024,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-08",
+  "action": "objection_required",
+  "reasons": [
+   "interest from 2026-04-01 for 8 full months on 3000.00: 36.00, notice says 40.00"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c10",
+  "client": "Elias Werner",
+  "due": "2027-01-14",
+  "deadline_status": "proposed",
+  "deadline_id": 40,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00296",
+  "kind": "vz_est",
+  "tax_year": 2027,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-09",
+  "action": "inform_client",
+  "reasons": [
+   "new prepayments"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c24",
+  "client": "Aylin Wagner",
+  "due": "2027-01-14",
+  "deadline_status": "proposed",
+  "deadline_id": 46,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00277",
+  "kind": "request",
+  "tax_year": 2025,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-12-18",
+  "action": "task",
+  "reasons": [
+   "request: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c14",
+  "client": "Felix Krause",
+  "due": "2027-01-15",
+  "deadline_status": "proposed",
+  "deadline_id": 88,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00300",
+  "kind": "vz_est",
+  "tax_year": 2027,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-11",
+  "action": "inform_client",
+  "reasons": [
+   "new prepayments"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c25",
+  "client": "Aylin Krause",
+  "due": "2027-01-15",
+  "deadline_status": "proposed",
+  "deadline_id": 50,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00251",
+  "kind": "reminder",
+  "tax_year": 2025,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-12-28",
+  "action": "task",
+  "reasons": [
+   "reminder: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c05",
+  "client": "Müller Medientechnik GmbH",
+  "due": "2027-01-18",
+  "deadline_status": "proposed",
+  "deadline_id": 125,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00262",
+  "kind": "request",
+  "tax_year": 2025,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-21",
+  "action": "task",
+  "reasons": [
+   "request: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c10",
+  "client": "Elias Werner",
+  "due": "2027-01-18",
+  "deadline_status": "proposed",
+  "deadline_id": 86,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00242",
+  "kind": "audit",
+  "tax_year": 2024,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-16",
+  "action": "task",
+  "reasons": [
+   "audit: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c01",
+  "client": "Olga Schmidt",
+  "due": "2027-01-20",
+  "deadline_status": "proposed",
+  "deadline_id": 62,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00244",
+  "kind": "request",
+  "tax_year": 2023,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-12-23",
+  "action": "task",
+  "reasons": [
+   "request: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c02",
+  "client": "Schneider Feinkost GmbH",
+  "due": "2027-01-20",
+  "deadline_status": "proposed",
+  "deadline_id": 109,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00271",
+  "kind": "audit",
+  "tax_year": 2025,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-16",
+  "action": "task",
+  "reasons": [
+   "audit: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c12",
+  "client": "Neumann Physiotherapie-Bedarf GmbH",
+  "due": "2027-01-20",
+  "deadline_status": "proposed",
+  "deadline_id": 70,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00283",
+  "kind": "request",
+  "tax_year": 2024,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-12-23",
+  "action": "task",
+  "reasons": [
+   "request: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c17",
+  "client": "Aylin Vogel",
+  "due": "2027-01-20",
+  "deadline_status": "proposed",
+  "deadline_id": 111,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00243",
+  "kind": "est",
+  "tax_year": 2023,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-17",
+  "action": "inform_client",
+  "reasons": [
+   "deviations in the client's favour or below the threshold"
+  ],
+  "status": "open",
+  "tax_effect": -295640,
+  "client_id": "f-spree-c01",
+  "client": "Olga Schmidt",
+  "due": "2027-01-21",
+  "deadline_status": "proposed",
+  "deadline_id": 69,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00276",
+  "kind": "vz_est",
+  "tax_year": 2027,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-12-15",
+  "action": "inform_client",
+  "reasons": [
+   "new prepayments"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c14",
+  "client": "Felix Krause",
+  "due": "2027-01-21",
+  "deadline_status": "proposed",
+  "deadline_id": 87,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00287",
+  "kind": "vz_est",
+  "tax_year": 2027,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-18",
+  "action": "inform_client",
+  "reasons": [
+   "new prepayments"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c19",
+  "client": "Clara Werner",
+  "due": "2027-01-22",
+  "deadline_status": "proposed",
+  "deadline_id": 90,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00256",
+  "kind": "vz_est",
+  "tax_year": 2027,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-21",
+  "action": "inform_client",
+  "reasons": [
+   "new prepayments"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c07",
+  "client": "Ben Seidel",
+  "due": "2027-01-25",
+  "deadline_status": "proposed",
+  "deadline_id": 83,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00273",
+  "kind": "est",
+  "tax_year": 2025,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-23",
+  "action": "inform_client",
+  "reasons": [
+   "deviations in the client's favour or below the threshold"
+  ],
+  "status": "open",
+  "tax_effect": -69900,
+  "client_id": "f-spree-c13",
+  "client": "Jonas Schwarz",
+  "due": "2027-01-27",
+  "deadline_status": "proposed",
+  "deadline_id": 104,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00290",
+  "kind": "ust",
+  "tax_year": 2024,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-23",
+  "action": "objection_review",
+  "reasons": [
+   "1 change(s) against the client; tax effect 575.00 €"
+  ],
+  "status": "open",
+  "tax_effect": 57500,
+  "client_id": "f-spree-c21",
+  "client": "Hoffmann Gastronomie GmbH",
+  "due": "2027-01-27",
+  "deadline_status": "proposed",
+  "deadline_id": 100,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00253",
+  "kind": "est",
+  "tax_year": 2024,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-24",
+  "action": "inform_client",
+  "reasons": [
+   "deviations in the client's favour or below the threshold"
+  ],
+  "status": "open",
+  "tax_effect": -56548,
+  "client_id": "f-spree-c06",
+  "client": "Anna Lehmann",
+  "due": "2027-01-28",
+  "deadline_status": "proposed",
+  "deadline_id": 107,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00255",
+  "kind": "vz_est",
+  "tax_year": 2027,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-22",
+  "action": "inform_client",
+  "reasons": [
+   "new prepayments"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c07",
+  "client": "Ben Seidel",
+  "due": "2027-01-28",
+  "deadline_status": "proposed",
+  "deadline_id": 110,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00241",
+  "kind": "audit",
+  "tax_year": 2024,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-29",
+  "action": "task",
+  "reasons": [
+   "audit: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c01",
+  "client": "Olga Schmidt",
+  "due": "2027-02-02",
+  "deadline_status": "proposed",
+  "deadline_id": 116,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00267",
+  "kind": "kst",
+  "tax_year": 2025,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-12-31",
+  "action": "objection_review",
+  "reasons": [
+   "1 change(s) against the client; tax effect 342.93 €"
+  ],
+  "status": "open",
+  "tax_effect": 34293,
+  "client_id": "f-spree-c11",
+  "client": "Vogel Softwareentwicklung GmbH",
+  "due": "2027-02-04",
+  "deadline_status": "proposed",
+  "deadline_id": 131,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00239",
+  "kind": "gewst_mess",
+  "tax_year": 2024,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-18",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c00",
+  "client": "Meyer Softwareentwicklung GmbH",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00240",
+  "kind": "gewst",
+  "tax_year": 2025,
+  "authority": "Landeshauptstadt Potsdam",
+  "notice_date": "2026-12-04",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c00",
+  "client": "Meyer Softwareentwicklung GmbH",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "municipal_post"
+ },
+ {
+  "id": "n00245",
+  "kind": "gewst",
+  "tax_year": 2025,
+  "authority": "Berlin",
+  "notice_date": "2026-12-14",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c02",
+  "client": "Schneider Feinkost GmbH",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "municipal_post"
+ },
+ {
+  "id": "n00248",
+  "kind": "ust",
+  "tax_year": 2023,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-11",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c04",
+  "client": "Olga Wolf",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00249",
+  "kind": "gewst",
+  "tax_year": 2025,
+  "authority": "Berlin",
+  "notice_date": "2026-12-31",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c04",
+  "client": "Olga Wolf",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "municipal_digital"
+ },
+ {
+  "id": "n00250",
+  "kind": "gewst_mess",
+  "tax_year": 2025,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-12-16",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c05",
+  "client": "Müller Medientechnik GmbH",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00257",
+  "kind": "gewst_mess",
+  "tax_year": 2024,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-12-31",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c08",
+  "client": "Schwarz Gebäudereinigung GmbH",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00259",
+  "kind": "ust",
+  "tax_year": 2025,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-08",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c09",
+  "client": "Koch Logistik GmbH",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00261",
+  "kind": "kst",
+  "tax_year": 2023,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-30",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c09",
+  "client": "Koch Logistik GmbH",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00264",
+  "kind": "gewst_mess",
+  "tax_year": 2025,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-12-24",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c11",
+  "client": "Vogel Softwareentwicklung GmbH",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00266",
+  "kind": "kst",
+  "tax_year": 2024,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-11-30",
+  "action": "duplicate",
+  "reasons": [
+   "same notice as n00265"
+  ],
+  "status": "open",
+  "tax_effect": -80566,
+  "client_id": "f-spree-c11",
+  "client": "Vogel Softwareentwicklung GmbH",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "client_upload"
+ },
+ {
+  "id": "n00269",
+  "kind": "ust",
+  "tax_year": 2024,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-01",
+  "action": "duplicate",
+  "reasons": [
+   "same notice as n00268"
+  ],
+  "status": "open",
+  "tax_effect": 122303,
+  "client_id": "f-spree-c12",
+  "client": "Neumann Physiotherapie-Bedarf GmbH",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "client_upload"
+ },
+ {
+  "id": "n00270",
+  "kind": "gewst_mess",
+  "tax_year": 2025,
+  "authority": "Finanzamt Charlottenburg",
+  "notice_date": "2026-12-10",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c12",
+  "client": "Neumann Physiotherapie-Bedarf GmbH",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00272",
+  "kind": "est",
+  "tax_year": 2024,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-21",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c13",
+  "client": "Jonas Schwarz",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00274",
+  "kind": "est",
+  "tax_year": 2025,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-23",
+  "action": "duplicate",
+  "reasons": [
+   "same notice as n00273"
+  ],
+  "status": "open",
+  "tax_effect": -69900,
+  "client_id": "f-spree-c13",
+  "client": "Jonas Schwarz",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "client_upload"
+ },
+ {
+  "id": "n00280",
+  "kind": "est",
+  "tax_year": 2024,
+  "authority": "Finanzamt Prenzlauer Berg",
+  "notice_date": "2026-12-16",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c16",
+  "client": "Lea Schmidt",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00281",
+  "kind": "request",
+  "tax_year": 2025,
+  "authority": "Steuerpflichtige(r): Lea Schmidt, Ringstraße 8, Berlin ; j j „€",
+  "notice_date": null,
+  "action": "task",
+  "reasons": [
+   "request: the authority expects something by a date"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c16",
+  "client": "Lea Schmidt",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00288",
+  "kind": "gewst",
+  "tax_year": 2025,
+  "authority": "Berlin",
+  "notice_date": "2026-12-18",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c20",
+  "client": "Anna Meyer",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "municipal_post"
+ },
+ {
+  "id": "n00289",
+  "kind": "gewst_mess",
+  "tax_year": 2023,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-12-07",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c20",
+  "client": "Anna Meyer",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "portal"
+ },
+ {
+  "id": "n00292",
+  "kind": "gewst",
+  "tax_year": 2024,
+  "authority": "Gemeinde Schönefeld",
+  "notice_date": "2026-12-21",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c22",
+  "client": "Fischer Kfz-Service GmbH",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "municipal_post"
+ },
+ {
+  "id": "n00294",
+  "kind": "est",
+  "tax_year": 2023,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-11-30",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c23",
+  "client": "Leonie Becker",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "post"
+ },
+ {
+  "id": "n00295",
+  "kind": "gewst_mess",
+  "tax_year": 2024,
+  "authority": "Finanzamt Mitte/Tiergarten",
+  "notice_date": "2026-12-17",
+  "action": "close",
+  "reasons": [
+   "matches the filed return; arithmetic and interest checked"
+  ],
+  "status": "open",
+  "tax_effect": 0,
+  "client_id": "f-spree-c23",
+  "client": "Leonie Becker",
+  "due": null,
+  "deadline_status": null,
+  "deadline_id": null,
+  "verified": true,
+  "channel": "portal"
+ }
+]

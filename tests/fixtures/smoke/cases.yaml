@@ -1,0 +1,48 @@
+- id: smoke-1
+  firm: { land: BE }
+  client: { name: "Lena Brandt", steuernummer: "27/615/02233", land: BE, kind: person }
+  filed:
+    kind: est
+    year: 2025
+    fields: { einkuenfte_nsa: 5210000, einkuenfte_gewerbe: 0, einkuenfte_vuv: 0, summe_einkuenfte: 5210000,
+              sonderausgaben: 410000, agb: 0, zve: 4800000, est: 900000, soli: 0, kist: 0, lst_est: 880000,
+              vz_est: 0, rest_est: 20000, lst_soli: 0, rest_soli: 0, lst_kist: 0, rest_kist: 0 }
+  document:
+    channel: post
+    posted: "2026-11-25"
+    received_at: "2026-11-27"
+    text: |
+      Finanzamt Charlottenburg
+      Steuernummer: 27/615/02233
+      Datum: 25.11.2026
+      Steuerpflichtige(r): Lena Brandt, Gartenweg 3, Berlin
+      Bescheid für 2025 über Einkommensteuer, Solidaritätszuschlag und Kirchensteuer
+      Ermittlung der Besteuerungsgrundlagen
+      Einkünfte aus nichtselbständiger Arbeit 52.100,00 €
+      Einkünfte aus Gewerbebetrieb 0,00 €
+      Einkünfte aus Vermietung und Verpachtung 0,00 €
+      Summe der Einkünfte 52.100,00 €
+      Sonderausgaben 4.100,00 €
+      außergewöhnliche Belastungen 0,00 €
+      zu versteuerndes Einkommen 48.000,00 €
+      Festsetzung
+      Einkommensteuer 9.000,00 €
+      Solidaritätszuschlag 0,00 €
+      Kirchensteuer 0,00 €
+      Abrechnung Einkommensteuer
+      festgesetzt 9.000,00 €
+      abzüglich Steuerabzugsbeträge 8.800,00 €
+      abzüglich Vorauszahlungen 0,00 €
+      verbleibende Beträge 200,00 €
+      Abrechnung Solidaritätszuschlag
+      festgesetzt 0,00 €
+      abzüglich Steuerabzugsbeträge 0,00 €
+      verbleibende Beträge 0,00 €
+      Abrechnung Kirchensteuer
+      festgesetzt 0,00 €
+      abzüglich Steuerabzugsbeträge 0,00 €
+      verbleibende Beträge 0,00 €
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch gegeben. Die Frist beträgt einen Monat.
+  expect: { kind: est, action: close, deadline: "2026-12-30", errors: [], fields: { zve: 4800000 } }
+  why: "Posted Wed 25.11.2026, 4th day Sun 29.11. -> Mon 30.11.; one month -> Wed 30.12.2026. Matches the return."

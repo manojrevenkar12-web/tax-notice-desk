@@ -1,0 +1,103 @@
+{
+ "split": "test",
+ "ship": true,
+ "failed": [],
+ "checks": [
+  {
+   "metric": "closed_but_needed_action",
+   "value": 0,
+   "limit": {
+    "max": 0
+   },
+   "status": "pass"
+  },
+  {
+   "metric": "missed_required_objection",
+   "value": 0,
+   "limit": {
+    "max": 0
+   },
+   "status": "pass"
+  },
+  {
+   "metric": "late_deadlines",
+   "value": 0,
+   "limit": {
+    "max": 0
+   },
+   "status": "pass"
+  },
+  {
+   "metric": "verified_wrong_values",
+   "value": 0,
+   "limit": {
+    "max": 0
+   },
+   "status": "pass"
+  },
+  {
+   "metric": "wrong_client",
+   "value": 0,
+   "limit": {
+    "max": 0
+   },
+   "status": "pass"
+  },
+  {
+   "metric": "deadline_exact",
+   "value": 0.9955,
+   "limit": {
+    "min": 0.97
+   },
+   "status": "pass"
+  },
+  {
+   "metric": "action_accuracy",
+   "value": 0.9696,
+   "limit": {
+    "min": 0.85
+   },
+   "status": "pass"
+  },
+  {
+   "metric": "kind_accuracy",
+   "value": 0.9864,
+   "limit": {
+    "min": 0.97
+   },
+   "status": "pass"
+  },
+  {
+   "metric": "error_recall",
+   "value": 1.0,
+   "limit": {
+    "min": 0.9
+   },
+   "status": "pass"
+  },
+  {
+   "metric": "error_precision",
+   "value": 1.0,
+   "limit": {
+    "min": 0.9
+   },
+   "status": "pass"
+  },
+  {
+   "metric": "review_rate",
+   "value": 0.0304,
+   "limit": {
+    "max": 0.25
+   },
+   "status": "pass"
+  },
+  {
+   "metric": "retrieval_recall_at_3",
+   "value": 1.0,
+   "limit": {
+    "min": 0.85
+   },
+   "status": "pass"
+  }
+ ]
+}
