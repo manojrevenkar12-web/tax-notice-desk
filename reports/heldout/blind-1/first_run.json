@@ -1,0 +1,1925 @@
+{
+ "set": "blind-1",
+ "status": "blind",
+ "ran_at": "2026-11-03T17:21:55+00:00",
+ "cases": 55,
+ "passed": 7,
+ "late_deadlines": 2,
+ "closed_but_needed_action": 0,
+ "by_check": {
+  "kind": 53,
+  "action": 10,
+  "deadline": 50,
+  "errors": 46,
+  "fields": 11
+ },
+ "failures": [
+  {
+   "id": "case-01",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "close",
+    "deadline": "2026-08-10",
+    "errors": [],
+    "fields": {
+     "zve": 5412800,
+     "est": 1248600,
+     "rest_est": 33200
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-08-10",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "zve": 5412800,
+     "est": null,
+     "rest_est": null
+    }
+   },
+   "why": "The notice prints the tax number without slashes (2761502233); by digits it is the client's 27/615/02233, so it is his notice, not misrouted. Received: post, posted (notice date) Mon 2026-07-06; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Fri 2026-07-10; Fri 2026-07-10 is a working day, no move needed. Deadline: one month after 2026-07-10 -> Mon 2026-08-10; Mon 2026-08-10 is a working day. Every figure equals the filed return; interest for 2025 would only start on 2027-04-01, so none is due and none is set. Arithmetic: 58,340.00 - 4,212.00 = 54,128 zve; rest_est 12,486 - 12,154 = 332.00; rest_kist 1,123.74 - 1,093.86 = 29.88. Matches and passes every check -> close."
+  },
+  {
+   "id": "case-02",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "inform_client",
+    "deadline": "2025-12-17",
+    "errors": [],
+    "fields": {
+     "zve": 4183000,
+     "est": 808700,
+     "rest_est": 104800,
+     "zinsen_est": 1000
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2025-12-17",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "zve": 4183000,
+     "est": 1000,
+     "rest_est": null,
+     "zinsen_est": 1000
+    }
+   },
+   "why": "Received: post, posted (notice date) Tue 2025-11-11; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2025-11-15; Sat 2025-11-15 is a Saturday; Sun 2025-11-16 is a Sunday -> next working day Mon 2025-11-17 (AO 108(3)). Deadline: one month after 2025-11-17 -> Wed 2025-12-17; Wed 2025-12-17 is a working day. Deviations: einkuenfte_nsa 46,120.00 EUR -> 45,720.00 EUR (-400.00 EUR); summe_einkuenfte 46,120.00 EUR -> 45,720.00 EUR (-400.00 EUR); zve 42,230.00 EUR -> 41,830.00 EUR (-400.00 EUR); est 8,203.00 EUR -> 8,087.00 EUR (-116.00 EUR); kist 656.24 EUR -> 646.96 EUR (-9.28 EUR); rest_est 1,164.00 EUR -> 1,048.00 EUR (-116.00 EUR); rest_kist 93.12 EUR -> 83.84 EUR (-9.28 EUR). All of them are in the client's favour (lower income, lower tax). Interest: interest 2025-04-01 to 2025-11-17 = 7 full months; base 1,048.00 EUR rounded down to 50 EUR = 1,000.00 EUR; 1,000.00 EUR x 0.15% x 7 = 10.5000 EUR -> 10 EUR. The notice sets exactly 10.00 EUR, so the interest is right (10 EUR is not under the minimum). Only favourable deviations -> inform_client."
+  },
+  {
+   "id": "case-03",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "close",
+    "deadline": "2025-02-03",
+    "errors": [],
+    "fields": {
+     "zve": 4411100,
+     "sonderausgaben": 310400,
+     "rest_est": 25800
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2025-02-03",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "zve": 4411100,
+     "sonderausgaben": 310400,
+     "rest_est": null
+    }
+   },
+   "why": "Posted on 30 Dec 2024, before 1 January 2025, so the old 3-day rule applies even though the notice counts as received in 2025 (the new 4-day rule would give 2025-01-03). Received: post, posted (notice date) Mon 2024-12-30; old AO 122(2) Nr. 1: 3rd day -> Thu 2025-01-02; Thu 2025-01-02 is a working day, no move needed. Deadline: one month after 2025-01-02 -> Sun 2025-02-02; Sun 2025-02-02 is a Sunday -> next working day Mon 2025-02-03. Sonderausgaben differ by 0.80 EUR (3,104.80 filed, 3,104.00 assessed): not more than 1 EUR, so not a deviation; zve is 44,111 either way (47,215.90 - 3,104.80 = 44,111.10 and 47,215.90 - 3,104.00 = 44,111.90, both rounded down), tax and rest are identical. Interest for 2023 starts 2025-04-01, after receipt: none. -> close."
+  },
+  {
+   "id": "case-04",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "objection_review",
+    "deadline": "2025-02-06",
+    "errors": [],
+    "fields": {
+     "zve": 4783000,
+     "est": 954300,
+     "rest_est": 49300
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2025-02-06",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "zve": 4783000,
+     "est": 954300,
+     "rest_est": null
+    }
+   },
+   "why": "Posted 2 Jan 2025, so the new 4-day rule applies. Received: post, posted (notice date) Thu 2025-01-02; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Mon 2025-01-06; Mon 2025-01-06 is a working day (Heilige Drei Könige is a holiday in BY but not in BE, so not a holiday for the desk), no move needed. Deadline: one month after 2025-01-06 -> Thu 2025-02-06; Thu 2025-02-06 is a working day. A desk that used the client's Land alone would move to 2025-01-07 and get 2025-02-07, which is later than the real deadline. Deviations: einkuenfte_nsa 51,200.00 EUR -> 51,850.00 EUR (650.00 EUR); summe_einkuenfte 51,200.00 EUR -> 51,850.00 EUR (650.00 EUR); zve 47,180.00 EUR -> 47,830.00 EUR (650.00 EUR); est 9,329.00 EUR -> 9,543.00 EUR (214.00 EUR); rest_est 279.00 EUR -> 493.00 EUR (214.00 EUR): against the client; remaining amount up by 214.00 EUR (no soli, no church tax), at least 50 EUR. Interest for 2023 starts 2025-04-01: none. -> objection_review."
+  },
+  {
+   "id": "case-05",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "close",
+    "deadline": "2024-09-16",
+    "errors": [],
+    "fields": {
+     "zve": 4274000,
+     "rest_est": 387100,
+     "zinsen_est": 2300
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2024-09-16",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "zve": 2150000,
+     "rest_est": null,
+     "zinsen_est": 2300
+    }
+   },
+   "why": "Received: portal, made available Mon 2024-08-12 (before 2025): 3rd day after the notification Tue 2024-08-13 -> Fri 2024-08-16. Deadline: one month after 2024-08-16 -> Mon 2024-09-16; Mon 2024-09-16 is a working day. Interest: interest 2024-04-01 to 2024-08-16 = 4 full months; base 3,871.00 EUR rounded down to 50 EUR = 3,850.00 EUR; 3,850.00 EUR x 0.15% x 4 = 23.1000 EUR -> 23 EUR; the notice sets 23.00 EUR: right. Figures equal the return (21,500 + 25,120 = 46,620; - 3,880 = 42,740 zve; 7,871 - 3,000 - 1,000 = 3,871.00 rest). -> close."
+  },
+  {
+   "id": "case-06",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "ust",
+    "action": "close",
+    "deadline": "2025-08-27",
+    "errors": [],
+    "fields": {
+     "ust": 3586980,
+     "zahllast": 1443761,
+     "rest_ust": 443761,
+     "zinsen_ust": 1900
+    }
+   },
+   "got": {
+    "kind": "ust",
+    "action": "review",
+    "deadline": "2025-08-27",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "ust": 18422000,
+     "zahllast": null,
+     "rest_ust": null,
+     "zinsen_ust": 1900
+    }
+   },
+   "why": "Made available in 2025, so the 2025 portal rule (4th day after the notification) applies, not the availability date (that would give 2025-07-25). Received: portal, made available Mon 2025-07-21 (in 2025): 4th day after the notification Wed 2025-07-23 -> Sun 2025-07-27; Sun 2025-07-27 is a Sunday, but for the portal the desk does not move it (it notes Mon 2025-07-28). Deadline: one month after 2025-07-27 -> Wed 2025-08-27; Wed 2025-08-27 is a working day. Arithmetic: 19% of 184,220.00 = 35,001.80; 7% of 12,400.00 = 868.00; ust 35,869.80 - Vorsteuer 21,432.19 = 14,437.61 - VZ 10,000.00 = 4,437.61. Interest: interest 2025-04-01 to 2025-07-27 = 3 full months; base 4,437.61 EUR rounded down to 50 EUR = 4,400.00 EUR; 4,400.00 EUR x 0.15% x 3 = 19.8000 EUR -> 19 EUR; the notice sets 19.00 EUR: right. Same as filed -> close."
+  },
+  {
+   "id": "case-07",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "kst",
+    "action": "close",
+    "deadline": "2026-04-14",
+    "errors": [],
+    "fields": {
+     "kst": 4687200,
+     "rest_kst": 687200,
+     "zinsen_kst": 11300
+    }
+   },
+   "got": {
+    "kind": "kst",
+    "action": "review",
+    "deadline": "2026-04-14",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "kst": 4687200,
+     "rest_kst": null,
+     "zinsen_kst": 11300
+    }
+   },
+   "why": "Received: portal, made available Tue 2026-03-10 (from 2026): 4th day after availability (AO 122a(4) new) -> Sat 2026-03-14; the notification date Thu 2026-03-12 does not count; Sat 2026-03-14 is a Saturday, but for the portal the desk does not move it (it notes Mon 2026-03-16). Deadline: one month after 2026-03-14 -> Tue 2026-04-14; Tue 2026-04-14 is a working day. kst 15% of 312,480 = 46,872.00; soli 5.5% = 2,577.96; rest_kst 46,872 - 40,000 = 6,872.00. Interest: interest 2025-04-01 to 2026-03-14 = 11 full months; base 6,872.00 EUR rounded down to 50 EUR = 6,850.00 EUR; 6,850.00 EUR x 0.15% x 11 = 113.0250 EUR -> 113 EUR (with the notification date 2026-03-16 it would also be 11 months); the notice sets 113.00 EUR: right. Same as filed -> close."
+  },
+  {
+   "id": "case-08",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "ust",
+    "action": "inform_client",
+    "deadline": "2026-04-07",
+    "errors": [],
+    "fields": {
+     "umsatz_19": 9412000,
+     "ust": 1788280,
+     "rest_ust": 45365
+    }
+   },
+   "got": {
+    "kind": "ust",
+    "action": "review",
+    "deadline": "2026-04-07",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "umsatz_19": 9412000,
+     "ust": 9412000,
+     "rest_ust": null
+    }
+   },
+   "why": "Received: portal, made available Mon 2026-03-02 (from 2026): 4th day after availability (AO 122a(4) new) -> Fri 2026-03-06; the notification date Tue 2026-03-03 does not count. Deadline: one month after 2026-03-06 -> Mon 2026-04-06; Mon 2026-04-06 is Ostermontag, a holiday in both BB (firm) and BB (authority) -> next working day Tue 2026-04-07. Deviations: umsatz_19 96,340.00 EUR -> 94,120.00 EUR (-2,220.00 EUR); ust 18,304.60 EUR -> 17,882.80 EUR (-421.80 EUR); zahllast 7,275.45 EUR -> 6,853.65 EUR (-421.80 EUR); rest_ust 875.45 EUR -> 453.65 EUR (-421.80 EUR): turnover and tax lower, in the client's favour (19% of 94,120.00 = 17,882.80; - 11,029.15 = 6,853.65; - 6,400.00 = 453.65). Interest for 2024 starts 2026-04-01, after receipt: none. -> inform_client."
+  },
+  {
+   "id": "case-09",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "close",
+    "deadline": "2026-02-03",
+    "errors": [],
+    "fields": {
+     "zve": 5721000,
+     "rest_est": 221000,
+     "zinsen_est": 2900
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-02-03",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "zve": 5721000,
+     "rest_est": null,
+     "zinsen_est": 2900
+    }
+   },
+   "why": "Boundary of the 2026 change: the notice was made available on 29 Dec 2025, so the 2025 rule applies (4th day after the notification), although the day it counts as received is in 2026; the 2026 rule would give 2026-01-02 and deadline 2026-02-02. Received: portal, made available Mon 2025-12-29 (in 2025): 4th day after the notification Tue 2025-12-30 -> Sat 2026-01-03; Sat 2026-01-03 is a Saturday, but for the portal the desk does not move it (it notes Mon 2026-01-05). Deadline: one month after 2026-01-03 -> Tue 2026-02-03; Tue 2026-02-03 is a working day. zve 63,180 - 5,120 - 850 = 57,210. Interest: interest 2025-04-01 to 2026-01-03 = 9 full months; base 2,210.00 EUR rounded down to 50 EUR = 2,200.00 EUR; 2,200.00 EUR x 0.15% x 9 = 29.7000 EUR -> 29 EUR; the notice sets 29.00 EUR: right. Same as filed -> close."
+  },
+  {
+   "id": "case-10",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": false,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "objection_required",
+    "deadline": "2024-12-04",
+    "errors": [
+     "interest"
+    ],
+    "fields": {
+     "vz_est": 982000,
+     "rest_est": 231500,
+     "zinsen_est": 2700
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2024-12-04",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "vz_est": null,
+     "rest_est": null,
+     "zinsen_est": 2700
+    }
+   },
+   "why": "Received: post, posted (notice date) Tue 2024-10-29; old AO 122(2) Nr. 1: 3rd day -> Fri 2024-11-01; Fri 2024-11-01 is Allerheiligen, a holiday in both NW (firm) and NW (authority); Sat 2024-11-02 is a Saturday; Sun 2024-11-03 is a Sunday -> next working day Mon 2024-11-04 (AO 108(3)). Deadline: one month after 2024-11-04 -> Wed 2024-12-04; Wed 2024-12-04 is a working day. Deviation: vz_est 11,320.00 EUR -> 9,820.00 EUR (-1,500.00 EUR); rest_est 815.00 EUR -> 2,315.00 EUR (1,500.00 EUR): fewer prepayments credited is against the client (+1,500.00 to pay), which alone would be objection_review. Interest: interest 2024-04-01 to 2024-11-04 = 7 full months; base 2,315.00 EUR rounded down to 50 EUR = 2,300.00 EUR; 2,300.00 EUR x 0.15% x 7 = 24.1500 EUR -> 24 EUR. The notice charges 27.00 EUR (8 months): differs by 3 EUR -> wrong interest. Earlier rows win -> objection_required with error interest."
+  },
+  {
+   "id": "case-11",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "close",
+    "deadline": "2024-12-02",
+    "errors": [],
+    "fields": {
+     "zve": 4083000,
+     "rest_est": -14200
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2024-12-02",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "zve": 4083000,
+     "rest_est": null
+    }
+   },
+   "why": "Same posting day as case-10, but the firm is in Berlin. Received: post, posted (notice date) Tue 2024-10-29; old AO 122(2) Nr. 1: 3rd day -> Fri 2024-11-01; Fri 2024-11-01 is a working day (Allerheiligen is a holiday in NW but not in BE, so not a holiday for the desk), no move needed. Deadline: one month after 2024-11-01 -> Sun 2024-12-01; Sun 2024-12-01 is a Sunday -> next working day Mon 2024-12-02. (Moving to 2024-11-04 as in NW would give 2024-12-04, later than the desk's deadline.) Refund 7,684 - 7,826 = -142.00 as filed; interest for 2023 not yet running. -> close."
+  },
+  {
+   "id": "case-12",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "close",
+    "deadline": "2026-11-19",
+    "errors": [],
+    "fields": {
+     "zve": 3611500,
+     "rest_est": -4300
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-11-19",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "zve": 3912000,
+     "rest_est": null
+    }
+   },
+   "why": "Received: portal, made available Wed 2026-10-14 (from 2026): 4th day after availability (AO 122a(4) new) -> Sun 2026-10-18; the notification date Thu 2026-10-15 does not count; Sun 2026-10-18 is a Sunday, but for the portal the desk does not move it (it notes Mon 2026-10-19). Deadline: one month after 2026-10-18 -> Wed 2026-11-18; Wed 2026-11-18 is Buß- und Bettag, a holiday in both SN (firm) and SN (authority) -> next working day Thu 2026-11-19. zve 39,120 - 3,005 = 36,115; refund 5,667 - 5,710 = -43.00 as filed; no interest for 2025 yet. -> close."
+  },
+  {
+   "id": "case-13",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "ust",
+    "action": "objection_review",
+    "deadline": "2026-11-18",
+    "errors": [],
+    "fields": {
+     "vorsteuer": 798380,
+     "zahllast": 764570,
+     "rest_ust": 164570
+    }
+   },
+   "got": {
+    "kind": "ust",
+    "action": "review",
+    "deadline": "2026-11-18",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "vorsteuer": 798380,
+     "zahllast": null,
+     "rest_ust": null
+    }
+   },
+   "why": "Same day as case-12, but the firm is in Berlin. Received: portal, made available Wed 2026-10-14 (from 2026): 4th day after availability (AO 122a(4) new) -> Sun 2026-10-18; the notification date Wed 2026-10-14 does not count; Sun 2026-10-18 is a Sunday, but for the portal the desk does not move it (it notes Mon 2026-10-19). Deadline: one month after 2026-10-18 -> Wed 2026-11-18; Wed 2026-11-18 is a working day (Buß- und Bettag is a holiday in SN but not in BE, so not a holiday for the desk). Deviations: vorsteuer 9,123.80 EUR -> 7,983.80 EUR (-1,140.00 EUR); zahllast 6,505.70 EUR -> 7,645.70 EUR (1,140.00 EUR); rest_ust 505.70 EUR -> 1,645.70 EUR (1,140.00 EUR). Less input VAT is against the client; rest_ust up by 1,140.00 (14,079.00 + 1,550.50 = 15,629.50 - 7,983.80 = 7,645.70 - 6,000.00 = 1,645.70). No interest for 2025. -> objection_review."
+  },
+  {
+   "id": "case-14",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "objection_review",
+    "deadline": "2027-01-07",
+    "errors": [],
+    "fields": {
+     "einkuenfte_vuv": -168000,
+     "zve": 12977000,
+     "est": 4188300,
+     "rest_est": 176300,
+     "rest_soli": 9696,
+     "rest_kist": 14104
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2027-01-07",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "einkuenfte_vuv": -168000,
+     "zve": 12977000,
+     "est": null,
+     "rest_est": null,
+     "rest_soli": null,
+     "rest_kist": null
+    }
+   },
+   "why": "Received: portal, made available Wed 2026-12-02 (from 2026): 4th day after availability (AO 122a(4) new) -> Sun 2026-12-06; the notification date Thu 2026-12-03 does not count; Sun 2026-12-06 is a Sunday, but for the portal the desk does not move it (it notes Mon 2026-12-07). Deadline: one month after 2026-12-06 -> Wed 2027-01-06; Wed 2027-01-06 is Heilige Drei Könige, a holiday in both BY (firm) and BY (authority) -> next working day Thu 2027-01-07. Deviations: einkuenfte_vuv -3,120.00 EUR -> -1,680.00 EUR (1,440.00 EUR); summe_einkuenfte 139,380.00 EUR -> 140,820.00 EUR (1,440.00 EUR); zve 128,330.00 EUR -> 129,770.00 EUR (1,440.00 EUR); est 41,278.00 EUR -> 41,883.00 EUR (605.00 EUR); soli 2,270.29 EUR -> 2,303.56 EUR (33.27 EUR); kist 3,302.24 EUR -> 3,350.64 EUR (48.40 EUR); rest_est 1,158.00 EUR -> 1,763.00 EUR (605.00 EUR); rest_soli 63.69 EUR -> 96.96 EUR (33.27 EUR); rest_kist 92.64 EUR -> 141.04 EUR (48.40 EUR). Smaller rental loss is against the client; rest_est alone goes up by 605.00 EUR (all remaining amounts together 686.67 EUR), at least 50 EUR either way. No interest for 2025 yet. -> objection_review."
+  },
+  {
+   "id": "case-15",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "vz_est",
+    "action": "inform_client",
+    "deadline": "2027-01-06",
+    "errors": [],
+    "fields": {
+     "vz_quartal": 184000
+    }
+   },
+   "got": {
+    "kind": "vz_est",
+    "action": "review",
+    "deadline": "2027-01-06",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "vz_quartal": null
+    }
+   },
+   "why": "A prepayment notice -> inform_client; it can be challenged, so the one-month period applies. Same dates as case-14, but the firm is in NW. Received: portal, made available Wed 2026-12-02 (from 2026): 4th day after availability (AO 122a(4) new) -> Sun 2026-12-06; the notification date Wed 2026-12-02 does not count; Sun 2026-12-06 is a Sunday, but for the portal the desk does not move it (it notes Mon 2026-12-07). Deadline: one month after 2026-12-06 -> Wed 2027-01-06; Wed 2027-01-06 is a working day (Heilige Drei Könige is a holiday in BY but not in NW, so not a holiday for the desk). The quarterly ESt prepayment is 1,840.00 EUR."
+  },
+  {
+   "id": "case-16",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "inform_client",
+    "deadline": "2026-03-02",
+    "errors": [],
+    "fields": {
+     "est": 470100,
+     "rest_est": -1900,
+     "rest_kist": -171
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-03-02",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "est": null,
+     "rest_est": null,
+     "rest_kist": null
+    }
+   },
+   "why": "Received: portal, made available Tue 2026-01-27 (from 2026): 4th day after availability (AO 122a(4) new) -> Sat 2026-01-31; the notification date Wed 2026-01-28 does not count; Sat 2026-01-31 is a Saturday, but for the portal the desk does not move it (it notes Mon 2026-02-02). Deadline: one month after 2026-01-31 -> Sat 2026-02-28 (the month has no such day, so its last day, BGB 188(3)); Sat 2026-02-28 is a Saturday; Sun 2026-03-01 is a Sunday -> next working day Mon 2026-03-02. Deviations: est 4,821.00 EUR -> 4,701.00 EUR (-120.00 EUR); kist 433.89 EUR -> 423.09 EUR (-10.80 EUR); rest_est 101.00 EUR -> -19.00 EUR (-120.00 EUR); rest_kist 9.09 EUR -> -1.71 EUR (-10.80 EUR): lower tax, in the client's favour (rest from 101.00 to -19.00). Interest for 2024 starts 2026-04-01: none. -> inform_client."
+  },
+  {
+   "id": "case-17",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "kst",
+    "action": "objection_review",
+    "deadline": "2026-04-30",
+    "errors": [],
+    "fields": {
+     "einkommen": 20212000,
+     "kst": 3031800,
+     "rest_kst": 531800
+    }
+   },
+   "got": {
+    "kind": "kst",
+    "action": "review",
+    "deadline": "2026-04-30",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "einkommen": 20212000,
+     "kst": 3031800,
+     "rest_kst": null
+    }
+   },
+   "why": "Received: post, posted (notice date) Fri 2026-03-27; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Tue 2026-03-31; Tue 2026-03-31 is a working day, no move needed. Deadline: one month after 2026-03-31 -> Thu 2026-04-30 (the month has no such day, so its last day, BGB 188(3)); Thu 2026-04-30 is a working day. Interest: interest period for 2024 starts 2026-04-01; the notice counts as received 2026-03-31, before that, so no interest (one day before it would start). Deviations: einkommen 184,120.00 EUR -> 202,120.00 EUR (18,000.00 EUR); kst 27,618.00 EUR -> 30,318.00 EUR (2,700.00 EUR); soli 1,518.99 EUR -> 1,667.49 EUR (148.50 EUR); rest_kst 2,618.00 EUR -> 5,318.00 EUR (2,700.00 EUR). vGA raises income: against the client; rest_kst up 2,700.00 (15% of 202,120 = 30,318.00 - 25,000.00 = 5,318.00; soli 1,667.49). -> objection_review."
+  },
+  {
+   "id": "case-18",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "close",
+    "deadline": "2026-06-15",
+    "errors": [],
+    "fields": {
+     "rest_est": 51200
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-06-15",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "rest_est": null
+    }
+   },
+   "why": "Received: post, posted (notice date) Mon 2026-05-11; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Fri 2026-05-15; Fri 2026-05-15 is a working day, no move needed. The envelope's postmark 2026-05-14 is later; the desk keeps the date from the notice and only notes the postmark. Deadline: one month after 2026-05-15 -> Mon 2026-06-15; Mon 2026-06-15 is a working day. (By the postmark it would be 2026-05-18 and 2026-06-18; the desk does not use it.) Interest: interest 2025-04-01 to 2026-05-15 = 13 full months; base 512.00 EUR rounded down to 50 EUR = 500.00 EUR; 500.00 EUR x 0.15% x 13 = 9.7500 EUR -> 9 EUR which is under 10 EUR, so no interest is set. The notice sets none: right. Same as filed (6,123 - 5,611 = 512.00). -> close."
+  },
+  {
+   "id": "case-19",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "objection_review",
+    "deadline": "2026-06-02",
+    "errors": [],
+    "fields": {
+     "einkuenfte_nsa": 4535000,
+     "est": 792300,
+     "rest_est": 187000
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-06-02",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "einkuenfte_nsa": 4535000,
+     "est": 792300,
+     "rest_est": null
+    }
+   },
+   "why": "The client forwarded his copy; nothing in the firm's records shows the original. Received: client_upload: original channel unknown, so both ways with the notice date Tue 2026-04-28: as post Sat 2026-05-02 -> moved to Mon 2026-05-04; as portal Sat 2026-05-02 (not moved); the earlier counts: Sat 2026-05-02. Deadline: one month after 2026-05-02 -> Tue 2026-06-02; Tue 2026-06-02 is a working day. Interest: from 2026-04-01 to 2026-05-02 (or 05-04) is 1 full month, base 1,850 x 0.15% = 2.78 EUR, under 10 EUR: none, and none set. Deviations: einkuenfte_nsa 44,100.00 EUR -> 45,350.00 EUR (1,250.00 EUR); summe_einkuenfte 44,100.00 EUR -> 45,350.00 EUR (1,250.00 EUR); zve 40,500.00 EUR -> 41,750.00 EUR (1,250.00 EUR); est 7,543.00 EUR -> 7,923.00 EUR (380.00 EUR); rest_est 1,490.00 EUR -> 1,870.00 EUR (380.00 EUR): against the client, rest +380.00. -> objection_review."
+  },
+  {
+   "id": "case-20",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "objection_review",
+    "deadline": "2026-10-07",
+    "errors": [],
+    "fields": {
+     "zve": 5362000,
+     "est": 1157200,
+     "rest_est": 56200
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-10-07",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "zve": 5362000,
+     "est": null,
+     "rest_est": null
+    }
+   },
+   "why": "Received: post, posted (notice date) Thu 2026-09-03; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Mon 2026-09-07; Mon 2026-09-07 is a working day, no move needed. Deadline: one month after 2026-09-07 -> Wed 2026-10-07; Wed 2026-10-07 is a working day. Deviations: einkuenfte_nsa 55,120.00 EUR -> 58,320.00 EUR (3,200.00 EUR); summe_einkuenfte 55,120.00 EUR -> 58,320.00 EUR (3,200.00 EUR); zve 50,420.00 EUR -> 53,620.00 EUR (3,200.00 EUR); est 10,432.00 EUR -> 11,572.00 EUR (1,140.00 EUR); kist 834.56 EUR -> 925.76 EUR (91.20 EUR); rest_est -578.00 EUR -> 562.00 EUR (1,140.00 EUR); rest_kist -46.24 EUR -> 44.96 EUR (91.20 EUR): against the client; rest_est goes from a 578.00 refund to 562.00 to pay (+1,140.00). No interest for 2025. -> objection_review."
+  },
+  {
+   "id": "case-22",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "gewst",
+    "action": "close",
+    "deadline": "2026-07-29",
+    "errors": [],
+    "fields": {
+     "messbetrag": 234150,
+     "hebesatz": 40000,
+     "gewst": 936600,
+     "vz_gewst": 880000,
+     "rest_gewst": 56600
+    }
+   },
+   "got": {
+    "kind": "gewst",
+    "action": "review",
+    "deadline": "2026-07-29",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "messbetrag": null,
+     "hebesatz": null,
+     "gewst": 936600,
+     "vz_gewst": 880000,
+     "rest_gewst": null
+    }
+   },
+   "why": "Widerspruch named: one month. Received: municipal_post, posted (notice date) Thu 2026-06-25; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Mon 2026-06-29; Mon 2026-06-29 is a working day, no move needed. Deadline: one month after 2026-06-29 -> Wed 2026-07-29; Wed 2026-07-29 is a working day. Checks: Hebesatz 400 = register (Markkleeberg 400); Messbetrag 2,341.50 = the only base notice on file for 2024; 2,341.50 x 400 / 100 = 9,366.00 as printed; 9,366.00 - 8,800.00 = 566.00 as printed. Table layout, but everything is right -> close."
+  },
+  {
+   "id": "case-23",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "gewst",
+    "action": "close",
+    "deadline": "2025-12-03",
+    "errors": [],
+    "fields": {
+     "messbetrag": 120750,
+     "hebesatz": 24000,
+     "gewst": 289800,
+     "vz_gewst": 360000,
+     "rest_gewst": -70200
+    }
+   },
+   "got": {
+    "kind": "gewst",
+    "action": "review",
+    "deadline": "2025-12-03",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 120750,
+     "hebesatz": 24000,
+     "gewst": 289800,
+     "vz_gewst": 360000,
+     "rest_gewst": null
+    }
+   },
+   "why": "The client lives in Berlin, but the authority is the municipality, whose Land is BB. Received: municipal_post, posted (notice date) Mon 2025-10-27; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Fri 2025-10-31; Fri 2025-10-31 is Reformationstag, a holiday in both BB (firm) and BB (authority); Sat 2025-11-01 is a Saturday; Sun 2025-11-02 is a Sunday -> next working day Mon 2025-11-03 (AO 108(3)). Deadline: one month after 2025-11-03 -> Wed 2025-12-03; Wed 2025-12-03 is a working day. With the client's Land (BE) 31 October would not count and the deadline would be 2025-11-30 -> 2025-12-01. Checks: Hebesatz 240 = register; Messbetrag 1,207.50 = base notice on file; 1,207.50 x 2.40 = 2,898.00; 2,898.00 - 3,600.00 = -702.00, printed with a trailing minus. -> close."
+  },
+  {
+   "id": "case-24",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": false,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": true,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "gewst",
+    "action": "close",
+    "deadline": "2026-03-13",
+    "errors": [],
+    "fields": {
+     "messbetrag": 1443050,
+     "hebesatz": 25000,
+     "gewst": 3607625,
+     "vz_gewst": 3400000,
+     "rest_gewst": 207625
+    }
+   },
+   "got": {
+    "kind": "gewst",
+    "action": "review",
+    "deadline": "2027-02-15",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 1443050,
+     "hebesatz": 25000,
+     "gewst": 1443050,
+     "vz_gewst": 3400000,
+     "rest_gewst": null
+    }
+   },
+   "why": "The notice has no instructions on how to object. It arrived on paper and the desk reads a scan, so it keeps one month and notes the year (one year after 2026-02-13 -> Sat 2027-02-13; Sat 2027-02-13 is a Saturday; Sun 2027-02-14 is a Sunday -> next working day Mon 2027-02-15). Received: municipal_post, posted (notice date) Mon 2026-02-09; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Fri 2026-02-13; Fri 2026-02-13 is a working day, no move needed. Deadline: one month after 2026-02-13 -> Fri 2026-03-13; Fri 2026-03-13 is a working day. Checks: 250 = register; 14,430.50 = base notice on file; 14,430.50 x 2.50 = 36,076.25; - 34,000.00 = 2,076.25. All right -> close."
+  },
+  {
+   "id": "case-25",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "gewst",
+    "action": "close",
+    "deadline": "2027-05-24",
+    "errors": [],
+    "fields": {
+     "messbetrag": 159600,
+     "hebesatz": 45000,
+     "gewst": 718200,
+     "vz_gewst": 844200,
+     "rest_gewst": -126000
+    }
+   },
+   "got": {
+    "kind": "gewst",
+    "action": "review",
+    "deadline": "2027-05-24",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 159600,
+     "hebesatz": 45000,
+     "gewst": 159600,
+     "vz_gewst": null,
+     "rest_gewst": null
+    }
+   },
+   "why": "No instructions on how to object, and the notice is digital (not a scan), so the one-year period (AO 356(2) / VwGO 58(2)) applies. Received: municipal_digital, made available Wed 2026-05-20 (from 2026): 4th day after availability (AO 122a(4) new) -> Sun 2026-05-24; the notification date Thu 2026-05-21 does not count; Sun 2026-05-24 is a Sunday; Pfingstsonntag, a holiday in both BB (firm) and BB (authority), but for the portal the desk does not move it (it notes Tue 2026-05-26). Deadline: one year after 2026-05-24 -> Mon 2027-05-24; Mon 2027-05-24 is a working day. Checks: the latest base notice on file for 2024 is the one dated 2026-03-11 (1,596.00; listed first, the older 1,876.00 of 2025-08-19 is superseded); the town uses 1,596.00: right. 450 = register; 1,596.00 x 4.50 = 7,182.00; 7,182.00 - 8,442.00 = -1,260.00 (the old 1,876.00 x 4.50 = 8,442.00 was paid). -> close."
+  },
+  {
+   "id": "case-26",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "gewst",
+    "action": "close",
+    "deadline": "2026-08-20",
+    "errors": [],
+    "fields": {
+     "messbetrag": 123900,
+     "hebesatz": 47500,
+     "gewst": 588500,
+     "vz_gewst": 600000,
+     "rest_gewst": -11500
+    }
+   },
+   "got": {
+    "kind": "gewst",
+    "action": "review",
+    "deadline": "2026-08-20",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 123900,
+     "hebesatz": 47500,
+     "gewst": 588500,
+     "vz_gewst": 600000,
+     "rest_gewst": null
+    }
+   },
+   "why": "The instructions name Klage, not Widerspruch (NRW has no Widerspruch here); it is still one month (VwGO 74). Received: municipal_post, posted (notice date) Tue 2026-07-14; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2026-07-18; Sat 2026-07-18 is a Saturday; Sun 2026-07-19 is a Sunday -> next working day Mon 2026-07-20 (AO 108(3)). Deadline: one month after 2026-07-20 -> Thu 2026-08-20; Thu 2026-08-20 is a working day. Checks: 475 = register; Messbetrag 1,239.00 = base notice on file; 1,239.00 x 4.75 = 5,885.25, the town printed 5,885.00 (rounded down to whole euros): 0.25 EUR off, not more than 1 EUR, so right; 5,885.00 - 6,000.00 = -115.00 (Überzahlung). -> close."
+  },
+  {
+   "id": "case-27",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": true
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "gewst",
+    "action": "close",
+    "deadline": "2026-09-07",
+    "errors": [],
+    "fields": {
+     "messbetrag": 1239350,
+     "hebesatz": 49000,
+     "gewst": 6072815,
+     "vz_gewst": 5600000,
+     "rest_gewst": 472815
+    }
+   },
+   "got": {
+    "kind": "gewst",
+    "action": "review",
+    "deadline": "2026-09-07",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 1239350,
+     "hebesatz": 49000,
+     "gewst": 6072815,
+     "vz_gewst": 5600000,
+     "rest_gewst": 472815
+    }
+   },
+   "why": "Widerspruch (or Klage) within one month. Received: municipal_digital, made available Mon 2026-08-03 (from 2026): 4th day after availability (AO 122a(4) new) -> Fri 2026-08-07; the notification date Tue 2026-08-04 does not count. Deadline: one month after 2026-08-07 -> Mon 2026-09-07; Mon 2026-09-07 is a working day. Checks: 490 = register; 12,393.50 = base notice on file; 12,393.50 x 4.90 = 60,728.15; - 56,000.00 = 4,728.15. -> close."
+  },
+  {
+   "id": "case-28",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": false,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "gewst",
+    "action": "objection_required",
+    "deadline": "2026-06-18",
+    "errors": [
+     "wrong_hebesatz"
+    ],
+    "fields": {
+     "messbetrag": 398300,
+     "hebesatz": 25000,
+     "gewst": 995750,
+     "vz_gewst": 0,
+     "rest_gewst": 995750
+    }
+   },
+   "got": {
+    "kind": "gewst",
+    "action": "review",
+    "deadline": "2026-06-18",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 398300,
+     "hebesatz": 25000,
+     "gewst": 995750,
+     "vz_gewst": 995750,
+     "rest_gewst": null
+    }
+   },
+   "why": "Received: municipal_post, posted (notice date) Tue 2026-05-12; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2026-05-16; Sat 2026-05-16 is a Saturday; Sun 2026-05-17 is a Sunday -> next working day Mon 2026-05-18 (AO 108(3)). Deadline: one month after 2026-05-18 -> Thu 2026-06-18; Thu 2026-06-18 is a working day. The register's Hebesatz for Grünwald is 240 %, the notice applies 250 %: wrong Hebesatz. Messbetrag 3,983.00 matches the base notice on file. Its own arithmetic holds (3,983.00 x 2.50 = 9,957.50); with 240 % it would be 9,559.20, 398.30 EUR less. -> objection_required."
+  },
+  {
+   "id": "case-29",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": false,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "gewst",
+    "action": "objection_required",
+    "deadline": "2025-10-21",
+    "errors": [
+     "wrong_hebesatz"
+    ],
+    "fields": {
+     "messbetrag": 2101750,
+     "hebesatz": 26000,
+     "gewst": 5464550,
+     "vz_gewst": 5000000,
+     "rest_gewst": 464550
+    }
+   },
+   "got": {
+    "kind": "gewst",
+    "action": "review",
+    "deadline": "2025-10-21",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 2101750,
+     "hebesatz": 26000,
+     "gewst": 2101750,
+     "vz_gewst": 5000000,
+     "rest_gewst": null
+    }
+   },
+   "why": "Klage within one month. Received: municipal_digital, made available Mon 2025-09-15 (in 2025): 4th day after the notification Wed 2025-09-17 -> Sun 2025-09-21; Sun 2025-09-21 is a Sunday, but for the portal the desk does not move it (it notes Mon 2025-09-22). Deadline: one month after 2025-09-21 -> Tue 2025-10-21; Tue 2025-10-21 is a working day. The register's Hebesatz for Monheim am Rhein is 250 % (same for 2023), the notice uses 260 %: wrong Hebesatz. The arithmetic holds with its own rate (21,017.50 x 2.60 = 54,645.50; - 50,000.00 = 4,645.50); with 250 % the tax would be 52,543.75. -> objection_required."
+  },
+  {
+   "id": "case-30",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": false,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "gewst",
+    "action": "objection_required",
+    "deadline": "2026-04-09",
+    "errors": [
+     "stale_messbetrag"
+    ],
+    "fields": {
+     "messbetrag": 812000,
+     "hebesatz": 28000,
+     "gewst": 2273600,
+     "vz_gewst": 2000000,
+     "rest_gewst": 273600
+    }
+   },
+   "got": {
+    "kind": "gewst",
+    "action": "review",
+    "deadline": "2026-04-09",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 812000,
+     "hebesatz": 28000,
+     "gewst": 812000,
+     "vz_gewst": 2000000,
+     "rest_gewst": null
+    }
+   },
+   "why": "Received: municipal_post, posted (notice date) Tue 2026-03-03; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2026-03-07; Sat 2026-03-07 is a Saturday; Sun 2026-03-08 is a Sunday -> next working day Mon 2026-03-09 (AO 108(3)). Deadline: one month after 2026-03-09 -> Thu 2026-04-09; Thu 2026-04-09 is a working day. The latest base notice on file for 2024 is dated 2026-02-18 (6,986.00, after the objection was granted); the town still uses 8,120.00 from the 2025-07-10 notice: outdated Messbetrag. Rate 280 = register; its arithmetic holds (8,120.00 x 2.80 = 22,736.00; - 20,000.00 = 2,736.00). With 6,986.00 the tax would be 19,560.80. -> objection_required."
+  },
+  {
+   "id": "case-31",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": false,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "gewst",
+    "action": "objection_required",
+    "deadline": "2026-05-27",
+    "errors": [
+     "arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 456750,
+     "hebesatz": 49000,
+     "gewst": 2283075,
+     "vz_gewst": 2000000,
+     "rest_gewst": 283075
+    }
+   },
+   "got": {
+    "kind": "gewst",
+    "action": "review",
+    "deadline": "2026-05-27",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 456750,
+     "hebesatz": 49000,
+     "gewst": 2283075,
+     "vz_gewst": 2000000,
+     "rest_gewst": null
+    }
+   },
+   "why": "Received: municipal_post, posted (notice date) Tue 2026-04-21; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2026-04-25; Sat 2026-04-25 is a Saturday; Sun 2026-04-26 is a Sunday -> next working day Mon 2026-04-27 (AO 108(3)). Deadline: one month after 2026-04-27 -> Wed 2026-05-27; Wed 2026-05-27 is a working day. Hebesatz 490 = register, Messbetrag 4,567.50 = base notice on file, but 4,567.50 x 4.90 = 22,380.75, not 22,830.75 (digits swapped): off by 450.00 EUR, the trade tax does not compute. -> objection_required."
+  },
+  {
+   "id": "case-32",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": false,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "gewst",
+    "action": "objection_required",
+    "deadline": "2026-12-16",
+    "errors": [
+     "arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 266000,
+     "hebesatz": 46000,
+     "gewst": 1223600,
+     "vz_gewst": 1080000,
+     "rest_gewst": 163600
+    }
+   },
+   "got": {
+    "kind": "gewst",
+    "action": "review",
+    "deadline": "2026-12-16",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 266000,
+     "hebesatz": 46000,
+     "gewst": 266000,
+     "vz_gewst": 1080000,
+     "rest_gewst": null
+    }
+   },
+   "why": "Received: municipal_post, posted (notice date) Thu 2026-11-12; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Mon 2026-11-16; Mon 2026-11-16 is a working day, no move needed. Deadline: one month after 2026-11-16 -> Wed 2026-12-16; Wed 2026-12-16 is a working day. Hebesatz 460 = register; Messbetrag 2,660.00 = on file; 2,660.00 x 4.60 = 12,236.00 as printed; but 12,236.00 - 10,800.00 = 1,436.00, the notice demands 1,636.00: the remaining amount does not compute (200.00 too much). -> objection_required (the town's arithmetic is wrong)."
+  },
+  {
+   "id": "case-33",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "gewst",
+    "action": "close",
+    "deadline": "2026-08-06",
+    "errors": [],
+    "fields": {
+     "messbetrag": 244300,
+     "hebesatz": 49000,
+     "gewst": 1197070,
+     "vz_gewst": 1100000,
+     "rest_gewst": 97070
+    }
+   },
+   "got": {
+    "kind": "gewst",
+    "action": "review",
+    "deadline": "2026-08-06",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 244300,
+     "hebesatz": 49000,
+     "gewst": 1197070,
+     "vz_gewst": 1100000,
+     "rest_gewst": null
+    }
+   },
+   "why": "Received: municipal_post, posted (notice date) Tue 2026-06-30; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2026-07-04; Sat 2026-07-04 is a Saturday; Sun 2026-07-05 is a Sunday -> next working day Mon 2026-07-06 (AO 108(3)). Deadline: one month after 2026-07-06 -> Thu 2026-08-06; Thu 2026-08-06 is a working day. The newest base notice on file is for 2023 (2026-05-06, after an audit), but the check uses the latest one for the notice's year, 2024: 2,443.00 of 2025-11-20, which is what the town uses. 490 = register; 2,443.00 x 4.90 = 11,970.70; - 11,000.00 = 970.70. The extra prepayment section changes nothing. -> close."
+  },
+  {
+   "id": "case-38",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "objection_review",
+    "deadline": "2026-07-08",
+    "errors": [],
+    "fields": {
+     "zve": 3451500,
+     "est": 599200,
+     "rest_est": 36200
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-07-08",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "zve": 3451500,
+     "est": 599200,
+     "rest_est": null
+    }
+   },
+   "why": "Received: post, posted (notice date) Tue 2026-06-02; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2026-06-06; Sat 2026-06-06 is a Saturday; Sun 2026-06-07 is a Sunday -> next working day Mon 2026-06-08 (AO 108(3)). Deadline: one month after 2026-06-08 -> Wed 2026-07-08; Wed 2026-07-08 is a working day. Deviations: einkuenfte_nsa 37,200.00 EUR -> 37,365.00 EUR (165.00 EUR); summe_einkuenfte 37,200.00 EUR -> 37,365.00 EUR (165.00 EUR); zve 34,350.00 EUR -> 34,515.00 EUR (165.00 EUR); est 5,942.00 EUR -> 5,992.00 EUR (50.00 EUR); rest_est 312.00 EUR -> 362.00 EUR (50.00 EUR): against the client. Remaining amount up by exactly 50.00 EUR (312.00 -> 362.00; no soli, no church tax): 'at least 50' is met. Interest: interest 2026-04-01 to 2026-06-08 = 2 full months; base 362.00 EUR rounded down to 50 EUR = 350.00 EUR; 350.00 EUR x 0.15% x 2 = 1.0500 EUR -> 1 EUR which is under 10 EUR, so no interest is set. -> objection_review."
+  },
+  {
+   "id": "case-39",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "inform_client",
+    "deadline": "2026-08-27",
+    "errors": [],
+    "fields": {
+     "est": 717000,
+     "lst_est": 680038,
+     "rest_est": 36962
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-08-27",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "est": 717000,
+     "lst_est": null,
+     "rest_est": null
+    }
+   },
+   "why": "Received: post, posted (notice date) Tue 2026-07-21; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2026-07-25; Sat 2026-07-25 is a Saturday; Sun 2026-07-26 is a Sunday -> next working day Mon 2026-07-27 (AO 108(3)). Deadline: one month after 2026-07-27 -> Thu 2026-08-27; Thu 2026-08-27 is a working day. Deviations: einkuenfte_nsa 41,200.00 EUR -> 41,350.00 EUR (150.00 EUR); summe_einkuenfte 41,200.00 EUR -> 41,350.00 EUR (150.00 EUR); zve 38,050.00 EUR -> 38,200.00 EUR (150.00 EUR); est 7,120.00 EUR -> 7,170.00 EUR (50.00 EUR); rest_est 319.63 EUR -> 369.62 EUR (49.99 EUR): against the client. Lohnsteuer differs by 0.01 EUR (6,800.37 filed, 6,800.38 per eLStB), not a deviation, but it is part of the remaining amount: 7,170.00 - 6,800.38 = 369.62 vs 319.63 filed, up by 49.99 EUR, under 50. Interest: interest 2026-04-01 to 2026-07-27 = 3 full months; base 369.62 EUR rounded down to 50 EUR = 350.00 EUR; 350.00 EUR x 0.15% x 3 = 1.5750 EUR -> 1 EUR which is under 10 EUR, so no interest is set. -> inform_client."
+  },
+  {
+   "id": "case-40",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "inform_client",
+    "deadline": "2026-10-12",
+    "errors": [],
+    "fields": {
+     "einkuenfte_vuv": 960000,
+     "sonderausgaben": 528000,
+     "zve": 5062000,
+     "rest_est": 280600,
+     "zinsen_est": 2100
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-10-12",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "einkuenfte_vuv": 960000,
+     "sonderausgaben": 528000,
+     "zve": 4630000,
+     "rest_est": null,
+     "zinsen_est": 2100
+    }
+   },
+   "why": "Received: portal, made available Tue 2026-09-08 (from 2026): 4th day after availability (AO 122a(4) new) -> Sat 2026-09-12; the notification date Wed 2026-09-09 does not count; Sat 2026-09-12 is a Saturday, but for the portal the desk does not move it (it notes Mon 2026-09-14). Deadline: one month after 2026-09-12 -> Mon 2026-10-12; Mon 2026-10-12 is a working day. Deviations: einkuenfte_vuv 8,400.00 EUR -> 9,600.00 EUR (1,200.00 EUR); summe_einkuenfte 54,700.00 EUR -> 55,900.00 EUR (1,200.00 EUR); sonderausgaben 4,100.00 EUR -> 5,280.00 EUR (1,180.00 EUR); zve 50,600.00 EUR -> 50,620.00 EUR (20.00 EUR); est 10,712.00 EUR -> 10,718.00 EUR (6.00 EUR); rest_est 2,800.00 EUR -> 2,806.00 EUR (6.00 EUR). Rental income +1,200 is against the client, Sonderausgaben +1,180 in his favour; zve +20, tax +6.00, remaining amount +6.00: against the client by less than 50 EUR. Interest: interest 2026-04-01 to 2026-09-12 = 5 full months; base 2,806.00 EUR rounded down to 50 EUR = 2,800.00 EUR; 2,800.00 EUR x 0.15% x 5 = 21.0000 EUR -> 21 EUR; printed 21.00: right. -> inform_client."
+  },
+  {
+   "id": "case-41",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "objection_review",
+    "deadline": "2026-09-24",
+    "errors": [],
+    "fields": {
+     "zve": 3619000,
+     "est": 623000,
+     "rest_est": -113000
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-09-24",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "zve": 3619000,
+     "est": 623000,
+     "rest_est": null
+    }
+   },
+   "why": "Received: post, posted (notice date) Tue 2026-08-18; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2026-08-22; Sat 2026-08-22 is a Saturday; Sun 2026-08-23 is a Sunday -> next working day Mon 2026-08-24 (AO 108(3)). Deadline: one month after 2026-08-24 -> Thu 2026-09-24; Thu 2026-09-24 is a working day. Deviations: einkuenfte_nsa 38,500.00 EUR -> 38,850.00 EUR (350.00 EUR); summe_einkuenfte 38,500.00 EUR -> 38,850.00 EUR (350.00 EUR); zve 35,840.00 EUR -> 36,190.00 EUR (350.00 EUR); est 6,120.00 EUR -> 6,230.00 EUR (110.00 EUR); rest_est -1,240.00 EUR -> -1,130.00 EUR (110.00 EUR). Still a refund, but a smaller one: the remaining amount goes from -1,240.00 to -1,130.00, i.e. up by 110.00 EUR, against the client. Interest: interest 2026-04-01 to 2026-08-24 = 4 full months; base 1,130.00 EUR rounded down to 50 EUR = 1,100.00 EUR; 1,100.00 EUR x 0.15% x 4 = 6.6000 EUR -> 6 EUR which is under 10 EUR, so no interest is set. -> objection_review."
+  },
+  {
+   "id": "case-42",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": false,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "objection_required",
+    "deadline": "2025-11-20",
+    "errors": [
+     "interest"
+    ],
+    "fields": {
+     "rest_est": 112000,
+     "zinsen_est": 900
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2025-11-20",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "rest_est": null,
+     "zinsen_est": 900
+    }
+   },
+   "why": "Received: post, posted (notice date) Tue 2025-10-14; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2025-10-18; Sat 2025-10-18 is a Saturday; Sun 2025-10-19 is a Sunday -> next working day Mon 2025-10-20 (AO 108(3)). Deadline: one month after 2025-10-20 -> Thu 2025-11-20; Thu 2025-11-20 is a working day. Figures equal the return. Interest: interest 2025-04-01 to 2025-10-20 = 6 full months; base 1,120.00 EUR rounded down to 50 EUR = 1,100.00 EUR; 1,100.00 EUR x 0.15% x 6 = 9.9000 EUR -> 9 EUR which is under 10 EUR, so no interest is set. The notice charges 9.00 EUR; under 10 EUR no interest is set, so it differs from 0 by 9 EUR -> wrong interest -> objection_required."
+  },
+  {
+   "id": "case-43",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": false,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "objection_required",
+    "deadline": "2026-06-10",
+    "errors": [
+     "interest"
+    ],
+    "fields": {
+     "rest_est": -651240,
+     "zinsen_est": -11700
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-06-10",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "rest_est": null,
+     "zinsen_est": 11700
+    }
+   },
+   "why": "Received: portal, made available Wed 2026-05-06 (from 2026): 4th day after availability (AO 122a(4) new) -> Sun 2026-05-10; the notification date Thu 2026-05-07 does not count; Sun 2026-05-10 is a Sunday, but for the portal the desk does not move it (it notes Mon 2026-05-11). Deadline: one month after 2026-05-10 -> Wed 2026-06-10; Wed 2026-06-10 is a working day. Figures equal the return (refund 6,512.40). Interest: interest 2025-04-01 to 2026-05-10 = 13 full months; base 6,512.40 EUR rounded down to 50 EUR = 6,500.00 EUR; 6,500.00 EUR x 0.15% x 13 = 126.7500 EUR -> 126 EUR (refund interest, negative). The office pays 117.00 EUR (12 months); right is 126.00 EUR: 9 EUR too little -> wrong interest -> objection_required."
+  },
+  {
+   "id": "case-44",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "close",
+    "deadline": "2026-11-19",
+    "errors": [],
+    "fields": {
+     "rest_est": 2004900,
+     "zinsen_est": 90000
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-11-19",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "rest_est": null,
+     "zinsen_est": 90000
+    }
+   },
+   "why": "Received: post, posted (notice date) Tue 2026-10-13; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2026-10-17; Sat 2026-10-17 is a Saturday; Sun 2026-10-18 is a Sunday -> next working day Mon 2026-10-19 (AO 108(3)). Deadline: one month after 2026-10-19 -> Thu 2026-11-19; Thu 2026-11-19 is a working day. Interest: interest 2024-04-01 to 2026-10-19 = 30 full months; base 20,049.00 EUR rounded down to 50 EUR = 20,000.00 EUR; 20,000.00 EUR x 0.15% x 30 = 900.0000 EUR -> 900 EUR. The notice sets 900.00 EUR: right. Without the 50 EUR rounding it would be 20,049 x 4.5% = 902.20 -> 902, 2 EUR off, so a desk that skips the rounding would wrongly flag it. Same as filed -> close."
+  },
+  {
+   "id": "case-45",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "kst",
+    "action": "inform_client",
+    "deadline": "2026-09-17",
+    "errors": [],
+    "fields": {
+     "einkommen": 21032000,
+     "kst": 3154800,
+     "rest_kst": 154800
+    }
+   },
+   "got": {
+    "kind": "kst",
+    "action": "review",
+    "deadline": "2026-09-17",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "einkommen": 21032000,
+     "kst": 3154800,
+     "rest_kst": null
+    }
+   },
+   "why": "Received: post, posted (notice date) Tue 2026-08-11; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2026-08-15; Sat 2026-08-15 is a Saturday; Sun 2026-08-16 is a Sunday -> next working day Mon 2026-08-17 (AO 108(3)). Deadline: one month after 2026-08-17 -> Thu 2026-09-17; Thu 2026-09-17 is a working day. Deviations: einkommen 210,040.00 EUR -> 210,320.00 EUR (280.00 EUR); kst 31,506.00 EUR -> 31,548.00 EUR (42.00 EUR); soli 1,732.83 EUR -> 1,735.14 EUR (2.31 EUR); rest_kst 1,506.00 EUR -> 1,548.00 EUR (42.00 EUR): against the client. rest_kst up by 42.00 (31,548.00 - 30,000.00 = 1,548.00 vs 1,506.00); with the soli (1,735.14 vs 1,732.83, +2.31) 44.31 EUR, under 50 either way. Interest: interest 2026-04-01 to 2026-08-17 = 4 full months; base 1,548.00 EUR rounded down to 50 EUR = 1,500.00 EUR; 1,500.00 EUR x 0.15% x 4 = 9.0000 EUR -> 9 EUR which is under 10 EUR, so no interest is set. -> inform_client."
+  },
+  {
+   "id": "case-46",
+   "pass": false,
+   "checks": {
+    "kind": false,
+    "action": false,
+    "deadline": false,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "objection_required",
+    "deadline": "2026-11-05",
+    "errors": [],
+    "fields": {
+     "einkuenfte_gewerbe": 6200000,
+     "zve": 6196400,
+     "est": 1612400,
+     "rest_est": 421800,
+     "zinsen_est": 3700
+    }
+   },
+   "got": {
+    "kind": "reminder",
+    "action": "review",
+    "deadline": "2026-10-05",
+    "errors": [],
+    "reasons": [
+     "the date set by the office was not read"
+    ],
+    "fields": {
+     "einkuenfte_gewerbe": null,
+     "zve": null,
+     "est": null,
+     "rest_est": null,
+     "zinsen_est": null
+    }
+   },
+   "why": "An estimate: bases estimated under AO 162 because no return was filed (there is no filed return). Received: post, posted (notice date) Tue 2026-09-29; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2026-10-03; Sat 2026-10-03 is a Saturday; Tag der Deutschen Einheit, a holiday in both BB (firm) and BB (authority); Sun 2026-10-04 is a Sunday -> next working day Mon 2026-10-05 (AO 108(3)). Deadline: one month after 2026-10-05 -> Thu 2026-11-05; Thu 2026-11-05 is a working day. (3 October is a holiday but also the Saturday.) Interest: interest 2026-04-01 to 2026-10-05 = 6 full months; base 4,218.00 EUR rounded down to 50 EUR = 4,200.00 EUR; 4,200.00 EUR x 0.15% x 6 = 37.8000 EUR -> 37 EUR; printed 37.00: right. An estimate -> objection_required."
+  },
+  {
+   "id": "case-47",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "objection_required",
+    "deadline": "2025-04-29",
+    "errors": [],
+    "fields": {
+     "einkuenfte_vuv": 600000,
+     "zve": 4696400,
+     "rest_est": 300000
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2025-04-29",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "einkuenfte_vuv": 600000,
+     "zve": 4100000,
+     "rest_est": null
+    }
+   },
+   "why": "The notice is an estimate (AO 162, 'nicht abgegeben'), although the firm's records hold a filed return; it evidently crossed with the assessment. Estimate -> objection_required (it is also against the client by 2,900.00). Received: portal, made available Mon 2025-03-24 (in 2025): 4th day after the notification Tue 2025-03-25 -> Sat 2025-03-29; Sat 2025-03-29 is a Saturday, but for the portal the desk does not move it (it notes Mon 2025-03-31). Deadline: one month after 2025-03-29 -> Tue 2025-04-29; Tue 2025-04-29 is a working day. Interest: interest period for 2023 starts 2025-04-01; the notice counts as received 2025-03-29, before that, so no interest."
+  },
+  {
+   "id": "case-48",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "close",
+    "deadline": "2027-02-22",
+    "errors": [],
+    "fields": {
+     "zve": 3108800,
+     "rest_est": 57500
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2027-02-22",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "zve": 2950000,
+     "rest_est": null
+    }
+   },
+   "why": "The notice has no Rechtsbehelfsbelehrung. It came through the portal as the office's own document, not a scan, so the desk can tell the passage is missing: one year (AO 356(2)). Received: portal, made available Mon 2026-02-16 (from 2026): 4th day after availability (AO 122a(4) new) -> Fri 2026-02-20; the notification date Tue 2026-02-17 does not count. Deadline: one year after 2026-02-20 -> Sat 2027-02-20; Sat 2027-02-20 is a Saturday; Sun 2027-02-21 is a Sunday -> next working day Mon 2027-02-22. (One month would be one month after 2026-02-20 -> Fri 2026-03-20; Fri 2026-03-20 is a working day.) Figures equal the return; no interest for 2024 before 2026-04-01. -> close."
+  },
+  {
+   "id": "case-49",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": false,
+    "errors": true,
+    "fields": false
+   },
+   "late_deadline": true,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "inform_client",
+    "deadline": "2026-11-12",
+    "errors": [],
+    "fields": {
+     "sonderausgaben": 340000,
+     "rest_est": -272800,
+     "zinsen_est": -2400
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2027-10-12",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "sonderausgaben": 340000,
+     "rest_est": null,
+     "zinsen_est": 2400
+    }
+   },
+   "why": "No Rechtsbehelfsbelehrung found, but the notice came on paper and the desk read a scan, so it keeps one month and notes the year (one year after 2026-10-12 -> Tue 2027-10-12; Tue 2027-10-12 is a working day). Received: post, posted (notice date) Tue 2026-10-06; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2026-10-10; Sat 2026-10-10 is a Saturday; Sun 2026-10-11 is a Sunday -> next working day Mon 2026-10-12 (AO 108(3)). Deadline: one month after 2026-10-12 -> Thu 2026-11-12; Thu 2026-11-12 is a working day. Deviations: sonderausgaben 3,000.00 EUR -> 3,400.00 EUR (400.00 EUR); zve 38,000.00 EUR -> 37,600.00 EUR (-400.00 EUR); est 6,412.00 EUR -> 6,284.00 EUR (-128.00 EUR); rest_est -2,600.00 EUR -> -2,728.00 EUR (-128.00 EUR): in the client's favour (larger refund). Interest: interest 2026-04-01 to 2026-10-12 = 6 full months; base 2,728.00 EUR rounded down to 50 EUR = 2,700.00 EUR; 2,700.00 EUR x 0.15% x 6 = 24.3000 EUR -> 24 EUR (refund interest, negative); the notice pays 24.00 EUR: right. -> inform_client."
+  },
+  {
+   "id": "case-51",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": true,
+    "deadline": false,
+    "errors": true,
+    "fields": true
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "reminder",
+    "action": "task",
+    "deadline": "2026-11-30",
+    "errors": []
+   },
+   "got": {
+    "kind": "reminder",
+    "action": "task",
+    "deadline": "2026-04-30",
+    "errors": [],
+    "reasons": [
+     "reminder: the authority expects something by a date"
+    ],
+    "fields": {}
+   },
+   "why": "A reminder that the 2024 VAT return is missing, with its own date 30.11.2026 (a Monday): the deadline is that date as written. The earlier date 30.04.2026 in the text is the original filing date, not the deadline set. Mentioning a possible estimate does not make it an estimate. -> task."
+  },
+  {
+   "id": "case-52",
+   "pass": false,
+   "checks": {
+    "kind": false,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": true
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "audit",
+    "action": "task",
+    "deadline": "2026-12-02",
+    "errors": []
+   },
+   "got": {
+    "kind": "gewst_mess",
+    "action": "review",
+    "deadline": "2026-12-02",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {}
+   },
+   "why": "An audit order: the deadline is the objection period; the audit start 2026-12-07 is recorded separately. Received: post, posted (notice date) Tue 2026-10-27; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2026-10-31; Sat 2026-10-31 is a Saturday; Reformationstag, a holiday in both SN (firm) and SN (authority); Sun 2026-11-01 is a Sunday -> next working day Mon 2026-11-02 (AO 108(3)). Deadline: one month after 2026-11-02 -> Wed 2026-12-02; Wed 2026-12-02 is a working day. (31 October is Reformation Day in Saxony but also the Saturday.) -> task."
+  },
+  {
+   "id": "case-53",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": true,
+    "deadline": false,
+    "errors": true,
+    "fields": true
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "misrouted",
+    "deadline": null,
+    "errors": []
+   },
+   "got": {
+    "kind": "est",
+    "action": "misrouted",
+    "deadline": "2026-11-16",
+    "errors": [],
+    "reasons": [
+     "no client in the group has this tax number"
+    ],
+    "fields": {}
+   },
+   "why": "The notice is for Bernd Scholl, tax number 16/118/60271 (digits 1611860271); the only client is Hannah Seidel, 27/402/18816. No client has that tax number, and it is clearly legible -> misrouted. No deadline is registered for a client (none is ours); see README."
+  },
+  {
+   "id": "case-55",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": true,
+    "deadline": true,
+    "errors": false,
+    "fields": false
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-09-10",
+    "errors": [
+     "arithmetic"
+    ],
+    "fields": {
+     "est": 760000,
+     "lst_est": 625000
+    }
+   },
+   "got": {
+    "kind": "est",
+    "action": "review",
+    "deadline": "2026-09-10",
+    "errors": [],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "est": 760000,
+     "lst_est": null
+    }
+   },
+   "why": "Received: post, posted (notice date) Tue 2026-08-04; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Sat 2026-08-08; Sat 2026-08-08 is a Saturday; Sun 2026-08-09 is a Sunday -> next working day Mon 2026-08-10 (AO 108(3)). Deadline: one month after 2026-08-10 -> Thu 2026-09-10; Thu 2026-09-10 is a working day. The notice's own arithmetic fails: 7,600.00 - 6,250.00 - 0.00 = 1,350.00, but it prints 1,530.00 as the remaining amount. Values the desk cannot confirm are not used to close anything; est and Lohnsteuer match the return, but the remaining amount is not trusted. Interest is none on either value (4 months; 1,350 or 1,500 x 0.6% < 10 EUR). Not a town notice, so not 'trade tax that does not compute' -> review with error arithmetic (see README)."
+  }
+ ]
+}

@@ -17,4 +17,4 @@
 | review_rate | 0.0304 | ≤ 0.25 | pass |
 | retrieval_recall_at_3 | 1.0 | ≥ 0.85 | pass |
 
-Model calls 44, cost $0.0352; 15.4 s for 230 notices.
+Model calls 14, cost $0.0109; 15.4 s for 230 notices.

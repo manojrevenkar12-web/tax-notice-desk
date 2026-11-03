@@ -86,14 +86,14 @@
    "n00281"
   ]
  },
- "ran_at": "2026-11-03T17:06:33+00:00",
+ "ran_at": "2026-11-03T17:37:01+00:00",
  "split": "test",
  "notices": 230,
  "seconds": 15.4,
- "model_calls": 44,
- "model_cost_usd": 0.0352,
+ "model_calls": 14,
+ "model_cost_usd": 0.0109,
  "versions": {
   "rules": 3,
-  "extraction": 3
+  "extraction": 4
  }
 }

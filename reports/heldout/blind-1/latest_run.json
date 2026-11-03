@@ -1,0 +1,48 @@
+{
+ "set": "blind-1",
+ "status": "regression",
+ "ran_at": "2026-11-03T17:37:14+00:00",
+ "cases": 55,
+ "passed": 54,
+ "late_deadlines": 0,
+ "closed_but_needed_action": 0,
+ "by_check": {
+  "kind": 55,
+  "action": 55,
+  "deadline": 54,
+  "errors": 55,
+  "fields": 55
+ },
+ "failures": [
+  {
+   "id": "case-53",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": true,
+    "deadline": false,
+    "errors": true,
+    "fields": true
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "est",
+    "action": "misrouted",
+    "deadline": null,
+    "errors": []
+   },
+   "got": {
+    "kind": "est",
+    "action": "misrouted",
+    "deadline": "2026-11-16",
+    "errors": [],
+    "reasons": [
+     "no client in the group has this tax number"
+    ],
+    "fields": {}
+   },
+   "why": "The notice is for Bernd Scholl, tax number 16/118/60271 (digits 1611860271); the only client is Hannah Seidel, 27/402/18816. No client has that tax number, and it is clearly legible -> misrouted. No deadline is registered for a client (none is ours); see README."
+  }
+ ]
+}

@@ -11,3 +11,4 @@ web/dist/
 web/test-results/
 web/playwright-report/
 *.egg-info/
+web/tsconfig.tsbuildinfo

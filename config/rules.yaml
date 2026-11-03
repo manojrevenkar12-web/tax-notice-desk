@@ -22,6 +22,7 @@ remedy:
   default_months: 1               # AO § 355 Abs. 1
   without_instructions_months: 12 # AO § 356 Abs. 2: no or wrong Rechtsbehelfsbelehrung
   municipal_widerspruch_months: 1 # VwGO § 70 Abs. 1 (Gewerbesteuerbescheid in most Länder)
+  municipal_klage_months: 1       # VwGO § 74 Abs. 1 (Länder without Widerspruch, e.g. NW, BY in tax matters)
   holidays_where: both            # a day is a holiday only if it is one at the firm and at the authority (earlier = safer)
 
 interest:                         # AO §§ 233a, 238, 239

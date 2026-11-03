@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import datetime as dt
 import io
+import os
 import random
 import subprocess
 import tempfile
@@ -349,6 +350,10 @@ def embed(pdf: bytes, name: str, payload: str) -> bytes:
     return out.getvalue()
 
 
+# The PDFs do not embed their fonts; rasterise them with these fonts only, so scans match on every machine.
+FONTS_CONF = Path(__file__).parent / "fonts" / "fonts.conf"
+
+
 def scan(pdf: bytes, quality: str, seed: str) -> bytes:
     """Print, scan: an image-only PDF, slightly rotated and noisy."""
     r = random.Random(seed)
@@ -357,7 +362,9 @@ def scan(pdf: bytes, quality: str, seed: str) -> bytes:
         src.write_bytes(pdf)
         dpi = {"good": 200, "fair": 150, "poor": 120}[quality]
         subprocess.run(
-            ["pdftoppm", "-r", str(dpi), "-gray", "-png", "-singlefile", str(src), str(Path(d) / "p")], check=True
+            ["pdftoppm", "-r", str(dpi), "-gray", "-png", "-singlefile", str(src), str(Path(d) / "p")],
+            check=True,
+            env={**os.environ, "FONTCONFIG_FILE": str(FONTS_CONF)},
         )
         img = Image.open(Path(d) / "p.png").convert("L")
     angle = r.uniform(-1.2, 1.2) * {"good": 0.4, "fair": 1, "poor": 1.6}[quality]

@@ -130,6 +130,6 @@ def test_heldout_harness_runs_a_case_end_to_end(tmp_path, monkeypatch):
     monkeypatch.setattr(config, "ROOT", root)
     monkeypatch.setattr(config, "REPORTS", root / "reports")
     rep = heldout.run("smoke", use_model=False)
-    assert rep["passed"] == 1, rep["failures"]
+    assert rep["passed"] == 2, rep["failures"]  # including paper without instructions: one month, not a year
     assert rep["recorded_as"] == "first_run.json"
     assert heldout.run("smoke", use_model=False)["recorded_as"] == "latest_run.json"  # the first run is kept

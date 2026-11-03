@@ -118,3 +118,70 @@ def test_retrieval_marks_outdated_text_and_follows_citations():
     assert estg4.stale and "2022" in estg4.stale
     hits = search("Die Besteuerungsgrundlagen wurden gemäß § 162 AO geschätzt.", dt.date(2025, 12, 31), None, k=3)
     assert hits[0].unit.ref == "AO § 162" and hits[0].why == "cited on the notice"
+
+
+# The layout reader: layouts the labels have never seen. Values still count only if the arithmetic holds.
+COLUMNS = """Finanzamt Musterstadt
+Steuernummer: 21/815/08150
+Datum: 03.11.2026
+
+Bescheid für 2025 über Einkommensteuer und Kirchensteuer
+
+Festsetzung            Einkommensteuer     Kirchenst. rk
+festgesetzt werden          9.120,00 €          820,80 €
+ab Steuerabzug vom Lohn     9.540,00 €          858,60 €
+verbleibende Beträge          420,00-            37,80-
+
+Einkünfte aus nichtselbständiger Arbeit        51.200,00 €
+Sonderausgaben                                   2.050 €
+zu versteuerndes Einkommen                      49.150 €
+"""
+
+TOWN_SENTENCES = """Stadt Leverkusen
+Steuernummer: 230/5719/0812
+Datum: 03.11.2026
+
+Gewerbesteuer 2025
+Auf der Grundlage des Steuermessbetrags von 1.050,00 € und eines Hebesatzes von 250 v. H. wird die
+Gewerbesteuer für 2025 auf 2.625,00 € festgesetzt. Darauf sind Vorauszahlungen von 3.000,00 € angerechnet;
+der Unterschied zu Ihren Gunsten von 375,00 € wird erstattet.
+"""
+
+TOWN_PIPES = """Stadt Markkleeberg
+Steuernummer: 232/118/09911
+Datum: 03.11.2026
+
+Gewerbesteuerbescheid 2025
+| Steuermessbetrag | Hebesatz | Gewerbesteuer |
+|------------------|----------|---------------|
+| 812,50 EUR       | 400 %    | 3.250,00 EUR  |
+bisher gezahlt ............. 2.000,00
+Abschlusszahlung ........... 1.250,00
+"""
+
+
+def test_a_column_table_with_whole_euros_and_trailing_minus_reads_without_learning():
+    p = extract(Reading(COLUMNS, "text"))
+    assert p.verified and p.tax_year == 2025
+    assert p.fields["est"] == 912000 and p.fields["kist"] == 82080
+    assert p.fields["rest_est"] == -42000 and p.fields["rest_kist"] == -3780
+    assert p.fields["zve"] == 4915000 and p.fields["soli"] == 0  # a line the notice leaves out is zero
+    assert set(p.method.values()) == {"layout"}
+
+
+def test_a_town_in_sentences_and_a_town_in_pipes_read_without_learning():
+    p = extract(Reading(TOWN_SENTENCES, "text"))
+    assert p.verified and p.fields == {
+        "messbetrag": 105000,
+        "hebesatz": 25000,
+        "gewst": 262500,
+        "vz_gewst": 300000,
+        "rest_gewst": -37500,
+    }
+    q = extract(Reading(TOWN_PIPES, "text"))
+    assert q.verified and q.fields["hebesatz"] == 40000 and q.fields["rest_gewst"] == 125000
+
+
+def test_the_layout_reader_proposes_and_the_arithmetic_still_decides():
+    bad = extract(Reading(TOWN_PIPES.replace("1.250,00", "1.520,00"), "text"))
+    assert not bad.verified and bad.does_not_compute  # every figure read, and the town's figures do not add up

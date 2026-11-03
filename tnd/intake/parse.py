@@ -55,6 +55,7 @@ class Parsed:
     source: str = "text"
     verified: bool = False
     failed_checks: list[str] = field(default_factory=list)
+    does_not_compute: bool = False  # every figure was read and the notice's own arithmetic still fails
 
     def as_dict(self) -> dict[str, Any]:
         return dict(self.__dict__)
@@ -125,8 +126,10 @@ def classify(text: str) -> str | None:
     head = "\n".join(text.splitlines()[:25])
     for rule in cfg["classify"]:
         hay = low if rule["kind"] in ("request", "reminder") else _norm(head) + " " + low
-        if all(p in hay or contains(text, p, cfg["fuzzy_min"]) for p in rule["all"]) and not any(
-            p in hay for p in rule.get("none", [])
+        if (
+            all(p in hay or contains(text, p, cfg["fuzzy_min"]) for p in rule["all"])
+            and not any(p in hay for p in rule.get("none", []))
+            and not any(p in _norm(head) for p in rule.get("none_head", []))
         ):
             return str(rule["kind"])
     return None
@@ -242,18 +245,31 @@ def extract(r: Reading, learned: dict[str, list[str]] | None = None) -> Parsed:
     p.steuernummer = d.get("steuernummer") or (f"{m[1]}/{m[2]}/{m[3]}" if m else None)
     dm = re.search(r"Datum\W{0,3}(\d{1,2}\.\d{1,2}\.\d{4})", text)
     p.date = d.get("date") or (iso(dm.group(1)) if dm else None)
-    ym = re.search(r"(?:Kalenderjahr|für)\s+(\d{4})", text)
+    ym = re.search(r"(?:Kalenderjahr|Erhebungszeitraum:?|für das Jahr|für)\s+(\d{4})\b", text) or re.search(
+        r"(?i)\b(?:\w*steuer\w*|\w*bescheid)\s+(\d{4})\b", "\n".join(lines[:25])
+    )
     p.tax_year = d.get("tax_year") or (int(ym.group(1)) if ym else None)
     low = _norm(text)
     p.vorbehalt = d.get("vorbehalt", False) or ("§ 164" in text and "vorbehalt" in low)
     p.vorlaeufig = re.findall(r"vorläufig hinsichtlich:?\s*(.+?)\.(?:\s|$)", text, flags=re.S)
     p.estimate = kind == "est" and ("§ 162" in text or "geschätzt" in low) and "geschätzt" in low
-    p.appeal_instructions = contains(text, "Rechtsbehelfsbelehrung", fz) and ("monat" in low)
-    p.remedy = "Widerspruch" if "widerspruch" in low else ("Einspruch" if "einspruch" in low else None)
+    named = contains(text, "Rechtsbehelfsbelehrung", fz) or re.search(
+        r"\b(einspruch|widerspruch|klage)\b[^.]{0,200}\b(monat|monats)\b|\b(monat|monats)\b[^.]{0,200}\b(einspruch|widerspruch|klage)\b",
+        low,
+    )
+    p.appeal_instructions = bool(named) and ("monat" in low)
+    p.remedy = (
+        "Widerspruch"
+        if "widerspruch" in low
+        else ("Einspruch" if "einspruch" in low else ("Klage" if re.search(r"\bklage\b", low) else None))
+    )
     ex = _region(lines, "Erläuterungen", fz)
     p.explanations = [" ".join(ex).strip()] if ex else []
-    due = re.search(r"(?:bis zum|beginnt am|spätestens bis zum)\s+(\d{1,2}\.\d{1,2}\.\d{4})", text)
-    p.due = d.get("due") or (iso(due.group(1)) if due else None)
+    # the date the office sets; a date before the notice's own is an earlier deadline it recalls
+    set_by = r"(?:bis zum|beginnt am|spätestens bis zum|Beginn der Prüfung:?)\s+(\d{1,2}\.\d{1,2}\.\d{4})"
+    dues = [iso(m.group(1)) for m in re.finditer(set_by, text)]
+    later = [x for x in dues if x and (not p.date or x > p.date)]
+    p.due = d.get("due") or (later[0] if later else (dues[0] if dues else None))
     mb = re.search(r"messbescheid\w*\s+des\s+finanzamt\w*\s+vom\s+(\d{1,2}\.\d{1,2}\.\d{4})", text, re.I)
     p.messbescheid_date = iso(mb.group(1)) if mb else None
     if not kind:
@@ -281,7 +297,43 @@ def extract(r: Reading, learned: dict[str, list[str]] | None = None) -> Parsed:
                     break
     p.missing = [k for k, sp in specs.items() if k not in p.fields and not sp.get("optional")]
     verify(p)
+    if not p.verified and not d.get("fields"):
+        ok, complete = _layout(p, text, specs)
+        if ok is not None:
+            return ok
+        if p.missing and complete is not None:
+            p = complete
+    p.does_not_compute = (
+        not p.verified and not p.missing and bool(p.failed_checks) and all(c in NOT_COMPUTING for c in p.failed_checks)
+    )
     return p
+
+
+NOT_COMPUTING = {
+    "summe",
+    "zve",
+    "rest_est",
+    "rest_soli_kist",
+    "kst",
+    "rest_kst",
+    "ust",
+    "rest_ust",
+    "messbetrag",
+    "rest_gewst",
+}
+
+
+def _layout(p: Parsed, text: str, specs: dict[str, dict]) -> tuple[Parsed | None, Parsed | None]:
+    """Any other layout: the layout reader proposes values, the notice's arithmetic decides."""
+    from . import layout
+
+    def make(fields: dict[str, int]) -> Parsed:
+        q = Parsed(**{**p.__dict__, "fields": dict(fields), "method": dict.fromkeys(fields, "layout"), "missing": []})
+        return q
+
+    if not p.kind:
+        return None, None
+    return layout.read(p.kind, text, specs, verify, make)
 
 
 def _close(a: int, b: int, tol: int = 1) -> bool:
@@ -301,8 +353,8 @@ def verify(p: Parsed) -> None:
             fails.append("zve")
         if not _close(f["rest_est"], f["est"] - f["lst_est"] - f["vz_est"]):
             fails.append("rest_est")
-        if not _close(f["rest_soli"], f["soli"] - f["lst_soli"]) or not _close(
-            f["rest_kist"], f["kist"] - f["lst_kist"]
+        if not _close(f["rest_soli"], f["soli"] - f["lst_soli"] - g("vz_soli", 0)) or not _close(
+            f["rest_kist"], f["kist"] - f["lst_kist"] - g("vz_kist", 0)
         ):
             fails.append("rest_soli_kist")
     elif p.kind == "kst":
@@ -329,6 +381,8 @@ def verify(p: Parsed) -> None:
     zkey = {"est": ("zinsen_est", "rest_est"), "kst": ("zinsen_kst", "rest_kst"), "ust": ("zinsen_ust", "rest_ust")}
     if p.kind in zkey and not p.missing:
         z, rest = f.get(zkey[p.kind][0], 0), f.get(zkey[p.kind][1], 0)
+        if z > 0 > rest and p.source == "text":  # interest on a refund, printed without its sign: the office pays it
+            f[zkey[p.kind][0]] = z = -z
         if z and rest and (z > 0) != (rest > 0):  # interest on a refund is the office's to pay (negative)
             fails.append("interest sign")
     p.failed_checks = fails

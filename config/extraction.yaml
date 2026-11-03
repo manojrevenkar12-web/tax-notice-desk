@@ -1,15 +1,15 @@
 # How the desk reads notices. Labels are matched case-insensitively and tolerate OCR noise
 # (similarity >= fuzzy_min); the first amount after a label, on its line or the next, is its value.
-version: 3
+version: 4
 fuzzy_min: 0.84
 ocr: { dpi: 200, lang: deu, psm: 4 }
 
 classify:            # first rule whose phrases all occur (lower-cased) decides; order matters
+  - { kind: audit,      all: ["prüfungsanordnung"] }
   - { kind: gewst,      all: ["gewerbesteuerbescheid"] }
   - { kind: gewst,      all: ["hebesatz", "gewerbesteuer"], none: ["messbetrag wird der gemeinde mitgeteilt"] }
   - { kind: gewst_mess, all: ["gewerbesteuermessbetrag"] }
-  - { kind: audit,      all: ["prüfungsanordnung"] }
-  - { kind: reminder,   all: ["erinnerung", "steuererklärung"] }
+  - { kind: reminder,   all: ["erinnerung", "steuererklärung"], none_head: ["bescheid für", "bescheid über"] }
   - { kind: request,    all: ["anforderung von unterlagen"] }
   - { kind: request,    all: ["bitte ich sie", "einzureichen"] }
   - { kind: vz_est,     all: ["vorauszahlungen zur einkommensteuer"] }
@@ -37,6 +37,8 @@ fields:
     lst_kist: { section: "Abrechnung Kirchensteuer", labels: ["abzüglich Steuerabzugsbeträge"] }
     rest_kist: { section: "Abrechnung Kirchensteuer", labels: ["verbleibende Beträge"] }
     zinsen_est: { labels: ["Zinsen zur Einkommensteuer"], optional: true }
+    vz_soli: { labels: [], optional: true }
+    vz_kist: { labels: [], optional: true }
   kst:
     einkommen: ["zu versteuerndes Einkommen"]
     kst: { section: "Festsetzung", labels: ["Körperschaftsteuer"] }
@@ -44,6 +46,7 @@ fields:
     vz_kst: { section: "Abrechnung Körperschaftsteuer", labels: ["abzüglich Vorauszahlungen"] }
     rest_kst: { section: "Abrechnung Körperschaftsteuer", labels: ["verbleibende Beträge"] }
     zinsen_kst: { labels: ["Zinsen zur Körperschaftsteuer"], optional: true }
+    vz_soli: { labels: [], optional: true }
   ust:
     umsatz_19: ["steuerpflichtige Umsätze zu 19 %"]
     umsatz_7: ["steuerpflichtige Umsätze zu 7 %"]
@@ -74,3 +77,85 @@ model:               # used only for scans the rules could not confirm; accepted
   model: haiku
   prompt: prompts/extract_v1.md
   budget_usd: 0.05
+
+# The layout reader: used when the labels above do not give values the notice's arithmetic confirms. It reads
+# any layout by what each amount is labelled with: column tables (taxes side by side), lines, sentences.
+layout:
+  columns:            # header words that name a column; a line naming one of them sets the column below it
+    est: [Einkommensteuer]
+    soli: [Solidaritätszuschlag, Solidaritätszuschl, Soli]
+    kist: [Kirchensteuer, Kirchenst]
+    kst: [Körperschaftsteuer]
+    messbetrag: [Steuermessbetrag, Messbetrag, Gewerbesteuermessbetrag]
+    hebesatz: [Hebesatz, Hebesatzes]
+    gewst: [Gewerbesteuer]
+  roles:              # what a label says an amount is; the longest match in a label wins
+    tax: [festgesetzt, festgesetzte, festgesetzter, festgesetzt werden, festzusetzende, Steuer, Betrag der Steuer]
+    lst: [Steuerabzug vom Lohn, Steuerabzugsbeträge, Lohnsteuer, einbehaltene Steuerabzugsbeträge, Abzugsteuern,
+          anzurechnen, anzurechnende, angerechnet, angerechnete, Anrechnung]
+    vz: [Vorauszahlungen, Vorauszahlung, Vorauszahlungssoll, bisher festgesetzt, bereits festgesetzt,
+         bisher festgesetzt und gezahlt, bereits gezahlt, bisher gezahlt, geleistete Zahlungen, Voranmeldungen]
+    rest: [verbleibende, verbleibender, verbleibend, verbleiben, Abschlusszahlung, Nachzahlung, noch zu zahlen,
+           Restbetrag, zu zahlen, Unterschied zu Ihren Lasten, Zahllast verbleibend, Saldo, Differenz]
+    refund: [Erstattung, erstattet, zu erstatten, Überzahlung, zu Ihren Gunsten, Guthaben]
+    year: [Jahresbetrag, Summe der Vorauszahlungen]
+  suffix_rest: ["fällig", "zur zahlung", "zu zahlen", "zahlbar"]   # after an amount without a label
+  fields:             # (role.column) -> field; column "-" when none applies
+    est: {tax.est: est, tax.soli: soli, tax.kist: kist, lst.est: lst_est, lst.soli: lst_soli, lst.kist: lst_kist,
+          vz.est: vz_est, vz.soli: vz_soli, vz.kist: vz_kist, rest.est: rest_est, rest.soli: rest_soli,
+          rest.kist: rest_kist, rest.-: rest_est, vz.-: vz_est, lst.-: lst_est}
+    kst: {tax.kst: kst, tax.soli: soli, vz.kst: vz_kst, vz.soli: vz_soli, rest.kst: rest_kst, rest.soli: rest_soli,
+          rest.-: rest_kst, vz.-: vz_kst}
+    ust: {vz.-: vz_ust, rest.-: rest_ust}
+    gewst: {tax.-: gewst, tax.gewst: gewst, vz.-: vz_gewst, vz.gewst: vz_gewst, rest.-: rest_gewst,
+            rest.gewst: rest_gewst}
+    vz_est: {quarter.est: vz_quartal}
+  lines:              # labels that name a field outright; they compete with roles on length
+    est:
+      zu versteuerndes Einkommen: zve
+      Einkünfte aus nichtselbständiger Arbeit: einkuenfte_nsa
+      Einkünfte aus Gewerbebetrieb: einkuenfte_gewerbe
+      Einkünfte aus Vermietung und Verpachtung: einkuenfte_vuv
+      Summe der Einkünfte: summe_einkuenfte
+      Gesamtbetrag der Einkünfte: summe_einkuenfte
+      Sonderausgaben: sonderausgaben
+      außergewöhnliche Belastungen: agb
+      Zinsen zur Einkommensteuer: zinsen_est
+    kst:
+      zu versteuerndes Einkommen: einkommen
+      Zinsen zur Körperschaftsteuer: zinsen_kst
+    ust:
+      steuerpflichtige Umsätze zu 19: umsatz_19
+      Umsätze zum allgemeinen Steuersatz: umsatz_19
+      steuerpflichtige Umsätze zu 7: umsatz_7
+      Umsätze zum ermäßigten Steuersatz: umsatz_7
+      Umsatzsteuer: ust
+      Steuer auf die Umsätze: ust
+      Vorsteuer: vorsteuer
+      abziehbare Vorsteuerbeträge: vorsteuer
+      Zahllast: zahllast
+      verbleibende Umsatzsteuer: zahllast
+      festgesetzte Umsatzsteuer: zahllast
+      Zinsen zur Umsatzsteuer: zinsen_ust
+    gewst_mess:
+      Gewinn aus Gewerbebetrieb: gewinn
+      Hinzurechnungen: hinzurechnungen
+      Kürzungen: kuerzungen
+      Gewerbeertrag: gewerbeertrag
+      Freibetrag: freibetrag
+      Steuermessbetrag: messbetrag
+    vz_est:
+      Vorauszahlung je Quartal: vz_quartal
+      vierteljährlich: vz_quartal
+    any:
+      Zinsen nach § 233a AO: zinsen
+      Zinsen (§ 233a AO): zinsen
+      Nachzahlungszinsen: zinsen
+      Erstattungszinsen: zinsen
+  zero_if_absent:     # real notices leave out lines that are zero; the arithmetic still has to hold
+    est: [einkuenfte_nsa, einkuenfte_gewerbe, einkuenfte_vuv, sonderausgaben, agb, soli, kist, lst_est, vz_est,
+          lst_soli, vz_soli, rest_soli, lst_kist, vz_kist, rest_kist]
+    kst: [vz_kst, vz_soli]
+    ust: [umsatz_7, vz_ust]
+    gewst_mess: [hinzurechnungen, kuerzungen]
+    gewst: [vz_gewst]

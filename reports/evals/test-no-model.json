@@ -1,21 +1,21 @@
 {
  "counts": {
   "notices": 230,
-  "action_right": 194,
+  "action_right": 214,
   "kind_total": 221,
   "kind_right": 218,
   "deadline_total": 220,
   "deadline_exact": 219,
-  "review": 36,
   "truth_close": 84,
-  "auto_closed": 59,
+  "auto_closed": 73,
+  "review": 16,
   "early_deadlines": 1,
   "deadline_missing": 1
  },
  "metrics": {
-  "action_accuracy": 0.8435,
-  "review_rate": 0.1565,
-  "auto_close_rate": 0.7024,
+  "action_accuracy": 0.9304,
+  "review_rate": 0.0696,
+  "auto_close_rate": 0.869,
   "kind_accuracy": 0.9864,
   "deadline_exact": 0.9955,
   "late_deadlines": 0,
@@ -26,8 +26,8 @@
   "error_recall": 1.0,
   "error_precision": 1.0,
   "retrieval_recall_at_3": 1.0,
-  "town_review_first_notice": 0.9167,
-  "town_review_later_notices": 0.4286
+  "town_review_first_notice": 0.4167,
+  "town_review_later_notices": 0.2381
  },
  "by_channel": {
   "client_upload": {
@@ -42,8 +42,8 @@
   },
   "municipal_post": {
    "notices": 30,
-   "action_accuracy": 0.3333,
-   "review_rate": 0.6667
+   "action_accuracy": 0.6667,
+   "review_rate": 0.3333
   },
   "portal": {
    "notices": 92,
@@ -52,34 +52,34 @@
   },
   "post": {
    "notices": 99,
-   "action_accuracy": 0.8384,
-   "review_rate": 0.1616
+   "action_accuracy": 0.9394,
+   "review_rate": 0.0606
   }
  },
  "confusion": {
-  "close -> close": 59,
-  "close -> review": 25,
+  "close -> close": 73,
+  "close -> review": 11,
   "duplicate -> duplicate": 6,
   "inform_client -> inform_client": 36,
   "inform_client -> review": 1,
   "misrouted -> misrouted": 3,
-  "objection_required -> objection_required": 6,
-  "objection_required -> review": 3,
-  "objection_review -> objection_review": 16,
-  "objection_review -> review": 6,
+  "objection_required -> objection_required": 8,
+  "objection_required -> review": 1,
+  "objection_review -> objection_review": 20,
+  "objection_review -> review": 2,
   "task -> review": 1,
   "task -> task": 68
  },
  "examples": {
   "wrong_action": [
-   "n00440",
-   "n00345",
-   "n00426",
    "n00438",
    "n00240",
-   "n00252",
    "n00310",
-   "n00347"
+   "n00371",
+   "n00403",
+   "n00357",
+   "n00457",
+   "n00373"
   ],
   "early_deadlines": [
    "n00371"
@@ -88,14 +88,14 @@
    "n00281"
   ]
  },
- "ran_at": "2026-11-03T17:15:42+00:00",
+ "ran_at": "2026-11-03T17:34:06+00:00",
  "split": "test",
  "notices": 230,
- "seconds": 16.4,
+ "seconds": 14.5,
  "model_calls": 0,
  "model_cost_usd": 0,
  "versions": {
   "rules": 3,
-  "extraction": 3
+  "extraction": 4
  }
 }

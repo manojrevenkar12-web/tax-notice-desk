@@ -11,8 +11,13 @@ from ..drafts import claude_cli
 from .parse import Parsed, _spec, verify
 
 
+def _asked(kind: str) -> dict[str, Any]:
+    """The fields the model is asked for: those with labels (vz_soli, vz_kist are only for the layout reader)."""
+    return {k: v for k, v in config.load("extraction")["fields"][kind].items() if _spec(v)["labels"]}
+
+
 def schema(kind: str) -> dict[str, Any]:
-    fields = config.load("extraction")["fields"][kind]
+    fields = _asked(kind)
     props: dict[str, Any] = {
         k: {"type": ["integer", "null"], "description": "cents; hebesatz as percent x 100"} for k in fields
     }
@@ -23,7 +28,7 @@ def read_with_model(p: Parsed, text: str) -> tuple[Parsed | None, dict[str, Any]
     cfg = config.load("extraction").get("model", {})
     if not cfg.get("enabled") or p.kind not in config.load("extraction")["fields"]:
         return None, {"calls": 0}
-    labels = {k: _spec(v)["labels"] for k, v in config.load("extraction")["fields"][p.kind].items()}
+    labels = {k: _spec(v)["labels"] for k, v in _asked(p.kind or "").items()}
     system = (config.ROOT / cfg["prompt"]).read_text()
     user = f"Kind of notice: {p.kind}\nFields and the usual labels: {labels}\n\nOCR text:\n{text[:6000]}"
     try:

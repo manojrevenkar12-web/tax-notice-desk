@@ -42,7 +42,8 @@ estimate.
 
 The notice is for the client whose tax number it carries. Tax numbers compare by their digits only
 (`27/123/45678` and `2712345678` are the same). A notice whose tax number no client of the group has is
-`misrouted`. A second copy of a notice already on the desk (same client, kind, tax year and notice date) is a
+`misrouted`; the desk still computes its deadline from the notice, so whoever it is passed on to knows the
+date. A second copy of a notice already on the desk (same client, kind, tax year and notice date) is a
 `duplicate` of the first one.
 
 ## When a notice counts as received (Bekanntgabe)
@@ -76,8 +77,10 @@ both ways (post and portal, with the notice date as the posting and availability
   (AO § 108 Abs. 3).
 - If the notice has **no instructions on how to object** (no Rechtsbehelfsbelehrung), the period is one year
   (AO § 356 Abs. 2). When the desk read a scan and could not find the instructions, it cannot tell a missing
-  passage from a badly read one, so it keeps one month (earlier) and notes the year.
-- A `request` or `reminder` sets its own date: the deadline is that date, as written (not moved).
+  passage from a badly read one, so it keeps one month (earlier) and notes the year. Paper mail (`post`,
+  `municipal_post`) always reaches the desk as a scan.
+- A `request` or `reminder` sets its own date: the deadline is that date, as written (not moved). A date
+  before the notice's own date is an earlier deadline it recalls, not the one it sets.
 - An `audit` order's deadline is the objection period; the audit start date is recorded separately.
 - **Holidays**: a day counts as a holiday only if it is a statutory holiday both in the Land of the firm and in
   the Land of the authority (for a municipality, its own Land; for a tax office, the client's Land). This keeps
@@ -104,7 +107,8 @@ interest the same way (negative). The notice's interest is wrong if it differs f
 - trade tax = Messbetrag × Hebesatz ÷ 100, to the cent; the notice is wrong if it differs by more than 1 €.
 
 **The notice's own arithmetic** must hold for its values to be trusted (for example, remaining amount = tax −
-withholding − prepayments). Values the desk cannot confirm this way are not used to close anything.
+withholding − prepayments). Values the desk cannot confirm this way are not used to close anything. A notice from the tax office whose
+printed figures do not compute is `review` with the error `arithmetic`.
 
 ## What happens with the notice (action)
 

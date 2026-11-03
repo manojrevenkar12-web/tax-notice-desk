@@ -136,6 +136,9 @@ def objection_deadline(
     elif remedy == "Widerspruch":
         months = rcfg["municipal_widerspruch_months"]
         rules.append("VwGO § 70 Abs. 1")
+    elif remedy == "Klage":
+        months = rcfg["municipal_klage_months"]
+        rules.append("VwGO § 74 Abs. 1")
     else:
         months = rcfg["default_months"]
         rules.append("AO § 355 Abs. 1")

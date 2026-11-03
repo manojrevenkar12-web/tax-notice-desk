@@ -178,6 +178,8 @@ def process(g: Group, nid: str, folder: Path, meta: dict[str, Any], use_model: b
     muni_guess = municipality(extract(first), first.text) if "hebesatz" in first.text.lower() else None
     memory = g.memory.get(muni_guess or "", {})
     r, p, trail = read_notice(pdf, xml if xml.exists() else None, memory, use_model)
+    # paper mail always reaches the desk as a scan, even when its text layer reads cleanly
+    scanned = r.source == "ocr" or meta.get("channel") in ("post", "municipal_post")
     if p.kind in ASSESSED + ("gewst",) and not p.tax_year:
         p.verified, p.failed_checks = False, [*p.failed_checks, "tax year not read"]
     cid, how = route(g, p, r.text)
@@ -220,9 +222,7 @@ def process(g: Group, nid: str, folder: Path, meta: dict[str, Any], use_model: b
         else:
             if meta["channel"] == "client_upload":  # how the original arrived is unknown: take the earlier date
                 options = [
-                    objection_deadline(
-                        ch, posted, lnd, p.appeal_instructions or r.source == "ocr", p.remedy, posted, posted
-                    )
+                    objection_deadline(ch, posted, lnd, p.appeal_instructions or scanned, p.remedy, posted, posted)
                     for ch in ("post", "portal")
                 ]
                 dl = min(options, key=lambda x: x.due)
@@ -232,7 +232,7 @@ def process(g: Group, nid: str, folder: Path, meta: dict[str, Any], use_model: b
                 )
             else:
                 # a scan where the instructions were not found may just be badly read: assume one month
-                instructions = p.appeal_instructions or r.source == "ocr"
+                instructions = p.appeal_instructions or scanned
                 dl = objection_deadline(
                     meta["channel"],
                     posted,
@@ -243,7 +243,7 @@ def process(g: Group, nid: str, folder: Path, meta: dict[str, Any], use_model: b
                     _date(meta.get("notified_at")),
                     _date(meta.get("postmark")),
                 )
-        if not p.appeal_instructions and r.source == "ocr" and p.kind not in ("request", "reminder"):
+        if not p.appeal_instructions and scanned and p.kind not in ("request", "reminder"):
             dl.notes.append(
                 "instructions on how to object not found in the scan: one month assumed; if they are "
                 "really missing, the period is a year (AO § 356 Abs. 2)"
@@ -281,6 +281,15 @@ def process(g: Group, nid: str, folder: Path, meta: dict[str, Any], use_model: b
         findings.append(
             checks.Finding("estimate", detail="estimated because no return was filed (AO § 162)", sources=["AO § 162"])
         )
+    if p.does_not_compute and r.source == "text" and (p.kind in ASSESSED or p.kind == "gewst"):
+        # a clean text layer, every figure read, and the printed figures still do not compute: the notice is wrong
+        findings.append(
+            checks.Finding(
+                "arithmetic",
+                detail="the notice's own figures do not compute (" + ", ".join(p.failed_checks) + ")",
+                sources=["AO § 129" if p.kind != "gewst" else "AO § 129 i. V. m. § 1 Abs. 2 Nr. 3"],
+            )
+        )
     out["findings"] = [f.as_dict() for f in findings]
     no_return_only = [f for f in findings if f.type == "no_return"]
     unread_taxno = cid is None and not p.steuernummer
@@ -300,6 +309,8 @@ def process(g: Group, nid: str, folder: Path, meta: dict[str, Any], use_model: b
         d.action, d.reasons = "review", ["tax number not readable: a person assigns the notice"]
     elif no_return_only and d.action not in ("duplicate", "misrouted"):
         d.action, d.reasons = "review", ["no filed return on record to compare with"]
+    if p.kind == "gewst" and d.action == "review" and any(f.type == "arithmetic" for f in findings) and cid:
+        d.action, d.reasons = "objection_required", ["the town's own figures do not compute"]
     out["action"], out["reasons"], out["tax_effect"], out["duplicate_of"] = d.action, d.reasons, effect, dup
     out["vorbehalt"], out["vorlaeufig"] = p.vorbehalt, p.vorlaeufig
     if d.action in ("objection_review", "objection_required", "inform_client") and findings:
