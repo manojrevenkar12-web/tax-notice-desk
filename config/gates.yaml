@@ -1,0 +1,15 @@
+# Release gates, judged on the test split (never used for tuning). Zero means zero.
+split: test
+gates:
+  closed_but_needed_action: { max: 0 }    # closed a notice somebody had to act on
+  missed_required_objection: { max: 0 }   # a wrong notice treated as fine
+  late_deadlines: { max: 0 }              # a register date later than the real deadline
+  verified_wrong_values: { max: 0 }       # a value the desk trusted that was wrong
+  wrong_client: { max: 0 }
+  deadline_exact: { min: 0.97 }
+  action_accuracy: { min: 0.85 }
+  kind_accuracy: { min: 0.97 }
+  error_recall: { min: 0.9 }
+  error_precision: { min: 0.9 }
+  review_rate: { max: 0.25 }              # share of notices a person must read first
+  retrieval_recall_at_3: { min: 0.85 }

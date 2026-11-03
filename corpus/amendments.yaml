@@ -1,0 +1,62 @@
+# The law texts in corpus/laws are the consolidated versions published in the bundestag/gesetze repository
+# (each file names its last amendment, mid to late 2021). Changes since then are listed here: with the new text
+# where it is needed for deadlines and interest, otherwise as a marker, so that the desk never presents an
+# outdated text as the law for a later year.
+amended:
+  - law: AO
+    section: "§ 122"
+    paragraph: "(2)"
+    from: "2025-01-01"
+    by: "Art. 20 Postrechtsmodernisierungsgesetz v. 15.07.2024, BGBl. 2024 I Nr. 236"
+    text: >-
+      (2) Ein schriftlicher Verwaltungsakt, der durch die Post übermittelt wird, gilt als bekannt gegeben
+      1. bei einer Übermittlung im Inland am vierten Tage nach der Aufgabe zur Post,
+      2. bei einer Übermittlung im Ausland einen Monat nach der Aufgabe zur Post,
+      außer wenn er nicht oder zu einem späteren Zeitpunkt zugegangen ist; im Zweifel hat die Behörde den Zugang
+      des Verwaltungsakts und den Zeitpunkt des Zugangs nachzuweisen.
+  - law: AO
+    section: "§ 122a"
+    paragraph: "(4)"
+    from: "2025-01-01"
+    by: "Postrechtsmodernisierungsgesetz v. 15.07.2024, BGBl. 2024 I Nr. 236"
+    text: >-
+      (4) Ein zum Abruf bereitgestellter Verwaltungsakt gilt am vierten Tag nach Absendung der elektronischen
+      Benachrichtigung über die Bereitstellung der Daten an die abrufberechtigte Person als bekannt gegeben. Im
+      Zweifel hat die Behörde den Zugang der Benachrichtigung nachzuweisen. Kann die Finanzbehörde den von der
+      abrufberechtigten Person bestrittenen Zugang der Benachrichtigung nicht nachweisen, gilt der Verwaltungsakt
+      an dem Tag als bekannt gegeben, an dem die abrufberechtigte Person den Datenabruf durchgeführt hat. Das
+      Gleiche gilt, wenn die abrufberechtigte Person unwiderlegbar vorträgt, die Benachrichtigung nicht innerhalb
+      von vier Tagen nach der Absendung erhalten zu haben.
+  - law: AO
+    section: "§ 122a"
+    paragraph: "(4)"
+    from: "2026-01-01"
+    by: "Art. 3 Viertes Bürokratieentlastungsgesetz v. 23.10.2024, BGBl. 2024 I Nr. 323; BMF v. 13.08.2026"
+    text: >-
+      (4) Ein zum Abruf bereitgestellter Verwaltungsakt gilt am vierten Tag nach der Bereitstellung zum Abruf als
+      bekannt gegeben. Im Zweifel hat die Behörde den Zeitpunkt der Bereitstellung zum Abruf nachzuweisen.
+  - law: AO
+    section: "§ 238"
+    paragraph: "(1a)"
+    from: "2019-01-01"
+    by: "Zweites Gesetz zur Änderung der Abgabenordnung und des Einführungsgesetzes zur Abgabenordnung v. 12.07.2022, BGBl. I 2022, 1142"
+    text: >-
+      (1a) In den Fällen des § 233a betragen die Zinsen abweichend von Absatz 1 Satz 1 ab dem 1. Januar 2019
+      0,15 Prozent für jeden Monat, das heißt 1,8 Prozent für jedes Jahr.
+  - law: AO
+    section: "§ 238"
+    paragraph: "(1b)"
+    from: "2019-01-01"
+    by: "Zweites Gesetz zur Änderung der Abgabenordnung und des Einführungsgesetzes zur Abgabenordnung v. 12.07.2022, BGBl. I 2022, 1142"
+    text: >-
+      (1b) Sind für einen Zinslauf unterschiedliche Zinssätze maßgeblich, ist der Zinslauf in
+      Teilverzinsungszeiträume aufzuteilen. Die Zinsen für die Teilverzinsungszeiträume sind jeweils tageweise zu
+      berechnen. Hierbei wird jeder Kalendermonat unabhängig von der tatsächlichen Anzahl der Kalendertage mit 30
+      Zinstagen und jedes Kalenderjahr mit 360 Tagen gerechnet.
+
+changed_without_text:   # the corpus text is outdated for these, from the date given
+  - { law: EStG, section: "§ 4", from: "2023-01-01", by: "Jahressteuergesetz 2022 (häusliches Arbeitszimmer, Tagespauschale: Abs. 5 Satz 1 Nr. 6b, 6c)" }
+  - { law: EStG, section: "§ 4", from: "2024-01-01", by: "Wachstumschancengesetz, BGBl. 2024 I Nr. 108 (Geschenke: Abs. 5 Satz 1 Nr. 1)" }
+  - { law: EStG, section: "§ 9", from: "2022-01-01", by: "Steuerentlastungsgesetz 2022 (Entfernungspauschale ab dem 21. Kilometer)" }
+  - { law: EStG, section: "§ 9a", from: "2023-01-01", by: "Jahressteuergesetz 2022 (Arbeitnehmer-Pauschbetrag)" }
+  - { law: AO, section: "§ 122a", from: "2026-01-01", by: "Viertes Bürokratieentlastungsgesetz (Abs. 1 bis 3: Bekanntgabe ohne Einwilligung)" }

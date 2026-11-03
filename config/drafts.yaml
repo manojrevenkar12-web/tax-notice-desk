@@ -1,0 +1,6 @@
+version: 1
+model:            # may reword the template; the verifier decides whether its text is used
+  enabled: true
+  model: haiku
+  prompt: prompts/draft_v1.md
+  budget_usd: 0.05

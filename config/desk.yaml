@@ -1,0 +1,13 @@
+database:
+  owner_url: postgresql://postgres@127.0.0.1:5544/tnd
+  app_url: postgresql://tnd_app:tnd_app@127.0.0.1:5544/tnd
+auth:
+  issuer: tax-notice-desk
+  token_minutes: 480
+  dev_secret: dev-only-secret-change-me   # refused when TND_ENV=production
+permissions:       # role -> actions
+  clerk: [read, correct, confirm_deadline, decide_simple]
+  advisor: [read, correct, confirm_deadline, decide_simple, decide_objection, release_draft]
+  mailroom: [route]
+  group_ops: [metrics]
+simple_decisions: [close, inform_client, task_done, duplicate]

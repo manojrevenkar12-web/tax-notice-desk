@@ -1,0 +1,106 @@
+# The simulated group of tax firms and the notices that reach it. Read only by tnd/sim and tnd/evals.
+# Hebesätze are illustrative values in the range the cities published for 2025; check before relying on them.
+seed: 20261103
+
+splits:                     # each split is a stretch of incoming mail
+  dev:     { start: "2026-10-26", end: "2026-11-27" }
+  test:    { start: "2026-11-30", end: "2027-01-08" }
+  heldout: { start: "2027-01-11", end: "2027-02-12" }
+
+firms:
+  - { id: f-spree,  name: "Kanzlei Spreebogen Steuerberatung", city: Berlin,  land: BE, clients: 26 }
+  - { id: f-isar,   name: "Isartal Steuerberater PartG",      city: München, land: BY, clients: 24 }
+  - { id: f-dom,    name: "Domblick Steuerkanzlei",           city: Köln,    land: NW, clients: 24 }
+  - { id: f-pleisse, name: "Pleiße Treuhand Steuerberatung",  city: Leipzig, land: SN, clients: 22 }
+
+municipalities:             # GewSt is assessed by the town; layout = how its notices look
+  - { id: berlin,     name: "Berlin",               land: BE, hebesatz: 410, remedy: Einspruch,   digital_share: 0.3 }
+  - { id: muenchen,   name: "Landeshauptstadt München", land: BY, hebesatz: 490, remedy: Widerspruch, digital_share: 0.2 }
+  - { id: gruenwald,  name: "Gemeinde Grünwald",    land: BY, hebesatz: 240, remedy: Widerspruch, digital_share: 0.0 }
+  - { id: garching,   name: "Stadt Garching b. München", land: BY, hebesatz: 280, remedy: Widerspruch, digital_share: 0.0 }
+  - { id: koeln,      name: "Stadt Köln",           land: NW, hebesatz: 475, remedy: Widerspruch, digital_share: 0.25 }
+  - { id: monheim,    name: "Stadt Monheim am Rhein", land: NW, hebesatz: 250, remedy: Widerspruch, digital_share: 0.5 }
+  - { id: leverkusen, name: "Stadt Leverkusen",     land: NW, hebesatz: 250, remedy: Widerspruch, digital_share: 0.0 }
+  - { id: bonn,       name: "Bundesstadt Bonn",     land: NW, hebesatz: 490, remedy: Widerspruch, digital_share: 0.0 }
+  - { id: leipzig,    name: "Stadt Leipzig",        land: SN, hebesatz: 460, remedy: Widerspruch, digital_share: 0.1 }
+  - { id: markkleeberg, name: "Stadt Markkleeberg", land: SN, hebesatz: 400, remedy: Widerspruch, digital_share: 0.0 }
+  - { id: potsdam,    name: "Landeshauptstadt Potsdam", land: BB, hebesatz: 450, remedy: Widerspruch, digital_share: 0.0 }
+  - { id: schoenefeld, name: "Gemeinde Schönefeld", land: BB, hebesatz: 240, remedy: Widerspruch, digital_share: 0.0 }
+
+finanzaemter:
+  BE: ["Finanzamt Charlottenburg", "Finanzamt Prenzlauer Berg", "Finanzamt Mitte/Tiergarten"]
+  BY: ["Finanzamt München", "Finanzamt Freising"]
+  NW: ["Finanzamt Köln-Mitte", "Finanzamt Köln-Süd", "Finanzamt Bonn-Innenstadt"]
+  SN: ["Finanzamt Leipzig I", "Finanzamt Leipzig II"]
+  BB: ["Finanzamt Potsdam", "Finanzamt Königs Wusterhausen"]
+
+clients:
+  company_share: 0.35            # GmbHs: KSt, USt, GewSt
+  trader_share: 0.30             # of persons: Einzelunternehmer with GewSt
+  church_tax_share: 0.45
+  other_municipality_share: 0.35 # businesses outside the firm's own city
+
+mail:                            # notices per client per split, by kind
+  per_client: 2.4
+  kinds:                         # relative weights
+    est: 30
+    kst: 6
+    ust: 10
+    gewst_mess: 9
+    gewst: 16
+    vz_est: 6
+    request: 4                   # Anforderung von Unterlagen (deadline set by the office)
+    reminder: 3                  # Erinnerung an eine fehlende Erklärung
+    audit: 2                     # Prüfungsanordnung
+    estimate: 2                  # Schätzungsbescheid: no return was filed
+  tax_years: { 2025: 0.55, 2024: 0.3, 2023: 0.15 }
+  misdelivered: 0.03             # scanned in the group mailroom, client of another firm
+  unknown_client: 0.015          # nobody in the group knows this tax number
+  no_appeal_notice: 0.02         # Rechtsbehelfsbelehrung missing: one year instead of a month
+  vorbehalt: 0.35                # § 164 AO
+  vorlaeufig: 0.25               # § 165 AO
+  postmark_late: 0.04            # envelope stamped later than the notice date
+  duplicate_copy: 0.06           # the client forwards a copy of a notice the firm already has
+
+channels:                        # how a Finanzamt notice arrives, by issue date
+  diva_share_until_2026: 0.45    # opt-in electronic notices (§ 122a AO with consent)
+  diva_share_from_2027: 0.92     # electronic by default (§ 122a Abs. 1 Satz 2 AO from 2027)
+  scan_quality: { good: 0.6, fair: 0.3, poor: 0.1 }
+
+deviations:                      # how often an assessment differs from the filed return
+  est: 0.42
+  kst: 0.30
+  ust: 0.25
+  gewst_mess: 0.25
+  in_favour_share: 0.25          # of deviations, the office deviates in the client's favour
+  unexplained_share: 0.12        # the office changes a figure without saying why
+municipal_errors:                # mistakes made by towns
+  wrong_hebesatz: 0.08
+  stale_messbetrag: 0.10         # an older Messbescheid used after it was changed
+  arithmetic: 0.05
+interest_errors: 0.06            # interest computed with the wrong number of months
+
+# Reasons a Finanzamt gives for deviating; the text is what appears on the notice.
+reasons:
+  est:
+    - { id: arbeitszimmer, field: einkuenfte_nsa, against: true, text: "Die Aufwendungen für das häusliche Arbeitszimmer wurden nur mit der Tagespauschale berücksichtigt, da die Tätigkeit nicht überwiegend in der häuslichen Wohnung ausgeübt wurde.", cite: ["EStG § 4", "EStG § 9"] }
+    - { id: fahrtkosten, field: einkuenfte_nsa, against: true, text: "Die Fahrtkosten zwischen Wohnung und erster Tätigkeitsstätte wurden mit der Entfernungspauschale angesetzt. Die kürzeste Straßenverbindung beträgt weniger Kilometer als erklärt.", cite: ["EStG § 9"] }
+    - { id: arbeitsmittel, field: einkuenfte_nsa, against: true, text: "Aufwendungen für Arbeitsmittel konnten mangels Nachweis nicht berücksichtigt werden.", cite: ["EStG § 9", "AO § 90"] }
+    - { id: spenden, field: sonderausgaben, against: true, text: "Zuwendungen wurden nur berücksichtigt, soweit Zuwendungsbestätigungen vorliegen.", cite: ["EStG § 10b"] }
+    - { id: kinderbetreuung, field: sonderausgaben, against: true, text: "Bar gezahlte Kinderbetreuungskosten sind nicht abziehbar; berücksichtigt wurden nur unbar gezahlte Beträge.", cite: ["EStG § 10"] }
+    - { id: krankheit, field: agb, against: true, text: "Krankheitskosten wurden um die zumutbare Belastung gekürzt.", cite: ["EStG § 33"] }
+    - { id: anschaffungsnah, field: einkuenfte_vuv, against: true, text: "Die Instandsetzungsaufwendungen innerhalb von drei Jahren nach Anschaffung übersteigen 15 % der Anschaffungskosten des Gebäudes und wurden als anschaffungsnahe Herstellungskosten über die AfA verteilt.", cite: ["EStG § 6", "EStG § 7"] }
+    - { id: bewirtung, field: einkuenfte_gewerbe, against: true, text: "Bewirtungsaufwendungen sind nur zu 70 % als Betriebsausgaben abziehbar.", cite: ["EStG § 4"] }
+    - { id: pauschbetrag, field: einkuenfte_nsa, against: false, text: "Anstelle der geringeren erklärten Werbungskosten wurde der Arbeitnehmer-Pauschbetrag angesetzt.", cite: ["EStG § 9a"] }
+    - { id: verlustvortrag, field: einkuenfte_gewerbe, against: false, text: "Der verbleibende Verlustvortrag aus dem Vorjahr wurde berücksichtigt.", cite: ["EStG § 10d"] }
+  kst:
+    - { id: vga, field: einkommen, against: true, text: "Die Zahlungen an den Gesellschafter-Geschäftsführer sind als verdeckte Gewinnausschüttung dem Einkommen hinzugerechnet worden.", cite: ["KStG § 8"] }
+    - { id: geschenke, field: einkommen, against: true, text: "Aufwendungen für Geschenke an Geschäftsfreunde oberhalb der Freigrenze sind nicht abziehbar.", cite: ["EStG § 4", "KStG § 8"] }
+    - { id: spenden_kst, field: einkommen, against: false, text: "Zuwendungen wurden im Rahmen der Höchstbeträge zusätzlich berücksichtigt.", cite: ["KStG § 9"] }
+  ust:
+    - { id: vorsteuer_rechnung, field: vorsteuer, against: true, text: "Der Vorsteuerabzug wurde versagt, soweit keine ordnungsgemäßen Rechnungen vorlagen.", cite: ["UStG § 15", "UStG § 14"] }
+    - { id: steuersatz, field: umsatz_19, against: true, text: "Umsätze wurden dem allgemeinen Steuersatz unterworfen; die Voraussetzungen des ermäßigten Steuersatzes liegen nicht vor.", cite: ["UStG § 12"] }
+  gewst_mess:
+    - { id: hinzurechnung_miete, field: hinzurechnungen, against: true, text: "Miet- und Pachtzinsen für unbewegliche Wirtschaftsgüter wurden mit dem gesetzlichen Anteil hinzugerechnet.", cite: ["GewStG § 8"] }
+    - { id: kuerzung_grundbesitz, field: kuerzungen, against: false, text: "Die Kürzung für Grundbesitz wurde berücksichtigt.", cite: ["GewStG § 9"] }
+  unexplained: "Die Besteuerungsgrundlagen weichen von der Steuererklärung ab."

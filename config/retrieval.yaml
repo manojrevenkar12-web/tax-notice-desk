@@ -1,0 +1,16 @@
+# Retrieval for explanations. Field hints are the sections a tax adviser looks at first when a figure changes.
+k: 5
+weights: { cited: 1.5, field_hint: 0.35, playbook: 1.1, history: 0.9 }
+field_hints:
+  einkuenfte_nsa: ["EStG § 9", "EStG § 9a", "EStG § 19"]
+  einkuenfte_gewerbe: ["EStG § 4", "EStG § 15", "EStG § 10d"]
+  einkuenfte_vuv: ["EStG § 21", "EStG § 6", "EStG § 7"]
+  sonderausgaben: ["EStG § 10", "EStG § 10b"]
+  agb: ["EStG § 33"]
+  einkommen: ["KStG § 8", "KStG § 9"]
+  vorsteuer: ["UStG § 15", "UStG § 14"]
+  umsatz_19: ["UStG § 12"]
+  umsatz_7: ["UStG § 12"]
+  hinzurechnungen: ["GewStG § 8"]
+  kuerzungen: ["GewStG § 9"]
+  gewinn: ["GewStG § 7"]

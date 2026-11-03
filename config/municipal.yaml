@@ -1,0 +1,28 @@
+# The group's register of municipal Hebesätze (public information, maintained by the firms).
+# The desk checks every Gewerbesteuerbescheid against it. Illustrative values; keep them current.
+hebesatz:
+  "Berlin": { 2023: 410, 2024: 410, 2025: 410 }
+  "Landeshauptstadt München": { 2023: 490, 2024: 490, 2025: 490 }
+  "Gemeinde Grünwald": { 2023: 240, 2024: 240, 2025: 240 }
+  "Stadt Garching b. München": { 2023: 280, 2024: 280, 2025: 280 }
+  "Stadt Köln": { 2023: 475, 2024: 475, 2025: 475 }
+  "Stadt Monheim am Rhein": { 2023: 250, 2024: 250, 2025: 250 }
+  "Stadt Leverkusen": { 2023: 250, 2024: 250, 2025: 250 }
+  "Bundesstadt Bonn": { 2023: 490, 2024: 490, 2025: 490 }
+  "Stadt Leipzig": { 2023: 460, 2024: 460, 2025: 460 }
+  "Stadt Markkleeberg": { 2023: 400, 2024: 400, 2025: 400 }
+  "Landeshauptstadt Potsdam": { 2023: 450, 2024: 450, 2025: 450 }
+  "Gemeinde Schönefeld": { 2023: 240, 2024: 240, 2025: 240 }
+land:
+  "Berlin": BE
+  "Landeshauptstadt München": BY
+  "Gemeinde Grünwald": BY
+  "Stadt Garching b. München": BY
+  "Stadt Köln": NW
+  "Stadt Monheim am Rhein": NW
+  "Stadt Leverkusen": NW
+  "Bundesstadt Bonn": NW
+  "Stadt Leipzig": SN
+  "Stadt Markkleeberg": SN
+  "Landeshauptstadt Potsdam": BB
+  "Gemeinde Schönefeld": BB

@@ -1,0 +1,45 @@
+# Rules the desk applies. Each one names its source; where the law is not settled, the rule says which
+# reading it takes and why. Deadlines are always the earliest defensible date ("conservative").
+version: 3
+
+bekanntgabe:
+  # When a notice counts as received (Bekanntgabe). Chosen by channel and by the date it was posted or
+  # made available; a version applies from its first day.
+  post:
+    - { from: "1900-01-01", days: 3, source: "AO § 122 Abs. 2 Nr. 1 (bis 31.12.2024)" }
+    - { from: "2025-01-01", days: 4, source: "AO § 122 Abs. 2 Nr. 1 i.d.F. Art. 20 PostModG, BGBl. 2024 I Nr. 236" }
+  post_abroad_months: 1           # AO § 122 Abs. 2 Nr. 2
+  portal:                         # made available for download (DIVA / ELSTER), AO § 122a Abs. 4
+    - { from: "1900-01-01", days: 3, counts_from: notification, source: "AO § 122a Abs. 4 (bis 31.12.2024)" }
+    - { from: "2025-01-01", days: 4, counts_from: notification, source: "AO § 122a Abs. 4 i.d.F. PostModG, BGBl. 2024 I Nr. 236" }
+    - { from: "2026-01-01", days: 4, counts_from: provision, source: "AO § 122a Abs. 4 i.d.F. 4. BEG, BGBl. 2024 I Nr. 323; BMF 13.08.2026" }
+  weekend_shift:
+    post: true                    # BFH III B 85/13 (5.5.2014): the presumed day moves to the next working day (§ 108 Abs. 3 AO)
+    portal: false                 # not settled for § 122a; the register keeps the earlier date and notes the later one
+  postmark: record_only           # a later postmark can rebut the presumption (BFH IX B 95/25), but the register keeps the earlier date
+
+remedy:
+  default_months: 1               # AO § 355 Abs. 1
+  without_instructions_months: 12 # AO § 356 Abs. 2: no or wrong Rechtsbehelfsbelehrung
+  municipal_widerspruch_months: 1 # VwGO § 70 Abs. 1 (Gewerbesteuerbescheid in most Länder)
+  holidays_where: both            # a day is a holiday only if it is one at the firm and at the authority (earlier = safer)
+
+interest:                         # AO §§ 233a, 238, 239
+  rate_per_month:
+    - { from: "2019-01-01", rate: "0.0015", source: "AO § 238 Abs. 1a" }
+  starts_after_months: 15         # AO § 233a Abs. 2 Satz 1
+  base_round_down_to_cents: 5000  # AO § 238 Abs. 2
+  minimum_cents: 1000             # AO § 239 Abs. 2 Satz 2
+  taxes: [est, kst, ust]          # interest the desk recomputes (GewSt interest is set by the town)
+
+gewst:                            # GewStG § 11
+  ertrag_round_down_to_cents: 10000
+  freibetrag_cents: 2450000       # natural persons and partnerships
+  messzahl: "0.035"
+
+tolerance_cents: 100              # rounding differences up to 1 € are not deviations
+
+decide:                           # who acts on a notice; rules decide, models explain
+  objection_materiality_cents: 5000          # tax effect against the client from which an objection is proposed
+  auto_close_requires: [identity, all_fields_read, no_deviation, arithmetic, interest, no_estimate, verified_extraction]
+  task_kinds: [request, reminder, audit]

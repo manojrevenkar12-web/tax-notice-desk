@@ -1,0 +1,76 @@
+# How the desk reads notices. Labels are matched case-insensitively and tolerate OCR noise
+# (similarity >= fuzzy_min); the first amount after a label, on its line or the next, is its value.
+version: 2
+fuzzy_min: 0.84
+ocr: { dpi: 200, lang: deu, psm: 4 }
+
+classify:            # first rule whose phrases all occur (lower-cased) decides; order matters
+  - { kind: gewst,      all: ["gewerbesteuerbescheid"] }
+  - { kind: gewst,      all: ["hebesatz", "gewerbesteuer"], none: ["messbetrag wird der gemeinde mitgeteilt"] }
+  - { kind: gewst_mess, all: ["gewerbesteuermessbetrag"] }
+  - { kind: audit,      all: ["prüfungsanordnung"] }
+  - { kind: reminder,   all: ["erinnerung", "steuererklärung"] }
+  - { kind: request,    all: ["anforderung von unterlagen"] }
+  - { kind: request,    all: ["bitte ich sie", "einzureichen"] }
+  - { kind: vz_est,     all: ["vorauszahlungen zur einkommensteuer"] }
+  - { kind: kst,        all: ["körperschaftsteuer"] }
+  - { kind: ust,        all: ["umsatzsteuer", "vorsteuer"] }
+  - { kind: est,        all: ["einkommensteuer"] }
+
+fields:
+  est:
+    einkuenfte_nsa: ["Einkünfte aus nichtselbständiger Arbeit"]
+    einkuenfte_gewerbe: ["Einkünfte aus Gewerbebetrieb"]
+    einkuenfte_vuv: ["Einkünfte aus Vermietung und Verpachtung"]
+    summe_einkuenfte: ["Summe der Einkünfte"]
+    sonderausgaben: ["Sonderausgaben"]
+    agb: ["außergewöhnliche Belastungen"]
+    zve: ["zu versteuerndes Einkommen"]
+    est: { section: "Festsetzung", labels: ["Einkommensteuer"] }
+    soli: { section: "Festsetzung", labels: ["Solidaritätszuschlag"] }
+    kist: { section: "Festsetzung", labels: ["Kirchensteuer"] }
+    lst_est: { section: "Abrechnung Einkommensteuer", labels: ["abzüglich Steuerabzugsbeträge"] }
+    vz_est: { section: "Abrechnung Einkommensteuer", labels: ["abzüglich Vorauszahlungen"] }
+    rest_est: { section: "Abrechnung Einkommensteuer", labels: ["verbleibende Beträge"] }
+    lst_soli: { section: "Abrechnung Solidaritätszuschlag", labels: ["abzüglich Steuerabzugsbeträge"] }
+    rest_soli: { section: "Abrechnung Solidaritätszuschlag", labels: ["verbleibende Beträge"] }
+    lst_kist: { section: "Abrechnung Kirchensteuer", labels: ["abzüglich Steuerabzugsbeträge"] }
+    rest_kist: { section: "Abrechnung Kirchensteuer", labels: ["verbleibende Beträge"] }
+    zinsen_est: { labels: ["Zinsen zur Einkommensteuer"], optional: true }
+  kst:
+    einkommen: ["zu versteuerndes Einkommen"]
+    kst: { section: "Festsetzung", labels: ["Körperschaftsteuer"] }
+    soli: { section: "Festsetzung", labels: ["Solidaritätszuschlag"] }
+    vz_kst: { section: "Abrechnung Körperschaftsteuer", labels: ["abzüglich Vorauszahlungen"] }
+    rest_kst: { section: "Abrechnung Körperschaftsteuer", labels: ["verbleibende Beträge"] }
+    zinsen_kst: { labels: ["Zinsen zur Körperschaftsteuer"], optional: true }
+  ust:
+    umsatz_19: ["steuerpflichtige Umsätze zu 19 %"]
+    umsatz_7: ["steuerpflichtige Umsätze zu 7 %"]
+    ust: ["Umsatzsteuer"]
+    vorsteuer: ["abziehbare Vorsteuerbeträge"]
+    zahllast: ["verbleibende Umsatzsteuer"]
+    vz_ust: ["abzüglich Vorauszahlungssoll"]
+    rest_ust: { section: "Abrechnung Umsatzsteuer", labels: ["verbleibende Beträge"] }
+    zinsen_ust: { labels: ["Zinsen zur Umsatzsteuer"], optional: true }
+  gewst_mess:
+    gewinn: ["Gewinn aus Gewerbebetrieb"]
+    hinzurechnungen: ["Hinzurechnungen"]
+    kuerzungen: ["Kürzungen"]
+    gewerbeertrag: ["Gewerbeertrag"]
+    freibetrag: ["Freibetrag"]
+    messbetrag: ["Steuermessbetrag"]
+  gewst:            # only the common wording; towns' own labels are learned from corrections (layout memory)
+    messbetrag: ["Steuermessbetrag", "Messbetrag"]
+    hebesatz: { labels: ["Hebesatz"], percent: true }
+    gewst: ["festgesetzte Gewerbesteuer", "Gewerbesteuer"]
+    vz_gewst: ["Vorauszahlungen"]
+    rest_gewst: ["Abschlusszahlung"]
+  vz_est:
+    vz_quartal: ["Vorauszahlung je Quartal"]
+
+model:               # used only for scans the rules could not confirm; accepted only if the arithmetic holds
+  enabled: true
+  model: haiku
+  prompt: prompts/extract_v1.md
+  budget_usd: 0.05
