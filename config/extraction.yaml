@@ -9,6 +9,7 @@ classify:            # first rule whose phrases all occur (lower-cased) decides;
   - { kind: gewst,      all: ["gewerbesteuerbescheid"] }
   - { kind: gewst,      all: ["hebesatz", "gewerbesteuer"], none: ["messbetrag wird der gemeinde mitgeteilt"] }
   - { kind: gewst_mess, all: ["gewerbesteuermessbetrag"] }
+  - { kind: gewst_mess, all: ["gewerbesteuermessbescheid"] }
   - { kind: reminder,   all: ["erinnerung", "steuererklärung"], none_head: ["bescheid für", "bescheid über"] }
   - { kind: request,    all: ["anforderung von unterlagen"] }
   - { kind: request,    all: ["bitte ich sie", "einzureichen"] }
@@ -83,20 +84,22 @@ model:               # used only for scans the rules could not confirm; accepted
 layout:
   columns:            # header words that name a column; a line naming one of them sets the column below it
     est: [Einkommensteuer]
-    soli: [Solidaritätszuschlag, Solidaritätszuschl, Soli]
-    kist: [Kirchensteuer, Kirchenst]
+    soli: [Solidaritätszuschlag, Solidaritätszuschl, Soli, SolZ]
+    kist: [Kirchensteuer, Kirchenst, KiSt]
     kst: [Körperschaftsteuer]
     messbetrag: [Steuermessbetrag, Messbetrag, Gewerbesteuermessbetrag]
     hebesatz: [Hebesatz, Hebesatzes]
     gewst: [Gewerbesteuer]
   roles:              # what a label says an amount is; the longest match in a label wins
-    tax: [festgesetzt, festgesetzte, festgesetzter, festgesetzt werden, festzusetzende, Steuer, Betrag der Steuer]
+    tax: [festgesetzt, festgesetzte, festgesetzter, festgesetzt werden, festzusetzende, Steuer, Betrag der Steuer,
+          Jahressteuer]
     lst: [Steuerabzug vom Lohn, Steuerabzugsbeträge, Lohnsteuer, einbehaltene Steuerabzugsbeträge, Abzugsteuern,
           anzurechnen, anzurechnende, angerechnet, angerechnete, Anrechnung]
     vz: [Vorauszahlungen, Vorauszahlung, Vorauszahlungssoll, bisher festgesetzt, bereits festgesetzt,
          bisher festgesetzt und gezahlt, bereits gezahlt, bisher gezahlt, geleistete Zahlungen, Voranmeldungen]
     rest: [verbleibende, verbleibender, verbleibend, verbleiben, Abschlusszahlung, Nachzahlung, noch zu zahlen,
-           Restbetrag, zu zahlen, Unterschied zu Ihren Lasten, Zahllast verbleibend, Saldo, Differenz]
+           Restbetrag, zu zahlen, Unterschied zu Ihren Lasten, Zahllast verbleibend, Saldo, Differenz, Ergebnis,
+           Unterschied]
     refund: [Erstattung, erstattet, zu erstatten, Überzahlung, zu Ihren Gunsten, Guthaben]
     year: [Jahresbetrag, Summe der Vorauszahlungen]
   suffix_rest: ["fällig", "zur zahlung", "zu zahlen", "zahlbar"]   # after an amount without a label
@@ -146,7 +149,6 @@ layout:
       Steuermessbetrag: messbetrag
     vz_est:
       Vorauszahlung je Quartal: vz_quartal
-      vierteljährlich: vz_quartal
     any:
       Zinsen nach § 233a AO: zinsen
       Zinsen (§ 233a AO): zinsen

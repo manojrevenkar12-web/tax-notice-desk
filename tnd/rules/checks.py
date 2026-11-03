@@ -62,10 +62,10 @@ DOWN_IS_AGAINST = {
     "vz_kst",
     "vz_ust",
 }
-PRIMARY = {  # the figures an office changes; the rest follow from them
-    "est": {"einkuenfte_nsa", "einkuenfte_gewerbe", "einkuenfte_vuv", "sonderausgaben", "agb"},
-    "kst": {"einkommen"},
-    "ust": {"umsatz_19", "umsatz_7", "vorsteuer"},
+PRIMARY = {  # the figures an office changes (bases, and the credits it allows); the rest follow from them
+    "est": {"einkuenfte_nsa", "einkuenfte_gewerbe", "einkuenfte_vuv", "sonderausgaben", "agb", "lst_est", "vz_est"},
+    "kst": {"einkommen", "vz_kst"},
+    "ust": {"umsatz_19", "umsatz_7", "vorsteuer", "vz_ust"},
     "gewst_mess": {"gewinn", "hinzurechnungen", "kuerzungen"},
 }
 REST = {"est": ("rest_est", "rest_soli", "rest_kist"), "kst": ("rest_kst", "soli"), "ust": ("rest_ust",)}
@@ -115,9 +115,9 @@ def compare(kind: str, notice: dict[str, int], filed: dict[str, int]) -> list[Fi
 
 def tax_effect(kind: str, notice: dict[str, int], filed: dict[str, int]) -> int:
     keys = REST.get(kind, ())
-    if not keys or not all(k in notice and k in filed for k in keys):
+    if not keys or keys[0] not in notice or keys[0] not in filed:
         return 0
-    return sum(notice[k] for k in keys) - sum(filed[k] for k in keys)
+    return sum(notice.get(k, 0) for k in keys) - sum(filed.get(k, 0) for k in keys)  # a line left out is zero
 
 
 def interest(kind: str, tax_year: int, base: int, wirksam: dt.date) -> tuple[int, dict]:

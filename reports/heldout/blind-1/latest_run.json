@@ -1,19 +1,66 @@
 {
  "set": "blind-1",
  "status": "regression",
- "ran_at": "2026-11-03T17:37:14+00:00",
+ "ran_at": "2026-11-03T17:52:48+00:00",
  "cases": 55,
- "passed": 54,
+ "passed": 53,
  "late_deadlines": 0,
  "closed_but_needed_action": 0,
  "by_check": {
   "kind": 55,
-  "action": 55,
+  "action": 54,
   "deadline": 54,
   "errors": 55,
   "fields": 55
  },
  "failures": [
+  {
+   "id": "case-32",
+   "pass": false,
+   "checks": {
+    "kind": true,
+    "action": false,
+    "deadline": true,
+    "errors": true,
+    "fields": true
+   },
+   "late_deadline": false,
+   "closed_but_needed_action": false,
+   "expected": {
+    "kind": "gewst",
+    "action": "objection_required",
+    "deadline": "2026-12-16",
+    "errors": [
+     "arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 266000,
+     "hebesatz": 46000,
+     "gewst": 1223600,
+     "vz_gewst": 1080000,
+     "rest_gewst": 163600
+    }
+   },
+   "got": {
+    "kind": "gewst",
+    "action": "review",
+    "deadline": "2026-12-16",
+    "errors": [
+     "arithmetic"
+    ],
+    "reasons": [
+     "values could not be confirmed by the notice's own arithmetic"
+    ],
+    "fields": {
+     "messbetrag": 266000,
+     "hebesatz": 46000,
+     "gewst": 1223600,
+     "vz_gewst": 1080000,
+     "rest_gewst": 163600
+    }
+   },
+   "why": "Received: municipal_post, posted (notice date) Thu 2026-11-12; AO 122(2) Nr. 1 as amended by PostModG: 4th day -> Mon 2026-11-16; Mon 2026-11-16 is a working day, no move needed. Deadline: one month after 2026-11-16 -> Wed 2026-12-16; Wed 2026-12-16 is a working day. Hebesatz 460 = register; Messbetrag 2,660.00 = on file; 2,660.00 x 4.60 = 12,236.00 as printed; but 12,236.00 - 10,800.00 = 1,436.00, the notice demands 1,636.00: the remaining amount does not compute (200.00 too much). -> objection_required (the town's arithmetic is wrong)."
+  },
   {
    "id": "case-53",
    "pass": false,

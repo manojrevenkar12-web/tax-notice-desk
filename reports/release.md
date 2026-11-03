@@ -11,10 +11,10 @@
 | wrong_client | 0 | ≤ 0 | pass |
 | deadline_exact | 0.9955 | ≥ 0.97 | pass |
 | action_accuracy | 0.9696 | ≥ 0.85 | pass |
-| kind_accuracy | 0.9864 | ≥ 0.97 | pass |
+| kind_accuracy | 0.991 | ≥ 0.97 | pass |
 | error_recall | 1.0 | ≥ 0.9 | pass |
 | error_precision | 1.0 | ≥ 0.9 | pass |
 | review_rate | 0.0304 | ≤ 0.25 | pass |
 | retrieval_recall_at_3 | 1.0 | ≥ 0.85 | pass |
 
-Model calls 14, cost $0.0109; 15.4 s for 230 notices.
+Model calls 14, cost $0.0109; 15.9 s for 230 notices.

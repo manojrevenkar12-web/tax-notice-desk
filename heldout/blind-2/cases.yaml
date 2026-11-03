@@ -1,0 +1,2553 @@
+# heldout/blind-2 — written by a Claude subagent that had not seen the code, from docs/NOTICE_RULES.md and
+# heldout/WRITING_CASES.md only. Amounts in cents; Hebesatz in percent x 100. See README.md for ambiguities.
+- id: case-01
+  firm: {land: BE}
+  client: {name: Jana Wiegand, steuernummer: 34/512/66021, land: BE, kind: person}
+  filed:
+    kind: est
+    year: 2023
+    fields: {einkuenfte_nsa: 5234000, einkuenfte_vuv: 215000, summe_einkuenfte: 5449000, sonderausgaben: 312000, zve: 5137000, est: 1185400, lst_est: 1144200, rest_est: 41200}
+  document:
+    channel: post
+    posted: '2025-04-04'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2025-04-09'
+    text: |
+      Finanzamt Prenzlauer Berg
+      Storkower Straße 134, 10407 Berlin
+
+      Steuernummer: 34/512/66021
+      Datum: 04.04.2025
+
+      Frau
+      Jana Wiegand
+      Greifswalder Straße 201
+      10405 Berlin
+
+      Bescheid für 2023 über Einkommensteuer und Solidaritätszuschlag
+
+      Festsetzung
+      Einkünfte aus nichtselbständiger Arbeit ......... 52.340 €
+      Einkünfte aus Vermietung und Verpachtung ......... 2.150 €
+      Summe der Einkünfte ............................. 54.490 €
+      Sonderausgaben ................................. - 3.120 €
+      zu versteuerndes Einkommen ...................... 51.370 €
+
+      Einkommensteuer, festgesetzt ................. 11.854,00 €
+
+      Abrechnung
+      Einkommensteuer .............................. 11.854,00 €
+        ab Steuerabzug vom Lohn .................. - 11.442,00 €
+        verbleibende Einkommensteuer .................. 412,00 €
+      noch zu zahlen .................................. 412,00 €
+      Bitte zahlen Sie den Betrag bis zum 08.05.2025.
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder
+      zur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe
+      zur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.
+  expect:
+    kind: est
+    action: close
+    deadline: '2025-05-09'
+    errors: []
+    fields: {zve: 5137000, est: 1185400, rest_est: 41200}
+  why: 'Income tax 2023 matches the return. 08.05.2025 was a one-off statutory holiday in Berlin (80th anniversary of the end of the war); firm and client are both in BE. The payment date printed (08.05.2025) is not the objection deadline. Interest: period starts 01.04.2025, the notice counts as received 08.04.2025 = 0 full months, so no interest; the notice prints none. Received (Bekanntgabe): posted 04.04.2025 + 4 days = 08.04.2025 (Di). Deadline: one month after 08.04.2025 = 08.05.2025 (Do) -> next working day in BE/BE: 09.05.2025 (Fr). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €. Interest: interest 01.04.2025–08.04.2025 = 0 full months x 0.15 % = 0.00 % on 412,00 rounded down to 400 € = 0.0000 € -> 0 € (< 10 €: none); notice prints 0,00 € -> right.'
+- id: case-02
+  firm: {land: NW}
+  client: {name: Jonas und Mira Albrecht, steuernummer: 133/5208/1147, land: NW, kind: person}
+  filed:
+    kind: est
+    year: 2025
+    fields: {einkuenfte_nsa: 9965000, summe_einkuenfte: 9965000, sonderausgaben: 685000, zve: 9280000, est: 1887400, kist: 169866, lst_est: 1948800, rest_est: -61400, lst_kist: 175392, rest_kist: -5526}
+  document:
+    channel: portal
+    posted: '2026-09-01'
+    provided_at: '2026-09-01'
+    notified_at: '2026-09-02'
+    postmark: null
+    received_at: '2026-09-03'
+    text: "Finanzamt Düsseldorf-Mitte\nKruppstraße 110, 40227 Düsseldorf\nSteuernummer: 133/5208/1147                         Datum: 01.09.2026\n\nHerrn Jonas Albrecht und\nFrau Mira Albrecht\nLorettostraße 22\n40219 Düsseldorf\n\nBescheid für 2025\nüber Einkommensteuer, Solidaritätszuschlag und Kirchensteuer\nZusammenveranlagung\n\nErmittlung des zu versteuernden Einkommens                         €\nEinkünfte aus nichtselbständiger Arbeit                     99.650 \nSumme der Einkünfte                                         99.650 \nSonderausgaben                                               6.850-\nZu versteuerndes Einkommen                                  92.800 \n\n                               Einkommensteuer             KiSt rk\nFestgesetzt werden                  18.874,00            1.698,66 \nab Steuerabzug vom Lohn             19.488,00-           1.753,92-\nverbleibende Beträge                   614,00-              55,26-\n\nDer Betrag von 669,26 € wird Ihnen erstattet\
+      \ auf das Konto DE** **** **** **** **47 12.\n\nRechtsbehelfsbelehrung\nGegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem\nFinanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt\nam vierten Tag nach der Bereitstellung zum Abruf als bekannt gegeben.\n"
+  expect:
+    kind: est
+    action: close
+    deadline: '2026-10-05'
+    errors: []
+    fields: {zve: 9280000, est: 1887400, kist: 169866, rest_est: -61400, rest_kist: -5526}
+  why: 'Joint assessment 2025 (Splittingtarif) matches the return; refund. Portal from 2026: four days after the notice was made available (01.09.), not after the notification (02.09.); the resulting Saturday is not moved. Received (Bekanntgabe): made available 01.09.2026 (from 2026): availability + 4 days = 05.09.2026 (Sa), portal: not moved although not a working day. Deadline: one month after 05.09.2026 = 05.10.2026 (Mo). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €.'
+- id: case-03
+  firm: {land: BY}
+  client: {name: Korbinian Hausladen, steuernummer: 156/207/34118, land: BY, kind: person}
+  filed:
+    kind: est
+    year: 2023
+    fields: {einkuenfte_nsa: 4487000, summe_einkuenfte: 4487000, sonderausgaben: 341000, zve: 4146000, est: 831800, kist: 66544, lst_est: 822000, rest_est: 9800, lst_kist: 65760, rest_kist: 784}
+  history:
+  - {year: 2022, kind: est, text: Homeoffice-Pauschale gekürzt, objection: true, outcome: abgeholfen}
+  document:
+    channel: post
+    posted: '2025-01-02'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2025-01-08'
+    text: |
+      Finanzamt Rosenheim
+      Wittelsbacherstraße 25, 83022 Rosenheim
+      Datum: 02.01.2025
+      Steuernummer: 156/207/34118
+
+      Herrn
+      Korbinian Hausladen
+      Kufsteiner Straße 9
+      83064 Raubling
+
+      Einkommensteuerbescheid 2023
+      Bescheid über Einkommensteuer, Solidaritätszuschlag und Kirchensteuer
+
+      | Besteuerungsgrundlagen | EUR |
+      |---|---:|
+      | Einkünfte aus nichtselbständiger Arbeit | 46 130 |
+      | Summe der Einkünfte | 46 130 |
+      | Sonderausgaben | 3 410- |
+      | zu versteuerndes Einkommen | 42 720 |
+
+      |  | Einkommensteuer | Kirchensteuer rk |
+      |---|---:|---:|
+      | festgesetzt | 8 746,00 | 699,68 |
+      | anzurechnende Steuerabzugsbeträge | 8 220,00- | 657,60- |
+      | verbleibend | 526,00 | 42,08 |
+
+      Gesamtbetrag – noch zu entrichten: EUR 568,08
+
+      Begründung
+      Die Tagespauschale für die Tätigkeit in der häuslichen Wohnung (210 Tage x 6 € = 1.260 €)
+      konnte nicht berücksichtigt werden, da Ihnen nach der Bescheinigung des Arbeitgebers für
+      diese Tage ein Arbeitsplatz im Betrieb zur Verfügung stand und Sie diesen nicht aufgesucht
+      haben. Die Einkünfte aus nichtselbständiger Arbeit erhöhen sich entsprechend.
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder
+      zur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe
+      zur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.
+  expect:
+    kind: est
+    action: objection_review
+    deadline: '2025-02-07'
+    errors: []
+    fields: {einkuenfte_nsa: 4613000, zve: 4272000, est: 874600, kist: 69968, rest_est: 52600, rest_kist: 4208}
+  why: 'Werbungskosten cut by 1.260 € (home-office allowance): wages income up, against the client; remaining tax + church tax rise well over 50 €. Assessed 2023 in January 2025, before the interest period (01.04.2025). Received (Bekanntgabe): posted 02.01.2025 + 4 days = 06.01.2025 (Mo), not a working day in BY/BY -> 07.01.2025 (Di). Deadline: one month after 07.01.2025 = 07.02.2025 (Fr). Comparison with the filed return: einkuenfte_nsa 44.870,00 -> 46.130,00 (+1.260,00, against); summe_einkuenfte 44.870,00 -> 46.130,00 (+1.260,00, against); zve 41.460,00 -> 42.720,00 (+1.260,00, against); est 8.318,00 -> 8.746,00 (+428,00, against); kist 665,44 -> 699,68 (+34,24, against); rest_est 98,00 -> 526,00 (+428,00, against); rest_kist 7,84 -> 42,08 (+34,24, against). Remaining amounts change by +462,24 €.'
+- id: case-04
+  firm: {land: HH}
+  client: {name: Svenja Oltmanns, steuernummer: 43/116/02987, land: HH, kind: person}
+  filed:
+    kind: est
+    year: 2024
+    fields: {einkuenfte_nsa: 5812000, summe_einkuenfte: 5812000, sonderausgaben: 421000, zve: 5391000, est: 1230500, lst_est: 1206800, rest_est: 23700}
+  document:
+    channel: portal
+    posted: '2025-07-07'
+    provided_at: '2025-07-07'
+    notified_at: '2025-07-08'
+    postmark: null
+    received_at: '2025-07-08'
+    text: |
+      Finanzamt Hamburg-Nord
+      Borsteler Chaussee 45, 22453 Hamburg
+
+      Steuernummer: 43/116/02987
+      Datum: 07.07.2025
+
+      Frau Svenja Oltmanns
+      Jarrestraße 58
+      22303 Hamburg
+
+      Bescheid für 2024 über Einkommensteuer und Solidaritätszuschlag
+
+      Festsetzung
+      Einkünfte aus nichtselbständiger Arbeit ......... 58.120 €
+      Summe der Einkünfte ............................. 58.120 €
+      Sonderausgaben ................................. - 4.630 €
+      zu versteuerndes Einkommen ...................... 53.490 €
+
+      Einkommensteuer, festgesetzt ................. 12.148,00 €
+
+      Abrechnung
+      Einkommensteuer .............................. 12.148,00 €
+        ab Steuerabzug vom Lohn .................. - 12.068,00 €
+        verbleibende Einkommensteuer ................... 80,00 €
+      noch zu zahlen ................................... 80,00 €
+
+      Erläuterungen
+      Die Beiträge zur Kranken- und Pflegeversicherung wurden in der Höhe berücksichtigt, die
+      Ihre Krankenkasse elektronisch übermittelt hat (420 € mehr als erklärt).
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem
+      Finanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt
+      am vierten Tag nach Absendung der elektronischen Benachrichtigung über die Bereitstellung als
+      bekannt gegeben.
+  expect:
+    kind: est
+    action: inform_client
+    deadline: '2025-08-12'
+    errors: []
+    fields: {sonderausgaben: 463000, zve: 5349000, est: 1214800, rest_est: 8000}
+  why: 'Sonderausgaben raised by 420 € in the client''s favour; no deviation against the client. Portal in 2025 counts from the notification (08.07.), not from availability; Saturday not moved. Received (Bekanntgabe): made available 07.07.2025 (in 2025): notification 08.07.2025 + 4 days = 12.07.2025 (Sa), portal: not moved although not a working day. Deadline: one month after 12.07.2025 = 12.08.2025 (Di). Comparison with the filed return: sonderausgaben 4.210,00 -> 4.630,00 (+420,00, in favour); zve 53.910,00 -> 53.490,00 (-420,00, in favour); est 12.305,00 -> 12.148,00 (-157,00, in favour); rest_est 237,00 -> 80,00 (-157,00, in favour). Remaining amounts change by -157,00 €.'
+- id: case-05
+  firm: {land: SN}
+  client: {name: Uwe Kretzschmar, steuernummer: 232/117/42083, land: SN, kind: person}
+  filed:
+    kind: est
+    year: 2023
+    fields: {einkuenfte_nsa: 3876000, summe_einkuenfte: 3876000, sonderausgaben: 298000, agb: 184000, zve: 3394000, est: 588600, kist: 52974, lst_est: 557100, rest_est: 31500, lst_kist: 50139, rest_kist: 2835}
+  document:
+    channel: post
+    posted: '2024-05-15'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2024-05-21'
+    text: "Finanzamt Leipzig I\nWilhelm-Liebknecht-Platz 3/4, 04105 Leipzig\nSteuernummer: 232/117/42083                         Datum: 15.05.2024\n\nHerrn\nUwe Kretzschmar\nKarl-Heine-Straße 77\n04229 Leipzig\n\nBescheid für 2023\nüber Einkommensteuer, Solidaritätszuschlag und Kirchensteuer\n\nErmittlung des zu versteuernden Einkommens                         €\nEinkünfte aus nichtselbständiger Arbeit                     38.760 \nSumme der Einkünfte                                         38.760 \nSonderausgaben                                               2.980-\nAußergewöhnliche Belastungen                                 1.720-\nZu versteuerndes Einkommen                                  34.060 \n\n                               Einkommensteuer             KiSt ev\nFestgesetzt werden                   5.923,00              533,07 \nab Steuerabzug vom Lohn              5.571,00-             501,39-\nverbleibende Beträge                   352,00               31,68 \n\nBitte zahlen Sie\
+      \ insgesamt 383,68 €.\n\nErläuterungen zur Festsetzung:\nFahrtkosten zu Arztbesuchen wurden nur für die nachgewiesenen Fahrten berücksichtigt\n(Aufwendungen für Krankheit 120 € niedriger als beantragt).\n\nRechtsbehelfsbelehrung:\nSie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats\nnach Bekanntgabe des Bescheids beim Finanzamt einzulegen. Bei Übermittlung durch die Post gilt der\nBescheid am dritten Tag nach der Aufgabe zur Post als bekannt gegeben.\n"
+  expect:
+    kind: est
+    action: inform_client
+    deadline: '2024-06-21'
+    errors: []
+    fields: {agb: 172000, zve: 3406000, est: 592300, kist: 53307, rest_est: 35200}
+  why: 'Außergewöhnliche Belastungen cut by 120 € (against the client), but income tax rises only by 37,00 € and church tax by 3,33 €, together under 50 €. Posted in 2024: third day. Received (Bekanntgabe): posted 15.05.2024 + 3 days = 18.05.2024 (Sa), not a working day in SN/SN -> 21.05.2024 (Di). Deadline: one month after 21.05.2024 = 21.06.2024 (Fr). Comparison with the filed return: agb 1.840,00 -> 1.720,00 (-120,00, against); zve 33.940,00 -> 34.060,00 (+120,00, against); est 5.886,00 -> 5.923,00 (+37,00, against); kist 529,74 -> 533,07 (+3,33, against); rest_est 315,00 -> 352,00 (+37,00, against); rest_kist 28,35 -> 31,68 (+3,33, against). Remaining amounts change by +40,33 €.'
+- id: case-06
+  firm: {land: BE}
+  client: {name: Dragan Petrović, steuernummer: 21/384/40917, land: BE, kind: person}
+  filed:
+    kind: est
+    year: 2025
+    fields: {einkuenfte_nsa: 5051000, summe_einkuenfte: 5051000, sonderausgaben: 313000, zve: 4738000, est: 977400, lst_est: 995700, rest_est: -18300}
+  document:
+    channel: portal
+    posted: '2026-05-22'
+    provided_at: '2026-05-22'
+    notified_at: '2026-05-22'
+    postmark: null
+    received_at: '2026-05-23'
+    text: |
+      Finanzamt Steglitz
+      Schloßstraße 58/59, 12165 Berlin
+
+      Steuernummer: 21/384/40917
+      Datum: 22.05.2026
+
+      Herrn Dragan Petrović
+      Birkbuschstraße 12
+      12167 Berlin
+
+      Bescheid für 2025 über Einkommensteuer und Solidaritätszuschlag
+
+      Festsetzung
+      Einkünfte aus nichtselbständiger Arbeit ......... 50.656 €
+      Summe der Einkünfte ............................. 50.656 €
+      Sonderausgaben ................................. - 3.130 €
+      zu versteuerndes Einkommen ...................... 47.526 €
+
+      Einkommensteuer, festgesetzt .................. 9.824,00 €
+
+      Abrechnung
+      Einkommensteuer ............................... 9.824,00 €
+        ab Steuerabzug vom Lohn ................... - 9.957,00 €
+        verbleibende Einkommensteuer ................. 133,00- €
+      zu erstatten .................................... 133,00 €
+
+      Erläuterungen
+      Aufwendungen für Arbeitsmittel wurden nur bis zur Höhe der vorgelegten Belege (146 € weniger)
+      berücksichtigt.
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem
+      Finanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt
+      am vierten Tag nach der Bereitstellung zum Abruf als bekannt gegeben.
+  expect:
+    kind: est
+    action: objection_review
+    deadline: '2026-06-26'
+    errors: []
+    fields: {einkuenfte_nsa: 5065600, zve: 4752600, est: 982400, rest_est: -13300}
+  why: 'Werbungskosten cut by 146 €: wages income up 146 €, income tax up exactly 50,00 € (refund falls by 50,00 €); no church tax, no Soli. ''At least 50 €'' is met. Received (Bekanntgabe): made available 22.05.2026 (from 2026): availability + 4 days = 26.05.2026 (Di). Deadline: one month after 26.05.2026 = 26.06.2026 (Fr). Comparison with the filed return: einkuenfte_nsa 50.510,00 -> 50.656,00 (+146,00, against); summe_einkuenfte 50.510,00 -> 50.656,00 (+146,00, against); zve 47.380,00 -> 47.526,00 (+146,00, against); est 9.774,00 -> 9.824,00 (+50,00, against); rest_est -183,00 -> -133,00 (+50,00, against). Remaining amounts change by +50,00 €.'
+- id: case-07
+  firm: {land: HE}
+  client: {name: Annika Rehbein, steuernummer: 045 238 61027, land: HE, kind: person}
+  filed:
+    kind: est
+    year: 2025
+    fields: {einkuenfte_nsa: 4410500, summe_einkuenfte: 4410500, sonderausgaben: 219000, zve: 4191500, est: 793800, lst_est: 787400, rest_est: 6400}
+  document:
+    channel: post
+    posted: '2026-08-10'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2026-08-14'
+    text: "Finanzamt Darmstadt\nSoderstraße 30, 64283 Darmstadt\nSteuernummer: 045 238 61027                         Datum: 10.08.2026\n\nFrau\nAnnika Rehbein\nHeinrichstraße 140\n64287 Darmstadt\n\nBescheid für 2025\nüber Einkommensteuer und Solidaritätszuschlag\n\nErmittlung des zu versteuernden Einkommens                         €\nEinkünfte aus nichtselbständiger Arbeit                     44.254 \nSumme der Einkünfte                                         44.254 \nSonderausgaben                                               2.190-\nZu versteuerndes Einkommen                                  42.064 \n\n                               Einkommensteuer\nFestgesetzt werden                   7.987,00 \nab Steuerabzug vom Lohn              7.874,00-\nverbleibende Beträge                   113,00 \n\nBitte zahlen Sie insgesamt 113,00 € bis zum 14.09.2026.\n\nErläuterungen zur Festsetzung:\nKontoführungsgebühren und Fachliteratur wurden mangels Nachweis nicht anerkannt (149 €).\n\nRechtsbehelfsbelehrung:\n\
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats\nnach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder\nzur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe\nzur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.\n"
+  expect:
+    kind: est
+    action: inform_client
+    deadline: '2026-09-14'
+    errors: []
+    fields: {einkuenfte_nsa: 4425400, zve: 4206400, est: 798700, rest_est: 11300}
+  why: 'Werbungskosten cut by 149 €: income tax up 49,00 €, nothing else changes; against the client but under 50 €. Received (Bekanntgabe): posted 10.08.2026 + 4 days = 14.08.2026 (Fr). Deadline: one month after 14.08.2026 = 14.09.2026 (Mo). Comparison with the filed return: einkuenfte_nsa 44.105,00 -> 44.254,00 (+149,00, against); summe_einkuenfte 44.105,00 -> 44.254,00 (+149,00, against); zve 41.915,00 -> 42.064,00 (+149,00, against); est 7.938,00 -> 7.987,00 (+49,00, against); rest_est 64,00 -> 113,00 (+49,00, against). Remaining amounts change by +49,00 €.'
+- id: case-08
+  firm: {land: BW}
+  client: {name: Benedikt Schäuble, steuernummer: 06086/31477, land: BW, kind: person}
+  filed:
+    kind: est
+    year: 2025
+    fields: {einkuenfte_nsa: 5538000, summe_einkuenfte: 5538000, sonderausgaben: 312000, zve: 5226000, est: 1150200, kist: 92016, lst_est: 1138200, rest_est: 12000, lst_kist: 91056, rest_kist: 960}
+  document:
+    channel: post
+    posted: '2026-06-30'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2026-07-06'
+    text: |
+      Finanzamt Freiburg-Stadt
+      Sautierstraße 24, 79104 Freiburg im Breisgau
+      Datum: 30.06.2026
+      Steuernummer: 06086/31477
+
+      Herrn Benedikt Schäuble
+      Habsburgerstraße 101
+      79104 Freiburg
+
+      Einkommensteuerbescheid 2025
+      Bescheid über Einkommensteuer, Solidaritätszuschlag und Kirchensteuer
+
+      | Besteuerungsgrundlagen | EUR |
+      |---|---:|
+      | Einkünfte aus nichtselbständiger Arbeit | 55 511 |
+      | Summe der Einkünfte | 55 511 |
+      | Sonderausgaben | 3 120- |
+      | zu versteuerndes Einkommen | 52 391 |
+
+      |  | Einkommensteuer | Kirchensteuer rk |
+      |---|---:|---:|
+      | festgesetzt | 11 549,00 | 923,92 |
+      | anzurechnende Steuerabzugsbeträge | 11 382,00- | 910,56- |
+      | verbleibend | 167,00 | 13,36 |
+
+      Gesamtbetrag – noch zu entrichten: EUR 180,36
+
+      Begründung
+      Gewerkschaftsbeiträge wurden nur in Höhe der vorgelegten Beitragsbescheinigung berücksichtigt.
+      Die Werbungskosten mindern sich dadurch um 131 €.
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder
+      zur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe
+      zur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.
+  expect:
+    kind: est
+    action: objection_review
+    deadline: '2026-08-06'
+    errors: []
+    fields: {zve: 5239100, est: 1154900, kist: 92392, rest_est: 16700, rest_kist: 1336}
+  why: 'Werbungskosten cut by 131 €: income tax +47,00 € and church tax +3,76 € = 50,76 € more to pay in total. Neither amount alone reaches 50 €; the rule speaks of ''the remaining amounts to pay'' going up by at least 50 €, read here as their total (ambiguity, see README). Received (Bekanntgabe): posted 30.06.2026 + 4 days = 04.07.2026 (Sa), not a working day in BW/BW -> 06.07.2026 (Mo). Deadline: one month after 06.07.2026 = 06.08.2026 (Do). Comparison with the filed return: einkuenfte_nsa 55.380,00 -> 55.511,00 (+131,00, against); summe_einkuenfte 55.380,00 -> 55.511,00 (+131,00, against); zve 52.260,00 -> 52.391,00 (+131,00, against); est 11.502,00 -> 11.549,00 (+47,00, against); kist 920,16 -> 923,92 (+3,76, against); rest_est 120,00 -> 167,00 (+47,00, against); rest_kist 9,60 -> 13,36 (+3,76, against). Remaining amounts change by +50,76 €.'
+- id: case-09
+  firm: {land: NI}
+  client: {name: Hauke Brüning, steuernummer: 25/208/11473, land: NI, kind: person}
+  filed:
+    kind: est
+    year: 2024
+    fields: {einkuenfte_nsa: 4726000, einkuenfte_vuv: -183000, summe_einkuenfte: 4543000, sonderausgaben: 354000, zve: 4189000, est: 807800, kist: 72642, lst_est: 799000, rest_est: 8800, lst_kist: 71910, rest_kist: 732}
+  document:
+    channel: portal
+    posted: '2026-02-12'
+    provided_at: '2026-02-12'
+    notified_at: '2026-02-13'
+    postmark: null
+    received_at: '2026-02-16'
+    text: |
+      Finanzamt Hannover-Nord
+      Vahrenwalder Straße 206, 30165 Hannover
+
+      Steuernummer: 25/208/11473
+      Datum: 12.02.2026
+
+      Herrn
+      Hauke Brüning
+      Podbielskistraße 312
+      30655 Hannover
+
+      Bescheid für 2024 über Einkommensteuer, Solidaritätszuschlag und Kirchensteuer
+
+      Festsetzung
+      Einkünfte aus nichtselbständiger Arbeit ......... 47.260 €
+      Einkünfte aus Vermietung und Verpachtung ........ -1.830 €
+      Summe der Einkünfte ............................. 45.430 €
+      Sonderausgaben ................................. - 3.540 €
+      zu versteuerndes Einkommen ...................... 41.890 €
+
+      Einkommensteuer, festgesetzt .................. 8.078,00 €
+      Kirchensteuer ev, festgesetzt ................... 727,02 €
+
+      Abrechnung
+      Einkommensteuer ............................... 8.078,00 €
+        ab Steuerabzug vom Lohn ................... - 7.990,00 €
+        verbleibende Einkommensteuer ................... 88,00 €
+      Kirchensteuer ev ................................ 727,02 €
+        ab Steuerabzug vom Lohn ..................... - 719,10 €
+        verbleibende Kirchensteuer ev ................... 7,92 €
+      noch zu zahlen ................................... 95,92 €
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem
+      Finanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt
+      am vierten Tag nach der Bereitstellung zum Abruf als bekannt gegeben.
+  expect:
+    kind: est
+    action: close
+    deadline: '2026-03-16'
+    errors: []
+    fields: {einkuenfte_vuv: -183000, zve: 4189000, est: 807800, kist: 72702, rest_kist: 792}
+  why: 'Everything matches the return except church tax, which is 0,60 € higher than the firm''s figure (rounding); a difference of not more than 1 € is not a deviation. Losses from letting are printed with a minus in the return figures; the notice shows them as a negative income line. Assessed 2024 before 01.04.2026: no interest. Received (Bekanntgabe): made available 12.02.2026 (from 2026): availability + 4 days = 16.02.2026 (Mo). Deadline: one month after 16.02.2026 = 16.03.2026 (Mo). Comparison with the filed return: kist differs by 0,60 € (not more than 1 €: no deviation); rest_kist differs by 0,60 € (not more than 1 €: no deviation). Remaining amounts change by +0,60 €.'
+- id: case-10
+  firm: {land: NW}
+  client: {name: Fatma Yıldırım, steuernummer: 214/5123/4567, land: NW, kind: person}
+  filed:
+    kind: est
+    year: 2025
+    fields: {einkuenfte_nsa: 6385000, summe_einkuenfte: 6385000, sonderausgaben: 447000, zve: 5938000, est: 1417400, lst_est: 1426900, rest_est: -9500}
+  document:
+    channel: post
+    posted: '2026-04-30'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2026-05-05'
+    text: |
+      Finanzamt Köln-Altstadt
+      Am Weidenbach 2-4, 50676 Köln
+      Steuernummer: 214/5123/4567
+      Datum: 30.04.2026
+
+      Frau
+      Fatma Yıldırım
+      Zülpicher Straße 280
+      50937 Köln
+
+      Einkommensteuerbescheid für das Jahr 2025
+
+      Der Festsetzung liegen Einkünfte aus nichtselbständiger Arbeit von 63.850 € zugrunde (Summe der Einkünfte 63.850 €).
+      Abgezogen wurden Sonderausgaben von 4.470 €.
+      Das zu versteuernde Einkommen beträgt 59.380 €.
+      Die Einkommensteuer wird auf 14.174,00 € festgesetzt.
+      Angerechnet werden Lohnsteuer von 12.789,00 €.
+      Es verbleiben: Einkommensteuer 1.385,00 € noch zu zahlen.
+      Insgesamt sind noch 1.385,00 € zu zahlen.
+
+      Erläuterungen: Die Lohnsteuer wurde nur in der Höhe angerechnet, die Ihr Arbeitgeber elektronisch
+      übermittelt hat. Für das zweite Dienstverhältnis (Juli bis Dezember) liegt keine elektronische
+      Lohnsteuerbescheinigung vor; die geltend gemachte Lohnsteuer von 1.480,00 € konnte daher nicht
+      angerechnet werden.
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder
+      zur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe
+      zur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.
+  expect:
+    kind: est
+    action: objection_review
+    deadline: '2026-06-05'
+    errors: []
+    fields: {est: 1417400, lst_est: 1278900, rest_est: 138500}
+  why: 'Wage tax credited 1.480,00 € lower than filed (credits lowered = against the client); the refund turns into a payment, remaining amount +1.480,00 €. Received (Bekanntgabe): posted 30.04.2026 + 4 days = 04.05.2026 (Mo). Deadline: one month after 04.05.2026 = 04.06.2026 (Do) -> next working day in NW/NW: 05.06.2026 (Fr). Comparison with the filed return: lst_est 14.269,00 -> 12.789,00 (-1.480,00, against); rest_est -95,00 -> 1.385,00 (+1.480,00, against). Remaining amounts change by +1.480,00 €.'
+- id: case-11
+  firm: {land: BE}
+  client: {name: Ramona Köpke, steuernummer: 046/123/04567, land: BB, kind: person}
+  filed:
+    kind: est
+    year: 2024
+    fields: {einkuenfte_nsa: 4698000, einkuenfte_vuv: 625000, summe_einkuenfte: 5323000, sonderausgaben: 286000, zve: 5037000, est: 1100500, lst_est: 948500, rest_est: 152000}
+  document:
+    channel: post
+    posted: '2025-10-27'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2025-11-03'
+    text: "Finanzamt Potsdam\nSteinstraße 104-106, 14480 Potsdam\nSteuernummer: 046/123/04567                         Datum: 27.10.2025\n\nFrau\nRamona Köpke\nZeppelinstraße 41\n14471 Potsdam\n\nBescheid für 2024\nüber Einkommensteuer und Solidaritätszuschlag\n\nErmittlung des zu versteuernden Einkommens                         €\nEinkünfte aus nichtselbständiger Arbeit                     46.980 \nEinkünfte aus Vermietung und Verpachtung                     6.650 \nSumme der Einkünfte                                         53.630 \nSonderausgaben                                               4.060-\nZu versteuerndes Einkommen                                  49.570 \n\n                               Einkommensteuer\nFestgesetzt werden                  10.718,00 \nab Steuerabzug vom Lohn              9.485,00-\nverbleibende Beträge                 1.233,00 \n\nBitte zahlen Sie insgesamt 1.233,00 €.\n\nErläuterungen zur Festsetzung:\n1. Einkünfte aus Vermietung und Verpachtung: Die Erhaltungsaufwendungen\
+      \ für die Wohnung\n   Zeppelinstraße 41a sind als anschaffungsnahe Herstellungskosten zu behandeln; die Einkünfte\n   erhöhen sich um 400 €.\n2. Sonderausgaben: Die Beiträge zur Basisrente wurden nach der Bescheinigung des Anbieters mit\n   1.200 € mehr berücksichtigt als erklärt.\n\nRechtsbehelfsbelehrung:\nSie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats\nnach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder\nzur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe\nzur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.\n"
+  expect:
+    kind: est
+    action: inform_client
+    deadline: '2025-12-01'
+    errors: []
+    fields: {einkuenfte_vuv: 665000, sonderausgaben: 406000, zve: 4957000, est: 1071800, rest_est: 123300}
+  why: 'Mixed: letting income +400 € (against) and Sonderausgaben +1.200 € (in favour); zve falls by 800 €, the remaining amount falls, so nothing to pay goes up by 50 €. 31.10.2025 is Reformation Day in BB but not in BE, so it is not a holiday for this desk: Bekanntgabe stays on Friday 31.10.; one month later has no 31st -> 30.11.2025 (Sunday) -> Monday 01.12.2025. Received (Bekanntgabe): posted 27.10.2025 + 4 days = 31.10.2025 (Fr). Deadline: one month after 31.10.2025 = 30.11.2025 (So) -> next working day in BE/BB: 01.12.2025 (Mo). Comparison with the filed return: einkuenfte_vuv 6.250,00 -> 6.650,00 (+400,00, against); summe_einkuenfte 53.230,00 -> 53.630,00 (+400,00, against); sonderausgaben 2.860,00 -> 4.060,00 (+1.200,00, in favour); zve 50.370,00 -> 49.570,00 (-800,00, in favour); est 11.005,00 -> 10.718,00 (-287,00, in favour); rest_est 1.520,00 -> 1.233,00 (-287,00, in favour). Remaining amounts change by -287,00 €.'
+- id: case-12
+  firm: {land: BB}
+  client: {name: Detlef Wunderlich, steuernummer: 049/228/13790, land: BB, kind: trader}
+  document:
+    channel: post
+    posted: '2025-10-27'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2025-11-04'
+    text: |
+      Finanzamt Königs Wusterhausen
+      Weg am Kreisgericht 9, 15711 Königs Wusterhausen
+
+      Steuernummer: 049/228/13790
+      Datum: 27.10.2025
+
+      Herrn
+      Detlef Wunderlich
+      Bahnhofstraße 17
+      15732 Eichwalde
+
+      Bescheid für 2024 über Einkommensteuer und Solidaritätszuschlag
+
+      Die Besteuerungsgrundlagen wurden gemäß § 162 der Abgabenordnung geschätzt, weil Sie Ihre
+      Einkommensteuererklärung für 2024 trotz Erinnerung vom 04.08.2025 nicht abgegeben haben.
+
+      Besteuerungsgrundlagen                                       €
+      Einkünfte aus Gewerbebetrieb (geschätzt)                    48.000
+      Einkünfte aus Vermietung und Verpachtung (geschätzt)         9.600
+      Summe der Einkünfte                                         57.600
+      zu versteuerndes Einkommen                                  57.600
+
+      Festsetzung                                                  €
+      Einkommensteuer                                          13.707,00
+      Verspätungszuschlag (§ 152 AO)                              250,00
+
+      Abrechnung
+      noch zu zahlen insgesamt                                 13.957,00
+
+      Die Schätzung wird durch die Abgabe einer vollständigen Erklärung nicht automatisch hinfällig.
+      Reichen Sie die Erklärung bitte zusammen mit einem etwaigen Einspruch ein.
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder
+      zur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe
+      zur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.
+  expect:
+    kind: est
+    action: objection_required
+    deadline: '2025-12-03'
+    errors: []
+    fields: {einkuenfte_gewerbe: 4800000, zve: 5760000, est: 1370700}
+  why: 'An est notice whose bases were estimated under § 162 AO because no return was filed: objection_required. No filed return to compare. Firm and client are both in BB: Friday 31.10.2025 is Reformation Day in both, Sat/Sun follow -> Bekanntgabe Monday 03.11.2025. Received (Bekanntgabe): posted 27.10.2025 + 4 days = 31.10.2025 (Fr), not a working day in BB/BB -> 03.11.2025 (Mo). Deadline: one month after 03.11.2025 = 03.12.2025 (Mi).'
+- id: case-13
+  firm: {land: TH}
+  client: {name: Marlene Gutheil, steuernummer: 151/220/04873, land: TH, kind: trader}
+  document:
+    channel: portal
+    posted: '2026-09-14'
+    provided_at: '2026-09-14'
+    notified_at: '2026-09-15'
+    postmark: null
+    received_at: '2026-09-16'
+    text: |
+      Finanzamt Erfurt
+      Mittelhäuser Straße 64f, 99091 Erfurt
+      Steuernummer: 151/220/04873
+      Datum: 14.09.2026
+
+      Frau Marlene Gutheil
+      Krämerbrücke 8
+      99084 Erfurt
+
+      Einkommensteuerbescheid 2024
+
+      Sehr geehrte Frau Gutheil,
+
+      da Sie für das Jahr 2024 keine Einkommensteuererklärung abgegeben haben, wurden die Besteuerungsgrundlagen
+      nach § 162 AO geschätzt. Für den Arbeitslohn wurden die elektronisch übermittelten Daten Ihres Arbeitgebers
+      übernommen; die Einkünfte aus Ihrem Gewerbebetrieb (Café) habe ich mit 12.000 € angesetzt.
+
+      Danach ergeben sich Einkünfte aus nichtselbständiger Arbeit von 41.000 €, eine Summe der Einkünfte
+      von 53.000 € und ein zu versteuerndes Einkommen von 53.000 €. Die Einkommensteuer wird auf
+      11.966,00 € festgesetzt. Nach Abzug der einbehaltenen Lohnsteuer von 6.800,00 € verbleiben
+      5.166,00 €.
+
+      Zinsen zur Einkommensteuer nach § 233a AO: Der Zinslauf begann am 01.04.2026. Bis zur Bekanntgabe dieses
+      Bescheids sind 5 volle Monate abgelaufen. 5 x 0,15 % = 0,75 % von 5.150 € ergibt 38,00 €.
+
+      Zu zahlen sind insgesamt 5.204,00 € (Einkommensteuer 5.166,00 €, Zinsen 38,00 €).
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem
+      Finanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt
+      am vierten Tag nach der Bereitstellung zum Abruf als bekannt gegeben.
+  expect:
+    kind: est
+    action: objection_required
+    deadline: '2026-10-19'
+    errors: []
+    fields: {zve: 5300000, est: 1196600, rest_est: 516600, zinsen_est: 3800}
+  why: 'Estimate under § 162 AO (no return filed): objection_required. Its interest is right, so no error. Received (Bekanntgabe): made available 14.09.2026 (from 2026): availability + 4 days = 18.09.2026 (Fr). Deadline: one month after 18.09.2026 = 18.10.2026 (So) -> next working day in TH/TH: 19.10.2026 (Mo). Interest: interest 01.04.2026–18.09.2026 = 5 full months x 0.15 % = 0.75 % on 5.166,00 rounded down to 5.150 € = 38.6250 € -> 38 €; notice prints 38,00 € -> right.'
+- id: case-14
+  firm: {land: RP}
+  client: {name: Dr. Konstantin Ebersbach, steuernummer: 26/650/1234/5, land: RP, kind: trader}
+  filed:
+    kind: est
+    year: 2023
+    fields: {einkuenfte_nsa: 11840000, einkuenfte_gewerbe: 3175000, summe_einkuenfte: 15015000, sonderausgaben: 562000, zve: 14453000, est: 5072900, soli: 279009, kist: 456561, lst_est: 4742500, rest_est: 330400, lst_soli: 260837, rest_soli: 18172, lst_kist: 426825, rest_kist: 29736}
+  document:
+    channel: portal
+    posted: '2025-08-18'
+    provided_at: '2025-08-18'
+    notified_at: '2025-08-19'
+    postmark: null
+    received_at: '2025-08-19'
+    text: |
+      Finanzamt Mainz
+      Schillerstraße 13, 55116 Mainz
+
+      Steuernummer: 26/650/1234/5
+      Datum: 18.08.2025
+
+      Herrn Dr. Konstantin Ebersbach
+      Am Rosengarten 3
+      55131 Mainz
+
+      Bescheid für 2023 über Einkommensteuer, Solidaritätszuschlag und Kirchensteuer
+
+      Festsetzung
+      Einkünfte aus nichtselbständiger Arbeit ........ 118.400 €
+      Einkünfte aus Gewerbebetrieb .................... 31.750 €
+      Summe der Einkünfte ............................ 150.150 €
+      Sonderausgaben ................................. - 5.620 €
+      zu versteuerndes Einkommen ..................... 144.530 €
+
+      Einkommensteuer, festgesetzt ................. 50.729,00 €
+      Solidaritätszuschlag, festgesetzt ............. 2.790,09 €
+      Kirchensteuer rk, festgesetzt ................. 4.565,61 €
+
+      Abrechnung
+      Einkommensteuer .............................. 50.729,00 €
+        ab Steuerabzug vom Lohn .................. - 47.425,00 €
+        verbleibende Einkommensteuer ................ 3.304,00 €
+      Solidaritätszuschlag .......................... 2.790,09 €
+        ab Steuerabzug vom Lohn ................... - 2.608,37 €
+        verbleibender Solidaritätszuschlag ............ 181,72 €
+      Kirchensteuer rk .............................. 4.565,61 €
+        ab Steuerabzug vom Lohn ................... - 4.268,25 €
+        verbleibende Kirchensteuer rk ................. 297,36 €
+      Zinsen zur Einkommensteuer (§ 233a AO) ........... 19,00 €
+      noch zu zahlen ................................ 3.802,08 €
+
+      Berechnung der Zinsen zur Einkommensteuer (§ 233a AO)
+      Zinslauf vom 01.04.2025 bis 23.08.2025 = 4 volle Monate
+      zu verzinsender Betrag 3.304,00 €, abgerundet 3.300 €
+      4 Monate x 0,15 % = 0,60 %  ->  Zinsen 19,00 €
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem
+      Finanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt
+      am vierten Tag nach Absendung der elektronischen Benachrichtigung über die Bereitstellung als
+      bekannt gegeben.
+  expect:
+    kind: est
+    action: close
+    deadline: '2025-09-23'
+    errors: []
+    fields: {zve: 14453000, est: 5072900, soli: 279009, kist: 456561, rest_est: 330400, zinsen_est: 1900}
+  why: 'Income tax 2023 with Soli and church tax matches the return. Interest only on the remaining income tax. Portal in 2025: notification 19.08. + 4 days = Saturday 23.08.2025, not moved. Received (Bekanntgabe): made available 18.08.2025 (in 2025): notification 19.08.2025 + 4 days = 23.08.2025 (Sa), portal: not moved although not a working day. Deadline: one month after 23.08.2025 = 23.09.2025 (Di). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €. Interest: interest 01.04.2025–23.08.2025 = 4 full months x 0.15 % = 0.60 % on 3.304,00 rounded down to 3.300 € = 19.8000 € -> 19 €; notice prints 19,00 € -> right.'
+- id: case-15
+  firm: {land: SH}
+  client: {name: Okke Thomsen, steuernummer: 15/287/30581, land: SH, kind: trader}
+  filed:
+    kind: est
+    year: 2023
+    fields: {einkuenfte_nsa: 3640000, einkuenfte_gewerbe: 2480000, summe_einkuenfte: 6120000, sonderausgaben: 398000, zve: 5722000, est: 1411900, lst_est: 730700, rest_est: 681200}
+  document:
+    channel: post
+    posted: '2025-10-06'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2025-10-10'
+    text: "Finanzamt Kiel\nFeldstraße 23, 24105 Kiel\nSteuernummer: 15/287/30581                         Datum: 06.10.2025\n\nHerrn\nOkke Thomsen\nHoltenauer Straße 152\n24105 Kiel\n\nBescheid für 2023\nüber Einkommensteuer und Solidaritätszuschlag\n\nErmittlung des zu versteuernden Einkommens                         €\nEinkünfte aus nichtselbständiger Arbeit                     36.400 \nEinkünfte aus Gewerbebetrieb                                24.800 \nSumme der Einkünfte                                         61.200 \nSonderausgaben                                               3.980-\nZu versteuerndes Einkommen                                  57.220 \n\n                               Einkommensteuer\nFestgesetzt werden                  14.119,00 \nab Steuerabzug vom Lohn              7.307,00-\nverbleibende Beträge                 6.812,00 \nZinsen (§ 233a AO)                      71,00 \n\nBitte zahlen Sie insgesamt 6.883,00 € bis 10.11.2025 an die Finanzkasse Kiel.\n\nZinsen nach\
+      \ § 233a AO: Zinslauf ab 01.04.2025, 7 volle Monate, Zinssatz 1,05 %,\nBemessungsgrundlage 6.800 €, Zinsen 71,00 €.\n\nRechtsbehelfsbelehrung:\nSie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats\nnach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder\nzur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe\nzur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.\n"
+  expect:
+    kind: est
+    action: objection_required
+    deadline: '2025-11-10'
+    errors: [interest]
+    fields: {rest_est: 681200, zinsen_est: 7100}
+  why: 'Figures match the return, but the interest is wrong: the notice counts 7 months. Received (Bekanntgabe): posted 06.10.2025 + 4 days = 10.10.2025 (Fr). Deadline: one month after 10.10.2025 = 10.11.2025 (Mo). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €. Interest: interest 01.04.2025–10.10.2025 = 6 full months x 0.15 % = 0.90 % on 6.812,00 rounded down to 6.800 € = 61.2000 € -> 61 €; notice prints 71,00 €, differs from 61,00 € by more than 1 €: wrong.'
+- id: case-16
+  firm: {land: BY}
+  client: {name: Theresia Gruber, steuernummer: 257/118/30472, land: BY, kind: person}
+  filed:
+    kind: est
+    year: 2022
+    fields: {einkuenfte_nsa: 4932000, einkuenfte_vuv: 314000, summe_einkuenfte: 5246000, sonderausgaben: 326000, zve: 4920000, est: 1150900, kist: 92072, lst_est: 1554600, rest_est: -403700, lst_kist: 124368, rest_kist: -32296}
+  document:
+    channel: post
+    posted: '2024-07-16'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2024-07-20'
+    text: |
+      Finanzamt Würzburg
+      Ludwigstraße 25, 97070 Würzburg
+
+      Steuernummer: 257/118/30472
+      Datum: 16.07.2024
+
+      Frau
+      Theresia Gruber
+      Sanderstraße 33
+      97070 Würzburg
+
+      Bescheid für 2022 über Einkommensteuer, Solidaritätszuschlag und Kirchensteuer
+
+      Festsetzung
+      Einkünfte aus nichtselbständiger Arbeit ......... 49.320 €
+      Einkünfte aus Vermietung und Verpachtung ......... 3.140 €
+      Summe der Einkünfte ............................. 52.460 €
+      Sonderausgaben ................................. - 3.260 €
+      zu versteuerndes Einkommen ...................... 49.200 €
+
+      Einkommensteuer, festgesetzt ................. 11.509,00 €
+      röm.-kath. Kirchensteuer, festgesetzt ........... 920,72 €
+
+      Abrechnung
+      Einkommensteuer .............................. 11.509,00 €
+        ab Steuerabzug vom Lohn .................. - 15.546,00 €
+        verbleibende Einkommensteuer ............... 4.037,00- €
+      röm.-kath. Kirchensteuer ........................ 920,72 €
+        ab Steuerabzug vom Lohn ................... - 1.243,68 €
+        verbleibende röm.-kath. Kirchensteuer ........ 322,96- €
+      Zinsen zur Einkommensteuer (§ 233a AO) .......... 18,00- €
+      zu erstatten .................................. 4.377,96 €
+
+      Erstattungszinsen (§ 233a AO): Zinslauf 01.04.2024 bis 19.07.2024 = 3 volle Monate;
+      0,45 % von 4.000 € = 18,00 € zu Ihren Gunsten.
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen. Bei Übermittlung durch die Post gilt der
+      Bescheid am dritten Tag nach der Aufgabe zur Post als bekannt gegeben.
+  expect:
+    kind: est
+    action: close
+    deadline: '2024-08-19'
+    errors: []
+    fields: {rest_est: -403700, zinsen_est: -1800}
+  why: 'Refund 2022 matching the return; refund interest earns interest the same way (negative). Received (Bekanntgabe): posted 16.07.2024 + 3 days = 19.07.2024 (Fr). Deadline: one month after 19.07.2024 = 19.08.2024 (Mo). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €. Interest: interest 01.04.2024–19.07.2024 = 3 full months x 0.15 % = 0.45 % on 4.037,00 rounded down to 4.000 € = 18.0000 € -> 18 €; notice prints -18,00 € -> right.'
+- id: case-17
+  firm: {land: NW}
+  client: {name: Lukas Terhorst, steuernummer: 336/5719/0846, land: NW, kind: person}
+  filed:
+    kind: est
+    year: 2022
+    fields: {einkuenfte_nsa: 7215000, summe_einkuenfte: 7215000, sonderausgaben: 513000, zve: 6702000, est: 1881100, soli: 22074, lst_est: 2485900, rest_est: -604800, rest_soli: 22074}
+  document:
+    channel: portal
+    posted: '2024-11-08'
+    provided_at: '2024-11-08'
+    notified_at: '2024-11-11'
+    postmark: null
+    received_at: '2024-11-12'
+    text: |
+      Finanzamt Münster-Innenstadt
+      Münzstraße 10, 48143 Münster
+      Datum: 08.11.2024
+      Steuernummer: 336/5719/0846
+
+      Herrn Lukas Terhorst
+      Hammer Straße 64
+      48153 Münster
+
+      Einkommensteuerbescheid 2022
+      Bescheid über Einkommensteuer und Solidaritätszuschlag
+
+      | Besteuerungsgrundlagen | EUR |
+      |---|---:|
+      | Einkünfte aus nichtselbständiger Arbeit | 72 150 |
+      | Summe der Einkünfte | 72 150 |
+      | Sonderausgaben | 5 130- |
+      | zu versteuerndes Einkommen | 67 020 |
+
+      |  | Einkommensteuer | Solidaritätszuschlag |
+      |---|---:|---:|
+      | festgesetzt | 18 811,00 | 220,74 |
+      | anzurechnende Steuerabzugsbeträge | 24 859,00- |  |
+      | verbleibend | 6 048,00- | 220,74 |
+      | Zinsen zur Einkommensteuer | 27,00- |  |
+
+      Gesamtbetrag – Erstattung zu Ihren Gunsten: EUR 5 854,26
+
+      Erstattungszinsen: Zinslauf ab 01.04.2024, 3 volle Monate x 0,15 %,
+      Bemessungsgrundlage 6.000 € -> 27,00 €.
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem
+      Finanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt
+      am dritten Tag nach Absendung der Benachrichtigung über die Bereitstellung als bekannt gegeben.
+  expect:
+    kind: est
+    action: objection_required
+    deadline: '2024-12-16'
+    errors: [interest]
+    fields: {rest_est: -604800, zinsen_est: -2700}
+  why: 'Refund matches the return, but refund interest counts only 3 months (too low, against the client). Received (Bekanntgabe): made available 08.11.2024 (before 2025): notification 11.11.2024 + 3 days = 14.11.2024 (Do). Deadline: one month after 14.11.2024 = 14.12.2024 (Sa) -> next working day in NW/NW: 16.12.2024 (Mo). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €. Interest: interest 01.04.2024–14.11.2024 = 7 full months x 0.15 % = 1.05 % on 6.048,00 rounded down to 6.000 € = 63.0000 € -> 63 €; notice prints -27,00 €, differs from -63,00 € by more than 1 €: wrong.'
+- id: case-18
+  firm: {land: SN}
+  client: {name: Grit Stephan, steuernummer: 203/104/05678, land: SN, kind: person}
+  filed:
+    kind: est
+    year: 2024
+    fields: {einkuenfte_nsa: 4083000, summe_einkuenfte: 4083000, sonderausgaben: 302000, zve: 3781000, est: 676200, kist: 60858, lst_est: 392200, rest_est: 284000, lst_kist: 35298, rest_kist: 25560}
+  document:
+    channel: portal
+    posted: '2026-06-15'
+    provided_at: '2026-06-15'
+    notified_at: '2026-06-16'
+    postmark: null
+    received_at: '2026-06-17'
+    text: "Finanzamt Dresden-Süd\nRabenerstraße 1, 01069 Dresden\nSteuernummer: 203/104/05678                         Datum: 15.06.2026\n\nFrau Grit Stephan\nHechtstraße 19\n01097 Dresden\n\nBescheid für 2024\nüber Einkommensteuer, Solidaritätszuschlag und Kirchensteuer\n\nErmittlung des zu versteuernden Einkommens                         €\nEinkünfte aus nichtselbständiger Arbeit                     40.830 \nSumme der Einkünfte                                         40.830 \nSonderausgaben                                               3.020-\nZu versteuerndes Einkommen                                  37.810 \n\n                               Einkommensteuer             KiSt ev\nFestgesetzt werden                    6762,00              608,58 \nab Steuerabzug vom Lohn               3922,00-             352,98-\nverbleibende Beträge                  2840,00              255,60 \n\nBitte zahlen Sie insgesamt 3095,60 €.\n\nRechtsbehelfsbelehrung\nGegen diesen Bescheid ist der Einspruch zulässig.\
+      \ Er ist binnen eines Monats nach Bekanntgabe bei dem\nFinanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt\nam vierten Tag nach der Bereitstellung zum Abruf als bekannt gegeben.\n"
+  expect:
+    kind: est
+    action: close
+    deadline: '2026-07-20'
+    errors: []
+    fields: {zve: 3781000, est: 676200, rest_est: 284000, rest_kist: 25560}
+  why: 'Matches the return. Interest would be under 10 €, so none is set and none is printed: right. Amounts printed without thousands separator. Received (Bekanntgabe): made available 15.06.2026 (from 2026): availability + 4 days = 19.06.2026 (Fr). Deadline: one month after 19.06.2026 = 19.07.2026 (So) -> next working day in SN/SN: 20.07.2026 (Mo). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €. Interest: interest 01.04.2026–19.06.2026 = 2 full months x 0.15 % = 0.30 % on 2.840,00 rounded down to 2.800 € = 8.4000 € -> 8 € (< 10 €: none); notice prints 0,00 € -> right.'
+- id: case-19
+  firm: {land: NI}
+  client: {name: Meike Harms, steuernummer: 24/131/27760, land: NI, kind: person}
+  filed:
+    kind: est
+    year: 2023
+    fields: {einkuenfte_nsa: 3911000, summe_einkuenfte: 3911000, sonderausgaben: 284000, zve: 3627000, est: 661600, lst_est: 359600, rest_est: 302000}
+  document:
+    channel: post
+    posted: '2025-06-10'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2025-06-16'
+    text: |
+      Finanzamt Braunschweig-Altewiekring
+      Altewiekring 20, 38102 Braunschweig
+
+      Steuernummer: 24/131/27760
+      Datum: 10.06.2025
+
+      Frau
+      Meike Harms
+      Kastanienallee 7
+      38104 Braunschweig
+
+      Bescheid für 2023 über Einkommensteuer und Solidaritätszuschlag
+
+      Festsetzung
+      Einkünfte aus nichtselbständiger Arbeit ......... 39.110 €
+      Summe der Einkünfte ............................. 39.110 €
+      Sonderausgaben ................................. - 2.840 €
+      zu versteuerndes Einkommen ...................... 36.270 €
+
+      Einkommensteuer, festgesetzt .................. 6.616,00 €
+
+      Abrechnung
+      Einkommensteuer ............................... 6.616,00 €
+        ab Steuerabzug vom Lohn ................... - 3.596,00 €
+        verbleibende Einkommensteuer ................ 3.020,00 €
+      Zinsen zur Einkommensteuer (§ 233a AO) ............ 9,00 €
+      noch zu zahlen ................................ 3.029,00 €
+
+      Zinsen: 2 volle Monate x 0,15 % von 3.000 € = 9,00 €.
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder
+      zur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe
+      zur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.
+  expect:
+    kind: est
+    action: objection_required
+    deadline: '2025-07-16'
+    errors: [interest]
+    fields: {rest_est: 302000, zinsen_est: 900}
+  why: 'Figures match the return, but the notice sets 9,00 € interest although interest under 10 € is not set. Received (Bekanntgabe): posted 10.06.2025 + 4 days = 14.06.2025 (Sa), not a working day in NI/NI -> 16.06.2025 (Mo). Deadline: one month after 16.06.2025 = 16.07.2025 (Mi). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €. Interest: interest 01.04.2025–16.06.2025 = 2 full months x 0.15 % = 0.30 % on 3.020,00 rounded down to 3.000 € = 9.0000 € -> 9 € (< 10 €: none); notice prints 9,00 €, differs from 0,00 € by more than 1 €: wrong.'
+- id: case-20
+  firm: {land: RP}
+  client: {name: Elke Hommes, steuernummer: 22/661/0457/3, land: RP, kind: person}
+  filed:
+    kind: est
+    year: 2025
+    fields: {einkuenfte_nsa: 4672000, einkuenfte_vuv: 438000, summe_einkuenfte: 5110000, sonderausgaben: 331000, zve: 4779000, est: 991600, kist: 89244, lst_est: 873200, rest_est: 118400, lst_kist: 78588, rest_kist: 10656}
+  document:
+    channel: post
+    posted: '2026-03-17'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2026-03-23'
+    text: |
+      Finanzamt Koblenz
+      Ferdinand-Sauerbruch-Straße 19, 56073 Koblenz
+
+      Steuernummer: 22/661/0457/3
+      Datum: 17.03.2026
+
+      Frau
+      Elke Hommes
+      Moselweißer Straße 55
+      56073 Koblenz
+
+      Bescheid für 2025 über Einkommensteuer, Solidaritätszuschlag und Kirchensteuer
+
+      Festsetzung
+      Einkünfte aus nichtselbständiger Arbeit ......... 46.720 €
+      Einkünfte aus Vermietung und Verpachtung ......... 4.380 €
+      Summe der Einkünfte ............................. 51.100 €
+      Sonderausgaben ................................. - 3.310 €
+      zu versteuerndes Einkommen ...................... 47.790 €
+
+      Einkommensteuer, festgesetzt .................. 9.916,00 €
+      Kirchensteuer rk, festgesetzt ................... 892,44 €
+
+      Abrechnung
+      Einkommensteuer ............................... 9.916,00 €
+        ab Steuerabzug vom Lohn ................... - 8.732,00 €
+        verbleibende Einkommensteuer ................ 1.184,00 €
+      Kirchensteuer rk ................................ 892,44 €
+        ab Steuerabzug vom Lohn ..................... - 785,88 €
+        verbleibende Kirchensteuer rk ................. 106,56 €
+      noch zu zahlen ................................ 1.380,56 €
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder
+      zur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe
+      zur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.
+  expect:
+    kind: est
+    action: review
+    deadline: '2026-04-23'
+    errors: [arithmetic]
+  why: 'The total ''noch zu zahlen'' 1.380,56 € is not the sum of the remaining amounts 1.184,00 € + 106,56 € = 1.290,56 €: the notice''s own arithmetic fails, so review with error arithmetic (every individual figure matches the return). Received (Bekanntgabe): posted 17.03.2026 + 4 days = 21.03.2026 (Sa), not a working day in RP/RP -> 23.03.2026 (Mo). Deadline: one month after 23.03.2026 = 23.04.2026 (Do).'
+- id: case-21
+  firm: {land: HH}
+  client: {name: Henrike Paulsen, steuernummer: 42/117/30552, land: HH, kind: person}
+  document:
+    channel: post
+    posted: '2026-07-01'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2026-07-07'
+    text: |
+      Finanzamt Hamburg-Altona
+      Gr. Bergstraße 264/266, 22767 Hamburg
+
+      Steuernummer: 42/171/30525
+      Datum: 01.07.2026
+
+      Herrn
+      Torben Pahlke
+      c/o Paulsen
+      Bahrenfelder Straße 99
+      22765 Hamburg
+
+      Bescheid für 2025 über Einkommensteuer und Solidaritätszuschlag
+
+      Festsetzung
+      Einkünfte aus nichtselbständiger Arbeit ......... 53.870 €
+      Summe der Einkünfte ............................. 53.870 €
+      Sonderausgaben ................................. - 3.650 €
+      zu versteuerndes Einkommen ...................... 50.220 €
+
+      Einkommensteuer, festgesetzt ................. 10.769,00 €
+
+      Abrechnung
+      Einkommensteuer .............................. 10.769,00 €
+        ab Steuerabzug vom Lohn .................. - 10.496,00 €
+        verbleibende Einkommensteuer .................. 273,00 €
+      noch zu zahlen .................................. 273,00 €
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder
+      zur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe
+      zur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.
+  expect:
+    kind: est
+    action: misrouted
+    deadline: '2026-08-06'
+    errors: []
+  why: 'The notice carries 42/171/30525 (digits 4217130525); the group''s client has 42/117/30552 (4211730552). No client has that tax number: misrouted. The deadline is still computed from the notice (tax office in HH, firm in HH). Received (Bekanntgabe): posted 01.07.2026 + 4 days = 05.07.2026 (So), not a working day in HH/HH -> 06.07.2026 (Mo). Deadline: one month after 06.07.2026 = 06.08.2026 (Do).'
+- id: case-22
+  firm: {land: BE}
+  client: {name: Paula Engelhardt, steuernummer: 31/507/28841, land: BE, kind: person}
+  document:
+    channel: post
+    posted: '2026-10-02'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2026-10-07'
+    text: |
+      Finanzamt Pankow/Weißensee
+      Tino-Schwierzina-Straße 32, 13089 Berlin
+
+      Steuernummer: 3?/5O■/2#8‚41
+      Datum: 02.10.2026
+
+      Frau
+      Paula Engelhardt
+      Wisbyer Straße 6
+      10439 Berlin
+
+      Bescheid für 2025 über Einkommensteuer und Solidaritätszuschlag
+
+      Festsetzung
+      Einkünfte aus nichtselbständiger Arbeit ......... 44.690 €
+      Summe der Einkünfte ............................. 44.690 €
+      Sonderausgaben ................................. - 2.770 €
+      zu versteuerndes Einkommen ...................... 41.920 €
+
+      Einkommensteuer, festgesetzt .................. 7.940,00 €
+
+      Abrechnung
+      Einkommensteuer ............................... 7.940,00 €
+        ab Steuerabzug vom Lohn ................... - 8.256,00 €
+        verbleibende Einkommensteuer ................. 316,00- €
+      zu erstatten .................................... 316,00 €
+
+      Rechtsbehelfsbelehrung
+      Dieser Bescheid kann mit dem Einspruch angefochten werden. Der Einspruch ist bei dem oben
+      bezeichneten Finanzamt schriftlich einzureichen, diesem elektronisch zu übermitteln oder dort zur
+      Niederschrift zu erklären. Die Frist für die Einlegung des Einspruchs beträgt einen Monat. Sie beginnt
+      mit Ablauf des Tages, an dem Ihnen dieser Bescheid bekannt gegeben worden ist.
+  expect:
+    kind: est
+    action: review
+    deadline: '2026-11-06'
+    errors: []
+  why: 'The scan of the tax number reads ''3?/5O■/2#8‚41'': it cannot be read with certainty. The name matches a client, but the rule says an unreadable tax number is review, not misrouted. Received (Bekanntgabe): posted 02.10.2026 + 4 days = 06.10.2026 (Di). Deadline: one month after 06.10.2026 = 06.11.2026 (Fr).'
+- id: case-23
+  firm: {land: NW}
+  client: {name: Pascal Wienholt, steuernummer: 315/5087/2211, land: NW, kind: person}
+  filed:
+    kind: est
+    year: 2024
+    fields: {einkuenfte_nsa: 3745000, summe_einkuenfte: 3745000, sonderausgaben: 251000, zve: 3494000, est: 587300, lst_est: 631500, rest_est: -44200}
+  document:
+    channel: portal
+    posted: '2026-02-02'
+    provided_at: '2026-02-02'
+    notified_at: '2026-02-03'
+    postmark: null
+    received_at: '2026-02-04'
+    text: "Finanzamt Dortmund-West\nMärkische Straße 124, 44141 Dortmund\nSteuernummer: 315/5087/2211                         Datum: 02.02.2026\n\nHerrn Pascal Wienholt\nRheinische Straße 140\n44147 Dortmund\n\nBescheid für 2024\nüber Einkommensteuer und Solidaritätszuschlag\n\nErmittlung des zu versteuernden Einkommens                         €\nEinkünfte aus nichtselbständiger Arbeit                     37.450 \nSumme der Einkünfte                                         37.450 \nSonderausgaben                                               2.510-\nZu versteuerndes Einkommen                                  34.940 \n\n                               Einkommensteuer\nFestgesetzt werden                   5.873,00 \nab Steuerabzug vom Lohn              6.315,00-\nverbleibende Beträge                   442,00-\n\nDer Betrag von 442,00 € wird Ihnen erstattet auf Ihr bekanntes Konto.\n"
+  expect:
+    kind: est
+    action: close
+    deadline: '2027-02-08'
+    errors: []
+  why: 'Matches the return. The notice (read from the portal file, not a scan) has no instructions on how to object: the period is one year (AO § 356 Abs. 2). Received (Bekanntgabe): made available 02.02.2026 (from 2026): availability + 4 days = 06.02.2026 (Fr). Deadline: one year after 06.02.2026 = 06.02.2027 (Sa) -> next working day in NW/NW: 08.02.2027 (Mo). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €.'
+- id: case-24
+  firm: {land: BY}
+  client: {name: Xaver Lindlbauer, steuernummer: 244/209/77315, land: BY, kind: person}
+  filed:
+    kind: est
+    year: 2024
+    fields: {einkuenfte_nsa: 4238000, summe_einkuenfte: 4238000, sonderausgaben: 306000, zve: 3932000, est: 724200, kist: 57936, lst_est: 713200, rest_est: 11000, lst_kist: 57056, rest_kist: 880}
+  document:
+    channel: post
+    posted: '2025-09-17'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2025-09-22'
+    text: |
+      Finanzamt Regensburg
+      Landshuter Straße 4, 93047 Regensburg
+
+      Steuernummer: 244/209/77315
+      Datum: 17.09.2025
+
+      Herrn
+      Xaver Lindlbauer
+      Prüfeninger Straße 41
+      93049 Regensburg
+
+      Bescheid für 2024 über Einkommensteuer, Solidaritätszuschlag und Kirchensteuer
+
+      Festsetzung
+      Einkünfte aus nichtselbständiger Arbeit ......... 42.380 €
+      Summe der Einkünfte ............................. 42.380 €
+      Sonderausgaben ................................. - 3.060 €
+      zu versteuerndes Einkommen ...................... 39.320 €
+
+      Einkommensteuer, festgesetzt .................. 7.242,00 €
+      Kirchensteuer rk, festgesetzt ................... 579,36 €
+
+      Abrechnung
+      Einkommensteuer ............................... 7.242,00 €
+        ab Steuerabzug vom Lohn ................... - 7.132,00 €
+        verbleibende Einkommensteuer .................. 110,00 €
+      Kirchensteuer rk ................................ 579,36 €
+        ab Steuerabzug vom Lohn ..................... - 570,56 €
+        verbleibende Kirchensteuer rk ................... 8,80 €
+      noch zu zahlen .................................. 118,80 €
+  expect:
+    kind: est
+    action: close
+    deadline: '2025-10-22'
+    errors: []
+  why: 'Matches the return. No instructions on how to object were found, but paper mail reaches the desk as a scan, so it keeps one month (and notes the year). Received (Bekanntgabe): posted 17.09.2025 + 4 days = 21.09.2025 (So), not a working day in BY/BY -> 22.09.2025 (Mo). Deadline: one month after 22.09.2025 = 22.10.2025 (Mi). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €.'
+- id: case-25
+  firm: {land: BE}
+  client: {name: Ilse Marquardt, steuernummer: 13/248/61755, land: BE, kind: person}
+  filed:
+    kind: est
+    year: 2025
+    fields: {einkuenfte_nsa: 5894000, summe_einkuenfte: 5894000, sonderausgaben: 412000, zve: 5482000, est: 1244200, lst_est: 1251900, rest_est: -7700}
+  document:
+    channel: post
+    posted: '2026-06-12'
+    provided_at: null
+    notified_at: null
+    postmark: '2026-06-16'
+    received_at: '2026-06-18'
+    text: |
+      Finanzamt Friedrichshain-Kreuzberg
+      Mehringdamm 22, 10961 Berlin
+      Datum: 12.06.2026
+      Steuernummer: 1324861755
+
+      Frau Ilse Marquardt
+      Graefestraße 71
+      10967 Berlin
+
+      Einkommensteuerbescheid 2025
+      Bescheid über Einkommensteuer und Solidaritätszuschlag
+
+      | Besteuerungsgrundlagen | EUR |
+      |---|---:|
+      | Einkünfte aus nichtselbständiger Arbeit | 58 940 |
+      | Summe der Einkünfte | 58 940 |
+      | Sonderausgaben | 4 120- |
+      | zu versteuerndes Einkommen | 54 820 |
+
+      |  | Einkommensteuer |
+      |---|---:|
+      | festgesetzt | 12 442,00 |
+      | anzurechnende Steuerabzugsbeträge | 12 519,00- |
+      | verbleibend | 77,00- |
+
+      Gesamtbetrag – Erstattung zu Ihren Gunsten: EUR 77,00
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder
+      zur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe
+      zur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.
+  expect:
+    kind: est
+    action: close
+    deadline: '2026-07-16'
+    errors: []
+  why: 'Tax number 1324861755 has the same digits as 13/248/61755. Matches the return. The envelope''s postmark (16.06.2026) is later than the notice date, which could rebut the presumption; the desk keeps the date from the notice and only notes it. Received (Bekanntgabe): posted 12.06.2026 + 4 days = 16.06.2026 (Di). Deadline: one month after 16.06.2026 = 16.07.2026 (Do). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €.'
+- id: case-26
+  firm: {land: SH}
+  client: {name: Jörn Asmussen, steuernummer: 22/298/40116, land: SH, kind: trader}
+  filed:
+    kind: est
+    year: 2025
+    fields: {einkuenfte_nsa: 2200000, einkuenfte_gewerbe: 3148000, summe_einkuenfte: 5348000, sonderausgaben: 387000, zve: 4961000, est: 1055300, lst_est: 290000, vz_est: 360000, rest_est: 405300}
+  document:
+    channel: post
+    posted: '2026-12-21'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2026-12-29'
+    text: |
+      Finanzamt Lübeck
+      Possehlstraße 4, 23560 Lübeck
+
+      Steuernummer: 22/298/40116
+      Datum: 21.12.2026
+
+      Herrn
+      Jörn Asmussen
+      Wakenitzmauer 12
+      23552 Lübeck
+
+      Bescheid für 2025 über Einkommensteuer und Solidaritätszuschlag
+
+      Festsetzung
+      Einkünfte aus nichtselbständiger Arbeit ......... 22.000 €
+      Einkünfte aus Gewerbebetrieb .................... 31.480 €
+      Summe der Einkünfte ............................. 53.480 €
+      Sonderausgaben ................................. - 3.870 €
+      zu versteuerndes Einkommen ...................... 49.610 €
+
+      Einkommensteuer, festgesetzt ................. 10.553,00 €
+
+      Abrechnung
+      Einkommensteuer .............................. 10.553,00 €
+        ab Steuerabzug vom Lohn ................... - 2.900,00 €
+        ab Vorauszahlungen ........................ - 2.700,00 €
+        verbleibende Einkommensteuer ................ 4.953,00 €
+      noch zu zahlen ................................ 4.953,00 €
+
+      Erläuterungen
+      Angerechnet wurden die für 2025 festgesetzten und bis zur Bekanntgabe dieses Bescheids
+      entrichteten Vorauszahlungen. Die Vorauszahlung zum 10.12.2025 (900,00 €) ist bisher nicht
+      eingegangen.
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder
+      zur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe
+      zur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.
+  expect:
+    kind: est
+    action: objection_review
+    deadline: '2027-01-28'
+    errors: []
+    fields: {vz_est: 270000, rest_est: 495300}
+  why: 'Prepayments credited 2.700,00 € instead of 3.600,00 € as filed (prepayments lowered = against the client); remaining amount up 900,00 €. Whether the December prepayment was paid is for the person reviewing to check. Received (Bekanntgabe): posted 21.12.2026 + 4 days = 25.12.2026 (Fr), not a working day in SH/SH -> 28.12.2026 (Mo). Deadline: one month after 28.12.2026 = 28.01.2027 (Do). Comparison with the filed return: vz_est 3.600,00 -> 2.700,00 (-900,00, against); rest_est 4.053,00 -> 4.953,00 (+900,00, against). Remaining amounts change by +900,00 €.'
+- id: case-27
+  firm: {land: BY}
+  client: {name: Severin Obermaier, steuernummer: 168/245/67890, land: BY, kind: person}
+  filed:
+    kind: est
+    year: 2025
+    fields: {einkuenfte_nsa: 5168000, summe_einkuenfte: 5168000, sonderausgaben: 394000, zve: 4774000, est: 989800, kist: 79184, lst_est: 1193700, rest_est: -203900, lst_kist: 95496, rest_kist: -16312}
+  document:
+    channel: post
+    posted: '2027-09-27'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2027-10-01'
+    text: "Finanzamt Freising\nPrinz-Ludwig-Straße 26, 85354 Freising\nSteuernummer: 168/245/67890                         Datum: 27.09.2027\n\nHerrn\nSeverin Obermaier\nObere Hauptstraße 44\n85354 Freising\n\nBescheid für 2025\nüber Einkommensteuer, Solidaritätszuschlag und Kirchensteuer\n\nErmittlung des zu versteuernden Einkommens                         €\nEinkünfte aus nichtselbständiger Arbeit                     51.680 \nSumme der Einkünfte                                         51.680 \nSonderausgaben                                               3.940-\nZu versteuerndes Einkommen                                  47.740 \n\n                               Einkommensteuer             KiSt rk\nFestgesetzt werden                   9.898,00              791,84 \nab Steuerabzug vom Lohn             11.937,00-             954,96-\nverbleibende Beträge                 2.039,00-             163,12-\nZinsen (§ 233a AO)                      18,00-                    \n\nDer Betrag von 2.220,12\
+      \ € wird Ihnen erstattet.\n\nErstattungszinsen nach § 233a AO für 6 volle Monate (01.04.2027 bis 01.10.2027):\n0,90 % von 2.000 € = 18,00 €.\n\nRechtsbehelfsbelehrung:\nSie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats\nnach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder\nzur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe\nzur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.\n"
+  expect:
+    kind: est
+    action: close
+    deadline: '2027-11-02'
+    errors: []
+    fields: {rest_est: -203900, zinsen_est: -1800}
+  why: 'Late assessment 2025, refund matches the return, refund interest right. Received (Bekanntgabe): posted 27.09.2027 + 4 days = 01.10.2027 (Fr). Deadline: one month after 01.10.2027 = 01.11.2027 (Mo) -> next working day in BY/BY: 02.11.2027 (Di). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €. Interest: interest 01.04.2027–01.10.2027 = 6 full months x 0.15 % = 0.90 % on 2.039,00 rounded down to 2.000 € = 18.0000 € -> 18 €; notice prints -18,00 € -> right.'
+- id: case-28
+  firm: {land: BE}
+  client: {name: Brauerei-Ausschank Hirschvogel GmbH, steuernummer: 241/118/50213, land: BY, kind: company}
+  filed:
+    kind: ust
+    year: 2025
+    fields: {umsatz_19: 14830000, umsatz_7: 1264000, ust: 2906180, vorsteuer: 984340, zahllast: 1921840, vz_ust: 1660000, rest_ust: 261840}
+  document:
+    channel: post
+    posted: '2027-09-27'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2027-10-04'
+    text: |
+      Finanzamt Nürnberg-Süd
+      Sandstraße 20, 90443 Nürnberg
+      Steuernummer: 241/118/50213
+      Datum: 27.09.2027
+
+      Brauerei-Ausschank Hirschvogel GmbH
+      Hirschelgasse 21
+      90403 Nürnberg
+
+      Bescheid für 2025 über Umsatzsteuer
+
+      Berechnung der Umsatzsteuer                       Bemessungsgrundlage €        Steuer €
+      Lieferungen und sonstige Leistungen zu 19 v. H.              148.300       28.177,00
+      Lieferungen und sonstige Leistungen zu 7 v. H.                12.640          884,80
+      Umsatzsteuer                                                                29.061,80
+      abziehbare Vorsteuerbeträge                                                  9.843,40-
+      verbleibende Umsatzsteuer                                                   19.218,40
+
+      Abrechnung
+      festgesetzt                                           19.218,40
+      Vorauszahlungssoll                                    16.600,00-
+      Unterschiedsbetrag (Abschlusszahlung)                  2.618,40
+      Zinsen zur Umsatzsteuer                                   23,00
+      noch zu entrichten                                     2.641,40
+
+      Zinsberechnung: Zinslauf 01.04.2027 bis 01.10.2027 (6 volle Monate), 0,90 % von 2.600 €.
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder
+      zur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe
+      zur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.
+  expect:
+    kind: ust
+    action: close
+    deadline: '2027-11-01'
+    errors: []
+    fields: {rest_ust: 261840, zinsen_ust: 2300}
+  why: 'VAT 2025 matches the return; interest right. Firm in BE, client in BY: Monday 01.11.2027 is All Saints in BY but not in BE, so not a holiday for the desk (compare case-27). Received (Bekanntgabe): posted 27.09.2027 + 4 days = 01.10.2027 (Fr). Deadline: one month after 01.10.2027 = 01.11.2027 (Mo). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €. Interest: interest 01.04.2027–01.10.2027 = 6 full months x 0.15 % = 0.90 % on 2.618,40 rounded down to 2.600 € = 23.4000 € -> 23 €; notice prints 23,00 € -> right.'
+- id: case-29
+  firm: {land: SN}
+  client: {name: Elbtal Messebau UG (haftungsbeschränkt), steuernummer: 231/104/05678, land: SN, kind: company}
+  filed:
+    kind: ust
+    year: 2025
+    fields: {umsatz_19: 9640000, ust: 1831600, vorsteuer: 691230, zahllast: 1140370, vz_ust: 1100000, rest_ust: 40370}
+  document:
+    channel: portal
+    posted: '2026-10-14'
+    provided_at: '2026-10-14'
+    notified_at: '2026-10-14'
+    postmark: null
+    received_at: '2026-10-15'
+    text: |
+      Finanzamt Leipzig II
+      Erich-Weinert-Straße 20, 04105 Leipzig
+      Datum: 14.10.2026
+      Steuernummer: 231/104/05678
+
+      Elbtal Messebau UG (haftungsbeschränkt)
+      Torgauer Straße 231
+      04347 Leipzig
+
+      Umsatzsteuerbescheid 2025
+
+      | | Bemessungsgrundlage | Steuer |
+      |---|---:|---:|
+      | steuerpflichtige Umsätze 19 % | 96.400 € | 18.316,00 € |
+      | Umsatzsteuer | | 18.316,00 € |
+      | Vorsteuer | | 5.672,30 € |
+      | Zahllast | | 12.643,70 € |
+      | ./. Vorauszahlungen | | 11.000,00 € |
+      | Abschlusszahlung | | 1.643,70 € |
+
+      Begründung: Die Vorsteuer aus der Rechnung der Fa. Stahlform Riesa GmbH vom 12.09.2025 über 1.240,00 € Umsatzsteuer
+      kann nicht abgezogen werden, weil die Rechnung nicht an Sie, sondern an die Elbtal Messebau GmbH i. L. adressiert
+      ist (§ 15 Abs. 1 Satz 1 Nr. 1 UStG). Abweichend von der Erklärung wurde die Vorsteuer um 1.240,00 € gemindert.
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem
+      Finanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt
+      am vierten Tag nach der Bereitstellung zum Abruf als bekannt gegeben.
+  expect:
+    kind: ust
+    action: objection_review
+    deadline: '2026-11-19'
+    errors: []
+    fields: {vorsteuer: 567230, zahllast: 1264370, rest_ust: 164370}
+  why: 'Input VAT lowered by 1.240,00 € (against the client); amount still to pay up 1.240,00 €. Portal from 2026: 14.10. + 4 = Sunday 18.10., not moved; one month later = Wednesday 18.11.2026, Buß- und Bettag, a holiday in SN for both firm and client. Received (Bekanntgabe): made available 14.10.2026 (from 2026): availability + 4 days = 18.10.2026 (So), portal: not moved although not a working day. Deadline: one month after 18.10.2026 = 18.11.2026 (Mi) -> next working day in SN/SN: 19.11.2026 (Do). Comparison with the filed return: vorsteuer 6.912,30 -> 5.672,30 (-1.240,00, against); zahllast 11.403,70 -> 12.643,70 (+1.240,00, against); rest_ust 403,70 -> 1.643,70 (+1.240,00, against). Remaining amounts change by +1.240,00 €.'
+- id: case-30
+  firm: {land: HE}
+  client: {name: Mainufer Lichttechnik GmbH, steuernummer: 047 224 30919, land: HE, kind: company}
+  filed:
+    kind: kst
+    year: 2024
+    fields: {einkommen: 8642000, kst: 1296300, soli: 71296, vz_kst: 1000000, rest_kst: 296300}
+  document:
+    channel: portal
+    posted: '2025-10-20'
+    provided_at: '2025-10-20'
+    notified_at: '2025-10-21'
+    postmark: null
+    received_at: '2025-10-22'
+    text: |
+      Finanzamt Frankfurt am Main IV
+      Gutleutstraße 118, 60327 Frankfurt am Main
+      Steuernummer: 047 224 30919
+      Datum: 20.10.2025
+
+      Mainufer Lichttechnik GmbH
+      Hanauer Landstraße 182
+      60314 Frankfurt am Main
+
+      Bescheid für 2024 über Körperschaftsteuer und Solidaritätszuschlag
+
+      Einkommen ........................................ 86.420 €
+      Körperschaftsteuer (15 %) ........................ 12.963,00 €
+      Solidaritätszuschlag (5,5 %) ..................... 712,96 €
+
+      Abrechnung                         Körperschaftsteuer    Solidaritätszuschlag
+      festgesetzt                                 12.963,00                  712,96
+      Vorauszahlungen                             10.000,00                  550,00
+      verbleibend                                  2.963,00                  162,96
+
+      insgesamt noch zu zahlen: 3.152,96 €
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem
+      Finanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt
+      am vierten Tag nach Absendung der elektronischen Benachrichtigung über die Bereitstellung als
+      bekannt gegeben.
+  expect:
+    kind: kst
+    action: review
+    deadline: '2025-11-25'
+    errors: [arithmetic]
+  why: 'Total 3.152,96 € does not equal 2.963,00 € + 162,96 € = 3.125,96 €: review, arithmetic. The individual figures match the return. Received (Bekanntgabe): made available 20.10.2025 (in 2025): notification 21.10.2025 + 4 days = 25.10.2025 (Sa), portal: not moved although not a working day. Deadline: one month after 25.10.2025 = 25.11.2025 (Di).'
+- id: case-31
+  firm: {land: NW}
+  client: {name: Rheinkiesel Logistik GmbH, steuernummer: 106/5741/0318, land: NW, kind: company}
+  filed:
+    kind: kst
+    year: 2024
+    fields: {einkommen: 21487000, kst: 3223050, soli: 177267, vz_kst: 3000000, rest_kst: 223050}
+  document:
+    channel: portal
+    posted: '2026-01-27'
+    provided_at: '2026-01-27'
+    notified_at: '2026-01-28'
+    postmark: null
+    received_at: '2026-01-28'
+    text: |
+      Finanzamt Düsseldorf-Nord
+      Roßstraße 68, 40476 Düsseldorf
+      Steuernummer: 106/5741/0318
+      Datum: 27.01.2026
+
+      Rheinkiesel Logistik GmbH
+      z. H. der Geschäftsführung
+      Theodorstraße 290
+      40472 Düsseldorf
+
+      Körperschaftsteuerbescheid für 2024
+      und Bescheid über den Solidaritätszuschlag zur Körperschaftsteuer für 2024
+
+      Ermittlung des Einkommens
+      Einkommen (lt. Erklärung 214.870 €)
+      zuzüglich verdeckte Gewinnausschüttung (§ 8 Abs. 3 Satz 2 KStG)      8.000 €
+      zu versteuerndes Einkommen                                      222.870 €
+
+      Körperschaftsteuer 15 v. H.                                   33.430,50 €
+      Solidaritätszuschlag 5,5 v. H.                                 1.838,67 €
+
+      Abrechnung (EUR)
+      Körperschaftsteuer  festgesetzt 33.430,50  ab Vorauszahlungen 30.000,00  verbleibend 3.430,50
+      SolZ                festgesetzt 1.838,67  ab Vorauszahlungen 1.650,00  verbleibend 188,67
+      Gesamtbetrag Nachzahlung 3.619,17
+
+      Erläuterung: Die Überlassung des Pkw an den Gesellschafter-Geschäftsführer zur Privatnutzung ohne Vereinbarung
+      ist als verdeckte Gewinnausschüttung zu behandeln (vgl. Bericht über die Außenprüfung vom 09.12.2025, Tz. 2.3).
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem
+      Finanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt
+      am vierten Tag nach der Bereitstellung zum Abruf als bekannt gegeben.
+  expect:
+    kind: kst
+    action: objection_review
+    deadline: '2026-03-02'
+    errors: []
+    fields: {einkommen: 22287000, kst: 3343050, soli: 183867, rest_kst: 343050}
+  why: 'Income raised by 8.000 € (vGA), against the client; corporate tax +1.200,00 €, Soli +66,00 €. Bekanntgabe Saturday 31.01.2026 (portal, not moved); February has no 31st -> 28.02.2026 (Saturday) -> Monday 02.03.2026. Received (Bekanntgabe): made available 27.01.2026 (from 2026): availability + 4 days = 31.01.2026 (Sa), portal: not moved although not a working day. Deadline: one month after 31.01.2026 = 28.02.2026 (Sa) -> next working day in NW/NW: 02.03.2026 (Mo). Comparison with the filed return: einkommen 214.870,00 -> 222.870,00 (+8.000,00, against); kst 32.230,50 -> 33.430,50 (+1.200,00, against); soli 1.772,67 -> 1.838,67 (+66,00, against); rest_kst 2.230,50 -> 3.430,50 (+1.200,00, against). Remaining amounts change by +1.266,00 €.'
+- id: case-32
+  firm: {land: BE}
+  client: {name: Isarwerk Sensorik GmbH, steuernummer: 143/118/30472, land: BY, kind: company}
+  filed:
+    kind: kst
+    year: 2024
+    fields: {einkommen: 5731200, kst: 859680, soli: 47282, vz_kst: 800000, rest_kst: 59680}
+  document:
+    channel: portal
+    posted: '2025-12-01'
+    provided_at: '2025-12-01'
+    notified_at: '2025-12-02'
+    postmark: null
+    received_at: '2025-12-03'
+    text: |
+      Finanzamt München
+      Abteilung Körperschaften
+      Meiserstraße 4, 80333 München
+
+      Steuernummer: 143/118/30472
+      Datum: 01.12.2025
+
+      Isarwerk Sensorik GmbH
+      Lindwurmstraße 117
+      80337 München
+
+      Bescheid für 2024 über Körperschaftsteuer und Solidaritätszuschlag
+
+      Festsetzung
+        Einkommen / zu versteuerndes Einkommen          EUR 57 312,00
+        Körperschaftsteuer                              EUR 8 596,80
+        Solidaritätszuschlag                            EUR 472,82
+
+      Abrechnung
+        Körperschaftsteuer               EUR 8 596,80
+        abzüglich Vorauszahlungen        EUR 8 000,00
+        Abschlusszahlung                 EUR 596,80
+        Solidaritätszuschlag             EUR 472,82
+        abzüglich Vorauszahlungen        EUR 440,00
+        Abschlusszahlung                 EUR 32,82
+
+      Die Festsetzung entspricht Ihrer Erklärung.
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem
+      Finanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt
+      am vierten Tag nach Absendung der elektronischen Benachrichtigung über die Bereitstellung als
+      bekannt gegeben.
+  expect:
+    kind: kst
+    action: close
+    deadline: '2026-01-06'
+    errors: []
+  why: 'Corporate tax 2024 matches the return. Portal in 2025: notification 02.12. + 4 = Saturday 06.12.2025 (not moved). 06.01.2026 is a holiday in BY but not in BE (firm), so not a holiday for the desk. Received (Bekanntgabe): made available 01.12.2025 (in 2025): notification 02.12.2025 + 4 days = 06.12.2025 (Sa), portal: not moved although not a working day. Deadline: one month after 06.12.2025 = 06.01.2026 (Di). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €.'
+- id: case-33
+  firm: {land: BW}
+  client: {name: Neckarblick Immobilienverwaltung GmbH, steuernummer: 99012/34567, land: BW, kind: company}
+  filed:
+    kind: kst
+    year: 2022
+    fields: {einkommen: 13145000, kst: 1971750, soli: 108446, vz_kst: 720000, rest_kst: 1251750}
+  document:
+    channel: post
+    posted: '2024-12-27'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2025-01-02'
+    text: |
+      Finanzamt Stuttgart-Körperschaften
+      Seidenstraße 23, 70174 Stuttgart
+
+      Datum: 27.12.2024
+      Steuernummer: 99012/34567
+
+      Neckarblick Immobilienverwaltung GmbH
+      Neckarstraße 145
+      70190 Stuttgart
+
+      Körperschaftsteuerbescheid 2022
+
+      Einkommen ............................................. 131.450 €
+      Körperschaftsteuer .................................... 19.717,50 €
+      Solidaritätszuschlag .................................. 1.084,46 €
+
+      Körperschaftsteuer: festgesetzt 19.717,50 €, Vorauszahlungen 7.200,00 €, Restbetrag 12.517,50 €
+      Solidaritätszuschlag: festgesetzt 1.084,46 €, Vorauszahlungen 396,00 €, Restbetrag 688,46 €
+      Zinsen zur Körperschaftsteuer (§ 233a AO) ............. 150,00 €
+      Summe noch zu zahlen .................................. 13.355,96 €
+
+      Zinsen: Zinslauf vom 01.04.2024 bis 30.12.2024, 8 volle Monate, 1,20 % von 12.500 €.
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen. Bei Übermittlung durch die Post gilt der
+      Bescheid am dritten Tag nach der Aufgabe zur Post als bekannt gegeben.
+  expect:
+    kind: kst
+    action: close
+    deadline: '2025-01-30'
+    errors: []
+    fields: {rest_kst: 1251750, zinsen_kst: 15000}
+  why: 'Corporate tax 2022 matches the return; interest right. Posted 27.12.2024, before 2025: third day = Monday 30.12.2024 (the new four-day rule would give 31.12. and a later deadline). Received (Bekanntgabe): posted 27.12.2024 + 3 days = 30.12.2024 (Mo). Deadline: one month after 30.12.2024 = 30.01.2025 (Do). Comparison with the filed return: every figure matches. Remaining amounts change by +0,00 €. Interest: interest 01.04.2024–30.12.2024 = 8 full months x 0.15 % = 1.20 % on 12.517,50 rounded down to 12.500 € = 150.0000 € -> 150 €; notice prints 150,00 € -> right.'
+- id: case-34
+  firm: {land: BY}
+  client: {name: Quirin Moosbrugger, steuernummer: 117/450/21986, land: BY, kind: trader}
+  filed:
+    kind: gewst_mess
+    year: 2023
+    fields: {gewinn: 8641200, hinzurechnungen: 125000, kuerzungen: 120000, gewerbeertrag: 8640000, freibetrag: 2450000, messbetrag: 216650}
+  document:
+    channel: portal
+    posted: '2024-05-21'
+    provided_at: '2024-05-21'
+    notified_at: '2024-05-22'
+    postmark: null
+    received_at: '2024-05-22'
+    text: |
+      Finanzamt Starnberg
+      Schloßbergstraße, 82319 Starnberg
+      Steuernummer: 117/450/21986
+      Datum: 21.05.2024
+
+      Herrn Quirin Moosbrugger
+      Bootsbau Moosbrugger
+      Seestraße 4, 82335 Berg
+
+      Bescheid für 2023 über den Gewerbesteuermessbetrag
+
+      Gewinn aus Gewerbebetrieb ............................ 86.412 €
+      Hinzurechnungen (§ 8 GewStG) ......................... 1.250 €
+      Kürzungen (§ 9 GewStG) ............................... 1.200 €
+      Gewerbeertrag (abgerundet auf volle 100 €) ............ 86.400 €
+      Freibetrag (§ 11 Abs. 1 GewStG) ...................... 24.500 €
+      Gewerbesteuermessbetrag (3,5 %) ...................... 2.166,50 €
+
+      Die Gemeinde Berg erhält eine Mitteilung über diesen Messbetrag.
+      Gegen die Höhe der Gewerbesteuer ist nicht hier, sondern bei der Gemeinde Einspruch bzw. Widerspruch einzulegen.
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem
+      Finanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt
+      am dritten Tag nach Absendung der Benachrichtigung über die Bereitstellung als bekannt gegeben.
+  expect:
+    kind: gewst_mess
+    action: close
+    deadline: '2024-06-25'
+    errors: []
+    fields: {gewerbeertrag: 8640000, messbetrag: 216650}
+  why: 'Messbetrag notice 2023 matches the return: 86.412 + 1.250 − 1.200 = 86.462 -> 86.400 − 24.500 = 61.900 x 3,5 % = 2.166,50 €. Portal made available in 2024: notification 22.05. + 3 days = Saturday 25.05.2024, not moved. Received (Bekanntgabe): made available 21.05.2024 (before 2025): notification 22.05.2024 + 3 days = 25.05.2024 (Sa), portal: not moved although not a working day. Deadline: one month after 25.05.2024 = 25.06.2024 (Di). Comparison with the filed return: every figure matches.'
+- id: case-35
+  firm: {land: BB}
+  client: {name: Henning Lamprecht, steuernummer: 056/141/22908, land: BB, kind: trader}
+  filed:
+    kind: gewst_mess
+    year: 2025
+    fields: {gewinn: 15238000, hinzurechnungen: 412000, kuerzungen: 204000, gewerbeertrag: 15440000, freibetrag: 2450000, messbetrag: 454650}
+  document:
+    channel: post
+    posted: '2026-09-23'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2026-09-28'
+    text: |
+      Finanzamt Cottbus
+      Vom-Stein-Straße 29, 03050 Cottbus
+
+      Steuernummer: 056/141/22908
+      Datum: 23.09.2026
+
+      Herrn Henning Lamprecht
+      Lamprecht Haustechnik
+      Sielower Straße 52
+      03044 Cottbus
+
+      Gewerbesteuermessbescheid für 2025
+
+                                                   Erklärung        Festsetzung
+      Gewinn aus Gewerbebetrieb                      152.380 €        152.380 €
+      Hinzurechnungen                                  4.120 €          4.240 €
+      Kürzungen                                        2.040 €          2.040 €
+      Gewerbeertrag (abgerundet)                                      154.500 €
+      Freibetrag                                                       24.500 €
+      Messbetrag 3,5 v. H.                                           4.550,00 €
+
+      Abweichend von der Erklärung wurden die Mietzinsen für die Lagerhalle Kiekebusch mit einem Fünftel
+      (§ 8 Nr. 1 Buchst. e GewStG) hinzugerechnet; die Hinzurechnungen erhöhen sich um 120 €.
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder
+      zur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe
+      zur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.
+  expect:
+    kind: gewst_mess
+    action: objection_review
+    deadline: '2026-10-28'
+    errors: []
+    fields: {hinzurechnungen: 424000, gewerbeertrag: 15450000, messbetrag: 455000}
+  why: 'Hinzurechnungen +120 € (against the client): Gewerbeertrag 154.580 -> 154.500 (filed 154.400), Messbetrag 4.550,00 € instead of 4.546,50 € (+3,50 €). For gewst_mess any deviation against the client is objection_review, however small the Messbetrag change. Posted 23.09.2026 + 4 = Sunday 27.09. -> Monday 28.09.2026. Received (Bekanntgabe): posted 23.09.2026 + 4 days = 27.09.2026 (So), not a working day in BB/BB -> 28.09.2026 (Mo). Deadline: one month after 28.09.2026 = 28.10.2026 (Mi). Comparison with the filed return: hinzurechnungen 4.120,00 -> 4.240,00 (+120,00, against); gewerbeertrag 154.400,00 -> 154.500,00 (+100,00, against); messbetrag 4.546,50 -> 4.550,00 (+3,50, against).'
+- id: case-36
+  firm: {land: NW}
+  client: {name: Wupperbogen Kunststofftechnik GmbH, steuernummer: 230/5711/4096, land: NW, kind: company}
+  filed:
+    kind: gewst_mess
+    year: 2023
+    fields: {gewinn: 26894000, hinzurechnungen: 1231000, kuerzungen: 168000, gewerbeertrag: 27950000, freibetrag: 0, messbetrag: 978250}
+  document:
+    channel: post
+    posted: '2025-01-27'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2025-01-31'
+    text: |
+      Finanzamt Leverkusen
+      Haus-Vorster-Straße 12, 51379 Leverkusen
+      Steuernummer: 230/5711/4096
+      Datum: 27.01.2025
+
+      Wupperbogen Kunststofftechnik GmbH
+      Edisonstraße 9
+      51373 Leverkusen
+
+      Bescheid über den Gewerbesteuermessbetrag 2023
+      (Festsetzung für Zwecke der Gewerbesteuer der Stadt Leverkusen)
+
+      Gewinn                         268 940,00 EUR
+      + Hinzurechnungen              12 310,00 EUR
+      - Kürzungen                    2 880,00 EUR
+      = Gewerbeertrag                278 300,00 EUR
+      Steuermesszahl 3,5 %
+      Steuermessbetrag               9 740,50 EUR
+
+      Die Kürzung für den zum Betriebsvermögen gehörenden Grundbesitz (§ 9 Nr. 1 Satz 1 GewStG) wurde nach dem
+      Einheitswert-/Grundsteuerwertbescheid mit 2.880 € statt mit 1.680 € angesetzt.
+
+      Rechtsbehelfsbelehrung:
+      Sie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats
+      nach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder
+      zur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe
+      zur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.
+  expect:
+    kind: gewst_mess
+    action: inform_client
+    deadline: '2025-02-28'
+    errors: []
+    fields: {kuerzungen: 288000, gewerbeertrag: 27830000, messbetrag: 974050}
+  why: 'Kürzungen +1.200 € in the client''s favour: Gewerbeertrag 278.300 € instead of 279.500 €, Messbetrag 9.740,50 € instead of 9.782,50 € (company: no Freibetrag). Posted 27.01.2025 + 4 = Friday 31.01.2025; February has no 31st -> 28.02.2025. Received (Bekanntgabe): posted 27.01.2025 + 4 days = 31.01.2025 (Fr). Deadline: one month after 31.01.2025 = 28.02.2025 (Fr). Comparison with the filed return: kuerzungen 1.680,00 -> 2.880,00 (+1.200,00, in favour); gewerbeertrag 279.500,00 -> 278.300,00 (-1.200,00, in favour); messbetrag 9.782,50 -> 9.740,50 (-42,00, in favour).'
+- id: case-37
+  firm: {land: BY}
+  client: {name: Wolfgang Brandstetter, steuernummer: 146/203/58114, land: BY, kind: trader}
+  onfile:
+  - {year: 2024, date: '2026-06-04', messbetrag: 312200}
+  document:
+    channel: municipal_post
+    posted: '2026-07-10'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2026-07-15'
+    text: |
+      Landeshauptstadt München
+      Stadtkämmerei – Steueramt, Gewerbesteuer
+      Herzog-Wilhelm-Straße 11, 80331 München
+
+      Steuernummer: 146/203/58114
+      Kassenzeichen: 3.112.448.091
+      Datum: 10.07.2026
+
+      Herrn Wolfgang Brandstetter
+      Feinkost Brandstetter
+      Westenriederstraße 8
+      80331 München
+
+      Gewerbesteuerbescheid für das Kalenderjahr 2024
+
+      Grundlage: Gewerbesteuermessbescheid des Finanzamts München vom 04.06.2026
+      Steuermessbetrag                          3.122,00 €
+      x Hebesatz 490 %
+      Gewerbesteuer 2024                       15.297,80 €
+      abzüglich festgesetzte Vorauszahlungen   14.000,00 €
+      Abschlusszahlung                          1.297,80 €
+
+      Der Betrag ist einen Monat nach Bekanntgabe dieses Bescheids fällig.
+
+      Rechtsbehelfsbelehrung:
+      Gegen diesen Bescheid können Sie innerhalb eines Monats nach seiner Bekanntgabe Widerspruch einlegen oder
+      unmittelbar Klage erheben. Der Widerspruch ist bei der Landeshauptstadt München, Stadtkämmerei, einzulegen.
+      Die Klage ist beim Bayerischen Verwaltungsgericht München, Bayerstraße 30, 80335 München zu erheben.
+  expect:
+    kind: gewst
+    action: close
+    deadline: '2026-08-14'
+    errors: []
+    fields: {messbetrag: 312200, hebesatz: 49000, gewst: 1529780, vz_gewst: 1400000, rest_gewst: 129780}
+  why: 'Munich trade tax 2024 is right. Bavarian notices offer Widerspruch or direct Klage: one month either way. Posted 10.07.2026 + 4 = Tuesday 14.07.2026. Check: register Hebesatz 490 %, notice 490 %; latest Messbetrag on file 3.122,00 €, notice 3.122,00 €; notice''s own product 3.122,00 x 490 % / 100 = 15.297,80 €, printed 15.297,80 €; correct trade tax 3.122,00 x 490 % / 100 = 15.297,80 €; remaining 15.297,80 - 14.000,00 = 1.297,80 €. Received (Bekanntgabe): posted 10.07.2026 + 4 days = 14.07.2026 (Di). Deadline: one month after 14.07.2026 = 14.08.2026 (Fr).'
+- id: case-38
+  firm: {land: BY}
+  client: {name: Perlacher Forst Capital Partners GmbH, steuernummer: 143/157/40028, land: BY, kind: company}
+  onfile:
+  - {year: 2025, date: '2026-03-02', messbetrag: 1846600}
+  document:
+    channel: municipal_digital
+    posted: '2026-03-26'
+    provided_at: '2026-03-26'
+    notified_at: '2026-03-26'
+    postmark: null
+    received_at: '2026-03-27'
+    text: |
+      Gemeinde Grünwald
+      Steueramt | Rathausstraße 3 | 82031 Grünwald
+
+      Steuernummer: 143/157/40028
+      Datum: 26.03.2026
+      Ihr Zeichen: GewSt 2025
+
+      Perlacher Forst Capital Partners GmbH
+      Südliche Münchner Straße 14
+      82031 Grünwald
+
+      GEWERBESTEUERBESCHEID 2025
+
+      | Position | Wert |
+      |---|---|
+      | Messbetrag lt. Mitteilung Finanzamt München vom 02.03.2026 | 18 466,00 EUR |
+      | Hebesatz der Gemeinde Grünwald | 240 v. H. |
+      | Gewerbesteuer | 44 318,40 EUR |
+      | bereits festgesetzte Vorauszahlungen (4 x 11 000,00) | 44 000,00 EUR |
+      | Nachzahlung | 318,40 EUR |
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid kann innerhalb eines Monats nach Bekanntgabe Widerspruch bei der Gemeinde Grünwald
+      erhoben oder unmittelbar Klage beim Bayerischen Verwaltungsgericht München erhoben werden.
+  expect:
+    kind: gewst
+    action: close
+    deadline: '2026-04-30'
+    errors: []
+    fields: {messbetrag: 1846600, hebesatz: 24000, gewst: 4431840, vz_gewst: 4400000, rest_gewst: 31840}
+  why: 'Grünwald''s notice is a pipe table with ''EUR 1 234,56''-style amounts and ''v. H.''; it is right. Municipal digital 2026: made available 26.03. + 4 = Monday 30.03.2026. Check: register Hebesatz 240 %, notice 240 %; latest Messbetrag on file 18.466,00 €, notice 18.466,00 €; notice''s own product 18.466,00 x 240 % / 100 = 44.318,40 €, printed 44.318,40 €; correct trade tax 18.466,00 x 240 % / 100 = 44.318,40 €; remaining 44.318,40 - 44.000,00 = 318,40 €. Received (Bekanntgabe): made available 26.03.2026 (from 2026): availability + 4 days = 30.03.2026 (Mo). Deadline: one month after 30.03.2026 = 30.04.2026 (Do).'
+- id: case-39
+  firm: {land: BY}
+  client: {name: Ludmila Hrubesch, steuernummer: 187/220/61309, land: BY, kind: trader}
+  onfile:
+  - {year: 2024, date: '2025-10-14', messbetrag: 174650}
+  document:
+    channel: municipal_post
+    posted: '2025-11-12'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2025-11-18'
+    text: |
+      Stadt Garching b. München
+      Kämmerei – Steuern und Abgaben
+      Rathausplatz 3, 85748 Garching b. München
+
+      Steuernummer: 187/220/61309
+      Datum: 12.11.2025
+
+      Frau Ludmila Hrubesch
+      Übersetzungsbüro Hrubesch
+      Mühlgasse 6
+      85748 Garching
+
+      Bescheid über Gewerbesteuer für 2024
+
+      Festsetzung:
+      Gewerbesteuermessbetrag (Finanzamt Freising, Bescheid vom 14.10.2025) ..... 1.746,50 €
+      Hebesatz ............................................................. 290 %
+      Gewerbesteuer 2024 ................................................... 5.064,85 €
+      Vorauszahlungen 2024 ................................................. 0,00 €
+      zu zahlen ............................................................ 5.064,85 €
+
+      Rechtsbehelfsbelehrung: Gegen diesen Bescheid kann innerhalb eines Monats nach Bekanntgabe Widerspruch
+      erhoben werden. Der Widerspruch ist bei der Stadt Garching b. München schriftlich oder zur Niederschrift
+      einzulegen. Sie können stattdessen auch unmittelbar Klage beim Bayerischen Verwaltungsgericht München erheben.
+  expect:
+    kind: gewst
+    action: objection_required
+    deadline: '2025-12-17'
+    errors: [wrong_hebesatz]
+    fields: {messbetrag: 174650, hebesatz: 29000, gewst: 506485}
+  why: 'Garching applies 290 % although the register''s Hebesatz for 2024 is 280 %: wrong_hebesatz, objection_required. Its arithmetic with its own (wrong) rate holds, so no arithmetic error. Posted 12.11.2025 + 4 = Sunday 16.11. -> Monday 17.11.2025. Check: register Hebesatz 280 %, notice 290 %; latest Messbetrag on file 1.746,50 €, notice 1.746,50 €; notice''s own product 1.746,50 x 290 % / 100 = 5.064,85 €, printed 5.064,85 €; correct trade tax 1.746,50 x 280 % / 100 = 4.890,20 €. Received (Bekanntgabe): posted 12.11.2025 + 4 days = 16.11.2025 (So), not a working day in BY/BY -> 17.11.2025 (Mo). Deadline: one month after 17.11.2025 = 17.12.2025 (Mi).'
+- id: case-40
+  firm: {land: NW}
+  client: {name: Ömer Kaplan, steuernummer: 215/5318/2207, land: NW, kind: trader}
+  onfile:
+  - {year: 2023, date: '2024-08-22', messbetrag: 220500}
+  document:
+    channel: municipal_post
+    posted: '2024-09-16'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2024-09-20'
+    text: |
+      Stadt Köln
+      Die Oberbürgermeisterin
+      Kämmerei – Steueramt
+      Ottmar-Pohl-Platz 1, 51103 Köln
+
+      Datum: 16.09.2024
+      Steuernummer: 215/5318/2207
+      Kassenzeichen: 1407.2210.553
+
+      Herrn Ömer Kaplan
+      Kaplan Kfz-Service
+      Venloer Straße 391
+      50825 Köln
+
+      Gewerbesteuerbescheid 2023
+
+      Sehr geehrter Herr Kaplan,
+
+      auf der Grundlage des Gewerbesteuermessbescheides des Finanzamts Köln-West vom 22.08.2024 (Steuermessbetrag
+      2.205,00 EUR) und des vom Rat der Stadt Köln für 2023 beschlossenen Hebesatzes von 475 v. H. wird die
+      Gewerbesteuer für 2023 auf 10.473,75 EUR festgesetzt. Hierauf sind Vorauszahlungen in Höhe von 9.800,00 EUR
+      angerechnet worden. Es verbleibt eine Nachzahlung von 673,75 EUR, die einen Monat nach Bekanntgabe
+      fällig ist.
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid kann innerhalb eines Monats nach Bekanntgabe Klage erhoben werden. Die Klage ist bei dem
+      Verwaltungsgericht Köln, Appellhofplatz, 50667 Köln, schriftlich oder zu Protokoll des Urkundsbeamten der
+      Geschäftsstelle zu erheben.
+  expect:
+    kind: gewst
+    action: close
+    deadline: '2024-10-21'
+    errors: []
+    fields: {messbetrag: 220500, hebesatz: 47500, gewst: 1047375, vz_gewst: 980000, rest_gewst: 67375}
+  why: 'Cologne writes its notice as prose; it is right. In NRW the instructions name Klage (no Widerspruch): read as instructions with a one-month period (VwGO § 74), see README. Municipal post 2024: posted 16.09.2024 + 3 = Thursday 19.09.; one month = Saturday 19.10.2024 -> Monday 21.10.2024. Check: register Hebesatz 475 %, notice 475 %; latest Messbetrag on file 2.205,00 €, notice 2.205,00 €; notice''s own product 2.205,00 x 475 % / 100 = 10.473,75 €, printed 10.473,75 €; correct trade tax 2.205,00 x 475 % / 100 = 10.473,75 €; remaining 10.473,75 - 9.800,00 = 673,75 €. Received (Bekanntgabe): posted 16.09.2024 + 3 days = 19.09.2024 (Do). Deadline: one month after 19.09.2024 = 19.10.2024 (Sa) -> next working day in NW/NW: 21.10.2024 (Mo).'
+- id: case-41
+  firm: {land: NW}
+  client: {name: Baumberger Pharma Services GmbH, steuernummer: 135/5702/0659, land: NW, kind: company}
+  onfile:
+  - {year: 2024, date: '2025-03-24', messbetrag: 2450000}
+  document:
+    channel: municipal_digital
+    posted: '2025-04-14'
+    provided_at: '2025-04-14'
+    notified_at: '2025-04-15'
+    postmark: null
+    received_at: '2025-04-15'
+    text: |
+      Stadt Monheim am Rhein
+      Der Bürgermeister – Bereich Finanzen / Steuern
+      Rathausplatz 2, 40789 Monheim am Rhein
+
+      Steuernummer: 135/5702/0659
+      Datum: 14.04.2025
+      Buchungszeichen: 7.0412.66
+
+      Baumberger Pharma Services GmbH
+      Kapellenstraße 40
+      40789 Monheim am Rhein
+
+      Festsetzung der Gewerbesteuer für das Jahr 2024
+
+        Messbetrag (Finanzamt Hilden, 24.03.2025)         EUR 24 500,00
+        Hebesatz                                            250 %
+        Jahressteuer 2024                                EUR 61 250,00
+        bisher festgesetzt (Vorauszahlungen)             EUR 60 000,00
+        Unterschied – noch zu zahlen                     EUR 1 250,00
+
+      Rechtsbehelfsbelehrung: Gegen diesen Bescheid kann innerhalb eines Monats nach Bekanntgabe Klage beim
+      Verwaltungsgericht Düsseldorf, Bastionstraße 39, 40213 Düsseldorf erhoben werden.
+  expect:
+    kind: gewst
+    action: close
+    deadline: '2025-05-19'
+    errors: []
+    fields: {messbetrag: 2450000, hebesatz: 25000, gewst: 6125000, vz_gewst: 6000000, rest_gewst: 125000}
+  why: 'Monheim is right. Municipal digital made available in 2025: the notification (15.04.2025) + 4 = Saturday 19.04.2025 (Easter Saturday), not moved. Check: register Hebesatz 250 %, notice 250 %; latest Messbetrag on file 24.500,00 €, notice 24.500,00 €; notice''s own product 24.500,00 x 250 % / 100 = 61.250,00 €, printed 61.250,00 €; correct trade tax 24.500,00 x 250 % / 100 = 61.250,00 €; remaining 61.250,00 - 60.000,00 = 1.250,00 €. Received (Bekanntgabe): made available 14.04.2025 (in 2025): notification 15.04.2025 + 4 days = 19.04.2025 (Sa), portal: not moved although not a working day. Deadline: one month after 19.04.2025 = 19.05.2025 (Mo).'
+- id: case-42
+  firm: {land: NW}
+  client: {name: Carsten Overbeck, steuernummer: 230/5044/1873, land: NW, kind: trader}
+  onfile:
+  - {year: 2024, date: '2025-06-10', messbetrag: 436800}
+  - {year: 2024, date: '2025-11-20', messbetrag: 392000}
+  history:
+  - {year: 2024, kind: gewst_mess, text: Hinzurechnung Mieten Lagerplatz, objection: true, outcome: abgeholfen}
+  document:
+    channel: municipal_post
+    posted: '2026-01-16'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2026-01-21'
+    text: |
+      Stadt Leverkusen
+      Fachbereich Finanzen – Abteilung Steuern
+      Friedrich-Ebert-Platz 1, 51373 Leverkusen
+
+      Steuernummer: 230/5044/1873
+      Datum: 16.01.2026
+
+      Herrn Carsten Overbeck
+      Overbeck Dachdeckerei
+      Opladener Straße 118
+      51375 Leverkusen
+
+      Gewerbesteuer – Jahresbescheid 2024
+
+      Messbetrag laut Finanzamt Leverkusen vom 10.06.2025 : 4368,00 EUR
+      Hebesatz                                          : 250 %
+      Gewerbesteuer                                     : 10920,00 EUR
+      Vorauszahlungen                                   : 9000,00 EUR
+      Nachzahlung                                       : 1920,00 EUR
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid kann binnen eines Monats nach Bekanntgabe Klage beim Verwaltungsgericht Köln erhoben werden.
+  expect:
+    kind: gewst
+    action: objection_required
+    deadline: '2026-02-20'
+    errors: [stale_messbetrag]
+    fields: {messbetrag: 436800, hebesatz: 25000, gewst: 1092000, vz_gewst: 900000, rest_gewst: 192000}
+  why: 'Leverkusen used the Messbetrag of 10.06.2025; the latest base notice on file (20.11.2025, after the client''s objection succeeded) is 3.920,00 €: stale_messbetrag, objection_required. With the latest Messbetrag the tax would be 9.800,00 €. Amounts printed without thousands separator. Posted 16.01.2026 + 4 = Tuesday 20.01.2026. Check: register Hebesatz 250 %, notice 250 %; latest Messbetrag on file 3.920,00 €, notice 4.368,00 €; notice''s own product 4.368,00 x 250 % / 100 = 10.920,00 €, printed 10.920,00 €; correct trade tax 3.920,00 x 250 % / 100 = 9.800,00 €; remaining 10.920,00 - 9.000,00 = 1.920,00 €. Received (Bekanntgabe): posted 16.01.2026 + 4 days = 20.01.2026 (Di). Deadline: one month after 20.01.2026 = 20.02.2026 (Fr).'
+- id: case-43
+  firm: {land: NW}
+  client: {name: Yvonne Siebertz, steuernummer: 205/5087/3302, land: NW, kind: trader}
+  onfile:
+  - {year: 2025, date: '2026-07-06', messbetrag: 151200}
+  document:
+    channel: municipal_digital
+    posted: '2026-08-03'
+    provided_at: '2026-08-03'
+    notified_at: '2026-08-04'
+    postmark: null
+    received_at: '2026-08-04'
+    text: |
+      Bundesstadt Bonn
+      Der Oberbürgermeister – Stadtsteueramt
+      Berliner Platz 2, 53111 Bonn
+
+      Steuernummer: 205/5087/3302
+      Datum: 03.08.2026
+
+      Frau Yvonne Siebertz
+      Siebertz Veranstaltungstechnik
+      Kölnstraße 211
+      53111 Bonn
+
+      Bescheid über die Festsetzung der Gewerbesteuer 2025
+
+      Bemessungsgrundlage: Messbetrag 1.512,00 € (Finanzamt Bonn-Innenstadt, Messbescheid vom 06.07.2026)
+      Hebesatz: 490 v. H.
+      festgesetzte Gewerbesteuer: 7.480,80 €
+      abzüglich Vorauszahlungen: 6.000,00 €
+      Nachzahlung: 1.480,80 €
+
+      Rechtsbehelfsbelehrung:
+      Gegen diesen Bescheid kann innerhalb eines Monats nach Bekanntgabe Klage beim Verwaltungsgericht Köln erhoben
+      werden.
+  expect:
+    kind: gewst
+    action: objection_required
+    deadline: '2026-09-07'
+    errors: [arithmetic]
+    fields: {messbetrag: 151200, hebesatz: 49000, gewst: 748080, vz_gewst: 600000, rest_gewst: 148080}
+  why: 'Bonn''s trade tax does not compute (digits swapped): objection_required with error arithmetic. Municipal digital 2026: 03.08. + 4 = Friday 07.08.2026. Check: register Hebesatz 490 %, notice 490 %; latest Messbetrag on file 1.512,00 €, notice 1.512,00 €; notice''s own product 1.512,00 x 490 % / 100 = 7.408,80 €, printed 7.480,80 €; correct trade tax 1.512,00 x 490 % / 100 = 7.408,80 €; remaining 7.480,80 - 6.000,00 = 1.480,80 €. Received (Bekanntgabe): made available 03.08.2026 (from 2026): availability + 4 days = 07.08.2026 (Fr). Deadline: one month after 07.08.2026 = 07.09.2026 (Mo).'
+- id: case-44
+  firm: {land: BE}
+  client: {name: Tobias Ehrlicher, steuernummer: 232/150/77421, land: SN, kind: trader}
+  onfile:
+  - {year: 2025, date: '2026-09-17', messbetrag: 259700}
+  document:
+    channel: municipal_digital
+    posted: '2026-10-14'
+    provided_at: '2026-10-14'
+    notified_at: '2026-10-14'
+    postmark: null
+    received_at: '2026-10-15'
+    text: |
+      Stadt Leipzig
+      Stadtkämmerei – Abteilung Steuern
+      Burgplatz 1 (Stadthaus), 04109 Leipzig
+
+      Steuernummer: 232/150/77421
+      Datum: 14.10.2026
+
+      Herrn Tobias Ehrlicher
+      Ehrlicher Fahrradmanufaktur
+      Könneritzstraße 93
+      04229 Leipzig
+
+      Gewerbesteuerbescheid für 2025
+
+      Steuermessbetrag (Mitteilung des Finanzamts Leipzig I vom 17.09.2026)   2.597,00 €
+      Hebesatz                                                               460 %
+      Gewerbesteuer                                                       11.946,20 €
+      Vorauszahlungssoll                                                  12.000,00 €
+      Erstattung                                                             53,80- €
+
+      Der Erstattungsbetrag wird auf Ihr Konto überwiesen.
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid kann innerhalb eines Monats nach Bekanntgabe Widerspruch erhoben werden. Der Widerspruch
+      ist schriftlich, in elektronischer Form oder zur Niederschrift bei der Stadt Leipzig, Stadtkämmerei, einzulegen.
+  expect:
+    kind: gewst
+    action: close
+    deadline: '2026-11-18'
+    errors: []
+    fields: {messbetrag: 259700, hebesatz: 46000, gewst: 1194620, vz_gewst: 1200000, rest_gewst: -5380}
+  why: 'Leipzig is right; a small refund printed with trailing minus. Widerspruch: one month (VwGO § 70). Made available 14.10.2026 + 4 = Sunday 18.10. (not moved); 18.11.2026 is Buß- und Bettag in SN (the town''s Land) but not in BE (the firm''s), so it is not a holiday for the desk. Check: register Hebesatz 460 %, notice 460 %; latest Messbetrag on file 2.597,00 €, notice 2.597,00 €; notice''s own product 2.597,00 x 460 % / 100 = 11.946,20 €, printed 11.946,20 €; correct trade tax 2.597,00 x 460 % / 100 = 11.946,20 €; remaining 11.946,20 - 12.000,00 = 53,80- €. Received (Bekanntgabe): made available 14.10.2026 (from 2026): availability + 4 days = 18.10.2026 (So), portal: not moved although not a working day. Deadline: one month after 18.10.2026 = 18.11.2026 (Mi).'
+- id: case-45
+  firm: {land: SN}
+  client: {name: Kathrin Seidel, steuernummer: 232/117/90134, land: SN, kind: trader}
+  onfile:
+  - {year: 2023, date: '2025-01-20', messbetrag: 134050}
+  document:
+    channel: municipal_post
+    posted: '2025-02-24'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2025-03-03'
+    text: |
+      Stadt Markkleeberg
+      Kämmerei / Steuern
+      Rathausplatz 1, 04416 Markkleeberg
+
+      Steuernummer: 232/117/90134
+      Datum: 24.02.2025
+
+      Frau Kathrin Seidel
+      Seidel Physiotherapie & Fitness
+      Koburger Straße 29
+      04416 Markkleeberg
+
+      Gewerbesteuer 2023 – Bescheid
+
+      Steuermessbetrag ......... 1.340,50
+      Hebesatz ................. 400 v. H.
+      Gewerbesteuer ............ 5.362,00
+      bisher gezahlt ........... 6.400,00
+      Ergebnis ................. 1.038,00-   (Guthaben zu Ihren Gunsten)
+      (alle Beträge in EUR)
+
+      Rechtsbehelfsbelehrung: Gegen diesen Bescheid kann innerhalb eines Monats nach seiner Bekanntgabe Widerspruch
+      bei der Stadt Markkleeberg eingelegt werden.
+  expect:
+    kind: gewst
+    action: close
+    deadline: '2025-03-28'
+    errors: []
+    fields: {messbetrag: 134050, hebesatz: 40000, gewst: 536200, vz_gewst: 640000, rest_gewst: -103800}
+  why: 'Markkleeberg is right; the refund is printed with a trailing minus. Posted 24.02.2025 + 4 = Friday 28.02.2025; one month = 28.03.2025. Check: register Hebesatz 400 %, notice 400 %; latest Messbetrag on file 1.340,50 €, notice 1.340,50 €; notice''s own product 1.340,50 x 400 % / 100 = 5.362,00 €, printed 5.362,00 €; correct trade tax 1.340,50 x 400 % / 100 = 5.362,00 €; remaining 5.362,00 - 6.400,00 = 1.038,00- €. Received (Bekanntgabe): posted 24.02.2025 + 4 days = 28.02.2025 (Fr). Deadline: one month after 28.02.2025 = 28.03.2025 (Fr).'
+- id: case-46
+  firm: {land: BB}
+  client: {name: Havelkontor Software GmbH, steuernummer: 046/141/33807, land: BB, kind: company}
+  onfile:
+  - {year: 2025, date: '2026-04-08', messbetrag: 940100}
+  document:
+    channel: municipal_digital
+    posted: '2026-05-11'
+    provided_at: '2026-05-11'
+    notified_at: '2026-05-12'
+    postmark: null
+    received_at: '2026-05-12'
+    text: |
+      Landeshauptstadt Potsdam
+      Fachbereich Finanzen – Bereich Steuern
+      Friedrich-Ebert-Straße 79/81, 14469 Potsdam
+
+      Steuernummer: 046/141/33807
+      Datum: 11.05.2026
+
+      Havelkontor Software GmbH
+      Am Kanal 16
+      14467 Potsdam
+
+      Gewerbesteuerbescheid 2025
+
+      Sehr geehrte Damen und Herren,
+
+      das Finanzamt Potsdam hat uns mit Messbescheid vom 08.04.2026 einen Gewerbesteuermessbetrag von 9.401,00 €
+      mitgeteilt. Mit dem Hebesatz der Landeshauptstadt Potsdam von 450 % ergibt sich eine Gewerbesteuer für 2025 von
+      42.304,50 €. Vorauszahlungen wurden für 2025 in Höhe von 40.000,00 € festgesetzt und gezahlt; den Restbetrag von
+      2.304,50 € überweisen Sie bitte innerhalb eines Monats.
+
+      Mit freundlichen Grüßen
+      Im Auftrag
+      Kerstin Laabs
+  expect:
+    kind: gewst
+    action: close
+    deadline: '2027-05-18'
+    errors: []
+    fields: {messbetrag: 940100, hebesatz: 45000, gewst: 4230450, vz_gewst: 4000000, rest_gewst: 230450}
+  why: 'Potsdam is right but its notice (an electronic document, not a scan) has no instructions on how to object: one year (AO § 356 Abs. 2 by the rule; VwGO § 58 Abs. 2 for a town says the same). Made available 11.05.2026 + 4 = Friday 15.05.2026; one year later is Saturday 15.05.2027, then Whit Sunday and Whit Monday (17.05.2027). Check: register Hebesatz 450 %, notice 450 %; latest Messbetrag on file 9.401,00 €, notice 9.401,00 €; notice''s own product 9.401,00 x 450 % / 100 = 42.304,50 €, printed 42.304,50 €; correct trade tax 9.401,00 x 450 % / 100 = 42.304,50 €; remaining 42.304,50 - 40.000,00 = 2.304,50 €. Received (Bekanntgabe): made available 11.05.2026 (from 2026): availability + 4 days = 15.05.2026 (Fr). Deadline: one year after 15.05.2026 = 15.05.2027 (Sa) -> next working day in BB/BB: 18.05.2027 (Di).'
+- id: case-47
+  firm: {land: BB}
+  client: {name: Ingo Matschke, steuernummer: 049/233/50612, land: BB, kind: trader}
+  onfile:
+  - {year: 2024, date: '2025-05-12', messbetrag: 359450}
+  document:
+    channel: municipal_post
+    posted: '2025-06-03'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2025-06-11'
+    text: |
+      Gemeinde Schönefeld
+      Die Bürgermeisterin – Kämmerei, Sachgebiet Steuern
+      Hans-Grade-Allee 11, 12529 Schönefeld
+
+      Steuernummer: 049/233/50612
+      Datum: 03.06.2025
+
+      Herrn Ingo Matschke
+      Matschke Flughafen-Shuttle
+      Mittelstraße 7
+      12529 Schönefeld
+
+      Gewerbesteuer für 2024
+
+      Sehr geehrter Herr Matschke,
+
+      nach dem Gewerbesteuermessbescheid des Finanzamts Königs Wusterhausen vom 12.05.2025 beträgt Ihr
+      Steuermessbetrag für 2024 3.594,50 Euro. Die Gemeindevertretung hat den Hebesatz für 2024 auf 240 vom Hundert
+      festgesetzt. Hiernach setzen wir die Gewerbesteuer 2024 auf 8.626,80 Euro fest. Vorauszahlungen waren nicht
+      festgesetzt. Bitte überweisen Sie den Betrag bis zum 10.07.2025 auf eines der unten genannten Konten der Gemeinde.
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid kann innerhalb eines Monats nach Bekanntgabe Widerspruch erhoben werden. Der Widerspruch
+      ist bei der Gemeinde Schönefeld, Hans-Grade-Allee 11, 12529 Schönefeld schriftlich oder zur Niederschrift
+      einzulegen.
+  expect:
+    kind: gewst
+    action: close
+    deadline: '2025-07-10'
+    errors: []
+    fields: {messbetrag: 359450, hebesatz: 24000, gewst: 862680}
+  why: 'Schönefeld writes prose; it is right. Posted 03.06.2025 + 4 = Saturday 07.06.; Whit Sunday 08.06., Whit Monday 09.06. -> Tuesday 10.06.2025. Check: register Hebesatz 240 %, notice 240 %; latest Messbetrag on file 3.594,50 €, notice 3.594,50 €; notice''s own product 3.594,50 x 240 % / 100 = 8.626,80 €, printed 8.626,80 €; correct trade tax 3.594,50 x 240 % / 100 = 8.626,80 €. Received (Bekanntgabe): posted 03.06.2025 + 4 days = 07.06.2025 (Sa), not a working day in BB/BB -> 10.06.2025 (Di). Deadline: one month after 10.06.2025 = 10.07.2025 (Do).'
+- id: case-48
+  firm: {land: BE}
+  client: {name: Friederike Lanz, steuernummer: 37/206/55183, land: BE, kind: trader}
+  document:
+    channel: post
+    posted: '2027-02-04'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2027-02-09'
+    text: |
+      Finanzamt Neukölln
+      Thiemannstraße 1, 12059 Berlin
+      Steuernummer: 37/206/55183
+      Datum: 04.02.2027
+
+      Frau
+      Friederike Lanz
+      Weserstraße 66
+      12045 Berlin
+
+      Bescheid über Vorauszahlungen zur Einkommensteuer und zum Solidaritätszuschlag
+      für 2027 und folgende Kalenderjahre
+
+      Die Vorauszahlungen werden auf der Grundlage der Veranlagung für 2025 wie folgt festgesetzt:
+
+      Fälligkeit        Einkommensteuer
+      10.03.2027             2.150,00 €
+      10.06.2027             2.150,00 €
+      10.09.2027             2.150,00 €
+      10.12.2027             2.150,00 €
+
+      Bisher waren vierteljährlich 1.700,00 € festgesetzt.
+
+      Rechtsbehelfsbelehrung
+      Dieser Bescheid kann mit dem Einspruch angefochten werden. Die Frist für die Einlegung des Einspruchs beträgt
+      einen Monat. Sie beginnt mit Ablauf des Tages, an dem Ihnen dieser Bescheid bekannt gegeben worden ist.
+  expect:
+    kind: vz_est
+    action: inform_client
+    deadline: '2027-03-09'
+    errors: []
+    fields: {vz_quartal: 215000}
+  why: 'Prepayment notice: inform_client; it can be challenged, so one month applies. Posted 04.02.2027 + 4 = Monday 08.02.2027; one month = Monday 08.03.2027, International Women''s Day, a holiday in BE for firm and client. Received (Bekanntgabe): posted 04.02.2027 + 4 days = 08.02.2027 (Mo). Deadline: one month after 08.02.2027 = 08.03.2027 (Mo) -> next working day in BE/BE: 09.03.2027 (Di).'
+- id: case-49
+  firm: {land: BY}
+  client: {name: Annemarie Pfaffinger, steuernummer: 145/116/80352, land: BY, kind: person}
+  document:
+    channel: portal
+    posted: '2025-12-01'
+    provided_at: '2025-12-01'
+    notified_at: '2025-12-02'
+    postmark: null
+    received_at: '2025-12-02'
+    text: |
+      Finanzamt München
+      Abteilung Einkommensteuer
+      Deroystraße 18, 80335 München
+      Datum: 01.12.2025
+      Steuernummer: 145/116/80352
+
+      Frau Annemarie Pfaffinger
+      Gotzinger Straße 52
+      81371 München
+
+      Vorauszahlungsbescheid
+      Einkommensteuer, Kirchensteuer röm.-kath. – ab dem Kalenderjahr 2026
+
+      Wegen der Mieteinnahmen aus der Wohnung Implerstraße 40 setze ich erstmals Vorauszahlungen fest.
+
+      | Termin | Einkommensteuer | Kirchensteuer rk |
+      |---|---:|---:|
+      | 10.03.2026 | 1 380,00 | 110,40 |
+      | 10.06.2026 | 1 380,00 | 110,40 |
+      | 10.09.2026 | 1 380,00 | 110,40 |
+      | 10.12.2026 | 1 380,00 | 110,40 |
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem Finanzamt
+      München einzulegen. Ein zum Datenabruf bereitgestellter Bescheid gilt am vierten Tag nach Absendung der
+      elektronischen Benachrichtigung über die Bereitstellung als bekannt gegeben.
+  expect:
+    kind: vz_est
+    action: inform_client
+    deadline: '2026-01-07'
+    errors: []
+    fields: {vz_quartal: 138000}
+  why: 'Prepayment notice: inform_client. Portal in 2025: notification 02.12. + 4 = Saturday 06.12.2025 (not moved); one month = Tuesday 06.01.2026, Epiphany, a holiday in BY for both firm and client -> 07.01.2026 (compare case-32). Received (Bekanntgabe): made available 01.12.2025 (in 2025): notification 02.12.2025 + 4 days = 06.12.2025 (Sa), portal: not moved although not a working day. Deadline: one month after 06.12.2025 = 06.01.2026 (Di) -> next working day in BY/BY: 07.01.2026 (Mi).'
+- id: case-50
+  firm: {land: BW}
+  client: {name: Dr. Rainer Kammerer, steuernummer: 32089/41752, land: BW, kind: person}
+  document:
+    channel: post
+    posted: '2026-10-22'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2026-10-27'
+    text: |
+      Finanzamt Heidelberg
+      Kurfürsten-Anlage 15-17, 69115 Heidelberg
+      Steuernummer: 32089/41752
+      Datum: 22.10.2026
+
+      Herrn
+      Dr. Rainer Kammerer
+      Mönchhofstraße 21
+      69120 Heidelberg
+
+      Einkommensteuer 2025
+      Anforderung von Unterlagen
+
+      Sehr geehrter Herr Dr. Kammerer,
+
+      mit Schreiben vom 02.09.2026 hatte ich Sie gebeten, mir bis zum 30.09.2026 die folgenden Unterlagen
+      vorzulegen. Eine Antwort liegt mir bisher nicht vor.
+
+      - Nachweis über die Aufwendungen für das Arbeitszimmer (Grundriss, Mietvertrag, Nebenkostenabrechnung 2025)
+      - Belege über die Spenden an den Förderverein Universitätsklinikum Heidelberg e. V.
+      - Aufstellung der Fahrten zur ersten Tätigkeitsstätte mit Angabe der Arbeitstage
+
+      Bitte reichen Sie die Unterlagen bis zum 15.11.2026 ein. Andernfalls muss ich die Steuererklärung nach
+      Aktenlage bearbeiten.
+
+      Mit freundlichen Grüßen
+      Ihr Finanzamt
+  expect:
+    kind: request
+    action: task
+    deadline: '2026-11-15'
+    errors: []
+  why: 'A request: the deadline is the date it sets. 30.09.2026 lies before the letter''s own date (22.10.2026), so it is the earlier deadline being recalled. 15.11.2026 is a Sunday, but a set date is taken as written. the date the notice sets, as written: 15.11.2026 (not moved).'
+- id: case-51
+  firm: {land: SN}
+  client: {name: Wolkenstein Druck & Medien GmbH, steuernummer: 214/110/66208, land: SN, kind: company}
+  document:
+    channel: portal
+    posted: '2026-09-14'
+    provided_at: '2026-09-14'
+    notified_at: '2026-09-14'
+    postmark: null
+    received_at: '2026-09-15'
+    text: |
+      Finanzamt Chemnitz-Süd
+      Paul-Bertz-Straße 1, 09120 Chemnitz
+      Steuernummer: 214/110/66208
+      Datum: 14.09.2026
+
+      Wolkenstein Druck & Medien GmbH
+      Annaberger Straße 240
+      09125 Chemnitz
+
+      Erinnerung
+      Abgabe der Umsatzsteuererklärung 2024
+
+      Sehr geehrte Damen und Herren,
+
+      die Umsatzsteuererklärung für 2024 war von Ihrer steuerlichen Vertretung bis zum 30.04.2026 abzugeben.
+      Sie liegt mir bisher nicht vor.
+
+      Ich erinnere Sie hiermit an die Abgabe und bitte, die Erklärung bis zum 16.10.2026 elektronisch zu übermitteln.
+      Sollte die Erklärung bis dahin nicht eingehen, muss ich die Besteuerungsgrundlagen schätzen (§ 162 AO) und
+      gegebenenfalls einen Verspätungszuschlag (§ 152 AO) festsetzen.
+
+      Diese Erinnerung ist kein Verwaltungsakt.
+  expect:
+    kind: reminder
+    action: task
+    deadline: '2026-10-16'
+    errors: []
+  why: 'A reminder sets its own date: 16.10.2026. The filing deadline it mentions (30.04.2026) lies before the reminder''s date and is only recalled. the date the notice sets, as written: 16.10.2026 (not moved).'
+- id: case-52
+  firm: {land: HE}
+  client: {name: Fuldatal Holzbau GmbH & Co. KG, steuernummer: 026 351 70984, land: HE, kind: company}
+  document:
+    channel: post
+    posted: '2026-11-06'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2026-11-11'
+    text: |
+      Finanzamt Kassel
+      Altmarkt 1, 34125 Kassel
+      Steuernummer: 026 351 70984
+      Datum: 06.11.2026
+
+      Fuldatal Holzbau GmbH & Co. KG
+      Industriestraße 12
+      34233 Fuldatal
+
+      Prüfungsanordnung
+
+      Sehr geehrte Damen und Herren,
+
+      aufgrund von § 193 Abs. 1 der Abgabenordnung ordne ich bei Ihnen eine Außenprüfung an.
+
+      Prüfungsgegenstand:  Umsatzsteuer, Gewerbesteuer, gesonderte und einheitliche Feststellung
+      Prüfungszeitraum:    2022 bis 2024
+      Voraussichtlicher Beginn der Prüfung: Montag, 18.01.2027, 9:00 Uhr, in Ihren Geschäftsräumen
+      Prüfer: Herr Steuerinspektor Bachmann
+
+      Bitte halten Sie die Bücher, Aufzeichnungen und Belege bereit.
+
+      Rechtsbehelfsbelehrung:
+      Gegen diese Prüfungsanordnung ist der Einspruch zulässig. Er ist innerhalb eines Monats nach Bekanntgabe beim
+      Finanzamt Kassel einzulegen. Bei Übermittlung durch die Post gilt die Prüfungsanordnung am vierten Tag nach
+      der Aufgabe zur Post als bekannt gegeben.
+  expect:
+    kind: audit
+    action: task
+    deadline: '2026-12-10'
+    errors: []
+  why: 'An audit order: task; its deadline is the objection period; the audit start (18.01.2027) is recorded separately. Received (Bekanntgabe): posted 06.11.2026 + 4 days = 10.11.2026 (Di). Deadline: one month after 10.11.2026 = 10.12.2026 (Do).'
+- id: case-53
+  firm: {land: NW}
+  client: {name: Corinna Wallraff, steuernummer: 205/5296/1184, land: NW, kind: person}
+  filed:
+    kind: est
+    year: 2025
+    fields: {einkuenfte_nsa: 4833000, summe_einkuenfte: 4833000, sonderausgaben: 614000, zve: 4219000, est: 802800, lst_est: 825300, rest_est: -22500}
+  document:
+    channel: client_upload
+    posted: '2026-09-08'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2026-09-21'
+    text: "Finanzamt Bonn-Innenstadt\nWelschnonnenstraße 15, 53111 Bonn\nSteuernummer: 205/5296/1184                         Datum: 08.09.2026\n\nFrau\nCorinna Wallraff\nPoppelsdorfer Allee 58\n53115 Bonn\n\nBescheid für 2025\nüber Einkommensteuer und Solidaritätszuschlag\n\nErmittlung des zu versteuernden Einkommens                         €\nEinkünfte aus nichtselbständiger Arbeit                     48.330 \nSumme der Einkünfte                                         48.330 \nSonderausgaben                                               3.740-\nZu versteuerndes Einkommen                                  44.590 \n\n                               Einkommensteuer\nFestgesetzt werden                   8.824,00 \nab Steuerabzug vom Lohn              8.253,00-\nverbleibende Beträge                   571,00 \n\nBitte zahlen Sie insgesamt 571,00 €.\n\nErläuterungen zur Festsetzung:\nKinderbetreuungskosten (§ 10 Abs. 1 Nr. 5 EStG) können nur berücksichtigt werden, wenn die\nZahlung auf das Konto\
+      \ des Leistungserbringers erfolgt ist. Die Barzahlungen an die Tagesmutter\n(2.400 €) bleiben daher unberücksichtigt.\n\nRechtsbehelfsbelehrung:\nSie können diesen Bescheid mit dem Einspruch anfechten. Der Einspruch ist innerhalb eines Monats\nnach Bekanntgabe des Bescheids beim Finanzamt einzulegen (schriftlich, elektronisch über ELSTER oder\nzur Niederschrift). Bei Übermittlung durch die Post gilt der Bescheid am vierten Tag nach der Aufgabe\nzur Post als bekannt gegeben, es sei denn, er ist nicht oder zu einem späteren Zeitpunkt zugegangen.\n"
+  expect:
+    kind: est
+    action: objection_review
+    deadline: '2026-10-12'
+    errors: []
+    fields: {sonderausgaben: 374000, zve: 4459000, est: 882400, rest_est: 57100}
+  why: 'The client forwarded a copy; nothing else of this notice is on the desk. Sonderausgaben cut by 2.400 € (against the client); the refund shrinks by more than 50 €. Received (Bekanntgabe): forwarded copy, both ways: post posted 08.09.2026 + 4 days = 12.09.2026 (Sa), not a working day in NW/NW -> 14.09.2026 (Mo); portal made available 08.09.2026 (from 2026): availability + 4 days = 12.09.2026 (Sa), portal: not moved although not a working day; keep the earlier 12.09.2026. Deadline: one month after 12.09.2026 = 12.10.2026 (Mo). Comparison with the filed return: sonderausgaben 6.140,00 -> 3.740,00 (-2.400,00, against); zve 42.190,00 -> 44.590,00 (+2.400,00, against); est 8.028,00 -> 8.824,00 (+796,00, against); rest_est -225,00 -> 571,00 (+796,00, against). Remaining amounts change by +796,00 €.'
+- id: case-54
+  group: g-albers
+  firm: {land: BE}
+  client: {name: Matthias Albers, steuernummer: 29/473/01864, land: BE, kind: person}
+  filed:
+    kind: est
+    year: 2025
+    fields: {einkuenfte_nsa: 3987000, einkuenfte_vuv: 241000, summe_einkuenfte: 4228000, sonderausgaben: 293000, zve: 3935000, est: 711300, lst_est: 718100, rest_est: -6800}
+  document:
+    channel: portal
+    posted: '2026-10-08'
+    provided_at: '2026-10-08'
+    notified_at: '2026-10-09'
+    postmark: null
+    received_at: '2026-10-09'
+    text: |
+      Finanzamt Treptow-Köpenick
+      Seelenbinderstraße 99, 12555 Berlin
+
+      Steuernummer: 29/473/01864
+      Datum: 08.10.2026
+
+      Herrn Matthias Albers
+      Bölschestraße 88
+      12587 Berlin
+
+      Bescheid für 2025 über Einkommensteuer und Solidaritätszuschlag
+
+      Festsetzung
+      Einkünfte aus nichtselbständiger Arbeit ......... 39.870 €
+      Einkünfte aus Vermietung und Verpachtung ......... 1.890 €
+      Summe der Einkünfte ............................. 41.760 €
+      Sonderausgaben ................................. - 2.930 €
+      zu versteuerndes Einkommen ...................... 38.830 €
+
+      Einkommensteuer, festgesetzt .................. 6.949,00 €
+
+      Abrechnung
+      Einkommensteuer ............................... 6.949,00 €
+        ab Steuerabzug vom Lohn ................... - 7.181,00 €
+        verbleibende Einkommensteuer ................. 232,00- €
+      zu erstatten .................................... 232,00 €
+
+      Erläuterungen
+      Bei den Einkünften aus Vermietung und Verpachtung wurde die Absetzung für Abnutzung nach dem
+      vorgelegten Kaufvertrag berechnet (520 € höher als erklärt).
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem
+      Finanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt
+      am vierten Tag nach der Bereitstellung zum Abruf als bekannt gegeben.
+  expect:
+    kind: est
+    action: inform_client
+    deadline: '2026-11-12'
+    errors: []
+    fields: {einkuenfte_vuv: 189000, zve: 3883000, est: 694900, rest_est: -23200}
+  why: 'Original of group g-albers. Letting income lower by 520 € (higher depreciation), in the client''s favour only. Received (Bekanntgabe): made available 08.10.2026 (from 2026): availability + 4 days = 12.10.2026 (Mo). Deadline: one month after 12.10.2026 = 12.11.2026 (Do). Comparison with the filed return: einkuenfte_vuv 2.410,00 -> 1.890,00 (-520,00, in favour); summe_einkuenfte 42.280,00 -> 41.760,00 (-520,00, in favour); zve 39.350,00 -> 38.830,00 (-520,00, in favour); est 7.113,00 -> 6.949,00 (-164,00, in favour); rest_est -68,00 -> -232,00 (-164,00, in favour). Remaining amounts change by -164,00 €.'
+- id: case-55
+  group: g-albers
+  firm: {land: BE}
+  client: {name: Matthias Albers, steuernummer: 29/473/01864, land: BE, kind: person}
+  filed:
+    kind: est
+    year: 2025
+    fields: {einkuenfte_nsa: 3987000, einkuenfte_vuv: 241000, summe_einkuenfte: 4228000, sonderausgaben: 293000, zve: 3935000, est: 711300, lst_est: 718100, rest_est: -6800}
+  document:
+    channel: client_upload
+    posted: '2026-10-08'
+    provided_at: null
+    notified_at: null
+    postmark: null
+    received_at: '2026-10-14'
+    text: |
+      Finanzamt Treptow-Köpenick
+      Seelenbinderstraße 99, 12555 Berlin
+
+      Steuernummer: 29/473/01864
+      Datum: 08.10.2026
+
+      Herrn Matthias Albers
+      Bölschestraße 88
+      12587 Berlin
+
+      Bescheid für 2025 über Einkommensteuer und Solidaritätszuschlag
+
+      Festsetzung
+      Einkünfte aus nichtselbständiger Arbeit ......... 39.870 €
+      Einkünfte aus Vermietung und Verpachtung ......... 1.890 €
+      Summe der Einkünfte ............................. 41.760 €
+      Sonderausgaben ................................. - 2.930 €
+      zu versteuerndes Einkommen ...................... 38.830 €
+
+      Einkommensteuer, festgesetzt .................. 6.949,00 €
+
+      Abrechnung
+      Einkommensteuer ............................... 6.949,00 €
+        ab Steuerabzug vom Lohn ................... - 7.181,00 €
+        verbleibende Einkommensteuer ................. 232,00- €
+      zu erstatten .................................... 232,00 €
+
+      Erläuterungen
+      Bei den Einkünften aus Vermietung und Verpachtung wurde die Absetzung für Abnutzung nach dem
+      vorgelegten Kaufvertrag berechnet (520 € höher als erklärt).
+
+      Rechtsbehelfsbelehrung
+      Gegen diesen Bescheid ist der Einspruch zulässig. Er ist binnen eines Monats nach Bekanntgabe bei dem
+      Finanzamt einzulegen, das den Bescheid erlassen hat. Ein zum Datenabruf bereitgestellter Bescheid gilt
+      am vierten Tag nach der Bereitstellung zum Abruf als bekannt gegeben.
+  expect:
+    kind: est
+    action: duplicate
+    deadline: '2026-11-12'
+    errors: []
+  why: 'The client forwarded a printout of the notice already on the desk as case-54 (same client, kind est, year 2025, notice date 08.10.2026): duplicate of case-54. Its deadline computed for a forwarded copy equals the original''s. Received (Bekanntgabe): forwarded copy, both ways: post posted 08.10.2026 + 4 days = 12.10.2026 (Mo); portal made available 08.10.2026 (from 2026): availability + 4 days = 12.10.2026 (Mo); keep the earlier 12.10.2026. Deadline: one month after 12.10.2026 = 12.11.2026 (Do).'

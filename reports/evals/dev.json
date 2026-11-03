@@ -89,10 +89,10 @@
    "n00156"
   ]
  },
- "ran_at": "2026-11-03T17:35:26+00:00",
+ "ran_at": "2026-11-03T17:54:13+00:00",
  "split": "dev",
  "notices": 238,
- "seconds": 19.2,
+ "seconds": 21.3,
  "model_calls": 20,
  "model_cost_usd": 0.0235,
  "versions": {

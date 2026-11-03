@@ -3,7 +3,7 @@
   "notices": 230,
   "action_right": 223,
   "kind_total": 221,
-  "kind_right": 218,
+  "kind_right": 219,
   "deadline_total": 220,
   "deadline_exact": 219,
   "truth_close": 84,
@@ -16,7 +16,7 @@
   "action_accuracy": 0.9696,
   "review_rate": 0.0304,
   "auto_close_rate": 0.9643,
-  "kind_accuracy": 0.9864,
+  "kind_accuracy": 0.991,
   "deadline_exact": 0.9955,
   "late_deadlines": 0,
   "closed_but_needed_action": 0,
@@ -86,10 +86,10 @@
    "n00281"
   ]
  },
- "ran_at": "2026-11-03T17:37:01+00:00",
+ "ran_at": "2026-11-03T17:53:51+00:00",
  "split": "test",
  "notices": 230,
- "seconds": 15.4,
+ "seconds": 15.9,
  "model_calls": 14,
  "model_cost_usd": 0.0109,
  "versions": {

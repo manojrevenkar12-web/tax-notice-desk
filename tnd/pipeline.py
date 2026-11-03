@@ -309,8 +309,6 @@ def process(g: Group, nid: str, folder: Path, meta: dict[str, Any], use_model: b
         d.action, d.reasons = "review", ["tax number not readable: a person assigns the notice"]
     elif no_return_only and d.action not in ("duplicate", "misrouted"):
         d.action, d.reasons = "review", ["no filed return on record to compare with"]
-    if p.kind == "gewst" and d.action == "review" and any(f.type == "arithmetic" for f in findings) and cid:
-        d.action, d.reasons = "objection_required", ["the town's own figures do not compute"]
     out["action"], out["reasons"], out["tax_effect"], out["duplicate_of"] = d.action, d.reasons, effect, dup
     out["vorbehalt"], out["vorlaeufig"] = p.vorbehalt, p.vorlaeufig
     if d.action in ("objection_review", "objection_required", "inform_client") and findings:

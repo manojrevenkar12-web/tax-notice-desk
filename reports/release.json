@@ -61,7 +61,7 @@
   },
   {
    "metric": "kind_accuracy",
-   "value": 0.9864,
+   "value": 0.991,
    "limit": {
     "min": 0.97
    },

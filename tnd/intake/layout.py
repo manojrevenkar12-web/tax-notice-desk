@@ -21,10 +21,43 @@ from .. import config
 
 AMOUNT = re.compile(
     r"(?<![\d.,/])(?:EUR\s?)?(?P<neg>-\s?)?(?P<whole>\d{1,3}(?:\.\d{3})+|\d{1,3}(?:[  ]\d{3})+|\d+),"
-    r"(?P<cents>\d{2})(?![\d,])(?:\s?(?:€|EUR))?(?P<trail>-(?!\d))?"
+    r"(?P<cents>\d{2})(?![\d,])(?:\s?(?:€|EUR|Euro\b))?(?P<trail>-(?!\d))?"
 )
-WHOLE_EUROS = re.compile(r"(?<![\d.,/])(?P<whole>\d{1,3}(?:\.\d{3})+|\d+)(?![\d,])\s?(?:€|EUR)")  # "42.740 €"
-PERCENT = re.compile(r"(?<![\d.,])(?P<pct>\d{3})(?:,\d{1,2})?\s*(?:%|v\.\s?H\.)")
+WHOLE_EUROS = re.compile(r"(?<![\d.,/])(?P<whole>\d{1,3}(?:\.\d{3})+|\d+)(?![\d,])\s?(?:€|EUR|Euro\b)")  # "42.740 €"
+GROUPED_EUROS = re.compile(r"(?<![\d.,/])(?P<whole>\d{1,3}(?:\.\d{3})+)(?![\d,.])(?P<trail>-(?!\d))?")  # "99.650"
+# Amounts that cannot be negative: a minus sign printed with them only says "deducted"
+NON_NEGATIVE = {
+    "lst_est",
+    "lst_soli",
+    "lst_kist",
+    "vz_est",
+    "vz_soli",
+    "vz_kist",
+    "vz_kst",
+    "vz_ust",
+    "vz_gewst",
+    "sonderausgaben",
+    "agb",
+    "vorsteuer",
+    "freibetrag",
+    "kuerzungen",
+    "hinzurechnungen",
+    "messbetrag",
+    "hebesatz",
+    "gewst",
+    "est",
+    "kst",
+    "soli",
+    "kist",
+    "ust",
+    "umsatz_19",
+    "umsatz_7",
+    "gewerbeertrag",
+    "zve",
+    "einkommen",
+    "vz_quartal",
+}
+PERCENT = re.compile(r"(?<![\d.,])(?P<pct>\d{3})(?:,\d{1,2})?\s*(?:%|v\.\s?H\.|vom Hundert)")
 DATE = re.compile(r"\b\d{1,2}\.\d{1,2}\.\d{4}\b")
 ABBREV = {"lt", "abs", "nr", "v", "h", "vgl", "bzw", "ggf", "gem", "str", "z", "b", "st", "u", "a", "ca", "s"}
 
@@ -48,6 +81,10 @@ def _tokens(line: str) -> list[Token]:
     for m in WHOLE_EUROS.finditer(clean):
         if not any(t.start <= m.start() < t.end or m.start() <= t.start < m.end() for t in out):
             out.append(Token(m.start(), m.end(), int(m["whole"].replace(".", "")) * 100, False))
+    for m in GROUPED_EUROS.finditer(clean):
+        if not any(t.start <= m.start() < t.end or m.start() <= t.start < m.end() for t in out):
+            v = int(m["whole"].replace(".", "")) * 100
+            out.append(Token(m.start(), m.end(), -v if m["trail"] else v, False))
     return sorted(out, key=lambda t: t.start)
 
 
@@ -159,6 +196,8 @@ class Layout:
         cands: dict[str, list[int]] = {}
 
         def add(f: str | None, v: int) -> None:
+            if f in NON_NEGATIVE:
+                v = abs(v)
             if f and v not in cands.setdefault(f, []):
                 cands[f].append(v)
 
@@ -210,6 +249,11 @@ class Layout:
                 if k == 0 and named and named not in self.field_columns:
                     line_col = named
                 suffix = line[t.end : toks[k + 1].start if k + 1 < len(toks) else len(line)]
+                bare = _strip(DATE.sub(" ", label))
+                if k == 0 and DATE.search(label) and not re.search(r"[A-Za-zÄÖÜäöüß]", bare):
+                    add(self.fields.get(f"quarter.{line_col}"), t.value)  # a due date and its amount
+                    last = t.end
+                    continue
                 f, refund = self._field(label, line_col, suffix, t.percent)
                 add(f, -abs(t.value) if refund else t.value)
                 last = t.end
